@@ -1,26 +1,23 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
 import { PortfolioTable } from "../PortfolioTable/PortfolioTable";
-import useSWR from "swr";
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+import { useSearchParams } from "react-router-dom";
+import { useSearchForBBL } from "../../api/hooks";
 
 export const Portfolio: React.FC = () => {
-  const { data, error, isLoading } = useSWR(
-    "https://wow-django.herokuapp.com/api/address/wowza?block=04290&lot=0008&borough=2",
-    fetcher,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    }
-  );
+  const [searchParams] = useSearchParams();
+  const bbl = searchParams.get("bbl") || '';
+
+  const { data, error, isLoading } = useSearchForBBL(bbl);
 
   return (
     <>
       Portfolio
+
       {isLoading && <div>loading...</div>}
-      {error && <div>{error}</div>}
+
+      {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
+
       {data && <PortfolioTable data={data.addrs} />}
     </>
   );

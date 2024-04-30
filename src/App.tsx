@@ -12,7 +12,7 @@ function Layout() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/portfolio">Portfolio For BBL 2042900008</Link>
+            <Link to="/portfolio?bbl=2042900008">Portfolio For BBL 2042900008</Link>
           </li>
         </ul>
       </nav>
