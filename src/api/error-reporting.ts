@@ -33,17 +33,3 @@ export class HTTPError extends NetworkError {
     this.status = response.status;
   }
 }
-
-/**
- * Report the given error to our error-reporting service, as long
- * as it's not a network error that we think shouldn't be reported.
- *
- * The error can also be a string, in which case it's logged as-is.
- */
-export function reportError(error: string | Error) {
-  if (error instanceof NetworkError && !error.shouldReport) return;
-  console.error(error);
-  // if (window.Rollbar) {
-  //   window.Rollbar.error(error);
-  // }
-}
