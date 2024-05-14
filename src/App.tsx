@@ -5,6 +5,7 @@ import { Indicators } from "./Components/Indicators/Indicators";
 import { useRollbar } from "@rollbar/react";
 import { SWRConfig } from "swr";
 import { NetworkError } from "./api/error-reporting";
+import { MapBox } from "./Components/MapBox/MapBox";
 
 function App() {
   const rollbar = useRollbar();
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<>home</>} />
+          <Route path="mapbox" element={<MapBox />} />
           <Route path="portfolio" element={<Portfolio />} />
           <Route path="indicators" element={<Indicators />} />
           <Route path="*" element={<>home</>} />
@@ -41,6 +43,11 @@ function Layout() {
           <li>
             <Link to="/portfolio?bbl=2042900008">
               Portfolio For BBL 2042900008
+            </Link>
+          </li>
+          <li>
+            <Link to="/mapbox?bbl=2042900008">
+              MapBox
             </Link>
           </li>
         </ul>
