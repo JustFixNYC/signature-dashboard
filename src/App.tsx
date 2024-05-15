@@ -41,13 +41,18 @@ function Layout() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/portfolio?bbl=2042900008">
-              Portfolio For BBL 2042900008
+            <Link to="/mapbox?bbl=2042900008">
+              Map For Portfolio of BBL 2042900008
             </Link>
           </li>
           <li>
-            <Link to="/mapbox?bbl=2042900008">
-              MapBox
+            <Link to="/portfolio?bbl=2042900008">
+              Table For Portfolio of BBL 2042900008
+            </Link>
+          </li>
+          <li>
+            <Link to="/indicators?bbl=2042900008">
+              Indicators Chart For Portfolio of BBL 2042900008
             </Link>
           </li>
         </ul>

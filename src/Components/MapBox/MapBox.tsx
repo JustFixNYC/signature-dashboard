@@ -2,7 +2,7 @@ import Map, { Source, Layer } from "react-map-gl";
 import type { CircleLayer } from "react-map-gl";
 import type { FeatureCollection } from "geojson";
 import { useSearchForBBL } from "../../api/hooks";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import "mapbox-gl/src/css/mapbox-gl.css";
 import { useState } from "react";
 import { AddressRecord } from "../../types/APIDataTypes";
@@ -45,6 +45,7 @@ export const MapBox: React.FC = () => {
           housenumber: addr.housenumber,
           streetname: addr.streetname,
           zip: addr.zip,
+          bbl: addr.bbl,
         },
       };
     }),
@@ -88,16 +89,17 @@ export const MapBox: React.FC = () => {
           <Layer {...layerStyle} />
         </Source>
       </Map>
+      {selectedAddr && (
+        <div>
+          Selected Address: <Link to={`/indicators?bbl=${selectedAddr.bbl}`}>
+            {selectedAddr.housenumber} {selectedAddr.streetname} {selectedAddr.zip}
+          </Link>
+        </div>
+      )}
       {hoveredAddr && (
         <div>
           Hover Address: {hoveredAddr.housenumber} {hoveredAddr.streetname}{" "}
           {hoveredAddr.zip}
-        </div>
-      )}
-      {selectedAddr && (
-        <div>
-          Selecterd Address: {selectedAddr.housenumber}{" "}
-          {selectedAddr.streetname} {selectedAddr.zip}
         </div>
       )}
     </>
