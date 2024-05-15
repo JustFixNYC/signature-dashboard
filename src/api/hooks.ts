@@ -9,7 +9,7 @@ import { apiFetcher } from "./helpers";
 /** ----------------------------------------------------------------------- */
 
 type IndicatorSWRResponse = {
-  indicators: IndicatorsDataFromAPI;
+  indicators: IndicatorsDataFromAPI[];
   isLoading: boolean;
   error:  Error | undefined;
 }
@@ -26,7 +26,7 @@ export function useGetIndicatorHistory(bbl: string): IndicatorSWRResponse {
   );
 
   return {
-    indicators: data,
+    indicators: data?.result,
     isLoading,
     error: error
   }
