@@ -9,9 +9,11 @@ import {
   Title,
   Tooltip,
   Legend,
+  ScriptableScaleContext,
+  ChartOptions,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
-import { Line, getDatasetAtEvent, getElementAtEvent } from "react-chartjs-2";
+import { Line, getElementAtEvent } from "react-chartjs-2";
 import { useSearchParams } from "react-router-dom";
 import { useGetIndicatorHistory } from "../../api/hooks";
 
@@ -31,9 +33,9 @@ export const Indicators: React.FC = () => {
   const bbl = searchParams.get("bbl") || "";
   const chartRef = useRef();
 
-  const { indicators, error, isLoading } = useGetIndicatorHistory(bbl);
+  const { indicators} = useGetIndicatorHistory(bbl);
 
-  const options = {
+  const options: ChartOptions<'line'> = {
     responsive: true,
     plugins: {
       legend: {
@@ -64,20 +66,21 @@ export const Indicators: React.FC = () => {
           text: "Month",
         },
         grid: {
-          color: function (context) {
+          color: function (context: ScriptableScaleContext) {
+            console.log({context})
             return context.tick.label == "09 2022" ? "black" : "#ddd";
           },
-          lineWidth: function (context) {
+          lineWidth: function (context: ScriptableScaleContext) {
             return context.tick.label == "09 2022" ? 3 : 1;
           },
         },
         ticks: {
           font: {
-            weight: function (context) {
+            weight: function (context: ScriptableScaleContext) {
               return context.tick.label == "09 2022" ? "bold" : "normal";
             }
           },
-          color: function (context) {
+          color: function (context: ScriptableScaleContext) {
             return context.tick.label == "09 2022" ? "black" : "#aaa";
           },
         },
@@ -97,7 +100,7 @@ export const Indicators: React.FC = () => {
       },
     ],
   };
-  const onClick = function (e) {
+  const onClick = function (e: React.MouseEvent<HTMLCanvasElement>) {
     const { current: chart } = chartRef;
     if (chart) {
       const { index } = getElementAtEvent(chart, e)[0];

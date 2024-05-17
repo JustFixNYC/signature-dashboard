@@ -1,5 +1,5 @@
 import Map, { Source, Layer } from "react-map-gl";
-import type { CircleLayer } from "react-map-gl";
+import type { CircleLayer, MapLayerMouseEvent } from "react-map-gl";
 import type { FeatureCollection } from "geojson";
 import { useSearchForBBL } from "../../api/hooks";
 import { Link, useSearchParams } from "react-router-dom";
@@ -16,21 +16,21 @@ export const MapBox: React.FC = () => {
   const [selectedAddr, setSelectedAddr] = useState<AddressRecord | null>(null);
   const [hoveredAddr, sethoveredAddr] = useState<AddressRecord | null>(null);
 
-  const onMouseEnter = (event) => {
+  const onMouseEnter = (event: MapLayerMouseEvent) => {
     if (event.features?.length) {
       setCursor("pointer");
-      sethoveredAddr(event.features[0].properties);
+      sethoveredAddr(event.features[0].properties as AddressRecord);
     }
   };
 
-  const onMouseLeave = (event) => {
+  const onMouseLeave = () => {
     setCursor("");
     sethoveredAddr(null);
   };
 
-  const onClick = (event) => {
+  const onClick = (event: MapLayerMouseEvent) => {
     if (event.features?.length) {
-      setSelectedAddr(event.features[0].properties);
+      setSelectedAddr(event.features[0].properties as AddressRecord);
     }
   };
 
@@ -40,7 +40,7 @@ export const MapBox: React.FC = () => {
     features: data?.addrs.map((addr) => {
       return {
         type: "Feature",
-        geometry: { type: "Point", coordinates: [addr.lng, addr.lat] },
+        geometry: { type: "Point", coordinates: [addr.lng as number, addr.lat as number] },
         properties: {
           housenumber: addr.housenumber,
           streetname: addr.streetname,
