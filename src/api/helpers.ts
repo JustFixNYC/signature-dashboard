@@ -8,11 +8,16 @@ function apiURL(url: string): string {
 }
 
 export const apiFetcher = async (url: string) => {
-  const res = await fetch(apiURL(url), { headers: { accept: "application/json" } });
+  const res = await fetch(apiURL(url), {
+    headers: { accept: "application/json" },
+  });
 
   const contentType = res.headers.get("Content-Type");
   if (!(contentType && /^application\/json/.test(contentType))) {
-    throw new NetworkError(`Expected JSON response but got ${contentType} from ${res.url}`, true);
+    throw new NetworkError(
+      `Expected JSON response but got ${contentType} from ${res.url}`,
+      true,
+    );
   }
 
   // If the status code is not in the range 200-299,

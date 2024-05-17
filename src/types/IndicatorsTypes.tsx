@@ -12,7 +12,7 @@ export const indicatorsDatasetIds = [
   "evictionfilings",
   "rentstabilizedunits",
 ] as const;
-export type IndicatorsDatasetId = typeof indicatorsDatasetIds[number];
+export type IndicatorsDatasetId = (typeof indicatorsDatasetIds)[number];
 
 /**
  * All the time spans you can view data by on the Timeline Tab, _in the order they will appear on the select menu_.
@@ -21,7 +21,7 @@ export type IndicatorsDatasetId = typeof indicatorsDatasetIds[number];
  * See https://stackoverflow.com/a/64174790 for more details on this approach.
  */
 export const indicatorsTimeSpans = ["month", "quarter", "year"] as const;
-export type IndicatorsTimeSpan = typeof indicatorsTimeSpans[number];
+export type IndicatorsTimeSpan = (typeof indicatorsTimeSpans)[number];
 
 // Types Relating to the State Machine Data for the Indicators Component:
 
@@ -176,7 +176,6 @@ export const indicatorsInitialState: IndicatorsState = {
   xAxisStart: 0,
   xAxisViewableColumns: 20,
 };
-
 
 // Other Useful Types and Type-related utilites:
 

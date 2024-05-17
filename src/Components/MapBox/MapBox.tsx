@@ -40,7 +40,10 @@ export const MapBox: React.FC = () => {
     features: data?.addrs.map((addr) => {
       return {
         type: "Feature",
-        geometry: { type: "Point", coordinates: [addr.lng as number, addr.lat as number] },
+        geometry: {
+          type: "Point",
+          coordinates: [addr.lng as number, addr.lat as number],
+        },
         properties: {
           housenumber: addr.housenumber,
           streetname: addr.streetname,
@@ -91,8 +94,10 @@ export const MapBox: React.FC = () => {
       </Map>
       {selectedAddr && (
         <div>
-          Selected Address: <Link to={`/indicators?bbl=${selectedAddr.bbl}`}>
-            {selectedAddr.housenumber} {selectedAddr.streetname} {selectedAddr.zip}
+          Selected Address:{" "}
+          <Link to={`/indicators?bbl=${selectedAddr.bbl}`}>
+            {selectedAddr.housenumber} {selectedAddr.streetname}{" "}
+            {selectedAddr.zip}
           </Link>
         </div>
       )}

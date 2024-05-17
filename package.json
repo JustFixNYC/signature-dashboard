@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "npm run lint:format && npm run lint:js",
+    "lint:format": "prettier --check --ignore-unknown \"src/**/*\"",
+    "lint:js": "eslint --no-error-on-unmatched-pattern --report-unused-disable-directives src/**",
+    "format": "prettier --write --ignore-unknown \"src/**/*\""
   },
   "dependencies": {
     "@rollbar/react": "^0.12.0-beta",

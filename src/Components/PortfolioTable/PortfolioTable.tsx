@@ -52,7 +52,7 @@ export const PortfolioTable: React.FC<PortfolioTableProps> = ({ data }) => {
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                     {header.depth === 2 &&
                       ({
@@ -69,7 +69,11 @@ export const PortfolioTable: React.FC<PortfolioTableProps> = ({ data }) => {
         <tbody>
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
-              <td><Link to={`/indicators?bbl=${row.getValue('bbl')}`} >View Indicators</Link></td>
+              <td>
+                <Link to={`/indicators?bbl=${row.getValue("bbl")}`}>
+                  View Indicators
+                </Link>
+              </td>
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

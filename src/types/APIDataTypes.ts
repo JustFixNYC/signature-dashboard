@@ -2,7 +2,12 @@
 
 // import { SearchAddress } from "./AddressSearch";
 
-export type Borough = "MANHATTAN" | "BRONX" | "BROOKLYN" | "QUEENS" | "STATEN ISLAND";
+export type Borough =
+  | "MANHATTAN"
+  | "BRONX"
+  | "BROOKLYN"
+  | "QUEENS"
+  | "STATEN ISLAND";
 
 export type WithBoroBlockLot = {
   boro: string;

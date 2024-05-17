@@ -25,7 +25,7 @@ ChartJS.register(
   TimeScale,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 export const Indicators: React.FC = () => {
@@ -33,9 +33,9 @@ export const Indicators: React.FC = () => {
   const bbl = searchParams.get("bbl") || "";
   const chartRef = useRef();
 
-  const { indicators} = useGetIndicatorHistory(bbl);
+  const { indicators } = useGetIndicatorHistory(bbl);
 
-  const options: ChartOptions<'line'> = {
+  const options: ChartOptions<"line"> = {
     responsive: true,
     plugins: {
       legend: {
@@ -44,7 +44,7 @@ export const Indicators: React.FC = () => {
       title: {
         display: true,
         text: "Chart.js Line Chart",
-      }
+      },
     },
     parsing: {
       xAxisKey: "month",
@@ -67,7 +67,7 @@ export const Indicators: React.FC = () => {
         },
         grid: {
           color: function (context: ScriptableScaleContext) {
-            console.log({context})
+            console.log({ context });
             return context.tick.label == "09 2022" ? "black" : "#ddd";
           },
           lineWidth: function (context: ScriptableScaleContext) {
@@ -78,7 +78,7 @@ export const Indicators: React.FC = () => {
           font: {
             weight: function (context: ScriptableScaleContext) {
               return context.tick.label == "09 2022" ? "bold" : "normal";
-            }
+            },
           },
           color: function (context: ScriptableScaleContext) {
             return context.tick.label == "09 2022" ? "black" : "#aaa";

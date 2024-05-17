@@ -11,8 +11,8 @@ import { apiFetcher } from "./helpers";
 type IndicatorSWRResponse = {
   indicators: IndicatorsDataFromAPI[];
   isLoading: boolean;
-  error:  Error | undefined;
-}
+  error: Error | undefined;
+};
 
 export function useGetIndicatorHistory(bbl: string): IndicatorSWRResponse {
   const { data, error, isLoading } = useSWR(
@@ -22,14 +22,14 @@ export function useGetIndicatorHistory(bbl: string): IndicatorSWRResponse {
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-    }
+    },
   );
 
   return {
     indicators: data?.result,
     isLoading,
-    error: error
-  }
+    error: error,
+  };
 }
 
 /** ----------------------------------------------------------------------- */
@@ -39,11 +39,11 @@ export function useGetIndicatorHistory(bbl: string): IndicatorSWRResponse {
 type PortfolioSWRResponse = {
   data: SearchResults;
   isLoading: boolean;
-  error:  Error | undefined;
-}
+  error: Error | undefined;
+};
 
 export function useSearchForBBL(bbl: string): PortfolioSWRResponse {
-  const {block, boro, lot} = splitBBL(bbl);
+  const { block, boro, lot } = splitBBL(bbl);
   const { data, error, isLoading } = useSWR(
     `/api/address/wowza?block=${block}&borough=${boro}&lot=${lot}`,
     apiFetcher,
@@ -51,12 +51,12 @@ export function useSearchForBBL(bbl: string): PortfolioSWRResponse {
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-    }
+    },
   );
 
   return {
     data: data,
     isLoading,
-    error: error
-  }
+    error: error,
+  };
 }

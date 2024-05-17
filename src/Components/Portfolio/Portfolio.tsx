@@ -6,18 +6,15 @@ import { useSearchForBBL } from "../../api/hooks";
 
 export const Portfolio: React.FC = () => {
   const [searchParams] = useSearchParams();
-  const bbl = searchParams.get("bbl") || '';
+  const bbl = searchParams.get("bbl") || "";
 
   const { data, error, isLoading } = useSearchForBBL(bbl);
 
   return (
     <>
       Portfolio
-
       {isLoading && <div>loading...</div>}
-
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-
       {data && <PortfolioTable data={data.addrs} />}
     </>
   );
