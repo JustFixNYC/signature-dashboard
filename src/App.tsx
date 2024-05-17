@@ -12,7 +12,6 @@ import "./App.scss";
 
 function App() {
   const rollbar = useRollbar();
-  const { user, logout } = useAuth();
 
   return (
     <SWRConfig
@@ -23,8 +22,6 @@ function App() {
         },
       }}
     >
-      <h1>Signature Dashboard</h1>
-      {user && <button onClick={logout}>Logout</button>}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route element={<PrivateRoutes />}>
@@ -43,9 +40,11 @@ function App() {
 }
 
 function Layout() {
+  const { user, logout } = useAuth();
   return (
     <div>
       <h1>Signature Dashboard</h1>
+      {user && <button onClick={logout}>Logout</button>}
       <Link className="api-link" to="/api_docs">
         API Docs
       </Link>
