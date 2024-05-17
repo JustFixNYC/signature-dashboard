@@ -16,6 +16,7 @@ import "chartjs-adapter-date-fns";
 import { Line, getElementAtEvent } from "react-chartjs-2";
 import { useSearchParams } from "react-router-dom";
 import { useGetIndicatorHistory } from "../../api/hooks";
+import "./styles.css";
 
 ChartJS.register(
   CategoryScale,
@@ -108,6 +109,8 @@ export const Indicators: React.FC = () => {
     }
   };
   return (
-    <Line ref={chartRef} options={options} data={data} onClick={onClick} />
+    <div className="chart-container">
+      <Line ref={chartRef} options={options} data={data} onClick={onClick} />
+    </div>
   );
 };
