@@ -2,7 +2,7 @@ import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-react/swagger-ui.css";
 import spec from "./APISpec.json";
 import { Link } from "react-router-dom";
-import "./style.css";
+import "./style.scss";
 
 export const APIDocs: React.FC = () => {
   return (

@@ -1,5 +1,4 @@
 import { Routes, Route, Outlet, Link } from "react-router-dom";
-import "./App.css";
 import { Portfolio } from "./Components/Portfolio/Portfolio";
 import { Indicators } from "./Components/Indicators/Indicators";
 import { useRollbar } from "@rollbar/react";
@@ -7,6 +6,7 @@ import { SWRConfig } from "swr";
 import { NetworkError } from "./api/error-reporting";
 import { MapBox } from "./Components/MapBox/MapBox";
 import { APIDocs } from "./Components/APIDocs/APIDocs";
+import "./App.scss";
 
 function App() {
   const rollbar = useRollbar();

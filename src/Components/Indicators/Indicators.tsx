@@ -16,7 +16,7 @@ import "chartjs-adapter-date-fns";
 import { Line, getElementAtEvent } from "react-chartjs-2";
 import { useSearchParams } from "react-router-dom";
 import { useGetIndicatorHistory } from "../../api/hooks";
-import "./styles.css";
+import "./styles.scss";
 
 ChartJS.register(
   CategoryScale,

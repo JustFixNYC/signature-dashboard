@@ -7,7 +7,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import "./style.css";
+import "./style.scss";
 import React from "react";
 import { portfolioColumns } from "./PortfolioColumns";
 import { Link } from "react-router-dom";
