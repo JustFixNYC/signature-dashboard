@@ -36,7 +36,7 @@ export const PortfolioTable: React.FC<PortfolioTableProps> = ({ data }) => {
 
   return (
     <>
-      <table>
+      <table className="portfolio-table">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>

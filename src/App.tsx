@@ -6,6 +6,7 @@ import { useRollbar } from "@rollbar/react";
 import { SWRConfig } from "swr";
 import { NetworkError } from "./api/error-reporting";
 import { MapBox } from "./Components/MapBox/MapBox";
+import { APIDocs } from "./Components/APIDocs/APIDocs";
 
 function App() {
   const rollbar = useRollbar();
@@ -18,7 +19,6 @@ function App() {
         },
       }}
     >
-      <h1>Signature Dashboard</h1>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<>home</>} />
@@ -27,6 +27,7 @@ function App() {
           <Route path="indicators" element={<Indicators />} />
           <Route path="*" element={<>home</>} />
         </Route>
+        <Route path="/api_docs" element={<APIDocs />} />
       </Routes>
     </SWRConfig>
   );
@@ -35,6 +36,10 @@ function App() {
 function Layout() {
   return (
     <div>
+      <h1>Signature Dashboard</h1>
+      <Link className="api-link" to="/api_docs">
+        API Docs
+      </Link>
       <nav>
         <ul>
           <li>

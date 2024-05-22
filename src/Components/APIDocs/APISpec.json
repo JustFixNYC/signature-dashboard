@@ -1,0 +1,57 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "JustFix API",
+    "description": "Api for accessing housing data maintained by JustFix."
+  },
+  "servers": [
+    {
+      "url": "https://wow-django.herokuapp.com/api"
+    }
+  ],
+  "paths": {
+    "/address/dap-portfoliosize": {
+      "get": {
+        "summary": "Returns the size of the portfolio associated with the BBL or null if the BBL is not registered with HPD.",
+        "parameters": [
+          {
+            "name": "bbl",
+            "in": "query",
+            "description": "BBL of the portfolio requested",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "3009580018"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Size of the portfolio associated with the BBL. Returns null if the BBL is not registered with HPD.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "portfolio_size": {
+                          "type": "integer",
+                          "example": 20
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. BBL should be a 10-digit padded BBL."
+          }
+        }
+      }
+    }
+  }
+}
