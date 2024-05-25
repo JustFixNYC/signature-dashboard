@@ -141,6 +141,92 @@
             "description": "Zip Code of the property"
           }
         }
+      },
+      "Collection": {
+        "properties": {
+          "collection_name": {
+            "type": "string",
+            "example": "Ved Parkash",
+            "description": "Collection display name"
+          },
+          "collection_slug": {
+            "type": "string",
+            "example": "ved-parkash",
+            "description": "Collection name slug, used for API and URL"
+          },
+          "collection_type": {
+            "type": "string",
+            "example": "landlord",
+            "description": "Collection type (landlord or lender)"
+          },
+          "buildings": {
+            "type": "integer",
+            "example": 26,
+            "description": "Number of properties (BBLs) in the collection"
+          },
+          "units_res": {
+            "type": "integer",
+            "example": 1800,
+            "description": "Total number of residential units in the collection"
+          },
+          "evictions": {
+            "type": "integer",
+            "example": 216,
+            "description": "Total number of evictions executed by marshals in previous year in the collection"
+          },
+          "hpd_viol_bc_open": {
+            "type": "integer",
+            "example": 15291,
+            "description": "Total number of open B & C class HPD violations in the collection, since 2010"
+          },
+          "hpd_viol_bc_open_per_unit": {
+            "type": "number",
+            "example": 8.495,
+            "description": "The average number of open B & C class HPD violations per unit in the collection, since 2010"
+          },
+          "hpd_viol_bc_total": {
+            "type": "integer",
+            "example": 15291,
+            "description": "Total number of B & C class HPD violations in the previous 12 months in the collection"
+          },
+          "hpd_viol_bc_total_per_unit": {
+            "type": "number",
+            "example": 8.495,
+            "description": "The average number of B & C class HPD violations per unit in the previous 12 months in the collection"
+          },
+          "hpd_comp_emerg_total": {
+            "type": "integer",
+            "example": 19800,
+            "description": "Total number of Emergency HPD complaints in the previous 12 months in the collection"
+          },
+          "hpd_comp_emerg_total_per_unit": {
+            "type": "number",
+            "example": 11,
+            "description": "The average number of Emergency HPD complaints per unit in the previous 12 months in the collection"
+          },
+          "debt_total": {
+            "type": "number",
+            "example": 140888559.23999998,
+            "description": "The total Signature debt of the collection"
+          },
+          "debt_per_building": {
+            "type": "number",
+            "example": 5418790.739999999,
+            "description": "The average Signature debt per building in the collection"
+          },
+          "debt_per_unit": {
+            "type": "number",
+            "example": 78271.42179999998,
+            "description": "The average Signature debt per unit in the collection"
+          },
+          "bldg_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Building"
+            },
+            "description": "Array of buildings in the collection"
+          }
+        }
       }
     }
   },
@@ -171,7 +257,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Building"
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Building"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -205,87 +299,11 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "collection_name": {
-                      "type": "string",
-                      "example": "Ved Parkash",
-                      "description": "Collection display name"
-                    },
-                    "collection_slug": {
-                      "type": "string",
-                      "example": "ved-parkash",
-                      "description": "Collection name slug, used for API and URL"
-                    },
-                    "collection_type": {
-                      "type": "string",
-                      "example": "landlord",
-                      "description": "Collection type (landlord or lender)"
-                    },
-                    "buildings": {
-                      "type": "integer",
-                      "example": 26,
-                      "description": "Number of properties (BBLs) in the collection"
-                    },
-                    "units_res": {
-                      "type": "integer",
-                      "example": 1800,
-                      "description": "Total number of residential units in the collection"
-                    },
-                    "evictions": {
-                      "type": "integer",
-                      "example": 216,
-                      "description": "Total number of evictions executed by marshals in previous year in the collection"
-                    },
-                    "hpd_viol_bc_open": {
-                      "type": "integer",
-                      "example": 15291,
-                      "description": "Total number of open B & C class HPD violations in the collection, since 2010"
-                    },
-                    "hpd_viol_bc_open_per_unit": {
-                      "type": "number",
-                      "example": 8.495,
-                      "description": "The average number of open B & C class HPD violations per unit in the collection, since 2010"
-                    },
-                    "hpd_viol_bc_total": {
-                      "type": "integer",
-                      "example": 15291,
-                      "description": "Total number of B & C class HPD violations in the previous 12 months in the collection"
-                    },
-                    "hpd_viol_bc_total_per_unit": {
-                      "type": "number",
-                      "example": 8.495,
-                      "description": "The average number of B & C class HPD violations per unit in the previous 12 months in the collection"
-                    },
-                    "hpd_comp_emerg_total": {
-                      "type": "integer",
-                      "example": 19800,
-                      "description": "Total number of Emergency HPD complaints in the previous 12 months in the collection"
-                    },
-                    "hpd_comp_emerg_total_per_unit": {
-                      "type": "number",
-                      "example": 11,
-                      "description": "The average number of Emergency HPD complaints per unit in the previous 12 months in the collection"
-                    },
-                    "debt_total": {
-                      "type": "number",
-                      "example": 140888559.23999998,
-                      "description": "The total Signature debt of the collection"
-                    },
-                    "debt_per_building": {
-                      "type": "number",
-                      "example": 5418790.739999999,
-                      "description": "The average Signature debt per building in the collection"
-                    },
-                    "debt_per_unit": {
-                      "type": "number",
-                      "example": 78271.42179999998,
-                      "description": "The average Signature debt per unit in the collection"
-                    },
-                    "bldg_data": {
+                    "result": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Building"
-                      },
-                      "description": "Array of buildings in the collection"
+                        "$ref": "#/components/schemas/Collection"
+                      }
                     }
                   }
                 }
