@@ -12,7 +12,7 @@
   ],
   "components": {
     "securitySchemes": {
-      "basicAuth": {
+      "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
       }
@@ -23,7 +23,7 @@
           "address": {
             "type": "string",
             "example": "410 AVENUE X",
-            "description": "Street adddress (house number and street name) of property."
+            "description": "Street address (house number and street name) of property."
           },
           "assem_dist": {
             "type": "string",
@@ -232,7 +232,7 @@
   },
   "security": [
     {
-      "basicAuth": []
+      "bearerAuth": []
     }
   ],
   "paths": {
@@ -278,7 +278,7 @@
     },
     "/signature/collection": {
       "get": {
-        "summary": "Returns data for the dashboard's Collection page for the requested colection (landlord, lender).",
+        "summary": "Returns data for the dashboard's Collection page for the requested collection (landlord, lender).",
         "parameters": [
           {
             "name": "collection",
@@ -293,7 +293,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Data for the dashboard's Colleciton page for the requested collection.",
+            "description": "Data for the dashboard's Collection page for the requested collection.",
             "content": {
               "application/json": {
                 "schema": {
