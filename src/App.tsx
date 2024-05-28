@@ -6,10 +6,13 @@ import { SWRConfig } from "swr";
 import { NetworkError } from "./api/error-reporting";
 import { MapBox } from "./Components/MapBox/MapBox";
 import { APIDocs } from "./Components/APIDocs/APIDocs";
+import { Login } from "./Components/Login/Login";
+import { PrivateRoutes, useAuth } from "./auth";
 import "./App.scss";
 
 function App() {
   const rollbar = useRollbar();
+
   return (
     <SWRConfig
       value={{
@@ -21,11 +24,14 @@ function App() {
     >
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<>home</>} />
-          <Route path="mapbox" element={<MapBox />} />
-          <Route path="portfolio" element={<Portfolio />} />
-          <Route path="indicators" element={<Indicators />} />
-          <Route path="*" element={<>home</>} />
+          <Route element={<PrivateRoutes />}>
+            <Route index element={<>home</>} />
+            <Route path="mapbox" element={<MapBox />} />
+            <Route path="portfolio" element={<Portfolio />} />
+            <Route path="indicators" element={<Indicators />} />
+            <Route path="*" element={<>home</>} />
+          </Route>
+          <Route path="/login" element={<Login />} />
         </Route>
         <Route path="/api_docs" element={<APIDocs />} />
       </Routes>
@@ -34,9 +40,11 @@ function App() {
 }
 
 function Layout() {
+  const { user, logout } = useAuth();
   return (
     <div>
       <h1>Signature Dashboard</h1>
+      {user && <button onClick={logout}>Logout</button>}
       <Link className="api-link" to="/api_docs">
         API Docs
       </Link>

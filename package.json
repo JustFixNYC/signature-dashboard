@@ -30,6 +30,7 @@
     "react-dom": "^18.2.0",
     "react-map-gl": "^7.1.7",
     "react-router-dom": "^6.23.0",
+    "react-use-cookie": "^1.6.1",
     "rollbar": "^2.26.4",
     "swagger-ui-react": "^5.17.12",
     "swr": "^2.2.5",

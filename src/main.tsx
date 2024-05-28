@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { ErrorBoundary, Provider } from "@rollbar/react";
+import { ErrorBoundary, Provider as RollbarProvider } from "@rollbar/react";
+import { AuthProvider } from "./auth";
 import App from "./App.tsx";
 
 const rollbarConfig = {
@@ -12,11 +13,13 @@ const rollbarConfig = {
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider config={rollbarConfig}>
-        <ErrorBoundary>
-          <App />
-        </ErrorBoundary>
-      </Provider>
+      <AuthProvider>
+        <RollbarProvider config={rollbarConfig}>
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
+        </RollbarProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );
