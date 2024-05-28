@@ -278,12 +278,12 @@
     },
     "/signature/collection": {
       "get": {
-        "summary": "Returns data for the dashboard's Collection page for the requested collection (landlord, lender).",
+        "summary": "Returns data for the dashboard's Collection page for the requested collection (landlord, lender, all).",
         "parameters": [
           {
             "name": "collection",
             "in": "query",
-            "description": "Name for the collection (landlord, lender) in slug format",
+            "description": "Name for the collection in slug format. (<landlord-name>, cpc, santander, all)",
             "required": true,
             "schema": {
               "type": "string"
