@@ -20,110 +20,40 @@
     "schemas": {
       "Building": {
         "properties": {
-          "address": {
-            "type": "string",
-            "example": "410 AVENUE X",
-            "description": "Street address (house number and street name) of property."
-          },
-          "assem_dist": {
-            "type": "string",
-            "example": "45",
-            "description": "State Assembly district"
-          },
           "bbl": {
             "type": "string",
             "example": "3071980006",
             "description": "Borough-Block-Lot of property, 10-digit zero-padded"
+          },
+          "address": {
+            "type": "string",
+            "example": "410 AVENUE X",
+            "description": "Street address (house number and street name) of property."
           },
           "borough": {
             "type": "string",
             "example": "BK",
             "description": "Borough abbreviation"
           },
-          "cong_dist": {
+          "zip": {
             "type": "string",
-            "example": "8",
-            "description": "Congressional district"
-          },
-          "coun_dist": {
-            "type": "string",
-            "example": 47,
-            "description": "City Council district"
-          },
-          "debt_per_unit": {
-            "type": "number",
-            "example": "118333.333333333",
-            "description": "Property's Signature debt per unit"
-          },
-          "debt_total": {
-            "type": "number",
-            "example": "5325000",
-            "description": "Property's total Signature debt (includes portion of multi-property loans)"
-          },
-          "evictions": {
-            "type": "integer",
-            "example": 1,
-            "description": "Evictions executed by marshals in previous 12 months"
-          },
-          "hpd_comp_apts": {
-            "type": "string",
-            "example": "1D, 1G, 2A, 2B, 2C, 2D, 2F, 2G, 3B, 3C, 3D, 3E, 3F, 3G, 4C, 4D, 4E, 4J, 5C, 5G, 6A, 6C, 6D, 6E, 6F, 6G, 7A, 7B, 7C, 7D, 7G",
-            "description": "List of apartments that have submitted HPD complaints in previous 12 months"
-          },
-          "hpd_comp_apts_pct": {
-            "type": "number",
-            "example": "0.68888888888888888889",
-            "description": "Share of units in the property that have made HPD complaints in previous 12 months"
-          },
-          "hpd_comp_emerg_total": {
-            "type": "string",
-            "example": 111,
-            "description": "Number of Emergency HPD complaints in previous 12 months"
-          },
-          "hpd_viol_bc_open": {
-            "type": "string",
-            "example": 141,
-            "description": "Number of open B & C class HPD violations since 2010"
-          },
-          "hpd_viol_bc_total": {
-            "type": "string",
-            "example": 141,
-            "description": "Total number of B & C class HPD violations in previous 12 months"
+            "example": "11223",
+            "description": "Zip Code of the property"
           },
           "landlord": {
             "type": "string",
             "example": "A&E Real Estate Holdings (Doug Eisenberg)",
             "description": "Landlord name"
           },
-          "lat": {
-            "type": "number",
-            "example": 40.5905737,
-            "description": "Latitude (lot centroid)"
-          },
           "lender": {
             "type": "string",
             "example": "Santander",
             "description": "Name of lender for Signature debt"
           },
-          "lng": {
-            "type": "number",
-            "example": -73.9676815,
-            "description": "Longitude (lot centroid)"
-          },
-          "origination_date": {
-            "type": "string",
-            "example": "2022-11-07",
-            "description": "Origination date of Signature loan"
-          },
-          "stsen_dist": {
-            "type": "string",
-            "example": "23",
-            "description": "State Senate district"
-          },
-          "units_comm": {
-            "type": "integer",
-            "example": 0,
-            "description": "Evictions executed by marshals in previous 12 months"
+          "units_nonres": {
+            "type": "boolean",
+            "example": false,
+            "description": "Presence of any non-residential units"
           },
           "units_res": {
             "type": "integer",
@@ -135,10 +65,95 @@
             "example": 1957,
             "description": "Year the property was built"
           },
-          "zip": {
+          "assem_dist": {
             "type": "string",
-            "example": "11223",
-            "description": "Zip Code of the property"
+            "example": "45",
+            "description": "State Assembly district"
+          },
+          "stsen_dist": {
+            "type": "string",
+            "example": "23",
+            "description": "State Senate district"
+          },
+          "cong_dist": {
+            "type": "string",
+            "example": "8",
+            "description": "Congressional district"
+          },
+          "coun_dist": {
+            "type": "string",
+            "example": 47,
+            "description": "City Council district"
+          },
+          "origination_date": {
+            "type": "string",
+            "example": "2022-11-07",
+            "description": "Origination date of Signature loan"
+          },
+          "debt_total": {
+            "type": "number",
+            "example": "5325000",
+            "description": "Property's total Signature debt (includes portion of multi-property loans)"
+          },
+          "debt_per_unit": {
+            "type": "number",
+            "example": "118333.333333333",
+            "description": "Property's Signature debt per unit"
+          },
+          "evictions": {
+            "type": "integer",
+            "example": 1,
+            "description": "Evictions executed by marshals in previous 12 months"
+          },
+          "hpd_comp_emerg_total": {
+            "type": "string",
+            "example": 111,
+            "description": "Number of Emergency HPD complaints in previous 12 months"
+          },
+          "hpd_comp_apts": {
+            "type": "string",
+            "example": "1D, 1G, 2A, 2B, 2C, 2D, 2F, 2G, 3B, 3C, 3D, 3E, 3F, 3G, 4C, 4D, 4E, 4J, 5C, 5G, 6A, 6C, 6D, 6E, 6F, 6G, 7A, 7B, 7C, 7D, 7G",
+            "description": "List of apartments that have submitted HPD complaints in previous 12 months"
+          },
+          "hpd_comp_apts_pct": {
+            "type": "number",
+            "example": "0.68888888888888888889",
+            "description": "Share of units in the property that have made HPD complaints in previous 12 months"
+          },
+          "hpd_comp_heat": {
+            "type": "integer",
+            "example": 1,
+            "description": "Number of HPD complaints related to lack of heat or hot water in previous 12 months"
+          },
+          "hpd_comp_water": {
+            "type": "integer",
+            "example": 1,
+            "description": "Number of HPD complaints related to water leaks or mold in previous 12 months"
+          },
+          "hpd_comp_pests": {
+            "type": "integer",
+            "example": 1,
+            "description": "Number of HPD complaints related to pests in previous 12 months"
+          },
+          "hpd_viol_bc_total": {
+            "type": "string",
+            "example": 141,
+            "description": "Total number of B & C class HPD violations in previous 12 months"
+          },
+          "hpd_viol_bc_open": {
+            "type": "string",
+            "example": 141,
+            "description": "Number of open B & C class HPD violations since 2010"
+          },
+          "lat": {
+            "type": "number",
+            "example": 40.5905737,
+            "description": "Latitude (lot centroid)"
+          },
+          "lng": {
+            "type": "number",
+            "example": -73.9676815,
+            "description": "Longitude (lot centroid)"
           }
         }
       },
