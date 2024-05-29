@@ -8,12 +8,12 @@ type BuildingSummaryTableProps = {
 };
 
 const indicatorDisplayNames = {
-  hpd_viol_bc_open: 'Open B & C HPD Violations',
-  hpd_viol_bc_total: 'Total B & C HPD Violations since [date]',
-  hpd_comp_emerg_total: 'Total Emergency HPD Complaints since [date]',
-  debt_per_unit: 'Debt Per Unit (Signature)',
-  origination_date: 'Loan Origination Date (Signature)'
-}
+  hpd_viol_bc_open: "Open B & C HPD Violations",
+  hpd_viol_bc_total: "Total B & C HPD Violations since [date]",
+  hpd_comp_emerg_total: "Total Emergency HPD Complaints since [date]",
+  debt_per_unit: "Debt Per Unit (Signature)",
+  origination_date: "Loan Origination Date (Signature)",
+};
 export const BuildingSummaryTable: React.FC<BuildingSummaryTableProps> = ({
   data,
 }) => {

@@ -6,8 +6,10 @@ export function splitBBL(bbl: string) {
   return { boro, block, lot };
 }
 
-
 export function formatMoney(amount: number): string {
-  const formatmoney= new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' });
+  const formatmoney = new Intl.NumberFormat("en", {
+    style: "currency",
+    currency: "USD",
+  });
   return formatmoney.format(amount);
 }

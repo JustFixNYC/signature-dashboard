@@ -9,9 +9,10 @@ function apiURL(url: string): string {
 
 export const apiFetcher = async (url: string) => {
   const res = await fetch(apiURL(url), {
-    headers: { accept: "application/json",
-      Authorization: `Bearer ${import.meta.env.VITE_JUSTFIX_API_TOKEN}`
-     },
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_JUSTFIX_API_TOKEN}`,
+    },
   });
 
   const contentType = res.headers.get("Content-Type");

@@ -12,7 +12,6 @@ type IndicatorSWRResponse = {
   error: Error | undefined;
 };
 
-
 export function useGetBuildingInfo(bbl: string): IndicatorSWRResponse {
   const { data, error, isLoading } = useSWR(
     `/signature/building?bbl=${bbl}`,
