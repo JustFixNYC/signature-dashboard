@@ -7,6 +7,7 @@ import { APIDocs } from "./Components/APIDocs/APIDocs";
 import { Login } from "./Components/Login/Login";
 import { PrivateRoutes, useAuth } from "./auth";
 import "./App.scss";
+import { CollectionPage } from "./Components/CollectionPage/CollectionPage";
 
 function App() {
   const rollbar = useRollbar();
@@ -25,6 +26,7 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route index element={<>home</>} />
             <Route path="building" element={<BuildingPage />} />
+            <Route path="collection" element={<CollectionPage />} />
             <Route path="*" element={<>home</>} />
           </Route>
           <Route path="/login" element={<Login />} />
@@ -59,6 +61,11 @@ function Layout() {
           <li>
             <Link to="/building?bbl=3071980006">
               Building Page for 3071980006
+            </Link>
+          </li>
+          <li>
+            <Link to="/collection?collection=ved-parkash">
+              Collection Page for Ved Parkash
             </Link>
           </li>
         </ul>
