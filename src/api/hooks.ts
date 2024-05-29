@@ -1,7 +1,5 @@
 import useSWR from "swr";
-import { SearchResults } from "../types/APIDataTypes";
-import { IndicatorsDataFromAPI } from "../types/IndicatorsTypes";
-import { splitBBL } from "../util/helpers";
+import { BuildingInfo } from "../types/APIDataTypes";
 import { apiFetcher } from "./helpers";
 
 /** ----------------------------------------------------------------------- */
@@ -9,14 +7,15 @@ import { apiFetcher } from "./helpers";
 /** ----------------------------------------------------------------------- */
 
 type IndicatorSWRResponse = {
-  indicators: IndicatorsDataFromAPI[];
+  data: BuildingInfo;
   isLoading: boolean;
   error: Error | undefined;
 };
 
-export function useGetIndicatorHistory(bbl: string): IndicatorSWRResponse {
+
+export function useGetBuildingInfo(bbl: string): IndicatorSWRResponse {
   const { data, error, isLoading } = useSWR(
-    `/api/address/indicatorhistory?bbl=${bbl}`,
+    `/signature/building?bbl=${bbl}`,
     apiFetcher,
     {
       revalidateIfStale: false,
@@ -26,36 +25,7 @@ export function useGetIndicatorHistory(bbl: string): IndicatorSWRResponse {
   );
 
   return {
-    indicators: data?.result,
-    isLoading,
-    error: error,
-  };
-}
-
-/** ----------------------------------------------------------------------- */
-/** --------------------------- Search for BBL ---------------------------- */
-/** ----------------------------------------------------------------------- */
-
-type PortfolioSWRResponse = {
-  data: SearchResults;
-  isLoading: boolean;
-  error: Error | undefined;
-};
-
-export function useSearchForBBL(bbl: string): PortfolioSWRResponse {
-  const { block, boro, lot } = splitBBL(bbl);
-  const { data, error, isLoading } = useSWR(
-    `/api/address/wowza?block=${block}&borough=${boro}&lot=${lot}`,
-    apiFetcher,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    },
-  );
-
-  return {
-    data: data,
+    data: data?.result[0],
     isLoading,
     error: error,
   };
