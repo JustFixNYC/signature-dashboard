@@ -1,5 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { AddressRecord } from "../../types/APIDataTypes";
+import { AddressRecord } from "../../types/WOWAPIDataTypes";
 
 const columnHelper = createColumnHelper<AddressRecord>();
 

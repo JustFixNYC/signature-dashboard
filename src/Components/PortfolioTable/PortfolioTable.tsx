@@ -1,4 +1,4 @@
-import { AddressRecord } from "../../types/APIDataTypes";
+import { AddressRecord } from "../../types/WOWAPIDataTypes";
 import {
   PaginationState,
   flexRender,

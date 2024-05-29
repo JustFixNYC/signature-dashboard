@@ -5,7 +5,7 @@ import { useSearchForBBL } from "../../api/hooks";
 import { Link, useSearchParams } from "react-router-dom";
 import "mapbox-gl/src/css/mapbox-gl.css";
 import { useState } from "react";
-import { AddressRecord } from "../../types/APIDataTypes";
+import { AddressRecord } from "../../types/WOWAPIDataTypes";
 
 export const MapBox: React.FC = () => {
   const [searchParams] = useSearchParams();
