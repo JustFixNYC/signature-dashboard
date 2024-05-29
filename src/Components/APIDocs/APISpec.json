@@ -100,6 +100,21 @@
             "example": 118333.333333333,
             "description": "Property's Signature debt per unit"
           },
+          "in_aep": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether the building is currently in HPD's Alternative Enforcement Program"
+          },
+          "in_conh": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether the building is currently in HPD's Certificate of No Harassment pilot program"
+          },
+          "in_ucp": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether the building is currently in HPD's Underlying Conditions Program"
+          },
           "evictions": {
             "type": "integer",
             "example": 1,
