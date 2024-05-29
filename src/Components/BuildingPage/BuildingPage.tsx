@@ -15,6 +15,7 @@ export const BuildingPage: React.FC = () => {
       <h2>Building Page</h2>
       {isLoading && <div>loading...</div>}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
+      {data && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
         <>
           <div>Address: {data.address}</div>
