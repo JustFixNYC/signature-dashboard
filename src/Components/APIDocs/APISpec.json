@@ -82,7 +82,7 @@
           },
           "coun_dist": {
             "type": "string",
-            "example": 47,
+            "example": "47",
             "description": "City Council district"
           },
           "origination_date": {
@@ -92,12 +92,12 @@
           },
           "debt_total": {
             "type": "number",
-            "example": "5325000",
+            "example": 5325000,
             "description": "Property's total Signature debt (includes portion of multi-property loans)"
           },
           "debt_per_unit": {
             "type": "number",
-            "example": "118333.333333333",
+            "example": 118333.333333333,
             "description": "Property's Signature debt per unit"
           },
           "evictions": {
@@ -117,7 +117,7 @@
           },
           "hpd_comp_apts_pct": {
             "type": "number",
-            "example": "0.68888888888888888889",
+            "example": 0.68888888888888888889,
             "description": "Share of units in the property that have made HPD complaints in previous 12 months"
           },
           "hpd_comp_heat": {
