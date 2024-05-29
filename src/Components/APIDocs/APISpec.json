@@ -45,10 +45,20 @@
             "example": "A&E Real Estate Holdings (Doug Eisenberg)",
             "description": "Landlord name"
           },
+          "landlord_slug": {
+            "type": "string",
+            "example": "a-e-real-estate-holdings-doug-eisenberg",
+            "description": "Landlord name in slug format. Same as 'collection_slug' for collection page"
+          },
           "lender": {
             "type": "string",
             "example": "Santander",
             "description": "Name of lender for Signature debt"
+          },
+          "lender_slug": {
+            "type": "string",
+            "example": "santander",
+            "description": "Lender name in slug format. Same as 'collection_slug' for collection page"
           },
           "units_nonres": {
             "type": "boolean",
