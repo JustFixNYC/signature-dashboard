@@ -44,10 +44,17 @@ function Layout() {
   return (
     <div>
       <h1>Signature Dashboard</h1>
-      {user && <button onClick={logout}>Logout</button>}
-      <Link className="api-link" to="/api_docs">
-        API Docs
-      </Link>
+      <div className="header-bar">
+        {user && (
+          <>
+            <span className="user-name">Welcome, {user}</span>
+            <button onClick={logout}>Logout</button>
+          </>
+        )}
+        <Link className="api-link" to="/api_docs">
+          API Docs
+        </Link>
+      </div>
       <nav>
         <ul>
           <li>

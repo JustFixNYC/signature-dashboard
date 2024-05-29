@@ -37,6 +37,9 @@ export const Login: React.FC = () => {
           Password: <input name="password" type="text" />
         </label>{" "}
         <button type="submit">Login</button>
+        <div style={{ marginTop: ".5rem", fontSize: ".9rem" }}>
+          (hint: try "organizer" or "tenantsunion")
+        </div>
       </form>
     </div>
   );
