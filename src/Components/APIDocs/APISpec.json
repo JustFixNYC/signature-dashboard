@@ -106,7 +106,7 @@
             "description": "Evictions executed by marshals in previous 12 months"
           },
           "hpd_comp_emerg_total": {
-            "type": "string",
+            "type": "integer",
             "example": 111,
             "description": "Number of Emergency HPD complaints in previous 12 months"
           },
@@ -136,12 +136,12 @@
             "description": "Number of HPD complaints related to pests in previous 12 months"
           },
           "hpd_viol_bc_total": {
-            "type": "string",
+            "type": "integer",
             "example": 141,
             "description": "Total number of B & C class HPD violations in previous 12 months"
           },
           "hpd_viol_bc_open": {
-            "type": "string",
+            "type": "integer",
             "example": 141,
             "description": "Number of open B & C class HPD violations since 2010"
           },
