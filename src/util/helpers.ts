@@ -5,3 +5,9 @@ export function splitBBL(bbl: string) {
   const lot = bblArr.slice(6, 10).join("");
   return { boro, block, lot };
 }
+
+
+export function formatMoney(amount: number): string {
+  const formatmoney= new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' });
+  return formatmoney.format(amount);
+}
