@@ -60,6 +60,11 @@
             "example": "santander",
             "description": "Lender name in slug format. Same as 'collection_slug' for collection page"
           },
+          "link_hpd": {
+            "type": "string",
+            "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
+            "description": "Link to HPD Online for the building. Direct to building page if property has only building, to BBL search results if there are multiple buildings in the BBL"
+          },
           "units_nonres": {
             "type": "boolean",
             "example": false,
@@ -99,6 +104,11 @@
             "type": "string",
             "example": "2022-11-07",
             "description": "Origination date of Signature loan"
+          },
+          "last_sale_date": {
+            "type": "date",
+            "example": "2022-11-06",
+            "description": "Date of the most recent sale of the property, from deed record"
           },
           "debt_total": {
             "type": "number",
