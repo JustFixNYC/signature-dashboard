@@ -65,6 +65,21 @@
             "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
             "description": "Link to HPD Online for the building. Direct to building page if property has only building, to BBL search results if there are multiple buildings in the BBL"
           },
+          "link_acris": {
+            "type": "string",
+            "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
+            "description": "Link to ACRIS for the building."
+          },
+          "link_dob": {
+            "type": "string",
+            "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
+            "description": "Link to DOB's website for the building."
+          },
+          "link_dap": {
+            "type": "string",
+            "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
+            "description": "Link to ANHD's DAP Portal for the building."
+          },
           "units_nonres": {
             "type": "boolean",
             "example": false,
