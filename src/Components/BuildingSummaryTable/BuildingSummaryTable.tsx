@@ -35,7 +35,7 @@ const keys: Partial<keyof BuildingInfo>[] = [
   "placeholder_active_dob_apps",
   "placeholder__dob_open_violations",
   "placeholder__bip_score",
-  "placeholder__rent_stab_units"
+  "placeholder__rent_stab_units",
 ];
 
 const formatAsMoney = ["debt_per_unit", "debt_total"];

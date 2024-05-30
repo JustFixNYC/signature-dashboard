@@ -59,7 +59,7 @@ export interface BuildingInfo {
   placeholder__rent_stab_units_resid_units: string;
   placeholder_violations_pests: number;
   placeholder_total_hp_cases: number;
-placeholder_active_dob_apps: number;
+  placeholder_active_dob_apps: number;
 }
 
 export interface CollectionInfo {

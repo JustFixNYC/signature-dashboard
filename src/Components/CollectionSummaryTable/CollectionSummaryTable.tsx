@@ -24,7 +24,7 @@ const keys: Partial<keyof Omit<CollectionInfo, "bldg_data">>[] = [
   "placeholder__hpd_emerg",
   "placeholder__hpd_erp",
   "placeholder__outstanding_hpd_charges",
-  "placeholder__total_evictions"
+  "placeholder__total_evictions",
 ];
 
 const formatAsMoney = ["debt_per_unit", "debt_per_building"];

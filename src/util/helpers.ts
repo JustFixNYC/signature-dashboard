@@ -57,7 +57,6 @@ export const DISPLAY_NAMES: Partial<{ [key in keys]: string }> = {
 
   last_sale_date: "Date of Last Sale",
 
-
   placeholder__hpd_emerg: "Number of HPD Emergency Repairs since [date]",
   placeholder__hpd_erp: "HPD ERP Charges per Unit",
   placeholder__active_hp: "Active HP Cases",
@@ -69,10 +68,11 @@ export const DISPLAY_NAMES: Partial<{ [key in keys]: string }> = {
   placeholder__rent_stab_units: "Rent Stabilized Units",
   placeholder__rent_stab_units_resid_units: "Residential Units",
   placeholder__outstanding_hpd_charges: "Total Outstanding HPD Charges",
-  placeholder_active_vacate_orders: "(Active) Vacate Order(s) (DOB, HPD, FDNY?)",
+  placeholder_active_vacate_orders:
+    "(Active) Vacate Order(s) (DOB, HPD, FDNY?)",
   placeholder_failed_rodents: "Failed Rodent Inspections (DOHMH)",
   placeholder_elected_official_districts: "Elected official districts",
   placeholder_violations_pests: "Total HPD Violations for Pests",
   placeholder_total_hp_cases: "Total HP Cases since [date]",
-  placeholder_active_dob_apps: "Active DOB Permit Applications"
+  placeholder_active_dob_apps: "Active DOB Permit Applications",
 };
