@@ -21,6 +21,7 @@ export const CollectionPage: React.FC = () => {
         <>
           <h3>Summary Table</h3>
           <CollectionSummaryTable data={data} />
+          <h3>Building Table</h3>
           <CollectionBuildingTable data={data.bldg_data} />
         </>
       )}

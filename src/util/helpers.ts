@@ -37,6 +37,10 @@ export const DISPLAY_NAMES: Partial<{ [key in keys]: string }> = {
   debt_per_unit: "Debt Per Unit (Signature)",
   debt_per_building: "Debt Per Building (Signature)",
   debt_total: "Total Outstanding Debt (Signature)",
+  evictions: "Total Executed Evictions since [date]",
+  in_aep: "In AEP (yes/no)",
+  in_conh: "In CONH (yes/no)",
+  in_ucp: "HPD Underlying Conditions Program (yes/no)",
   origination_date: "Loan Origination Date (Signature)",
   units_res: "Residential Units",
   year_built: "Year Built",
@@ -50,19 +54,25 @@ export const DISPLAY_NAMES: Partial<{ [key in keys]: string }> = {
   cong_dist: "Congressional District",
   coun_dist: "City Council District",
   stsen_dist: "State Senante District",
+
+  last_sale_date: "Date of Last Sale",
+
+
   placeholder__hpd_emerg: "Number of HPD Emergency Repairs since [date]",
   placeholder__hpd_erp: "HPD ERP Charges per Unit",
   placeholder__active_hp: "Active HP Cases",
   placeholder__total_evictions: "Total Eviction Filings since [date]",
-  placeholder__hpd_emerg_complaints:
-    "Total Emergency HPD Complaints in last 12 months",
-  placeholder__hpd_emerg_complaints_per_unit:
-    "Total Emergency HPD Complaints in last 12 months, per unit",
   placeholder__dob_open_violations: "Open DOB Violations",
-  placeholder__charges_water: "Outstanding Charges for Water/Sewer",
-  placeholder__debt_per_unit: "Debt Per Unit (Signature)",
+  placeholder__outstanding_charges_water: "Outstanding Charges for Water/Sewer",
   placeholder__debt_per_building: "Debt Per Building (Signature)",
   placeholder__bip_score: "BIP score (violations + charges)",
   placeholder__rent_stab_units: "Rent Stabilized Units",
   placeholder__rent_stab_units_resid_units: "Residential Units",
+  placeholder__outstanding_hpd_charges: "Total Outstanding HPD Charges",
+  placeholder_active_vacate_orders: "(Active) Vacate Order(s) (DOB, HPD, FDNY?)",
+  placeholder_failed_rodents: "Failed Rodent Inspections (DOHMH)",
+  placeholder_elected_official_districts: "Elected official districts",
+  placeholder_violations_pests: "Total HPD Violations for Pests",
+  placeholder_total_hp_cases: "Total HP Cases since [date]",
+  placeholder_active_dob_apps: "Active DOB Permit Applications"
 };
