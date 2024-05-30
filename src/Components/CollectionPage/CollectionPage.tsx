@@ -3,6 +3,7 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetCollectionInfo } from "../../api/hooks";
 import { CollectionSummaryTable } from "../CollectionSummaryTable/CollectionSummaryTable";
+import { CollectionBuildingTable } from "../CollectionBuildingTable/CollectionBuildingTable";
 
 export const CollectionPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -20,6 +21,7 @@ export const CollectionPage: React.FC = () => {
         <>
           <h3>Summary Table</h3>
           <CollectionSummaryTable data={data} />
+          <CollectionBuildingTable data={data.bldg_data} />
         </>
       )}
     </>
