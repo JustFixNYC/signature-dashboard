@@ -23,6 +23,7 @@ export const BuildingPage: React.FC = () => {
           <div>Borough: {data.borough}</div>
           <div>Zip: {data.zip}</div>
           <div>Landlord: {data.landlord}</div>
+          <div>Lender: {data.lender}</div>
           <h3>Summary Table</h3>
           <BuildingSummaryTable data={data} />
         </>
