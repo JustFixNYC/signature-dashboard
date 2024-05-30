@@ -32,7 +32,9 @@ type CollectionInfoSWRResponse = {
   error: Error | undefined;
 };
 
-export function useGetCollectionInfo(collection: string): CollectionInfoSWRResponse {
+export function useGetCollectionInfo(
+  collection: string,
+): CollectionInfoSWRResponse {
   const { data, error, isLoading } = useSWR(
     `/signature/collection?collection=${collection}`,
     apiFetcher,

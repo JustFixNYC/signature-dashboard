@@ -18,7 +18,7 @@ export function formatMoney(amount: number): string {
 
 type keys = keyof BuildingInfo | keyof CollectionInfo;
 
-export const DISPLAY_NAMES: Partial<{[key in keys]: string}> = {
+export const DISPLAY_NAMES: Partial<{ [key in keys]: string }> = {
   bbl: "BBL",
   hpd_viol_bc_open: "Open B & C HPD Violations (since 2010)",
   hpd_viol_bc_open_per_unit: "Open B & C HPD Violations, per unit (since 2010)",

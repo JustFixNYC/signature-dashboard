@@ -49,20 +49,20 @@ export interface BuildingInfo {
 }
 
 export interface CollectionInfo {
-  collection_name: string,
-  collection_slug: string,
-  collection_type: string,
-  buildings: number,
-  units_res: number,
-  evictions: number,
-  hpd_viol_bc_open: number,
-  hpd_viol_bc_open_per_unit: number,
-  hpd_viol_bc_total: number,
-  hpd_viol_bc_total_per_unit: number,
-  hpd_comp_emerg_total: number,
-  hpd_comp_emerg_total_per_unit: number,
-  debt_total: number,
-  debt_per_building: number,
-  debt_per_unit: number,
-  bldg_data: BuildingInfo[]
+  collection_name: string;
+  collection_slug: string;
+  collection_type: string;
+  buildings: number;
+  units_res: number;
+  evictions: number;
+  hpd_viol_bc_open: number;
+  hpd_viol_bc_open_per_unit: number;
+  hpd_viol_bc_total: number;
+  hpd_viol_bc_total_per_unit: number;
+  hpd_comp_emerg_total: number;
+  hpd_comp_emerg_total_per_unit: number;
+  debt_total: number;
+  debt_per_building: number;
+  debt_per_unit: number;
+  bldg_data: BuildingInfo[];
 }
