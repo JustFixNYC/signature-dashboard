@@ -445,46 +445,6 @@
         }
       }
     },
-    "/signature/collection/charts": {
-      "get": {
-        "summary": "Returns data for charts on the dashboard's Collection page for the requested collection (landlord, lender, all).",
-        "parameters": [
-          {
-            "name": "collection",
-            "in": "query",
-            "description": "Name for the collection in slug format. (<landlord-name>, cpc, santander, all)",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "example": "ved-parkash"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Monthly longitudinal data (2010-present) for the charts on the dashboard's Collection page for the requested collection. Returns empty list if the collection is not part of the Signature portfolio. The first portion of the indicator names indicate the chart it belongs too, and some charts will include multiple indicators, for example as stacked bars.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Charts"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request. Collection should be 'all' or landlord/lender name in slug format."
-          }
-        }
-      }
-    },
     "/signature/collection": {
       "get": {
         "summary": "Returns data for the dashboard's Collection page for the requested collection (landlord, lender, all).",
@@ -512,6 +472,46 @@
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/Collection"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Collection should be 'all' or landlord/lender name in slug format."
+          }
+        }
+      }
+    },
+    "/signature/collection/charts": {
+      "get": {
+        "summary": "Returns data for charts on the dashboard's Collection page for the requested collection (landlord, lender, all).",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "description": "Name for the collection in slug format. (<landlord-name>, cpc, santander, all)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ved-parkash"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Monthly longitudinal data (2010-present) for the charts on the dashboard's Collection page for the requested collection. Returns empty list if the collection is not part of the Signature portfolio. The first portion of the indicator names indicate the chart it belongs too, and some charts will include multiple indicators, for example as stacked bars.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Charts"
                       }
                     }
                   }
