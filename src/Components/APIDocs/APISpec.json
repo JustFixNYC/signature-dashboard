@@ -192,6 +192,70 @@
           }
         }
       },
+      "Charts": {
+        "properties": {
+          "month": {
+            "type": "string",
+            "example": "2024-01",
+            "description": "The month of data for all chart values, in YYYY-MM format. Values can be aggregated for quarterly or yearly chart versions."
+          },
+          "hpdviolations_class_a": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of class A HPD violations in the given month."
+          },
+          "hpdviolations_class_b": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of class B HPD violations in the given month."
+          },
+          "hpdviolations_class_c": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of class C HPD violations in the given month."
+          },
+          "hpdviolations_class_i": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of class I HPD violations in the given month."
+          },
+          "hpdviolations_total": {
+              "type": "integer",
+              "example": 1,
+              "description": "Total nNumber of HPD violations in the given month."
+          },
+          "hpdcomplaints_emergency": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of emergency HPD complaints in the given month."
+          },
+          "hpdcomplaints_nonemergency": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of class non-emergency HPD complaints in the given month."
+          },
+          "hpdcomplaints_total": {
+              "type": "integer",
+              "example": 1,
+              "description": "Total number of HPD complaints in the given month."
+          },
+          "dobviolations_regular": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of regular DOB violations in the given month."
+          },
+          "dobviolations_ecb": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of ECB type DOB violations in the given month."
+          },
+          "dobviolations_total": {
+              "type": "integer",
+              "example": 1,
+              "description": "Total number of DOB violations in the given month."
+          }
+        }
+      },
       "Collection": {
         "properties": {
           "collection_name": {
@@ -313,6 +377,46 @@
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/Building"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. BBL should be a 10-digit padded BBL."
+          }
+        }
+      }
+    },
+    "/signature/building/charts": {
+      "get": {
+        "summary": "Returns data for charts on the dashboard's Building page for the requested property (BBL).",
+        "parameters": [
+          {
+            "name": "bbl",
+            "in": "query",
+            "description": "BBL of the property, in 10-digit zero-padded format",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "3071980006"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Monthly longitudinal data (2010-present) for the charts on the dashboard's Building page associated with the BBL. Returns empty list if the BBL is not part of the Signature portfolio. The first portion of the indicator names indicate the chart it belongs too, and some charts will include multiple indicators, for example as stacked bars.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Charts"
                       }
                     }
                   }
