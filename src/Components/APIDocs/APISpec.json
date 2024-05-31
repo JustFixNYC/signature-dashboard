@@ -195,6 +195,16 @@
             "example": 141,
             "description": "Number of open B & C class HPD violations since 2010"
           },
+          "last_rodent_date": {
+            "type": "string",
+            "example": "2024-01-06",
+            "description": "The date of the most recent DOHMH rodent inspection"
+          },
+          "last_rodent_result": {
+            "type": "string",
+            "example": "Failed",
+            "description": "Result ('Failed' or 'Passed') of the most recent DOHMH rodent inspection."
+          },
           "lat": {
             "type": "number",
             "example": 40.5905737,
