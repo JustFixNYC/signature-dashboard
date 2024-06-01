@@ -195,6 +195,26 @@
             "example": 141,
             "description": "Number of open B & C class HPD violations since 2010"
           },
+          "hpd_viol_bc_open_per_unit": {
+            "type": "number",
+            "example": 1.5,
+            "description": "Number of open B & C class HPD violations since 2010, per unit"
+          },
+          "hpd_erp_orders": {
+            "type": "integer",
+            "example": 4,
+            "description": "Number of HPD Emergency Repair Program work orders in the last 12 months"
+          },
+          "hpd_erp_charges": {
+            "type": "number",
+            "example": 454.00,
+            "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months"
+          },
+          "hpd_erp_charges_per_unit": {
+            "type": "number",
+            "example": 44.23,
+            "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months, per unit"
+          },
           "last_rodent_date": {
             "type": "string",
             "example": "2024-01-06",
@@ -342,6 +362,26 @@
             "type": "number",
             "example": 11,
             "description": "The average number of Emergency HPD complaints per unit in the previous 12 months in the collection"
+          },
+          "hpd_erp_orders": {
+            "type": "integer",
+            "example": 134,
+            "description": "Total number of HPD Emergency Repair Program work orders in the last 12 months in the collection"
+          },
+          "hpd_erp_orders_per_unit": {
+            "type": "number",
+            "example": 454.75,
+            "description": "Total number of HPD Emergency Repair Program work orders in the last 12 months per unit in the collection"
+          },
+          "hpd_erp_charges": {
+            "type": "number",
+            "example": 1544.23,
+            "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months in the collection"
+          },
+          "hpd_erp_charges_per_unit": {
+            "type": "number",
+            "example": 24.20,
+            "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months per unit in the collection"
           },
           "debt_total": {
             "type": "number",
