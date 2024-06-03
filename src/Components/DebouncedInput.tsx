@@ -4,7 +4,7 @@ type DebouncedInputProps = {
   value: string | number;
   onChange: (value: string | number) => void;
   debounce?: number;
-} & Omit<InputHTMLAttributes<HTMLInputElement>, "onChange">
+} & Omit<InputHTMLAttributes<HTMLInputElement>, "onChange">;
 
 // A typical debounced input react component
 const DebouncedInput: React.FC<DebouncedInputProps> = ({
@@ -34,6 +34,6 @@ const DebouncedInput: React.FC<DebouncedInputProps> = ({
       onChange={(e) => setValue(e.target.value)}
     />
   );
-}
+};
 
 export default DebouncedInput;

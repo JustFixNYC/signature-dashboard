@@ -61,7 +61,7 @@ export const CollectionBuildingTable: React.FC<
                         >
                           {flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                           {{
                             asc: " 🔼",

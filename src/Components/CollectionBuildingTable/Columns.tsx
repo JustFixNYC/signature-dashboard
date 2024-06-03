@@ -2,7 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { DISPLAY_NAMES } from "../../util/helpers";
 import { BuildingInfo } from "../../types/APIDataTypes";
 
-export const columns: ColumnDef<BuildingInfo, string|number>[] = [
+export const columns: ColumnDef<BuildingInfo, string | number>[] = [
   {
     accessorKey: "address",
     header: DISPLAY_NAMES["address"],
@@ -150,5 +150,5 @@ export const columns: ColumnDef<BuildingInfo, string|number>[] = [
   {
     accessorKey: "placeholder__total_evictions",
     header: DISPLAY_NAMES["placeholder__total_evictions"],
-  }
+  },
 ];
