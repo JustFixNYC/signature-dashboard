@@ -16,7 +16,6 @@ const keys: Partial<keyof Omit<CollectionInfo, "bldg_data">>[] = [
   "debt_per_unit",
   "debt_per_building",
   "units_res",
-  "hpd_comp_emerg_total_per_unit",
   "placeholder__dob_open_violations",
   "placeholder__outstanding_charges_water",
   "placeholder__bip_score",
@@ -42,7 +41,7 @@ export const CollectionSummaryTable: React.FC<CollectionSummaryTableProps> = ({
       value = data[key];
     }
     return (
-      <tr>
+      <tr key={key}>
         <td>{name}</td>
         <td>{value}</td>
       </tr>
