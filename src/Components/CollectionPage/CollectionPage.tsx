@@ -12,7 +12,7 @@ export const CollectionPage: React.FC = () => {
   const { data, error, isLoading } = useGetCollectionInfo(collection);
 
   return (
-    <>
+    <div style={{ minHeight: "1500px" }}>
       <h2>Collection Page</h2>
       {isLoading && <div>loading...</div>}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
@@ -25,6 +25,6 @@ export const CollectionPage: React.FC = () => {
           <CollectionBuildingTable data={data.bldg_data} />
         </>
       )}
-    </>
+    </div>
   );
 };
