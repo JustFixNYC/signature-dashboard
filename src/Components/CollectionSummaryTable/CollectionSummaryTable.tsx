@@ -26,6 +26,7 @@ const keys: Partial<keyof Omit<CollectionInfo, "bldg_data">>[] = [
   "placeholder__total_evictions",
 ];
 
+const round = ["hpd_viol_bc_open_per_unit", "hpd_comp_emerg_total_per_unit"];
 const formatAsMoney = ["debt_per_unit", "debt_per_building"];
 
 export const CollectionSummaryTable: React.FC<CollectionSummaryTableProps> = ({
@@ -34,6 +35,11 @@ export const CollectionSummaryTable: React.FC<CollectionSummaryTableProps> = ({
   const rows = keys.map((key) => {
     const name = DISPLAY_NAMES[key];
     let value;
+
+    if (round.includes(key) && typeof value === 'number') {
+      console.log(typeof value)
+      value = (value as number).toFixed(2)
+    }
 
     if (formatAsMoney.includes(key)) {
       value = formatMoney(data[key] as number);

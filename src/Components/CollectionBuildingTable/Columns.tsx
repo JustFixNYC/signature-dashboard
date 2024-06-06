@@ -25,6 +25,7 @@ export const columns: ColumnDef<BuildingInfo, string | number>[] = [
   {
     accessorKey: "hpd_viol_bc_open_per_unit",
     header: DISPLAY_NAMES["hpd_viol_bc_open_per_unit"],
+    cell: (info) => (info.getValue() as number).toFixed(2),
     meta: {
       filterVariant: "range",
     },
@@ -71,6 +72,7 @@ export const columns: ColumnDef<BuildingInfo, string | number>[] = [
   {
     accessorKey: "hpd_comp_apts_pct",
     header: DISPLAY_NAMES["hpd_comp_apts_pct"],
+    cell: (info) => ((info.getValue() as number) * 100).toFixed(2) + "%",
   },
   {
     accessorKey: "units_res",

@@ -39,18 +39,21 @@ const keys: Partial<keyof BuildingInfo>[] = [
 ];
 
 const formatAsMoney = ["debt_per_unit", "debt_total"];
+const round = ["hpd_viol_bc_open_per_unit"];
 export const BuildingSummaryTable: React.FC<BuildingSummaryTableProps> = ({
   data,
 }) => {
   const rows = keys.map((key) => {
     const name = DISPLAY_NAMES[key];
-    let value;
-
-    if (formatAsMoney.includes(key)) {
-      value = formatMoney(data[key] as number);
-    } else {
-      value = data[key];
+    let value = data[key];
+    if (round.includes(key) && typeof value === 'number') {
+      value = (value as number).toFixed(2)
     }
+
+    if (formatAsMoney.includes(key) && !Number.isNaN(value)) {
+      value = formatMoney(value as number);
+    }
+
     return (
       <tr>
         <td>{name}</td>
