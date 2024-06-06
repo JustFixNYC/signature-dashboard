@@ -10,10 +10,16 @@ export const columns: ColumnDef<BuildingInfo, string | number>[] = [
   {
     accessorKey: "zip",
     header: DISPLAY_NAMES["zip"],
+    meta: {
+      inputWidth: "3rem",
+    },
   },
   {
     accessorKey: "borough",
     header: DISPLAY_NAMES["borough"],
+    meta: {
+      inputWidth: "1.5rem",
+    },
   },
   {
     accessorKey: "hpd_viol_bc_open",
@@ -73,14 +79,23 @@ export const columns: ColumnDef<BuildingInfo, string | number>[] = [
     accessorKey: "hpd_comp_apts_pct",
     header: DISPLAY_NAMES["hpd_comp_apts_pct"],
     cell: (info) => ((info.getValue() as number) * 100).toFixed(2) + "%",
+    meta: {
+      filterVariant: "range",
+    },
   },
   {
     accessorKey: "units_res",
     header: DISPLAY_NAMES["units_res"],
+    meta: {
+      filterVariant: "range",
+    },
   },
   {
     accessorKey: "year_built",
     header: DISPLAY_NAMES["year_built"],
+    meta: {
+      filterVariant: "range",
+    },
   },
   {
     accessorKey: "units_nonres",
@@ -96,22 +111,37 @@ export const columns: ColumnDef<BuildingInfo, string | number>[] = [
   {
     accessorKey: "lender",
     header: DISPLAY_NAMES["lender"],
+    meta: {
+      inputWidth: "4rem",
+    },
   },
   {
     accessorKey: "assem_dist",
     header: DISPLAY_NAMES["assem_dist"],
+    meta: {
+      inputWidth: "1rem",
+    },
   },
   {
     accessorKey: "cong_dist",
     header: DISPLAY_NAMES["cong_dist"],
+    meta: {
+      inputWidth: "1rem",
+    },
   },
   {
     accessorKey: "coun_dist",
     header: DISPLAY_NAMES["coun_dist"],
+    meta: {
+      inputWidth: "1rem",
+    },
   },
   {
     accessorKey: "stsen_dist",
     header: DISPLAY_NAMES["stsen_dist"],
+    meta: {
+      inputWidth: "1rem",
+    },
   },
   {
     accessorKey: "placeholder_active_vacate_orders",

@@ -22,6 +22,7 @@ declare module "@tanstack/react-table" {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ColumnMeta<TData extends RowData, TValue> {
     filterVariant?: "text" | "range" | "boolean";
+    inputWidth?: string;
   }
 }
 
@@ -48,20 +49,23 @@ export const CollectionBuildingTable: React.FC<
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <th key={header.column.id} colSpan={header.colSpan}>
+                  <th
+                    key={header.column.id}
+                    style={{ minWidth: header.getSize() || undefined }}
+                  >
                     {header.isPlaceholder ? null : (
-                      <>
+                      <div className="column-header">
                         <div
                           {...{
                             className: header.column.getCanSort()
-                              ? "column-header__sort-area"
-                              : "",
+                              ? "column-header__label column-header__sort-area"
+                              : "column-header__label",
                             onClick: header.column.getToggleSortingHandler(),
                           }}
                         >
                           {flexRender(
                             header.column.columnDef.header,
-                            header.getContext(),
+                            header.getContext()
                           )}
                           {{
                             asc: " 🔼",
@@ -69,11 +73,11 @@ export const CollectionBuildingTable: React.FC<
                           }[header.column.getIsSorted() as string] ?? null}
                         </div>
                         {header.column.getCanFilter() ? (
-                          <div>
+                          <div className="column-header__filter">
                             <Filter column={header.column} />
                           </div>
                         ) : null}
-                      </>
+                      </div>
                     )}
                   </th>
                 );
@@ -99,7 +103,7 @@ export const CollectionBuildingTable: React.FC<
 
 function Filter({ column }: { column: Column<BuildingInfo, unknown> }) {
   const columnFilterValue = column.getFilterValue();
-  const { filterVariant } = column.columnDef.meta ?? {};
+  const { filterVariant, inputWidth } = column.columnDef.meta ?? {};
 
   return filterVariant === "range" ? (
     <div>
@@ -121,7 +125,6 @@ function Filter({ column }: { column: Column<BuildingInfo, unknown> }) {
           placeholder={`Max`}
         />
       </div>
-      <div className="h-1" />
     </div>
   ) : filterVariant === "boolean" ? (
     <select
@@ -144,9 +147,9 @@ function Filter({ column }: { column: Column<BuildingInfo, unknown> }) {
       onChange={(value) => {
         column.setFilterValue(value);
       }}
-      placeholder={`Search...`}
       type="text"
       value={(columnFilterValue ?? "") as string}
+      {...(inputWidth && { style: { width: inputWidth } })}
     />
   );
 }
