@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { useGetBuildingChartData, useGetBuildingInfo } from "../../api/hooks";
 import { BuildingSummaryTable } from "../BuildingSummaryTable/BuildingSummaryTable";
 import { BuildingBandCChart } from "../BuildingBAndCChart/BuildingBAndCChart";
+import { BuildingHPDCompEmerg } from "../BuildingHPDCompEmerg/BuildingHPDCompEmerg";
 
 export const BuildingPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -47,6 +48,11 @@ export const BuildingPage: React.FC = () => {
       {chartIsLoading && <div>loading...</div>}
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
       {chartData && <BuildingBandCChart data={chartData} />}
+
+      <h3>HPD Complaints Emergency and Non-emergency</h3>
+      {chartIsLoading && <div>loading...</div>}
+      {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
+      {chartData && <BuildingHPDCompEmerg data={chartData} />}
     </>
   );
 };
