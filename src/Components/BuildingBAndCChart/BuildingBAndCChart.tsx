@@ -10,21 +10,20 @@ import {
 import { ChartData } from "../../types/APIDataTypes";
 import { Bar } from "react-chartjs-2";
 
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const options = {
   plugins: {
     title: {
       display: true,
-      text: 'HPD Violations',
+      text: "HPD Violations",
     },
   },
   responsive: true,
@@ -42,30 +41,35 @@ type BuildingBAndCChartProps = {
   data: ChartData[];
 };
 
-export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({data}) => {
+export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
+  data,
+}) => {
   const chartData = {
     datasets: [
       {
-        label: 'Class B',
-        data: data.map((data => ({
+        label: "Class B",
+        data: data.map((data) => ({
           x: data.month,
           y: data.hpdviolations_class_b,
-        }))),
-        backgroundColor: 'rgb(255, 99, 132)',
+        })),
+        backgroundColor: "rgb(255, 99, 132)",
       },
       {
-        label: 'Class C',
-        data: data.map((data => ({
+        label: "Class C",
+        data: data.map((data) => ({
           x: data.month,
-          y: data.hpdviolations_class_c
-        }))),
-        backgroundColor: 'rgb(75, 192, 192)',
+          y: data.hpdviolations_class_c,
+        })),
+        backgroundColor: "rgb(75, 192, 192)",
       },
     ],
   };
 
   return (
-    <div className="chart-container"  style={{position: "relative", height:"50vh", width:"80vw"}}>
+    <div
+      className="chart-container"
+      style={{ position: "relative", height: "50vh", width: "80vw" }}
+    >
       <Bar options={options} data={chartData}></Bar>
     </div>
   );

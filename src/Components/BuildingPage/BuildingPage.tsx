@@ -9,7 +9,11 @@ export const BuildingPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const bbl = searchParams.get("bbl") || "";
 
-  const { data: buildingInfo, error: buildingInfoError, isLoading: buildingInfoIsLoading } = useGetBuildingInfo(bbl);
+  const {
+    data: buildingInfo,
+    error: buildingInfoError,
+    isLoading: buildingInfoIsLoading,
+  } = useGetBuildingInfo(bbl);
   const {
     data: chartData,
     error: chartError,
@@ -20,7 +24,9 @@ export const BuildingPage: React.FC = () => {
       <h2>Building Page</h2>
 
       {buildingInfoIsLoading && <div>loading...</div>}
-      {buildingInfoError && <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>}
+      {buildingInfoError && (
+        <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>
+      )}
       {buildingInfo && <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>}
       {buildingInfo && (
         <>
@@ -35,7 +41,6 @@ export const BuildingPage: React.FC = () => {
           <BuildingSummaryTable data={buildingInfo} />
         </>
       )}
-
 
       <h3>HPD Violations Class B and Class C</h3>
 

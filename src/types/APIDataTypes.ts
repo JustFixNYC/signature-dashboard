@@ -90,16 +90,16 @@ export interface CollectionInfo {
 }
 
 export interface ChartData {
-  month: string,
-  hpdviolations_class_a: number,
-  hpdviolations_class_b: number,
-  hpdviolations_class_c: number,
-  hpdviolations_class_i: number,
-  hpdviolations_total: number,
-  hpdcomplaints_emergency: number,
-  hpdcomplaints_nonemergency: number,
-  hpdcomplaints_total: number,
-  dobviolations_regular: number,
-  dobviolations_ecb: number,
-  dobviolations_total: number
+  month: string;
+  hpdviolations_class_a: number;
+  hpdviolations_class_b: number;
+  hpdviolations_class_c: number;
+  hpdviolations_class_i: number;
+  hpdviolations_total: number;
+  hpdcomplaints_emergency: number;
+  hpdcomplaints_nonemergency: number;
+  hpdcomplaints_total: number;
+  dobviolations_regular: number;
+  dobviolations_ecb: number;
+  dobviolations_total: number;
 }

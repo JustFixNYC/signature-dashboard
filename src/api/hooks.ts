@@ -58,9 +58,7 @@ type ChartDataSWRResponse = {
   error: Error | undefined;
 };
 
-export function useGetBuildingChartData(
-  bbl: string,
-): ChartDataSWRResponse {
+export function useGetBuildingChartData(bbl: string): ChartDataSWRResponse {
   const { data, error, isLoading } = useSWR(
     `/signature/building/charts?bbl=${bbl}`,
     apiFetcher,
@@ -97,5 +95,3 @@ export function useGetCollectionChartData(
     error: error,
   };
 }
-
-

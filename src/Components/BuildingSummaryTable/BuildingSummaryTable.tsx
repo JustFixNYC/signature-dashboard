@@ -46,8 +46,8 @@ export const BuildingSummaryTable: React.FC<BuildingSummaryTableProps> = ({
   const rows = keys.map((key) => {
     const name = DISPLAY_NAMES[key];
     let value = data[key];
-    if (round.includes(key) && typeof value === 'number') {
-      value = (value as number).toFixed(2)
+    if (round.includes(key) && typeof value === "number") {
+      value = (value as number).toFixed(2);
     }
 
     if (formatAsMoney.includes(key) && !Number.isNaN(value)) {
