@@ -4,12 +4,15 @@ import { HTTPError, NetworkError } from "./error-reporting";
  * Rebase a url like `/api/boop` to start with our API base URL
  */
 function apiURL(url: string): string {
-  return `${import.meta.env.VITE_APP_API_BASE_URL}${url}`;
+  return `${import.meta.env.VITE_JUSTFIX_API_BASE_URL}${url}`;
 }
 
 export const apiFetcher = async (url: string) => {
   const res = await fetch(apiURL(url), {
-    headers: { accept: "application/json" },
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_JUSTFIX_API_TOKEN}`,
+    },
   });
 
   const contentType = res.headers.get("Content-Type");

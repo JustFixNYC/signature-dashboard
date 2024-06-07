@@ -1,22 +1,16 @@
 import useSWR from "swr";
-import { SearchResults } from "../types/APIDataTypes";
-import { IndicatorsDataFromAPI } from "../types/IndicatorsTypes";
-import { splitBBL } from "../util/helpers";
+import { BuildingInfo, CollectionInfo } from "../types/APIDataTypes";
 import { apiFetcher } from "./helpers";
 
-/** ----------------------------------------------------------------------- */
-/** ------------------------ Get Indicator History ------------------------ */
-/** ----------------------------------------------------------------------- */
-
-type IndicatorSWRResponse = {
-  indicators: IndicatorsDataFromAPI[];
+type BuildingInfoSWRResponse = {
+  data: BuildingInfo;
   isLoading: boolean;
   error: Error | undefined;
 };
 
-export function useGetIndicatorHistory(bbl: string): IndicatorSWRResponse {
+export function useGetBuildingInfo(bbl: string): BuildingInfoSWRResponse {
   const { data, error, isLoading } = useSWR(
-    `/api/address/indicatorhistory?bbl=${bbl}`,
+    `/signature/building?bbl=${bbl}`,
     apiFetcher,
     {
       revalidateIfStale: false,
@@ -26,26 +20,23 @@ export function useGetIndicatorHistory(bbl: string): IndicatorSWRResponse {
   );
 
   return {
-    indicators: data?.result,
+    data: data?.result[0],
     isLoading,
     error: error,
   };
 }
 
-/** ----------------------------------------------------------------------- */
-/** --------------------------- Search for BBL ---------------------------- */
-/** ----------------------------------------------------------------------- */
-
-type PortfolioSWRResponse = {
-  data: SearchResults;
+type CollectionInfoSWRResponse = {
+  data: CollectionInfo;
   isLoading: boolean;
   error: Error | undefined;
 };
 
-export function useSearchForBBL(bbl: string): PortfolioSWRResponse {
-  const { block, boro, lot } = splitBBL(bbl);
+export function useGetCollectionInfo(
+  collection: string,
+): CollectionInfoSWRResponse {
   const { data, error, isLoading } = useSWR(
-    `/api/address/wowza?block=${block}&borough=${boro}&lot=${lot}`,
+    `/signature/collection?collection=${collection}`,
     apiFetcher,
     {
       revalidateIfStale: false,
@@ -55,7 +46,7 @@ export function useSearchForBBL(bbl: string): PortfolioSWRResponse {
   );
 
   return {
-    data: data,
+    data: data?.result[0],
     isLoading,
     error: error,
   };

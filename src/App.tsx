@@ -1,14 +1,13 @@
 import { Routes, Route, Outlet, Link } from "react-router-dom";
-import { Portfolio } from "./Components/Portfolio/Portfolio";
-import { Indicators } from "./Components/Indicators/Indicators";
+import { BuildingPage } from "./Components/BuildingPage/BuildingPage";
 import { useRollbar } from "@rollbar/react";
 import { SWRConfig } from "swr";
 import { NetworkError } from "./api/error-reporting";
-import { MapBox } from "./Components/MapBox/MapBox";
 import { APIDocs } from "./Components/APIDocs/APIDocs";
 import { Login } from "./Components/Login/Login";
 import { PrivateRoutes, useAuth } from "./auth";
 import "./App.scss";
+import { CollectionPage } from "./Components/CollectionPage/CollectionPage";
 
 function App() {
   const rollbar = useRollbar();
@@ -26,9 +25,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route element={<PrivateRoutes />}>
             <Route index element={<>home</>} />
-            <Route path="mapbox" element={<MapBox />} />
-            <Route path="portfolio" element={<Portfolio />} />
-            <Route path="indicators" element={<Indicators />} />
+            <Route path="building" element={<BuildingPage />} />
+            <Route path="collection" element={<CollectionPage />} />
             <Route path="*" element={<>home</>} />
           </Route>
           <Route path="/login" element={<Login />} />
@@ -61,18 +59,13 @@ function Layout() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/mapbox?bbl=2042900008">
-              Map For Portfolio of BBL 2042900008
+            <Link to="/building?bbl=3071980006">
+              Building Page for 3071980006
             </Link>
           </li>
           <li>
-            <Link to="/portfolio?bbl=2042900008">
-              Table For Portfolio of BBL 2042900008
-            </Link>
-          </li>
-          <li>
-            <Link to="/indicators?bbl=2042900008">
-              Indicators Chart For Portfolio of BBL 2042900008
+            <Link to="/collection?collection=ved-parkash">
+              Collection Page for Ved Parkash
             </Link>
           </li>
         </ul>

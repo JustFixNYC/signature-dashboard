@@ -1,223 +1,90 @@
-// TYPES ASSOCIATED WITH INPUT DATA:
-
-// import { SearchAddress } from "./AddressSearch";
-
-export type Borough =
-  | "MANHATTAN"
-  | "BRONX"
-  | "BROOKLYN"
-  | "QUEENS"
-  | "STATEN ISLAND";
-
-export type WithBoroBlockLot = {
-  boro: string;
-  block: string;
-  lot: string;
-};
-
-// export type SearchAddressWithoutBbl = Omit<SearchAddress, "bbl">;
-
-// TYPES ASSOCIATED WITH ADDRESS SEARCH QUERY:
-
-export type HpdOwnerContact = {
-  title: string;
-  value: string;
-};
-
-export type HpdContactAddress = {
-  housenumber: string | null;
-  streetname: string;
-  apartment: string | null;
-  city: string | null;
-  state: string | null;
-  zip: string | null;
-};
-
-export type HpdFullContact = HpdOwnerContact & {
-  address: HpdContactAddress | null;
-};
-
-export type HpdComplaintCount = {
-  type: string;
-  count: number;
-};
-
 /** Date fields that come from our API Data are strings with the format YYYY-MM-DD */
 type APIDate = string;
 
-export type GeoSearchData = {
+export type BoroughAbbreviation = "MAN" | "BX" | "BK" | "QNS" | "SI";
+
+export interface BuildingInfo {
+  address: string;
+  assem_dist: string;
   bbl: string;
-};
+  borough: BoroughAbbreviation;
+  cong_dist: string;
+  coun_dist: string;
+  debt_per_unit: number;
+  debt_total: number;
+  evictions: number;
+  hpd_comp_heat: number;
+  hpd_comp_water: number;
+  hpd_comp_pests: number;
+  hpd_comp_apts: string;
+  hpd_comp_apts_pct: number;
+  hpd_comp_emerg_total: number;
+  hpd_comp_emerg_total_per_unit: number;
+  hpd_viol_bc_open: number;
+  hpd_viol_bc_open_per_unit: number;
+  hpd_viol_bc_total: number;
+  hpd_viol_bc_total_per_unit: number;
+  placeholder__outstanding_hpd_charges: number;
+  landlord: string;
+  lat: number;
+  lender: string;
+  lng: number;
+  origination_date: string;
+  last_sale_date: string;
+  in_aep: number;
+  in_conh: number;
+  in_ucp: number;
+  stsen_dist: number;
+  units_comm: number;
+  units_res: number;
+  units_nonres: number;
+  year_built: APIDate;
+  zip: string;
 
-export type AddressRecord = {
-  // allcontacts: HpdFullContact[] | null;
-  allcontacts: string;
-  bbl: number; //string;
-  bin: number; //string;
-  boro: Borough;
-  businessaddrs: string[] | null;
-  corpnames: string[] | null;
-  evictions: number | null;
-  evictionfilings: number | null;
-  housenumber: string;
-  lastregistrationdate: APIDate;
-  lastsaleacrisid: string | null;
-  lastsaleamount: number | null;
-  lastsaledate: APIDate | null;
-  lat: number | null;
-  lng: number | null;
-  /** This property gets assigned in the PropertiesMap component, not from our API */
-  mapType?: "base" | "search";
-  openviolations: number;
-  ownernames: HpdOwnerContact[] | null;
-  recentcomplaints: number;
-  /** Note: this property will never be an empty array. Either null, or an array of length 1 or more */
-  recentcomplaintsbytype: HpdComplaintCount[] | null;
-  registrationenddate: APIDate;
-  registrationid: string;
-  hpdbuildingid: number;
-  hpdbuildings: number;
-  rsdiff: number | null;
-  rsunits2007: number | null;
-  rsunitslatest: number | null;
-  rsunitslatestyear: number;
-  streetname: string;
-  totalcomplaints: number;
-  totalviolations: number;
-  unitsres: number | null;
-  yearbuilt: number | null;
-  /** Note: in some rare cases, the year listed as the start of this abatement program is actually in the future! */
-  yearstartedj51: number | null;
-  /** Note: in some rare cases, the year listed as the start of this abatement program is actually in the future! */
-  yearstarted421a: number | null;
-  zip: string | null;
-  council: number | null;
-};
+  placeholder_active_vacate_orders: number;
+  placeholder_failed_rodents: number;
+  placeholder_elected_official_districts: number;
+  placeholder__hpd_emerg: string;
+  placeholder__hpd_erp: string;
+  placeholder__active_hp: string;
+  placeholder__total_evictions: string;
+  placeholder__hpd_emerg_complaints: string;
+  placeholder__hpd_emerg_complaints_per_unit: string;
+  placeholder__dob_open_violations: string;
+  placeholder__outstanding_charges_water: string;
+  placeholder__debt_per_unit: string;
+  placeholder__debt_per_building: string;
+  placeholder__bip_score: string;
+  placeholder__rent_stab_units: string;
+  placeholder__rent_stab_units_resid_units: string;
+  placeholder_violations_pests: number;
+  placeholder_total_hp_cases: number;
+  placeholder_active_dob_apps: number;
+}
 
-export type PortfolioGraphNode = {
-  id: number;
-  value: {
-    kind: "name" | "bizaddr";
-    value: string;
-  };
-};
-
-export type PortfolioGraphEdge = {
-  from: number;
-  to: number;
-  reg_contacts: number;
-};
-
-export type RawPortfolioGraphJson = {
-  nodes: PortfolioGraphNode[];
-  edges: PortfolioGraphEdge[];
-};
-
-export type SearchResults = {
-  addrs: AddressRecord[];
-  geosearch?: GeoSearchData;
-  graph?: RawPortfolioGraphJson;
-};
-
-// TYPES ASSOCIATED WITH SUMMARY AGGREGATION:
-
-export type AddressLocation = {
-  boro: Borough;
-  housenumber: string;
-  lat: number | null;
-  lng: number | null;
-  streetname: string;
-};
-
-type EvictionAddress = AddressLocation & {
-  evictions: number | null;
-};
-
-type EvictionFilingsAddress = AddressLocation & {
-  filings: number | null;
-};
-
-type RentStabilizedAddress = AddressLocation & {
-  rsdiff: number | null;
-};
-
-type HpdViolationsAddress = AddressLocation & {
-  openviolations: number | null;
-};
-
-export type SummaryStatsRecord = {
-  age: number | null;
-  avgevictions: number | null;
-  bldgs: number;
-  evictionsaddr: EvictionAddress;
-  evictionfilingsaddr: EvictionFilingsAddress;
-  openviolationsperbldg: number;
-  openviolationsperresunit: number;
-  rslossaddr: RentStabilizedAddress;
-  rsproportion: number | null;
-  topbusinessaddr: string | null;
-  topcorp: string | null;
-  topowners: string[];
-  totalhpdcomplaints: number;
-  totalrecenthpdcomplaints: number;
-  recenthpdcomplaintsbytype: HpdComplaintCount[];
-  totalevictions: number | null;
-  totalevictionfilings: number | null;
-  totalopenviolations: number;
-  totalrsdiff: number | null;
-  totalrsgain: number;
-  totalrsloss: number;
-  totalviolations: number;
-  units: number;
-  violationsaddr: HpdViolationsAddress;
-};
-// TYPES ASSOCIATED WITH BUILDING INFO QUERY:
-
-export type BuildingInfoRecord = {
-  boro: Borough;
-  housenumber: string;
-  latitude: number;
-  longitude: number;
-  streetname: string;
-  bldgclass: string;
-  unitsres: number;
-  lastregistrationdate: string;
-  registrationenddate: string;
-  formatted_address: string;
-  /** The name of the NYCHA development (e.g. "SOTOMAYOR HOUSES").
-   * NULL if building is not part of NYCHA */
-  nycha_development: string | null;
-  /** Total executed residential evictions (since 2017) accross the building's entire NYCHA development.
-   * NULL values either mean 0 evictions took place across the development or building is not part of NYCHA. */
-  nycha_dev_evictions: number | null;
-  /** Total residential units accross the building's entire NYCHA development.
-   * NULL values either mean PLUTO listed 0 residential units across the development or building is not part of NYCHA. */
-  nycha_dev_unitsres: number | null;
-};
-
-export type BuildingInfoResults = {
-  result: BuildingInfoRecord[];
-};
-
-// TYPES ASSOCIATED WITH INDICATORS (TIMELINE TAB) QUERY:
-
-export type MonthlyTimelineData = {
-  month: string;
-  hpdcomplaints_emergency: number;
-  hpdcomplaints_nonemergency: number;
-  hpdcomplaints_total: number;
-  dobpermits_total: number;
-  hpdviolations_class_a: number;
-  hpdviolations_class_b: number;
-  hpdviolations_class_c: number;
-  hpdviolations_total: number;
-  dobviolations_regular: number;
-  dobviolations_ecb: number;
-  dobviolations_total: number;
-  evictionfilings_total: number;
-  rentstabilizedunits_total: number;
-};
-
-export type IndicatorsHistoryResults = {
-  result: MonthlyTimelineData[];
-};
+export interface CollectionInfo {
+  collection_name: string;
+  collection_slug: string;
+  collection_type: string;
+  buildings: number;
+  units_res: number;
+  evictions: number;
+  hpd_viol_bc_open: number;
+  hpd_viol_bc_open_per_unit: number;
+  hpd_viol_bc_total: number;
+  hpd_viol_bc_total_per_unit: number;
+  hpd_comp_emerg_total: number;
+  hpd_comp_emerg_total_per_unit: number;
+  debt_total: number;
+  debt_per_building: number;
+  debt_per_unit: number;
+  placeholder__hpd_emerg: number;
+  placeholder__hpd_erp: number;
+  placeholder__dob_open_violations: number;
+  placeholder__outstanding_charges_water: string;
+  placeholder__bip_score: number;
+  placeholder__rent_stab_units: number;
+  placeholder__outstanding_hpd_charges: number;
+  placeholder__total_evictions: number;
+  bldg_data: BuildingInfo[];
+}
