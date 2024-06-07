@@ -32,8 +32,8 @@
           },
           "borough": {
             "type": "string",
-            "example": "BK",
-            "description": "Borough abbreviation"
+            "example": "Brooklyn",
+            "description": "Borough name"
           },
           "zip": {
             "type": "string",
@@ -166,8 +166,8 @@
             "description": "List of apartments that have submitted HPD complaints in previous 12 months"
           },
           "hpd_comp_apts_pct": {
-            "type": "number",
-            "example": 0.68888888888888888889,
+            "type": "integer",
+            "example": 68,
             "description": "Share of units in the property that have made HPD complaints in previous 12 months"
           },
           "hpd_comp_heat": {
@@ -200,6 +200,21 @@
             "example": 1.5,
             "description": "Number of open B & C class HPD violations since 2010, per unit"
           },
+          "hpd_viol_heat": {
+            "type": "integer",
+            "example": 8,
+            "description": "Number of HPD violations related to heat/hot water"
+          },
+          "hpd_viol_water": {
+            "type": "integer",
+            "example": 4,
+            "description": "Number of HPD violations related to leaks/mold"
+          },
+          "hpd_viol_pests": {
+            "type": "integer",
+            "example": 3,
+            "description": "Number of HPD violations related to pests"
+          },
           "hpd_erp_orders": {
             "type": "integer",
             "example": 4,
@@ -223,7 +238,12 @@
           "last_rodent_result": {
             "type": "string",
             "example": "Failed",
-            "description": "Result ('Failed' or 'Passed') of the most recent DOHMH rodent inspection."
+            "description": "Result of the most recent DOHMH rodent inspection ('Passed' or 'Failed')."
+          },
+          "dob_jobs": {
+            "type": "integer",
+            "example": 3,
+            "description": "Number of DOB Job Application Filings for the building in the last 12 months."
           },
           "lat": {
             "type": "number",
