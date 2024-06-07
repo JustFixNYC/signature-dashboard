@@ -1,11 +1,17 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { DISPLAY_NAMES } from "../../util/helpers";
 import { BuildingInfo } from "../../types/APIDataTypes";
+import { Link } from "react-router-dom";
 
 export const columns: ColumnDef<BuildingInfo, string | number>[] = [
   {
     accessorKey: "address",
     header: DISPLAY_NAMES["address"],
+    cell: (info) => (
+      <Link to={`/building?bbl=${info.row.original.bbl}`}>
+        {info.getValue()}
+      </Link>
+    ),
   },
   {
     accessorKey: "zip",
