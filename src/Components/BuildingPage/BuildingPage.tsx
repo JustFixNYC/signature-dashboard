@@ -11,7 +11,7 @@ export const BuildingPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const bbl = searchParams.get("bbl") || "";
 
-  const [bAndCTimeSpan, setBAndCTimespan] = useState("two-years");
+  const [bAndCTimeSpan, setBAndCTimespan] = useState<"two-years" | "all-time">("two-years");
 
   const {
     data: buildingInfo,
