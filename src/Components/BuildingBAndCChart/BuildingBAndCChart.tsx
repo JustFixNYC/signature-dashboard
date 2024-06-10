@@ -6,7 +6,10 @@ import {
   Tooltip,
   Legend,
   BarElement,
+  TimeScale,
+  Interaction,
 } from "chart.js";
+import "chartjs-adapter-luxon";
 import { ChartData } from "../../types/APIDataTypes";
 import { Bar } from "react-chartjs-2";
 
@@ -17,32 +20,19 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  TimeScale
 );
-
-const options = {
-  plugins: {
-    title: {
-      display: true,
-      text: "HPD Violations",
-    },
-  },
-  responsive: true,
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
-};
+const twoYearsAgo = new Date();
+twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2 );
 
 type BuildingBAndCChartProps = {
   data: ChartData[];
+  timespan: 'two-years' | 'all-time'
 };
 
 export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
   data,
+  timespan
 }) => {
   const chartData = {
     datasets: [
@@ -65,10 +55,70 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
     ],
   };
 
+  const options = {
+    plugins: {
+      title: {
+        display: false,
+        text: "HPD Violations",
+      },
+      tooltip: {
+        callbacks: {
+          title: (context) => {
+            const date = new Date(context[0].label).toLocaleDateString("en", { year: "numeric", month: "long" })
+            return date;
+          },
+          footer: (context) => {
+            let total = 0;
+            context.forEach(context => {
+              total += context.raw.y
+            })
+            return "Total: " + total
+          }
+        }
+      },
+    },
+    interaction: {
+      mode: 'index'
+    },
+    responsive: true,
+    scales: {
+      x: {
+        stacked: true,
+        type: "time",
+        min: timespan === 'two-years' ? twoYearsAgo : null,
+        autoSkip: false,
+        time: {
+          unit: "month",
+        },
+        ticks: {
+          callback: function (value: string | number) {
+            const fullDate: string = this.getLabelForValue(value); // Make date value include a day so it can be parsed
+            const date = new Date(fullDate);
+            const month = date.toLocaleDateString("en", { month: "short" });
+            return (
+              (date.getMonth() === 0 ? date.getFullYear() + "  " : "") + month
+            );
+          },
+        },
+      },
+      y: {
+        stacked: true,
+        title: {
+          display: true,
+          text: "HPD Violations",
+          font: {
+            family: "Degular",
+            size: 16,
+          },
+        },
+      },
+    },
+  };
+
   return (
     <div
       className="chart-container"
-      style={{ position: "relative", height: "50vh", width: "80vw" }}
+      style={{ position: "relative", height: "80vh", width: "80vw"}}
     >
       <Bar options={options} data={chartData}></Bar>
     </div>

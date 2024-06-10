@@ -1,14 +1,17 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
-import React from "react";
+import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetBuildingChartData, useGetBuildingInfo } from "../../api/hooks";
 import { BuildingSummaryTable } from "../BuildingSummaryTable/BuildingSummaryTable";
 import { BuildingBandCChart } from "../BuildingBAndCChart/BuildingBAndCChart";
 import { BuildingHPDCompEmerg } from "../BuildingHPDCompEmerg/BuildingHPDCompEmerg";
+import { RadioButton } from "@justfixnyc/component-library";
 
 export const BuildingPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const bbl = searchParams.get("bbl") || "";
+
+  const [bAndCTimeSpan, setBAndCTimespan] = useState("two-years");
 
   const {
     data: buildingInfo,
@@ -43,16 +46,40 @@ export const BuildingPage: React.FC = () => {
         </>
       )}
 
-      <h3>HPD Violations Class B and Class C</h3>
+      <h3>HPD Violations</h3>
 
       {chartIsLoading && <div>loading...</div>}
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
-      {chartData && <BuildingBandCChart data={chartData} />}
+      {chartData && (
+        <>
+          <RadioButton
+            name="b-and-c-timespan"
+            labelText="Past 2 years"
+            id="radio-two-years"
+            value="two-years"
+            checked={bAndCTimeSpan === "two-years"}
+            onChange={() => setBAndCTimespan("two-years")}
+          />
+          <RadioButton
+            name="b-and-c-timespan"
+            labelText="All time"
+            id="radio-all-time"
+            value="all-time"
+            checked={bAndCTimeSpan === "all-time"}
+            onChange={() => setBAndCTimespan("all-time")}
+          />
+          <BuildingBandCChart data={chartData} timespan={bAndCTimeSpan} />
+        </>
+      )}
 
-      <h3>HPD Complaints Emergency and Non-emergency</h3>
+      <h3>HPD Complaints</h3>
       {chartIsLoading && <div>loading...</div>}
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
-      {chartData && <BuildingHPDCompEmerg data={chartData} />}
+      {chartData && (
+        <>
+          <BuildingHPDCompEmerg data={chartData} />
+        </>
+      )}
     </>
   );
 };

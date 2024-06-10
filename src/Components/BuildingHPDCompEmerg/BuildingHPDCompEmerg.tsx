@@ -22,7 +22,7 @@ ChartJS.register(
 const options = {
   plugins: {
     title: {
-      display: true,
+      display: false,
       text: "HPD Complaints",
     },
   },
