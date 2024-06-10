@@ -20,19 +20,19 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  TimeScale
+  TimeScale,
 );
 const twoYearsAgo = new Date();
-twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2 );
+twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
 
 type BuildingBAndCChartProps = {
   data: ChartData[];
-  timespan: 'two-years' | 'all-time'
+  timespan: "two-years" | "all-time";
 };
 
 export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
   data,
-  timespan
+  timespan,
 }) => {
   const chartData = {
     datasets: [
@@ -64,28 +64,31 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
       tooltip: {
         callbacks: {
           title: (context) => {
-            const date = new Date(context[0].label).toLocaleDateString("en", { year: "numeric", month: "long" })
+            const date = new Date(context[0].label).toLocaleDateString("en", {
+              year: "numeric",
+              month: "long",
+            });
             return date;
           },
           footer: (context) => {
             let total = 0;
-            context.forEach(context => {
-              total += context.raw.y
-            })
-            return "Total: " + total
-          }
-        }
+            context.forEach((context) => {
+              total += context.raw.y;
+            });
+            return "Total: " + total;
+          },
+        },
       },
     },
     interaction: {
-      mode: 'index'
+      mode: "index",
     },
     responsive: true,
     scales: {
       x: {
         stacked: true,
         type: "time",
-        min: timespan === 'two-years' ? twoYearsAgo : null,
+        min: timespan === "two-years" ? twoYearsAgo : null,
         autoSkip: false,
         time: {
           unit: "month",
@@ -118,7 +121,7 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
   return (
     <div
       className="chart-container"
-      style={{ position: "relative", height: "80vh", width: "80vw"}}
+      style={{ position: "relative", height: "80vh", width: "80vw" }}
     >
       <Bar options={options} data={chartData}></Bar>
     </div>
