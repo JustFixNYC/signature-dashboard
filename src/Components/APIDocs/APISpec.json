@@ -135,6 +135,16 @@
             "example": 118333.333333333,
             "description": "Property's Signature debt per unit"
           },
+          "water_charges": {
+            "type": "number",
+            "example": 500.00,
+            "description": "Outstanding water charges due to the city"
+          },
+          "bip": {
+            "type": "integer",
+            "example": 19,
+            "description": "UNHP's Building Indicator Project (BIP) score. Combines unpaid charges to the city and HPD violations."
+          },
           "in_aep": {
             "type": "boolean",
             "example": true,
@@ -426,6 +436,50 @@
             "description": "Array of buildings in the collection"
           }
         }
+      },
+      "Landlords": {
+        "properties": {
+          "landlord_name": {
+            "type": "string",
+            "example": "Ved Parkash",
+            "description": "Landlord display name"
+          },
+          "landlord_slug": {
+            "type": "string",
+            "example": "ved-parkash",
+            "description": "Landlord name slug, used for API and URL"
+          },
+          "lender_name": {
+            "type": "string",
+            "example": "CPC",
+            "description": "Lender display name"
+          },
+          "lender_slug": {
+            "type": "string",
+            "example": "cpc",
+            "description": "Lender name slug, used for API and URL"
+          },
+          "buildings": {
+            "type": "integer",
+            "example": 26,
+            "description": "Number of properties (BBLs) in the collection"
+          },
+          "units_res": {
+            "type": "integer",
+            "example": 1800,
+            "description": "Total number of residential units in the collection"
+          },
+          "hpd_viol_bc_open_per_unit": {
+            "type": "number",
+            "example": 8.495,
+            "description": "The average number of open B & C class HPD violations per unit in the collection, since 2010"
+          },
+          "debt_per_unit": {
+            "type": "number",
+            "example": 78271.42179999998,
+            "description": "The average Signature debt per unit in the collection"
+          }
+        }
       }
     }
   },
@@ -591,6 +645,34 @@
           },
           "400": {
             "description": "Bad Request. Collection should be 'all' or landlord/lender name in slug format."
+          }
+        }
+      }
+    },
+    "/signature/landlords": {
+      "get": {
+        "summary": "Returns data for table of all landlords on the dashboard's Landlord search page.",
+        "responses": {
+          "200": {
+            "description": "Data for every landlord in the signature portfolio, with select aggregate stats, to populate the exploration table on the landlord search page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Landlords"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
           }
         }
       }
