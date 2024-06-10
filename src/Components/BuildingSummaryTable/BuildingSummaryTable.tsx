@@ -55,7 +55,7 @@ export const BuildingSummaryTable: React.FC<BuildingSummaryTableProps> = ({
     }
 
     return (
-      <tr>
+      <tr key={key}>
         <td>{name}</td>
         <td>{value}</td>
       </tr>
