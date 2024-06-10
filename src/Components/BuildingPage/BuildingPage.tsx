@@ -11,7 +11,9 @@ export const BuildingPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const bbl = searchParams.get("bbl") || "";
 
-  const [bAndCTimeSpan, setBAndCTimespan] = useState<"two-years" | "all-time">("two-years");
+  const [bAndCTimeSpan, setBAndCTimespan] = useState<"two-years" | "all-time">(
+    "two-years",
+  );
 
   const {
     data: buildingInfo,
@@ -68,7 +70,11 @@ export const BuildingPage: React.FC = () => {
             checked={bAndCTimeSpan === "all-time"}
             onChange={() => setBAndCTimespan("all-time")}
           />
-          <BuildingBandCChart data={chartData} timespan={bAndCTimeSpan} />
+          <BuildingBandCChart
+            data={chartData}
+            timespan={bAndCTimeSpan}
+            buildingInfo={buildingInfo}
+          />
         </>
       )}
 
