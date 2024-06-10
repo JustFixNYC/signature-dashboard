@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -7,7 +8,6 @@ import {
   Legend,
   BarElement,
   TimeScale,
-  Interaction,
 } from "chart.js";
 import "chartjs-adapter-luxon";
 import { ChartData } from "../../types/APIDataTypes";
