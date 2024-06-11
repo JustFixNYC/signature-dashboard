@@ -96,16 +96,16 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
         annotations: {
           line1: {
             type: "line",
-            display: !!buildingInfo.origination_date,
-            xMin: buildingInfo.origination_date,
-            xMax: buildingInfo.origination_date,
+            display: !!buildingInfo?.origination_date,
+            xMin: buildingInfo?.origination_date,
+            xMax: buildingInfo?.origination_date,
             borderColor: "black",
             borderWidth: 2,
             label: {
               display: true,
               content:
                 "Origination: " +
-                new Date(buildingInfo.origination_date).toLocaleDateString(
+                new Date(buildingInfo?.origination_date).toLocaleDateString(
                   "en",
                   {
                     year: "numeric",
@@ -126,16 +126,16 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
           },
           line2: {
             type: "line",
-            display: !!buildingInfo.last_sale_date,
-            xMin: buildingInfo.last_sale_date,
-            xMax: buildingInfo.last_sale_date,
+            display: !!buildingInfo?.last_sale_date,
+            xMin: buildingInfo?.last_sale_date,
+            xMax: buildingInfo?.last_sale_date,
             borderColor: "black",
             borderWidth: 2,
             label: {
               display: true,
               content:
                 "Sold: " +
-                new Date(buildingInfo.last_sale_date).toLocaleDateString("en", {
+                new Date(buildingInfo?.last_sale_date).toLocaleDateString("en", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
@@ -157,7 +157,6 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
     interaction: {
       mode: "index",
     },
-    responsive: true,
     scales: {
       x: {
         stacked: true,
@@ -194,14 +193,17 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
         },
       },
     },
+
+    maintainAspectRatio: false,
   };
 
   return (
     <div
       className="chart-container"
-      style={{ position: "relative", height: "80vh", width: "80vw" }}
+      style={{ position: "relative"}}
     >
-      <Bar options={options} data={chartData}></Bar>
+      <Bar options={options} data={chartData}
+          height={300}></Bar>
     </div>
   );
 };

@@ -6,13 +6,14 @@ import { BuildingSummaryTable } from "../BuildingSummaryTable/BuildingSummaryTab
 import { BuildingBandCChart } from "../BuildingBAndCChart/BuildingBAndCChart";
 import { BuildingHPDCompEmerg } from "../BuildingHPDCompEmerg/BuildingHPDCompEmerg";
 import { RadioButton } from "@justfixnyc/component-library";
+import "./style.scss";
 
 export const BuildingPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const bbl = searchParams.get("bbl") || "";
 
   const [bAndCTimeSpan, setBAndCTimespan] = useState<"two-years" | "all-time">(
-    "two-years",
+    "two-years"
   );
 
   const {
@@ -54,22 +55,24 @@ export const BuildingPage: React.FC = () => {
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
       {chartData && (
         <>
-          <RadioButton
-            name="b-and-c-timespan"
-            labelText="Past 2 years"
-            id="radio-two-years"
-            value="two-years"
-            checked={bAndCTimeSpan === "two-years"}
-            onChange={() => setBAndCTimespan("two-years")}
-          />
-          <RadioButton
-            name="b-and-c-timespan"
-            labelText="All time"
-            id="radio-all-time"
-            value="all-time"
-            checked={bAndCTimeSpan === "all-time"}
-            onChange={() => setBAndCTimespan("all-time")}
-          />
+          <div className="chart__timespan_filter">
+            <RadioButton
+              name="b-and-c-timespan"
+              labelText="Past 2 years"
+              id="radio-two-years"
+              value="two-years"
+              checked={bAndCTimeSpan === "two-years"}
+              onChange={() => setBAndCTimespan("two-years")}
+            />
+            <RadioButton
+              name="b-and-c-timespan"
+              labelText="All time"
+              id="radio-all-time"
+              value="all-time"
+              checked={bAndCTimeSpan === "all-time"}
+              onChange={() => setBAndCTimespan("all-time")}
+            />
+          </div>
           <BuildingBandCChart
             data={chartData}
             timespan={bAndCTimeSpan}
