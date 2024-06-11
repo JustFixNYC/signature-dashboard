@@ -90,6 +90,11 @@
             "example": 45,
             "description": "Number of residential units"
           },
+          "rs_units": {
+            "type": "integer",
+            "example": 45,
+            "description": "Number of registered rent stabilized units. Most recent non-zero value 2019-2022."
+          },
           "year_built": {
             "type": "integer",
             "example": 1957,
@@ -160,10 +165,15 @@
             "example": true,
             "description": "Whether the building is currently in HPD's Underlying Conditions Program"
           },
-          "evictions": {
+          "evictions_executed": {
             "type": "integer",
             "example": 1,
             "description": "Evictions executed by marshals in previous 12 months"
+          },
+          "evictions_filed": {
+            "type": "integer",
+            "example": 3,
+            "description": "Eviction cases filed in housing court in previous 12 months"
           },
           "hpd_comp_emerg_total": {
             "type": "integer",
@@ -254,6 +264,16 @@
             "type": "integer",
             "example": 3,
             "description": "Number of DOB Job Application Filings for the building in the last 12 months."
+          },
+          "dob_ecb_viol_total": {
+            "type": "integer",
+            "example": 3,
+            "description": "Number of DOB/ECB violations in the last 12 months."
+          },
+          "dob_ecb_viol_open": {
+            "type": "integer",
+            "example": 3,
+            "description": "Number of active DOB/ECB violations (since 2010)."
           },
           "lat": {
             "type": "number",
@@ -358,10 +378,20 @@
             "example": 1800,
             "description": "Total number of residential units in the collection"
           },
-          "evictions": {
+          "rs_units": {
+            "type": "integer",
+            "example": 45,
+            "description": "Total number of registered rent stabilized units in the collection. Most recent non-zero value 2019-2022."
+          },
+          "evictions_filed": {
             "type": "integer",
             "example": 216,
-            "description": "Total number of evictions executed by marshals in previous year in the collection"
+            "description": "Total number of eviction cases filed in the last 12 months in the collection."
+          },
+          "bip_500_pct": {
+            "type": "float",
+            "example": 44,
+            "description": "Percent of buildings in the collection with a BIP score of 500 or greater."
           },
           "hpd_viol_bc_open": {
             "type": "integer",
@@ -412,6 +442,16 @@
             "type": "number",
             "example": 24.20,
             "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months per unit in the collection"
+          },
+          "dob_ecb_viol_open_per_unit": {
+            "type": "number",
+            "example": 24.20,
+            "description": "Number of active DOB/ECB violations per unit in the collection (since 2010)"
+          },
+          "water_charges": {
+            "type": "number",
+            "example": 5500.00,
+            "description": "Total outstanding water charges due to the city for all buildings in the collection"
           },
           "debt_total": {
             "type": "number",
@@ -478,6 +518,25 @@
             "type": "number",
             "example": 78271.42179999998,
             "description": "The average Signature debt per unit in the collection"
+          }
+        }
+      },
+      "Portfolios": {
+        "properties": {
+          "collection_slug": {
+            "type": "string",
+            "example": "cpc",
+            "description": "Collection name slug for the portfolio, used for API and URL. (all, cpc, santander)"
+          },
+          "buildings": {
+            "type": "integer",
+            "example": 140,
+            "description": "Total number of buildings in the collection"
+          },
+          "landlords": {
+            "type": "integer",
+            "example": 57,
+            "description": "Total number of landlords in the collection"
           }
         }
       }
@@ -664,6 +723,63 @@
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/Landlords"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          }
+        }
+      }
+    },
+    "/signature/portfolios": {
+      "get": {
+        "summary": "Returns data for signature/lender portfolios to use on home page cards.",
+        "responses": {
+          "200": {
+            "description": "Data for entire Signature portfolio and each lender for cards on home and lender pages.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Portfolios"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          }
+        }
+      }
+    },
+    "/signature/bbls": {
+      "get": {
+        "summary": "Returns a list of all BBLs in the Signature portfolio, to limit results from GeoSearch Autocomplete API for address search function",
+        "responses": {
+          "200": {
+            "description": "List of all BBLs in the Signature portfolio",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "3071980006"
                       }
                     }
                   }
