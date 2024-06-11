@@ -23,7 +23,7 @@ ChartJS.register(
   Tooltip,
   Legend,
   TimeScale,
-  annotationPlugin,
+  annotationPlugin
 );
 const twoYearsAgo = new Date();
 twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
@@ -91,6 +91,7 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
             size: 14,
           },
         },
+        position: "bottom"
       },
       annotation: {
         annotations: {
@@ -111,7 +112,7 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
                     year: "numeric",
                     month: "short",
                     day: "numeric",
-                  },
+                  }
                 ),
               font: {
                 family: "Degular",
@@ -135,11 +136,14 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
               display: true,
               content:
                 "Sold: " +
-                new Date(buildingInfo?.last_sale_date).toLocaleDateString("en", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                }),
+                new Date(buildingInfo?.last_sale_date).toLocaleDateString(
+                  "en",
+                  {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  }
+                ),
               font: {
                 family: "Degular",
                 size: 14,
@@ -191,6 +195,12 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
             size: 16,
           },
         },
+        ticks: {
+          font: {
+            family: "Degular",
+            size: 13,
+          },
+        },
       },
     },
 
@@ -198,12 +208,8 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
   };
 
   return (
-    <div
-      className="chart-container"
-      style={{ position: "relative"}}
-    >
-      <Bar options={options} data={chartData}
-          height={300}></Bar>
+    <div className="chart-container" style={{ position: "relative" }}>
+      <Bar options={options} data={chartData} height={300}></Bar>
     </div>
   );
 };
