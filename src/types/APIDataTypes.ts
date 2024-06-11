@@ -12,7 +12,7 @@ export interface BuildingInfo {
   coun_dist: string;
   debt_per_unit: number;
   debt_total: number;
-  evictions: number;
+  evictions_executed: number;
   hpd_comp_heat: number;
   hpd_comp_water: number;
   hpd_comp_pests: number;

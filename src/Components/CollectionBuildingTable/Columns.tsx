@@ -35,16 +35,16 @@ export const columns: ColumnDef<BuildingInfo, string | number>[] = [
     },
   },
   {
-    accessorKey: "hpd_viol_bc_open_per_unit",
-    header: DISPLAY_NAMES["hpd_viol_bc_open_per_unit"],
-    cell: (info) => (info.getValue() as number).toFixed(2),
+    accessorKey: "evictions_executed",
+    header: DISPLAY_NAMES["evictions_executed"],
     meta: {
       filterVariant: "range",
     },
   },
   {
-    accessorKey: "evictions",
-    header: DISPLAY_NAMES["evictions"],
+    accessorKey: "hpd_viol_bc_open_per_unit",
+    header: DISPLAY_NAMES["hpd_viol_bc_open_per_unit"],
+    cell: (info) => (info.getValue() as number).toFixed(2),
     meta: {
       filterVariant: "range",
     },
@@ -125,28 +125,28 @@ export const columns: ColumnDef<BuildingInfo, string | number>[] = [
     accessorKey: "assem_dist",
     header: DISPLAY_NAMES["assem_dist"],
     meta: {
-      inputWidth: "1rem",
+      inputWidth: "1.5rem",
     },
   },
   {
     accessorKey: "cong_dist",
     header: DISPLAY_NAMES["cong_dist"],
     meta: {
-      inputWidth: "1rem",
+      inputWidth: "1.5rem",
     },
   },
   {
     accessorKey: "coun_dist",
     header: DISPLAY_NAMES["coun_dist"],
     meta: {
-      inputWidth: "1rem",
+      inputWidth: "1.5rem",
     },
   },
   {
     accessorKey: "stsen_dist",
     header: DISPLAY_NAMES["stsen_dist"],
     meta: {
-      inputWidth: "1rem",
+      inputWidth: "1.5rem",
     },
   },
   {

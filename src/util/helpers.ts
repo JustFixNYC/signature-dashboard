@@ -37,7 +37,7 @@ export const DISPLAY_NAMES: Partial<{ [key in keys]: string }> = {
   debt_per_unit: "Debt Per Unit (Signature)",
   debt_per_building: "Debt Per Building (Signature)",
   debt_total: "Total Outstanding Debt (Signature)",
-  evictions: "Total Executed Evictions since [date]",
+  evictions_executed: "Total Executed Evictions since [date]",
   in_aep: "In AEP (yes/no)",
   in_conh: "In CONH (yes/no)",
   in_ucp: "HPD Underlying Conditions Program (yes/no)",
@@ -53,7 +53,7 @@ export const DISPLAY_NAMES: Partial<{ [key in keys]: string }> = {
   assem_dist: "State Assembly District",
   cong_dist: "Congressional District",
   coun_dist: "City Council District",
-  stsen_dist: "State Senante District",
+  stsen_dist: "State Senate District",
 
   last_sale_date: "Date of Last Sale",
 
