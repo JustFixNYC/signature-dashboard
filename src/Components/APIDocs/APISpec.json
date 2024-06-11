@@ -168,72 +168,97 @@
           "evictions_executed": {
             "type": "integer",
             "example": 1,
-            "description": "Evictions executed by marshals in previous 12 months"
+            "description": "Evictions executed by marshals in last 12 months"
           },
           "evictions_filed": {
             "type": "integer",
             "example": 3,
-            "description": "Eviction cases filed in housing court in previous 12 months"
+            "description": "Eviction cases filed in housing court in last 12 months"
+          },
+          "hp_total": {
+            "type": "integer",
+            "example": 3,
+            "description": "Total number of HP cases against the landlord, since Aug 2006."
+          },
+          "hp_open_judgements": {
+            "type": "integer",
+            "example": 1,
+            "description": "Number of HP cases against the landlord with an open judgement."
+          },
+          "hp_penalies": {
+            "type": "number",
+            "example": 2250.00,
+            "description": "Total value of civil penalties from HP cases against the landlord with an open judgement."
+          },
+          "hp_find_harassment": {
+            "type": "integer",
+            "example": 1,
+            "description": "Number of HP cases against the landlord with a finding of harassment."
+          },
+          "hp_active": {
+            "type": "integer",
+            "example": 2,
+            "description": "Number of active HP cases against the landlord."
           },
           "hpd_comp_emerg_total": {
             "type": "integer",
             "example": 111,
-            "description": "Number of Emergency HPD complaints in previous 12 months"
+            "description": "Number of Emergency HPD complaints in last 12 months"
           },
           "hpd_comp_apts": {
             "type": "string",
             "example": "1D, 1G, 2A, 2B, 2C, 2D, 2F, 2G, 3B, 3C, 3D, 3E, 3F, 3G, 4C, 4D, 4E, 4J, 5C, 5G, 6A, 6C, 6D, 6E, 6F, 6G, 7A, 7B, 7C, 7D, 7G",
-            "description": "List of apartments that have submitted HPD complaints in previous 12 months"
+            "description": "List of apartments that have submitted HPD complaints in last 12 months"
           },
           "hpd_comp_apts_pct": {
             "type": "integer",
             "example": 68,
-            "description": "Share of units in the property that have made HPD complaints in previous 12 months"
+            "description": "Share of units in the property that have made HPD complaints in last 12 months"
           },
           "hpd_comp_heat": {
             "type": "integer",
             "example": 1,
-            "description": "Number of HPD complaints related to lack of heat or hot water in previous 12 months"
+            "description": "Number of HPD complaints related to lack of heat or hot water in last 12 months"
           },
           "hpd_comp_water": {
             "type": "integer",
             "example": 1,
-            "description": "Number of HPD complaints related to water leaks or mold in previous 12 months"
+            "description": "Number of HPD complaints related to water leaks or mold in last 12 months"
           },
           "hpd_comp_pests": {
             "type": "integer",
             "example": 1,
-            "description": "Number of HPD complaints related to pests in previous 12 months"
+            "description": "Number of HPD complaints related to pests in last 12 months"
           },
           "hpd_viol_bc_total": {
             "type": "integer",
             "example": 141,
-            "description": "Total number of B & C class HPD violations in previous 12 months"
+            "description": "Total number of B & C class HPD violations issued in last 12 months"
           },
           "hpd_viol_bc_open": {
             "type": "integer",
             "example": 141,
-            "description": "Number of open B & C class HPD violations since 2010"
+            "description": "Number of open B & C class HPD violations issued in last 5 years"
           },
           "hpd_viol_bc_open_per_unit": {
             "type": "number",
             "example": 1.5,
-            "description": "Number of open B & C class HPD violations since 2010, per unit"
+            "description": "Number of open B & C class HPD violations issued in last 5 years, per unit"
           },
           "hpd_viol_heat": {
             "type": "integer",
             "example": 8,
-            "description": "Number of HPD violations related to heat/hot water"
+            "description": "Number of HPD violations related to heat/hot water issued in the last 12 months"
           },
           "hpd_viol_water": {
             "type": "integer",
             "example": 4,
-            "description": "Number of HPD violations related to leaks/mold"
+            "description": "Number of HPD violations related to leaks/mold issued in the last 12 months"
           },
           "hpd_viol_pests": {
             "type": "integer",
             "example": 3,
-            "description": "Number of HPD violations related to pests"
+            "description": "Number of HPD violations related to pests issued in the last 12 months"
           },
           "hpd_erp_orders": {
             "type": "integer",
@@ -388,6 +413,11 @@
             "example": 216,
             "description": "Total number of eviction cases filed in the last 12 months in the collection."
           },
+          "hp_active": {
+            "type": "integer",
+            "example": 6,
+            "description": "Total number of active HP cases against the landlord in the collection."
+          },
           "bip_500_pct": {
             "type": "float",
             "example": 44,
@@ -396,32 +426,32 @@
           "hpd_viol_bc_open": {
             "type": "integer",
             "example": 15291,
-            "description": "Total number of open B & C class HPD violations in the collection, since 2010"
+            "description": "Total number of open B & C class HPD violations in the collection, issued in the last 5 years"
           },
           "hpd_viol_bc_open_per_unit": {
             "type": "number",
             "example": 8.495,
-            "description": "The average number of open B & C class HPD violations per unit in the collection, since 2010"
+            "description": "The average number of open B & C class HPD violations per unit in the collection, issued in the last 5 years"
           },
           "hpd_viol_bc_total": {
             "type": "integer",
             "example": 15291,
-            "description": "Total number of B & C class HPD violations in the previous 12 months in the collection"
+            "description": "Total number of B & C class HPD violations issued in the last 12 months in the collection"
           },
           "hpd_viol_bc_total_per_unit": {
             "type": "number",
             "example": 8.495,
-            "description": "The average number of B & C class HPD violations per unit in the previous 12 months in the collection"
+            "description": "The average number of B & C class HPD violations per unit issued in the last 12 months in the collection"
           },
           "hpd_comp_emerg_total": {
             "type": "integer",
             "example": 19800,
-            "description": "Total number of Emergency HPD complaints in the previous 12 months in the collection"
+            "description": "Total number of Emergency HPD complaints in the last 12 months in the collection"
           },
           "hpd_comp_emerg_total_per_unit": {
             "type": "number",
             "example": 11,
-            "description": "The average number of Emergency HPD complaints per unit in the previous 12 months in the collection"
+            "description": "The average number of Emergency HPD complaints per unit in the last 12 months in the collection"
           },
           "hpd_erp_orders": {
             "type": "integer",
