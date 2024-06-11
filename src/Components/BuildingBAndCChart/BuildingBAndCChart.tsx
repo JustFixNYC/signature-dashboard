@@ -23,7 +23,7 @@ ChartJS.register(
   Tooltip,
   Legend,
   TimeScale,
-  annotationPlugin
+  annotationPlugin,
 );
 const twoYearsAgo = new Date();
 twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
@@ -91,7 +91,7 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
             size: 14,
           },
         },
-        position: "bottom"
+        position: "bottom",
       },
       annotation: {
         annotations: {
@@ -112,7 +112,7 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
                     year: "numeric",
                     month: "short",
                     day: "numeric",
-                  }
+                  },
                 ),
               font: {
                 family: "Degular",
@@ -142,7 +142,7 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
                     year: "numeric",
                     month: "short",
                     day: "numeric",
-                  }
+                  },
                 ),
               font: {
                 family: "Degular",

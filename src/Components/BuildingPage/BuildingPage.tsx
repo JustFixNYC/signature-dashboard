@@ -13,7 +13,7 @@ export const BuildingPage: React.FC = () => {
   const bbl = searchParams.get("bbl") || "";
 
   const [bAndCTimeSpan, setBAndCTimespan] = useState<"two-years" | "all-time">(
-    "two-years"
+    "two-years",
   );
 
   const {
@@ -80,7 +80,7 @@ export const BuildingPage: React.FC = () => {
           />
         </>
       )}
-{/*
+      {/*
       <h3>HPD Complaints</h3>
       {chartIsLoading && <div>loading...</div>}
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
