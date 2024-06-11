@@ -80,7 +80,7 @@ export const BuildingPage: React.FC = () => {
           />
         </>
       )}
-
+{/*
       <h3>HPD Complaints</h3>
       {chartIsLoading && <div>loading...</div>}
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
@@ -88,7 +88,7 @@ export const BuildingPage: React.FC = () => {
         <>
           <BuildingHPDCompEmerg data={chartData} />
         </>
-      )}
+      )} */}
     </>
   );
 };
