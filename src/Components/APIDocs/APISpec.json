@@ -477,7 +477,7 @@
           }
         }
       },
-      "Landlords": {
+      "Landlord": {
         "properties": {
           "landlord_name": {
             "type": "string",
@@ -521,7 +521,7 @@
           }
         }
       },
-      "Portfolios": {
+      "Portfolio": {
         "properties": {
           "collection_slug": {
             "type": "string",
@@ -537,6 +537,55 @@
             "type": "integer",
             "example": 57,
             "description": "Total number of landlords in the collection"
+          }
+        }
+      },
+      "MapBuilding": {
+        "properties": {
+          "bbl": {
+            "type": "string",
+            "example": "3071980006",
+            "description": "Borough-Block-Lot of property, 10-digit zero-padded"
+          },
+          "address": {
+            "type": "string",
+            "example": "410 AVENUE X",
+            "description": "Street address (house number and street name) of property."
+          },
+          "borough": {
+            "type": "string",
+            "example": "Brooklyn",
+            "description": "Borough name"
+          },
+          "zip": {
+            "type": "string",
+            "example": "11223",
+            "description": "Zip Code of the property"
+          },
+          "landlord": {
+            "type": "string",
+            "example": "Ved Parkash",
+            "description": "Landlord display name"
+          },
+          "landlord_slug": {
+            "type": "string",
+            "example": "ved-parkash",
+            "description": "Landlord name slug, used for API and URL"
+          },
+          "lender_slug": {
+            "type": "string",
+            "example": "cpc",
+            "description": "Lender name slug, used for API and URL"
+          },
+          "lat": {
+            "type": "number",
+            "example": 40.5905737,
+            "description": "Latitude (lot centroid)"
+          },
+          "lng": {
+            "type": "number",
+            "example": -73.9676815,
+            "description": "Longitude (lot centroid)"
           }
         }
       }
@@ -722,7 +771,7 @@
                     "result": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Landlords"
+                        "$ref": "#/components/schemas/Landlord"
                       }
                     }
                   }
@@ -750,7 +799,7 @@
                     "result": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Portfolios"
+                        "$ref": "#/components/schemas/Portfolio"
                       }
                     }
                   }
@@ -780,6 +829,34 @@
                       "items": {
                         "type": "string",
                         "example": "3071980006"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          }
+        }
+      }
+    },
+    "/signature/map": {
+      "get": {
+        "summary": "Returns a data for all properties in the Signature portfolio to populate the dedicated map page of the dashboard.",
+        "responses": {
+          "200": {
+            "description": "List properties with address, lender/landlord links, and lat/long coordinates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MapBuilding"
                       }
                     }
                   }
