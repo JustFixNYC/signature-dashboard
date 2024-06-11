@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { useGetBuildingChartData, useGetBuildingInfo } from "../../api/hooks";
 import { BuildingSummaryTable } from "../BuildingSummaryTable/BuildingSummaryTable";
 import { BuildingBandCChart } from "../BuildingBAndCChart/BuildingBAndCChart";
-import { BuildingHPDCompEmerg } from "../BuildingHPDCompEmerg/BuildingHPDCompEmerg";
+// import { BuildingHPDCompEmerg } from "../BuildingHPDCompEmerg/BuildingHPDCompEmerg";
 import { RadioButton } from "@justfixnyc/component-library";
 import "./style.scss";
 
