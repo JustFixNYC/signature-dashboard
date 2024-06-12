@@ -161,7 +161,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "buildings",
   },
   bip: {
-    name: "BIP",
+    name: "BIP score (violations + charges)",
   },
   bip_500_pct: {
     name: "Percent of building with BIP score over 500"
