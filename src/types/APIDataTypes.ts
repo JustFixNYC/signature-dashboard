@@ -112,6 +112,7 @@ export type BuildingInfo = {
   | "hp_find_harassment"
   | "hp_active"
   | "hpd_comp_emerg_total"
+  | "hpd_comp_emerg_total_per_unit"
   | "hpd_comp_apts"
   | "hpd_comp_apts_pct"
   | "hpd_comp_heat"

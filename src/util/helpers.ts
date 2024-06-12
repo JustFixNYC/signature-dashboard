@@ -52,6 +52,15 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Total B & C HPD Violations in last 12 months, per unit",
     format: "round"
   },
+  hpd_viol_heat: {
+    name: "Total HPD Violations for Heat/Hot Water in last 12 months"
+  },
+  hpd_viol_pests: {
+    name: "Total HPD Violations for Pests in last 12 months"
+  },
+  hpd_viol_water: {
+    name: "Total HPD Violations for Leak/Mold in last 12 months"
+  },
   hpd_comp_emerg_total: {
     name: "Total Emergency HPD Complaints in last 12 months",
   },

@@ -1,12 +1,11 @@
-import { BuildingInfo } from "../../../../types/APIDataTypes";
-import React from "react";
-import "./style.scss";
-import { DetailTable } from "../../../DetailTable/DetailTable";
-import { DetailTableRow } from "../../../DetailTable/DetailTableRow";
+import { BuildingInfo } from "../../../types/APIDataTypes";
+import React, { HTMLAttributes } from "react";
+import { DetailTable } from "../../DetailTable/DetailTable";
+import { DetailTableRow } from "../../DetailTable/DetailTableRow";
 
-type BuildingSummaryTableProps = {
+interface BuildingSummaryTableProps extends HTMLAttributes<HTMLDListElement> {
   data: BuildingInfo;
-};
+}
 
 const keys: Partial<keyof BuildingInfo>[] = [
   "bip",
@@ -33,10 +32,11 @@ const keys: Partial<keyof BuildingInfo>[] = [
 
 export const BuildingSummaryTable: React.FC<BuildingSummaryTableProps> = ({
   data,
+  ...props
 }) => {
   const rows = keys.map((key) => {
     return <DetailTableRow key={key} apiKey={key} value={data[key]}/>;
   });
 
-  return <DetailTable className="building-sumary-table">{rows}</DetailTable>;
+  return <DetailTable {...props}>{rows}</DetailTable>;
 };

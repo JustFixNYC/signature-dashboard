@@ -19,7 +19,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
 
   const indicator = INDICATOR_STRINGS[apiKey];
 
-  const name = indicator?.name;
+  const name = indicator ? indicator.name : apiKey;
   const description = indicator?.description;
   let displayValue = value;
 
