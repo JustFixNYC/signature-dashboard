@@ -44,7 +44,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
           {name}
           {description && (
             <Icon
-              icon="circleExclamation"
+              icon="circleInfo"
               className="detail-table__name_icon"
             />
           )}
