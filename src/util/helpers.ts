@@ -20,15 +20,16 @@ export function formatMoney(amount: number): string {
   return formatmoney.format(amount);
 }
 
-type keys = keyof BuildingInfo | keyof CollectionInfo | keyof Indicators;
+export type apiKeys = keyof BuildingInfo | keyof CollectionInfo | keyof Indicators;
 
 type indicatorObj = {
   name: string;
   short_name?: string;
   description?: string;
+  format?: "money" | "round";
 };
 
-export const INDICATOR_STRINGS: Partial<{ [key in keys]: indicatorObj }> = {
+export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   bbl: {
     name: "BBL",
   },
@@ -42,18 +43,21 @@ export const INDICATOR_STRINGS: Partial<{ [key in keys]: indicatorObj }> = {
   },
   hpd_viol_bc_open_per_unit: {
     name: "Open B & C HPD Violations, per unit (since 2010)",
+    format: "round"
   },
   hpd_viol_bc_total: {
     name: "Total B & C HPD Violations (since 2010)",
   },
   hpd_viol_bc_total_per_unit: {
     name: "Total B & C HPD Violations in last 12 months, per unit",
+    format: "round"
   },
   hpd_comp_emerg_total: {
     name: "Total Emergency HPD Complaints in last 12 months",
   },
   hpd_comp_emerg_total_per_unit: {
     name: "Total Emergency HPD Complaints in last 12 months, per unit",
+    format: "round"
   },
   hpd_comp_heat: {
     name: "Total HPD Complaints for Heat/Hot Water",
@@ -72,12 +76,15 @@ export const INDICATOR_STRINGS: Partial<{ [key in keys]: indicatorObj }> = {
   },
   debt_per_unit: {
     name: "Debt Per Unit (Signature)",
+    format: "money"
   },
   debt_per_building: {
     name: "Debt Per Building (Signature)",
+    format: "money"
   },
   debt_total: {
     name: "Total Outstanding Debt (Signature)",
+    format: "money"
   },
   evictions_executed: {
     name: "Total Executed Evictions since [date]",
@@ -173,6 +180,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in keys]: indicatorObj }> = {
   },
   hpd_erp_charges_per_unit: {
     name: "HPD ERP Charges in last 12 months per Unit",
+    format: "round"
   },
   placeholder_vacate_order: {
     name: "Active Vacate Order",

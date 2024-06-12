@@ -2,18 +2,19 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetBuildingChartData, useGetBuildingInfo } from "../../api/hooks";
-import { BuildingSummaryTable } from "./BuildingSummaryTable/BuildingSummaryTable";
-import { BuildingBandCChart } from "./BuildingBAndCChart/BuildingBAndCChart";
+import { BuildingSummaryTable } from "./Tables/BuildingSummaryTable/BuildingSummaryTable";
+import { BuildingBandCChart } from "./Charts/BuildingBAndCChart/BuildingBAndCChart";
 // import { BuildingHPDCompEmerg } from "../BuildingHPDCompEmerg/BuildingHPDCompEmerg";
 import { RadioButton } from "@justfixnyc/component-library";
 import "./style.scss";
+import { BuildingFinancialTable } from "./Tables/BuildingFinancialTable/BuildingFinancialTable";
 
 export const BuildingPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const bbl = searchParams.get("bbl") || "";
 
   const [bAndCTimeSpan, setBAndCTimespan] = useState<"two-years" | "all-time">(
-    "two-years",
+    "two-years"
   );
 
   const {
@@ -48,6 +49,14 @@ export const BuildingPage: React.FC = () => {
           <BuildingSummaryTable data={buildingInfo} />
         </>
       )}
+
+      <h3>Financials</h3>
+      {buildingInfoIsLoading && <div>loading...</div>}
+      {buildingInfoError && (
+        <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>
+      )}
+      {buildingInfo && <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>}
+      {buildingInfo && <BuildingFinancialTable data={buildingInfo} />}
 
       <h3>HPD Violations</h3>
 

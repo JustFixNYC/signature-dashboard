@@ -1,22 +1,35 @@
 import { Icon } from "@justfixnyc/component-library";
 import { useState } from "react";
+import { INDICATOR_STRINGS, apiKeys, formatMoney } from "../../util/helpers";
 
 type DetailTableRowProps = {
-  name: string;
+  apiKey: apiKeys;
   value: string | number | boolean;
-  description?: string;
 };
 
 export const DetailTableRow: React.FC<DetailTableRowProps> = ({
-  name,
-  value,
-  description,
+  apiKey,
+  value
 }) => {
   const [showDesc, setShowDesc] = useState(false);
 
   const handleRowClick = () => {
     setShowDesc(!showDesc);
   };
+
+  const indicator = INDICATOR_STRINGS[apiKey];
+
+  const name = indicator?.name;
+  const description = indicator?.description;
+  let displayValue = value;
+
+  if (indicator?.format === 'round' && typeof value === 'number') {
+    displayValue = value.toFixed(2);
+  }
+
+  if (indicator?.format === 'money' && typeof value === 'number') {
+    displayValue = formatMoney(value);
+  }
 
   return (
     <div className="detail-table_row">
@@ -36,7 +49,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
             />
           )}
         </dt>
-        <dd className="detail-table__value">{value}</dd>
+        <dd className="detail-table__value">{displayValue}</dd>
       </div>
       <dd
         className={

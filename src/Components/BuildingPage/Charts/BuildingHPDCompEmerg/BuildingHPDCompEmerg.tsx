@@ -7,7 +7,7 @@ import {
   Legend,
   BarElement,
 } from "chart.js";
-import { ChartData } from "../../../types/APIDataTypes";
+import { ChartData } from "../../../../types/APIDataTypes";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
