@@ -2,8 +2,8 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetCollectionInfo } from "../../api/hooks";
-import { CollectionSummaryTable } from "../CollectionSummaryTable/CollectionSummaryTable";
-import { CollectionBuildingTable } from "../CollectionBuildingTable/CollectionBuildingTable";
+import { CollectionSummaryTable } from "./CollectionSummaryTable/CollectionSummaryTable";
+import { CollectionBuildingTable } from "./CollectionBuildingTable/CollectionBuildingTable";
 
 export const CollectionPage: React.FC = () => {
   const [searchParams] = useSearchParams();

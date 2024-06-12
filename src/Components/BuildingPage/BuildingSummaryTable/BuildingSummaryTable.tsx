@@ -1,9 +1,9 @@
-import { BuildingInfo } from "../../types/APIDataTypes";
+import { BuildingInfo } from "../../../types/APIDataTypes";
 import React from "react";
 import "./style.scss";
-import { formatMoney, INDICATOR_STRINGS } from "../../util/helpers";
-import { DetailTable } from "../DetailTable/DetailTable";
-import { DetailTableRow } from "../DetailTable/DetailTableRow";
+import { formatMoney, INDICATOR_STRINGS } from "../../../util/helpers";
+import { DetailTable } from "../../DetailTable/DetailTable";
+import { DetailTableRow } from "../../DetailTable/DetailTableRow";
 
 type BuildingSummaryTableProps = {
   data: BuildingInfo;
