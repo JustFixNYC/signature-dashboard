@@ -1,4 +1,4 @@
-import { BuildingInfo } from "../../types/APIDataTypes";
+import { BuildingInfo } from "../../../types/APIDataTypes";
 import {
   Column,
   RowData,
@@ -11,7 +11,7 @@ import {
 import "./style.scss";
 import React from "react";
 import { columns } from "./Columns";
-import DebouncedInput from "../DebouncedInput";
+import DebouncedInput from "../../DebouncedInput";
 
 type CollectionBuildingTableProps = {
   data: BuildingInfo[];

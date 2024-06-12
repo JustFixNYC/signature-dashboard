@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { DISPLAY_NAMES } from "../../util/helpers";
-import { BuildingInfo } from "../../types/APIDataTypes";
+import { DISPLAY_NAMES } from "../../../util/helpers";
+import { BuildingInfo } from "../../../types/APIDataTypes";
 import { Link } from "react-router-dom";
 
 export const columns: ColumnDef<BuildingInfo, string | number>[] = [

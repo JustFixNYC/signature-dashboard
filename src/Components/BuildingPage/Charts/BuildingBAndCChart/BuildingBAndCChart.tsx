@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 import "chartjs-adapter-luxon";
 import annotationPlugin from "chartjs-plugin-annotation";
-import { BuildingInfo, ChartData } from "../../types/APIDataTypes";
+import { BuildingInfo, ChartData } from "../../../types/APIDataTypes";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(

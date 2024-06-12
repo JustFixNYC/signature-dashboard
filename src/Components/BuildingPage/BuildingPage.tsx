@@ -2,18 +2,21 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetBuildingChartData, useGetBuildingInfo } from "../../api/hooks";
-import { BuildingSummaryTable } from "../BuildingSummaryTable/BuildingSummaryTable";
-import { BuildingBandCChart } from "../BuildingBAndCChart/BuildingBAndCChart";
+import { BuildingSummaryTable } from "./Tables/BuildingSummaryTable";
+import { BuildingBandCChart } from "./Charts/BuildingBAndCChart/BuildingBAndCChart";
 // import { BuildingHPDCompEmerg } from "../BuildingHPDCompEmerg/BuildingHPDCompEmerg";
 import { RadioButton } from "@justfixnyc/component-library";
 import "./style.scss";
+import { BuildingFinancialTable } from "./Tables/BuildingFinancialTable";
+import { BuildingHPDViolationsTable } from "./Tables/BuildingHPDViolationsTable";
+import { BuildingHPDComplaintsTable } from "./Tables/BuildingHPDComplaints";
 
 export const BuildingPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const bbl = searchParams.get("bbl") || "";
 
   const [bAndCTimeSpan, setBAndCTimespan] = useState<"two-years" | "all-time">(
-    "two-years",
+    "two-years"
   );
 
   const {
@@ -31,9 +34,6 @@ export const BuildingPage: React.FC = () => {
       <h2>Building Page</h2>
 
       {buildingInfoIsLoading && <div>loading...</div>}
-      {buildingInfoError && (
-        <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>
-      )}
       {buildingInfo && <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>}
       {buildingInfo && (
         <>
@@ -45,9 +45,24 @@ export const BuildingPage: React.FC = () => {
           <div>Lender: {buildingInfo.lender}</div>
 
           <h3>Summary Table</h3>
-          <BuildingSummaryTable data={buildingInfo} />
+          <BuildingSummaryTable data={buildingInfo} className="building-detail-table" />
         </>
       )}
+
+      <h3>Financials</h3>
+      {buildingInfoIsLoading && <div>loading...</div>}
+      {buildingInfo && <BuildingFinancialTable data={buildingInfo} className="building-detail-table" />}
+
+      <h3>HPD Violations</h3>
+      {buildingInfoIsLoading && <div>loading...</div>}
+      {buildingInfo && <BuildingHPDViolationsTable data={buildingInfo} className="building-detail-table" />}
+
+
+      <h3>HPD Complaints</h3>
+      {buildingInfoIsLoading && <div>loading...</div>}
+      {buildingInfo && <BuildingHPDComplaintsTable data={buildingInfo} className="building-detail-table" />}
+
+
 
       <h3>HPD Violations</h3>
 
