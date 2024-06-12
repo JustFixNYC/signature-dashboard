@@ -1,0 +1,46 @@
+@import "../../colors.scss";
+
+.detail-table {
+  border: 1px solid $GREY_400;
+  border-radius: 4px;
+  text-align: center;
+  border-spacing: 0;
+
+  .detail-table_row {
+    padding: 12px;
+    border-top: 1px solid $GREY_50;
+
+    &:first-of-type {
+      border-top: none;
+    }
+
+    .detail-table_row_name-value-wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      &.detail-table_row_name-value-wrapper_has_desc {
+        cursor: pointer;
+      }
+
+      .detail-table__name {
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+
+        .detail-table__name_icon {
+          margin-left: 5px;
+        }
+      }
+    }
+
+    .detail-table__description {
+      display: none;
+      margin: 0;
+      text-align: left;
+
+      &.detail-table__description_open {
+        display: block;
+      }
+    }
+  }
+}

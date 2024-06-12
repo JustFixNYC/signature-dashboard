@@ -1,51 +1,49 @@
 import { BuildingInfo } from "../../types/APIDataTypes";
 import React from "react";
 import "./style.scss";
-import { DISPLAY_NAMES, formatMoney } from "../../util/helpers";
+import { formatMoney, INDICATOR_STRINGS } from "../../util/helpers";
+import { DetailTable } from "../DetailTable/DetailTable";
+import { DetailTableRow } from "../DetailTable/DetailTableRow";
 
 type BuildingSummaryTableProps = {
   data: BuildingInfo;
 };
 
 const keys: Partial<keyof BuildingInfo>[] = [
+  "bip",
   "hpd_viol_bc_open",
   "hpd_viol_bc_open_per_unit",
   "hpd_viol_bc_total",
-  "hpd_viol_bc_total_per_unit",
+  "hpd_erp_orders",
+  "hpd_comp_emerg_total",
   "in_aep",
   "in_conh",
   "in_ucp",
-  "hpd_comp_emerg_total",
+  "placeholder_vacate_order",
+  "hp_total",
+  "hp_active",
+  "evictions_filed",
+  "placeholder_dob_permit_applications",
+  "dob_ecb_viol_open",
+  "hpd_erp_charges",
   "last_sale_date",
-  "debt_per_unit",
-  "debt_total",
   "origination_date",
-  "units_res",
-  "year_built",
-  "landlord",
-  "lender",
-  "placeholder_violations_pests",
-  "placeholder__outstanding_hpd_charges",
-  "placeholder__hpd_emerg",
-  "placeholder__hpd_erp",
-  "placeholder_total_hp_cases",
-  "placeholder__active_hp",
-  "placeholder__total_evictions",
-  "placeholder_active_vacate_orders",
-  "placeholder_active_dob_apps",
-  "placeholder__dob_open_violations",
-  "placeholder__bip_score",
-  "placeholder__rent_stab_units",
+  "debt_total",
+  "debt_per_unit",
 ];
 
 const formatAsMoney = ["debt_per_unit", "debt_total"];
 const round = ["hpd_viol_bc_open_per_unit"];
+
 export const BuildingSummaryTable: React.FC<BuildingSummaryTableProps> = ({
   data,
 }) => {
   const rows = keys.map((key) => {
-    const name = DISPLAY_NAMES[key];
+    const indicator = INDICATOR_STRINGS[key];
     let value = data[key];
+    const name = indicator ? indicator.name : key;
+    const description = indicator?.description;
+
     if (round.includes(key) && typeof value === "number") {
       value = (value as number).toFixed(2);
     }
@@ -55,17 +53,14 @@ export const BuildingSummaryTable: React.FC<BuildingSummaryTableProps> = ({
     }
 
     return (
-      <tr key={key}>
-        <td>{name}</td>
-        <td>{value}</td>
-      </tr>
+      <DetailTableRow
+        key={key}
+        name={name}
+        value={value}
+        description={description}
+      />
     );
   });
-  return (
-    <>
-      <table className="building-summary-table">
-        <tbody>{rows}</tbody>
-      </table>
-    </>
-  );
+
+  return <DetailTable className="building-sumary-table">{rows}</DetailTable>;
 };

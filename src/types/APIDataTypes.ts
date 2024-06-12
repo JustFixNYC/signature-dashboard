@@ -1,93 +1,169 @@
-/** Date fields that come from our API Data are strings with the format YYYY-MM-DD */
-type APIDate = string;
+export type Borough =
+  | "Manhattan"
+  | "Bronx"
+  | "Brooklyn"
+  | "Queens"
+  | "Staten Island";
 
-export type BoroughAbbreviation = "MAN" | "BX" | "BK" | "QNS" | "SI";
-
-export interface BuildingInfo {
-  address: string;
-  assem_dist: string;
+export interface Indicators {
   bbl: string;
-  borough: BoroughAbbreviation;
-  cong_dist: string;
-  coun_dist: string;
+  address: number;
+  assem_dist: number;
+  bip: number;
+  bip_500_pct: number;
+  borough: number;
+  cong_dist: number;
+  coun_dist: number;
+  debt_per_building: number;
   debt_per_unit: number;
   debt_total: number;
+  dob_ecb_viol_open: number;
+  dob_ecb_viol_total: number;
+  dob_ecb_viol_open_per_unit: number;
+  dob_jobs: number;
   evictions_executed: number;
-  hpd_comp_heat: number;
-  hpd_comp_water: number;
-  hpd_comp_pests: number;
-  hpd_comp_apts: string;
+  evictions_filed: number;
+  hp_active: number;
+  hp_find_harassment: number;
+  hp_open_judgements: number;
+  hp_penalies: number;
+  hp_total: number;
+  hpd_comp_apts: number;
   hpd_comp_apts_pct: number;
   hpd_comp_emerg_total: number;
   hpd_comp_emerg_total_per_unit: number;
+  hpd_comp_heat: number;
+  hpd_comp_pests: number;
+  hpd_comp_water: number;
+  hpd_erp_charges: number;
+  hpd_erp_charges_per_unit: number;
+  hpd_erp_orders: number;
+  hpd_erp_orders_per_unit: number;
   hpd_viol_bc_open: number;
   hpd_viol_bc_open_per_unit: number;
   hpd_viol_bc_total: number;
   hpd_viol_bc_total_per_unit: number;
-  placeholder__outstanding_hpd_charges: number;
-  landlord: string;
-  lat: number;
-  lender: string;
-  lng: number;
-  origination_date: string;
-  last_sale_date: string;
+  hpd_viol_heat: number;
+  hpd_viol_pests: number;
+  hpd_viol_water: number;
+  water_charges: number;
   in_aep: number;
   in_conh: number;
   in_ucp: number;
+  landlord: number;
+  last_rodent_date: number;
+  last_rodent_result: number;
+  last_sale_date: number;
+  lender: number;
+  link_acris: number;
+  link_dap: number;
+  link_dob: number;
+  link_hpd: number;
+  origination_date: number;
+  rs_units: number;
   stsen_dist: number;
-  units_comm: number;
-  units_res: number;
   units_nonres: number;
-  year_built: APIDate;
-  zip: string;
-
-  placeholder_active_vacate_orders: number;
-  placeholder_failed_rodents: number;
-  placeholder_elected_official_districts: number;
-  placeholder__hpd_emerg: string;
-  placeholder__hpd_erp: string;
-  placeholder__active_hp: string;
-  placeholder__total_evictions: string;
-  placeholder__hpd_emerg_complaints: string;
-  placeholder__hpd_emerg_complaints_per_unit: string;
-  placeholder__dob_open_violations: string;
-  placeholder__outstanding_charges_water: string;
-  placeholder__debt_per_unit: string;
-  placeholder__debt_per_building: string;
-  placeholder__bip_score: string;
-  placeholder__rent_stab_units: string;
-  placeholder__rent_stab_units_resid_units: string;
-  placeholder_violations_pests: number;
-  placeholder_total_hp_cases: number;
-  placeholder_active_dob_apps: number;
+  units_res: number;
+  year_built: number;
+  zip: number;
 }
 
-export interface CollectionInfo {
+export type BuildingInfo = {
+  landlord_slug: string;
+  lender_slug: string;
+  water_charges: string;
+  lat: string;
+  lng: string;
+  placeholder_vacate_order: string;
+  placeholder_dob_permit_applications: string;
+} & Pick<
+  Indicators,
+  | "bbl"
+  | "address"
+  | "borough"
+  | "zip"
+  | "landlord"
+  | "lender"
+  | "link_hpd"
+  | "link_acris"
+  | "link_dob"
+  | "link_dap"
+  | "units_nonres"
+  | "units_res"
+  | "rs_units"
+  | "year_built"
+  | "assem_dist"
+  | "stsen_dist"
+  | "cong_dist"
+  | "coun_dist"
+  | "origination_date"
+  | "last_sale_date"
+  | "debt_total"
+  | "debt_per_unit"
+  | "bip"
+  | "in_aep"
+  | "in_conh"
+  | "in_ucp"
+  | "evictions_executed"
+  | "evictions_filed"
+  | "hp_total"
+  | "hp_open_judgements"
+  | "hp_penalies"
+  | "hp_find_harassment"
+  | "hp_active"
+  | "hpd_comp_emerg_total"
+  | "hpd_comp_apts"
+  | "hpd_comp_apts_pct"
+  | "hpd_comp_heat"
+  | "hpd_comp_water"
+  | "hpd_comp_pests"
+  | "hpd_viol_bc_total"
+  | "hpd_viol_bc_open"
+  | "hpd_viol_bc_open_per_unit"
+  | "hpd_viol_heat"
+  | "hpd_viol_water"
+  | "hpd_viol_pests"
+  | "hpd_erp_orders"
+  | "hpd_erp_charges"
+  | "hpd_erp_charges_per_unit"
+  | "last_rodent_date"
+  | "last_rodent_result"
+  | "dob_jobs"
+  | "dob_ecb_viol_total"
+  | "dob_ecb_viol_open"
+>;
+
+export type CollectionInfo = {
   collection_name: string;
   collection_slug: string;
   collection_type: string;
   buildings: number;
-  units_res: number;
-  evictions: number;
-  hpd_viol_bc_open: number;
-  hpd_viol_bc_open_per_unit: number;
-  hpd_viol_bc_total: number;
-  hpd_viol_bc_total_per_unit: number;
-  hpd_comp_emerg_total: number;
-  hpd_comp_emerg_total_per_unit: number;
-  debt_total: number;
-  debt_per_building: number;
-  debt_per_unit: number;
-  placeholder__hpd_emerg: number;
-  placeholder__hpd_erp: number;
-  placeholder__dob_open_violations: number;
-  placeholder__outstanding_charges_water: string;
-  placeholder__bip_score: number;
-  placeholder__rent_stab_units: number;
-  placeholder__outstanding_hpd_charges: number;
-  placeholder__total_evictions: number;
   bldg_data: BuildingInfo[];
-}
+} & Pick<
+  Indicators,
+  | "bbl"
+  | "units_res"
+  | "rs_units"
+  | "evictions_filed"
+  | "hp_active"
+  | "bip_500_pct"
+  | "hpd_viol_bc_open"
+  | "hpd_viol_bc_open_per_unit"
+  | "hpd_viol_bc_total"
+  | "hpd_viol_bc_total_per_unit"
+  | "hpd_comp_emerg_total"
+  | "hpd_comp_emerg_total_per_unit"
+  | "hpd_erp_orders"
+  | "hpd_erp_orders_per_unit"
+  | "hpd_erp_charges"
+  | "hpd_erp_charges_per_unit"
+  | "dob_ecb_viol_open"
+  | "dob_ecb_viol_open_per_unit"
+  | "water_charges"
+  | "debt_total"
+  | "debt_per_building"
+  | "debt_per_unit"
+>;
 
 export interface ChartData {
   month: string;
