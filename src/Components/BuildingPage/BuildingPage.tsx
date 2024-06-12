@@ -16,7 +16,7 @@ export const BuildingPage: React.FC = () => {
   const bbl = searchParams.get("bbl") || "";
 
   const [bAndCTimeSpan, setBAndCTimespan] = useState<"two-years" | "all-time">(
-    "two-years"
+    "two-years",
   );
 
   const {
@@ -45,24 +45,39 @@ export const BuildingPage: React.FC = () => {
           <div>Lender: {buildingInfo.lender}</div>
 
           <h3>Summary Table</h3>
-          <BuildingSummaryTable data={buildingInfo} className="building-detail-table" />
+          <BuildingSummaryTable
+            data={buildingInfo}
+            className="building-detail-table"
+          />
         </>
       )}
 
       <h3>Financials</h3>
       {buildingInfoIsLoading && <div>loading...</div>}
-      {buildingInfo && <BuildingFinancialTable data={buildingInfo} className="building-detail-table" />}
+      {buildingInfo && (
+        <BuildingFinancialTable
+          data={buildingInfo}
+          className="building-detail-table"
+        />
+      )}
 
       <h3>HPD Violations</h3>
       {buildingInfoIsLoading && <div>loading...</div>}
-      {buildingInfo && <BuildingHPDViolationsTable data={buildingInfo} className="building-detail-table" />}
-
+      {buildingInfo && (
+        <BuildingHPDViolationsTable
+          data={buildingInfo}
+          className="building-detail-table"
+        />
+      )}
 
       <h3>HPD Complaints</h3>
       {buildingInfoIsLoading && <div>loading...</div>}
-      {buildingInfo && <BuildingHPDComplaintsTable data={buildingInfo} className="building-detail-table" />}
-
-
+      {buildingInfo && (
+        <BuildingHPDComplaintsTable
+          data={buildingInfo}
+          className="building-detail-table"
+        />
+      )}
 
       <h3>HPD Violations</h3>
 

@@ -20,7 +20,10 @@ export function formatMoney(amount: number): string {
   return formatmoney.format(amount);
 }
 
-export type apiKeys = keyof BuildingInfo | keyof CollectionInfo | keyof Indicators;
+export type apiKeys =
+  | keyof BuildingInfo
+  | keyof CollectionInfo
+  | keyof Indicators;
 
 type indicatorObj = {
   name: string;
@@ -43,30 +46,30 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hpd_viol_bc_open_per_unit: {
     name: "Open B & C HPD Violations, per unit (since 2010)",
-    format: "round"
+    format: "round",
   },
   hpd_viol_bc_total: {
     name: "Total B & C HPD Violations (since 2010)",
   },
   hpd_viol_bc_total_per_unit: {
     name: "Total B & C HPD Violations in last 12 months, per unit",
-    format: "round"
+    format: "round",
   },
   hpd_viol_heat: {
-    name: "Total HPD Violations for Heat/Hot Water in last 12 months"
+    name: "Total HPD Violations for Heat/Hot Water in last 12 months",
   },
   hpd_viol_pests: {
-    name: "Total HPD Violations for Pests in last 12 months"
+    name: "Total HPD Violations for Pests in last 12 months",
   },
   hpd_viol_water: {
-    name: "Total HPD Violations for Leak/Mold in last 12 months"
+    name: "Total HPD Violations for Leak/Mold in last 12 months",
   },
   hpd_comp_emerg_total: {
     name: "Total Emergency HPD Complaints in last 12 months",
   },
   hpd_comp_emerg_total_per_unit: {
     name: "Total Emergency HPD Complaints in last 12 months, per unit",
-    format: "round"
+    format: "round",
   },
   hpd_comp_heat: {
     name: "Total HPD Complaints for Heat/Hot Water",
@@ -85,15 +88,15 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   debt_per_unit: {
     name: "Debt Per Unit (Signature)",
-    format: "money"
+    format: "money",
   },
   debt_per_building: {
     name: "Debt Per Building (Signature)",
-    format: "money"
+    format: "money",
   },
   debt_total: {
     name: "Total Outstanding Debt (Signature)",
-    format: "money"
+    format: "money",
   },
   evictions_executed: {
     name: "Total Executed Evictions since [date]",
@@ -164,7 +167,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "BIP score (violations + charges)",
   },
   bip_500_pct: {
-    name: "Percent of building with BIP score over 500"
+    name: "Percent of building with BIP score over 500",
   },
   evictions_filed: {
     name: "Total Eviction Filings, last 12 mo.",
@@ -189,7 +192,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hpd_erp_charges_per_unit: {
     name: "HPD ERP Charges in last 12 months per Unit",
-    format: "round"
+    format: "round",
   },
   placeholder_vacate_order: {
     name: "Active Vacate Order",

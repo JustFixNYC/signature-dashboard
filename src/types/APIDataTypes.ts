@@ -74,8 +74,9 @@ export type BuildingInfo = {
   water_charges: string;
   lat: string;
   lng: string;
-  placeholder_vacate_order: string;
-  placeholder_dob_permit_applications: string;
+  placeholder_vacate_order: number;
+  placeholder_dob_permit_applications: number;
+  placeholder_outstanding_water: number;
 } & Pick<
   Indicators,
   | "bbl"

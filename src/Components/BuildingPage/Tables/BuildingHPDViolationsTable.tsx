@@ -9,7 +9,7 @@ interface BuildingHPDViolationsTable extends HTMLAttributes<HTMLDListElement> {
 
 export const BuildingHPDViolationsTable: React.FC<
   BuildingHPDViolationsTable
-> = ({ data, ...props}) => {
+> = ({ data, ...props }) => {
   return (
     <DetailTable {...props}>
       <DetailTableRow

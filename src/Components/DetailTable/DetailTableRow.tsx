@@ -9,7 +9,7 @@ type DetailTableRowProps = {
 
 export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   apiKey,
-  value
+  value,
 }) => {
   const [showDesc, setShowDesc] = useState(false);
 
@@ -23,11 +23,11 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   const description = indicator?.description;
   let displayValue = value;
 
-  if (indicator?.format === 'round' && typeof value === 'number') {
+  if (indicator?.format === "round" && typeof value === "number") {
     displayValue = value.toFixed(2);
   }
 
-  if (indicator?.format === 'money' && typeof value === 'number') {
+  if (indicator?.format === "money" && typeof value === "number") {
     displayValue = formatMoney(value);
   }
 
@@ -43,10 +43,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
         <dt className="detail-table__name">
           {name}
           {description && (
-            <Icon
-              icon="circleInfo"
-              className="detail-table__name_icon"
-            />
+            <Icon icon="circleInfo" className="detail-table__name_icon" />
           )}
         </dt>
         <dd className="detail-table__value">{displayValue}</dd>
