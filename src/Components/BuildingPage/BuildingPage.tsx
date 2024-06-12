@@ -1,33 +1,94 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
-import React from "react";
+import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useGetBuildingInfo } from "../../api/hooks";
+import { useGetBuildingChartData, useGetBuildingInfo } from "../../api/hooks";
 import { BuildingSummaryTable } from "../BuildingSummaryTable/BuildingSummaryTable";
+import { BuildingBandCChart } from "../BuildingBAndCChart/BuildingBAndCChart";
+// import { BuildingHPDCompEmerg } from "../BuildingHPDCompEmerg/BuildingHPDCompEmerg";
+import { RadioButton } from "@justfixnyc/component-library";
+import "./style.scss";
 
 export const BuildingPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const bbl = searchParams.get("bbl") || "";
 
-  const { data, error, isLoading } = useGetBuildingInfo(bbl);
+  const [bAndCTimeSpan, setBAndCTimespan] = useState<"two-years" | "all-time">(
+    "two-years",
+  );
 
+  const {
+    data: buildingInfo,
+    error: buildingInfoError,
+    isLoading: buildingInfoIsLoading,
+  } = useGetBuildingInfo(bbl);
+  const {
+    data: chartData,
+    error: chartError,
+    isLoading: chartIsLoading,
+  } = useGetBuildingChartData(bbl);
   return (
     <>
       <h2>Building Page</h2>
-      {isLoading && <div>loading...</div>}
-      {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-      {data && <pre>{JSON.stringify(error, null, 2)}</pre>}
-      {data && (
+
+      {buildingInfoIsLoading && <div>loading...</div>}
+      {buildingInfoError && (
+        <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>
+      )}
+      {buildingInfo && <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>}
+      {buildingInfo && (
         <>
-          <div>Address: {data.address}</div>
-          <div>BBL: {data.bbl}</div>
-          <div>Borough: {data.borough}</div>
-          <div>Zip: {data.zip}</div>
-          <div>Landlord: {data.landlord}</div>
-          <div>Lender: {data.lender}</div>
+          <div>Address: {buildingInfo.address}</div>
+          <div>BBL: {buildingInfo.bbl}</div>
+          <div>Borough: {buildingInfo.borough}</div>
+          <div>Zip: {buildingInfo.zip}</div>
+          <div>Landlord: {buildingInfo.landlord}</div>
+          <div>Lender: {buildingInfo.lender}</div>
+
           <h3>Summary Table</h3>
-          <BuildingSummaryTable data={data} />
+          <BuildingSummaryTable data={buildingInfo} />
         </>
       )}
+
+      <h3>HPD Violations</h3>
+
+      {chartIsLoading && <div>loading...</div>}
+      {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
+      {chartData && (
+        <>
+          <div className="chart__timespan_filter">
+            <RadioButton
+              name="b-and-c-timespan"
+              labelText="Past 2 years"
+              id="radio-two-years"
+              value="two-years"
+              checked={bAndCTimeSpan === "two-years"}
+              onChange={() => setBAndCTimespan("two-years")}
+            />
+            <RadioButton
+              name="b-and-c-timespan"
+              labelText="All time"
+              id="radio-all-time"
+              value="all-time"
+              checked={bAndCTimeSpan === "all-time"}
+              onChange={() => setBAndCTimespan("all-time")}
+            />
+          </div>
+          <BuildingBandCChart
+            data={chartData}
+            timespan={bAndCTimeSpan}
+            buildingInfo={buildingInfo}
+          />
+        </>
+      )}
+      {/*
+      <h3>HPD Complaints</h3>
+      {chartIsLoading && <div>loading...</div>}
+      {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
+      {chartData && (
+        <>
+          <BuildingHPDCompEmerg data={chartData} />
+        </>
+      )} */}
     </>
   );
 };

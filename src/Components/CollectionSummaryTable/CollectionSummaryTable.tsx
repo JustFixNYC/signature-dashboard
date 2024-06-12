@@ -36,9 +36,9 @@ export const CollectionSummaryTable: React.FC<CollectionSummaryTableProps> = ({
     const name = DISPLAY_NAMES[key];
     let value;
 
-    if (round.includes(key) && typeof value === 'number') {
-      console.log(typeof value)
-      value = (value as number).toFixed(2)
+    if (round.includes(key) && typeof value === "number") {
+      console.log(typeof value);
+      value = (value as number).toFixed(2);
     }
 
     if (formatAsMoney.includes(key)) {

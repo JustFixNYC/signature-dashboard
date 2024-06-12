@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { BuildingInfo, CollectionInfo } from "../types/APIDataTypes";
+import { BuildingInfo, ChartData, CollectionInfo } from "../types/APIDataTypes";
 import { apiFetcher } from "./helpers";
 
 type BuildingInfoSWRResponse = {
@@ -47,6 +47,50 @@ export function useGetCollectionInfo(
 
   return {
     data: data?.result[0],
+    isLoading,
+    error: error,
+  };
+}
+
+type ChartDataSWRResponse = {
+  data: ChartData[];
+  isLoading: boolean;
+  error: Error | undefined;
+};
+
+export function useGetBuildingChartData(bbl: string): ChartDataSWRResponse {
+  const { data, error, isLoading } = useSWR(
+    `/signature/building/charts?bbl=${bbl}`,
+    apiFetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
+
+  return {
+    data: data?.result,
+    isLoading,
+    error: error,
+  };
+}
+
+export function useGetCollectionChartData(
+  collection: string,
+): ChartDataSWRResponse {
+  const { data, error, isLoading } = useSWR(
+    `/signature/collection/charts?collection=${collection}`,
+    apiFetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
+
+  return {
+    data: data?.result,
     isLoading,
     error: error,
   };
