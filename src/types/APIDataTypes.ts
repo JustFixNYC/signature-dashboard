@@ -14,7 +14,6 @@ export interface Indicators {
   borough: number;
   cong_dist: number;
   coun_dist: number;
-  debt_per_building: number;
   debt_per_unit: number;
   debt_total: number;
   dob_ecb_viol_open: number;

@@ -4,6 +4,8 @@ import {
   INDICATOR_STRINGS,
   apiKeys,
   formatMoney,
+  formatNumber,
+  formatPercent,
 } from "../../../util/helpers";
 import { BuildingInfo } from "../../../types/APIDataTypes";
 import { Link } from "react-router-dom";
@@ -17,10 +19,6 @@ const getColumnHeader = (apiKey: apiKeys) => {
   } else {
     return apiKey;
   }
-};
-
-const formatPercent = (value: number) => {
-  return value.toFixed(2) + "%";
 };
 
 const round = (value: number) => {
@@ -89,6 +87,7 @@ export const columns = [
       }),
       columnHelper.accessor("rs_units", {
         header: getColumnHeader("rs_units"),
+        cell: (info) => formatNumber(info.getValue()),
         meta: {
           inputWidth: "2rem",
         },
@@ -107,6 +106,7 @@ export const columns = [
     columns: [
       columnHelper.accessor("bip", {
         header: getColumnHeader("bip"),
+        cell: (info) => formatNumber(info.getValue()),
         meta: {
           inputWidth: "2.5rem",
         },
@@ -119,6 +119,7 @@ export const columns = [
     columns: [
       columnHelper.accessor("hpd_viol_bc_open", {
         header: getColumnHeader("hpd_viol_bc_open"),
+        cell: (info) => formatNumber(info.getValue()),
         meta: {
           filterVariant: "range",
         },
@@ -132,7 +133,7 @@ export const columns = [
       }),
       columnHelper.accessor("hpd_viol_bc_total", {
         header: getColumnHeader("hpd_viol_bc_total"),
-        cell: (info) => round(info.getValue()),
+        cell: (info) => info.getValue(),
         meta: {
           filterVariant: "range",
         },
@@ -170,6 +171,7 @@ export const columns = [
     columns: [
       columnHelper.accessor("hpd_erp_orders", {
         header: getColumnHeader("hpd_erp_orders"),
+        cell: (info) => formatNumber(info.getValue()),
         meta: {
           filterVariant: "range",
         },
@@ -334,13 +336,14 @@ export const columns = [
     columns: [
       columnHelper.accessor("hpd_erp_charges", {
         header: getColumnHeader("hpd_erp_charges"),
+        cell: (info) => formatMoney(info.getValue()),
         meta: {
           filterVariant: "range",
         },
       }),
       columnHelper.accessor("hpd_erp_charges_per_unit", {
         header: getColumnHeader("hpd_erp_charges_per_unit"),
-        cell: (info) => round(info.getValue()),
+        cell: (info) => formatMoney(info.getValue()),
         meta: {
           filterVariant: "range",
         },

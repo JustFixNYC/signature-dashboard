@@ -1,6 +1,12 @@
 import { Icon } from "@justfixnyc/component-library";
 import { useState } from "react";
-import { INDICATOR_STRINGS, apiKeys, formatMoney } from "../../util/helpers";
+import {
+  INDICATOR_STRINGS,
+  apiKeys,
+  formatMoney,
+  formatNumber,
+  formatPercent,
+} from "../../util/helpers";
 
 type DetailTableRowProps = {
   apiKey: apiKeys;
@@ -29,6 +35,14 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
 
   if (indicator?.format === "money" && typeof value === "number") {
     displayValue = formatMoney(value);
+  }
+
+  if (indicator?.format === "percent" && typeof value === "number") {
+    displayValue = formatPercent(value);
+  }
+
+  if (typeof indicator?.format === "undefined" && typeof value === "number") {
+    displayValue = formatNumber(value);
   }
 
   return (

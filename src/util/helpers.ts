@@ -16,9 +16,19 @@ export function formatMoney(amount: number): string {
   const formatmoney = new Intl.NumberFormat("en", {
     style: "currency",
     currency: "USD",
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
   });
   return formatmoney.format(amount);
 }
+
+export const formatPercent = (value: number) => {
+  return value.toFixed(0) + "%";
+};
+
+export const formatNumber = (value: number) => {
+  return new Intl.NumberFormat("en").format(value);
+};
 
 export type apiKeys =
   | keyof BuildingInfo
@@ -29,7 +39,7 @@ type indicatorObj = {
   name: string;
   short_name?: string;
   description?: string;
-  format?: "money" | "round";
+  format?: "money" | "round" | "percent";
 };
 
 export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
@@ -218,6 +228,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Percent of buildings with BIP score over 500",
     description:
       "The number of buildings within a landlord portfolio that are likely to be in physical or financial distress, according to the Building Indicator Project (BIP) Database.",
+    format: "percent",
   },
   hp_active: {
     name: "Active HPD litigation cases",
@@ -249,6 +260,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Overdue water charges",
     description:
       "Overdue water charges are an important indicator of distress, as it is often the first payment that landlords will delay when trying to cut costs.",
+    format: "money",
   },
   dob_ecb_viol_open: {
     name: "Open DOB/ECB violations",
@@ -269,12 +281,13 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "HPD emergency repair charges, last 12 mo., per unit",
     description:
       "Total cost charged to the landlord for work orders completed as part of HPD programs (Emergency Repairs, Alternative Enforcement, etc.) in the last 12 months, divided by the total number of units. Read more on HPD Emergency Repairs",
-    format: "round",
+    format: "money",
   },
   hpd_erp_charges: {
     name: "HPD emergency repair charges, last 12 mo.",
     description:
       "Total cost charged to the landlord for work orders completed as part of HPD programs (Emergency Repairs, Alternative Enforcement, etc.) in the last 12 months",
+    format: "money",
   },
   hpd_erp_orders: {
     name: "HPD emergency repair work orders, last 12 mo.",
@@ -320,7 +333,6 @@ export const DISPLAY_NAMES: { [key: string]: string } = {
   hpd_comp_apts_pct:
     "Percent of Units that have HPD Complaints in last 12 months",
   debt_per_unit: "Debt Per Unit (Signature)",
-  debt_per_building: "Debt Per Building (Signature)",
   debt_total: "Total Outstanding Debt (Signature)",
   evictions_executed: "Total Executed Evictions since [date]",
   in_aep: "In AEP (yes/no)",
@@ -340,11 +352,11 @@ export const DISPLAY_NAMES: { [key: string]: string } = {
   coun_dist: "City Council District",
   stsen_dist: "State Senate District",
   last_sale_date: "Date of Last Sale",
+  water_charges: "Outstanding Charges for Water/Sewer",
   placeholder__hpd_emerg: "Number of HPD Emergency Repairs since [date]",
   placeholder__hpd_erp: "HPD ERP Charges per Unit",
   placeholder__total_evictions: "Total Eviction Filings since [date]",
   placeholder__dob_open_violations: "Open DOB Violations",
-  placeholder__outstanding_charges_water: "Outstanding Charges for Water/Sewer",
   placeholder__bip_score: "BIP score (violations + charges)",
   placeholder__rent_stab_units: "Rent Stabilized Units",
   placeholder__outstanding_hpd_charges: "Total Outstanding HPD Charges",

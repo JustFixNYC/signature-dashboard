@@ -12,7 +12,7 @@ const keys: Partial<keyof Omit<CollectionInfo, "bldg_data">>[] = [
   "evictions_filed",
   "rs_units",
   "bip_500_pct",
-  "debt_per_building",
+  "debt_total",
   "debt_per_unit",
   "dob_ecb_viol_open",
   "hp_active",
