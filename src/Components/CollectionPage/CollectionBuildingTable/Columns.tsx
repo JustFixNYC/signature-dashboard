@@ -89,7 +89,7 @@ export const columns = [
         header: getColumnHeader("rs_units"),
         cell: (info) => formatNumber(info.getValue()),
         meta: {
-          inputWidth: "2rem",
+          filterVariant: "range",
         },
       }),
       columnHelper.accessor("year_built", {
