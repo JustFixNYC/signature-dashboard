@@ -162,7 +162,6 @@ export type CollectionInfo = {
   | "dob_ecb_viol_open_per_unit"
   | "water_charges"
   | "debt_total"
-  | "debt_per_building"
   | "debt_per_unit"
 >;
 

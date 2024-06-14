@@ -1,6 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import {
-  DISPLAY_NAMES,
   INDICATOR_STRINGS,
   apiKeys,
   formatMoney,
@@ -39,7 +38,7 @@ const showYesNo = (value: boolean) => {
 
 export const columns = [
   columnHelper.accessor("address", {
-    header: DISPLAY_NAMES["address"],
+    header: getColumnHeader("address"),
     cell: (info) => (
       <Link to={`/building?bbl=${info.row.original.bbl}`}>
         {info.getValue()}

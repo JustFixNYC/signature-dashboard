@@ -173,7 +173,9 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Year Built",
   },
   units_nonres: {
-    name: "Non-Residential Units (yes/no)",
+    name: "Non-Residential Units",
+    description:
+      "Presence of any non-residential units. May include one or more types of units (offices, retail stores, etc.)",
   },
   landlord: {
     name: "Landlord",
