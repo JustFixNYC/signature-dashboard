@@ -1,8 +1,10 @@
 @import "@justfixnyc/component-library/dist/src/assets/index.css";
+@import "colors.scss";
 
 body {
   font-family: "Degular";
   letter-spacing: 0.54px;
+  background-color: unquote($OFF_WHITE_100 + "50");
 }
 
 .header-bar {
