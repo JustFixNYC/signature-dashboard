@@ -86,12 +86,14 @@ export const columns = [
       columnHelper.accessor("rs_units", {
         header: getColumnHeader("rs_units"),
         cell: (info) => formatNumber(info.getValue()),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
       columnHelper.accessor("year_built", {
         header: getColumnHeader("year_built"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -118,6 +120,7 @@ export const columns = [
       columnHelper.accessor("hpd_viol_bc_open", {
         header: getColumnHeader("hpd_viol_bc_open"),
         cell: (info) => formatNumber(info.getValue()),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -125,6 +128,7 @@ export const columns = [
       columnHelper.accessor("hpd_viol_bc_open_per_unit", {
         header: getColumnHeader("hpd_viol_bc_open_per_unit"),
         cell: (info) => round(info.getValue()),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -132,6 +136,7 @@ export const columns = [
       columnHelper.accessor("hpd_viol_bc_total", {
         header: getColumnHeader("hpd_viol_bc_total"),
         cell: (info) => info.getValue(),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -145,18 +150,21 @@ export const columns = [
       // }),
       columnHelper.accessor("hpd_viol_heat", {
         header: getColumnHeader("hpd_viol_heat"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
       columnHelper.accessor("hpd_viol_pests", {
         header: getColumnHeader("hpd_viol_pests"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
       columnHelper.accessor("hpd_viol_water", {
         header: getColumnHeader("hpd_viol_water"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -170,6 +178,7 @@ export const columns = [
       columnHelper.accessor("hpd_erp_orders", {
         header: getColumnHeader("hpd_erp_orders"),
         cell: (info) => formatNumber(info.getValue()),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -185,30 +194,35 @@ export const columns = [
     columns: [
       columnHelper.accessor("hpd_comp_emerg_total", {
         header: getColumnHeader("hpd_comp_emerg_total"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
       columnHelper.accessor("hpd_comp_emerg_total_per_unit", {
         header: getColumnHeader("hpd_comp_emerg_total_per_unit"),
+        filterFn: "inNumberRange",
         meta: {
-          // filterVariant: "range",
+          filterVariant: "range",
         },
       }),
       columnHelper.accessor("hpd_comp_heat", {
         header: getColumnHeader("hpd_comp_heat"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
       columnHelper.accessor("hpd_comp_water", {
         header: getColumnHeader("hpd_comp_water"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
       columnHelper.accessor("hpd_comp_pests", {
         header: getColumnHeader("hpd_comp_pests"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -216,6 +230,7 @@ export const columns = [
       columnHelper.accessor("hpd_comp_apts_pct", {
         header: getColumnHeader("hpd_comp_apts_pct"),
         cell: (info) => formatPercent(info.getValue()),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -265,18 +280,21 @@ export const columns = [
     columns: [
       columnHelper.accessor("hp_active", {
         header: getColumnHeader("hp_active"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
       columnHelper.accessor("hp_find_harassment", {
         header: getColumnHeader("hp_find_harassment"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
       columnHelper.accessor("hp_open_judgements", {
         header: getColumnHeader("hp_open_judgements"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -289,12 +307,14 @@ export const columns = [
     columns: [
       columnHelper.accessor("evictions_filed", {
         header: getColumnHeader("evictions_filed"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
       columnHelper.accessor("evictions_executed", {
         header: getColumnHeader("evictions_executed"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -310,6 +330,7 @@ export const columns = [
       }),
       columnHelper.accessor("dob_jobs", {
         header: getColumnHeader("dob_jobs"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -322,6 +343,7 @@ export const columns = [
     columns: [
       columnHelper.accessor("dob_ecb_viol_total", {
         header: getColumnHeader("dob_ecb_viol_total"),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -335,6 +357,7 @@ export const columns = [
       columnHelper.accessor("hpd_erp_charges", {
         header: getColumnHeader("hpd_erp_charges"),
         cell: (info) => formatMoney(info.getValue()),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -342,6 +365,7 @@ export const columns = [
       columnHelper.accessor("hpd_erp_charges_per_unit", {
         header: getColumnHeader("hpd_erp_charges_per_unit"),
         cell: (info) => formatMoney(info.getValue()),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -364,6 +388,7 @@ export const columns = [
       columnHelper.accessor("debt_total", {
         header: getColumnHeader("debt_total"),
         cell: (info) => formatMoney(info.getValue()),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
@@ -371,6 +396,7 @@ export const columns = [
       columnHelper.accessor("debt_per_unit", {
         header: getColumnHeader("debt_per_unit"),
         cell: (info) => formatMoney(info.getValue()),
+        filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
