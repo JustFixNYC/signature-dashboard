@@ -5,6 +5,7 @@
   border-radius: 4px;
   text-align: center;
   border-spacing: 0;
+  background-color: white;
 
   .detail-table_row {
     padding: 12px;
@@ -25,9 +26,11 @@
       .detail-table__name {
         display: flex;
         align-items: center;
+        font-weight: 500;
 
         .detail-table__name_icon {
           margin-left: 5px;
+          color: $GREY_600;
         }
       }
 
@@ -41,6 +44,7 @@
       display: none;
       margin: 0;
       text-align: left;
+      font-weight: 300;
 
       &.detail-table__description_open {
         display: block;

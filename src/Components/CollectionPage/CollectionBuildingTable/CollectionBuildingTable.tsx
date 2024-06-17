@@ -51,6 +51,7 @@ export const CollectionBuildingTable: React.FC<
                 return (
                   <th
                     key={header.column.id}
+                    colSpan={header.colSpan}
                     style={{ minWidth: header.getSize() || undefined }}
                   >
                     {header.isPlaceholder ? null : (

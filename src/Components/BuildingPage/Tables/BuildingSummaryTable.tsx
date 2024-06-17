@@ -35,7 +35,7 @@ export const BuildingSummaryTable: React.FC<BuildingSummaryTableProps> = ({
   ...props
 }) => {
   const rows = keys.map((key) => {
-    return <DetailTableRow key={key} apiKey={key} value={data[key]}/>;
+    return <DetailTableRow key={key} apiKey={key} value={data[key]} />;
   });
 
   return <DetailTable {...props}>{rows}</DetailTable>;

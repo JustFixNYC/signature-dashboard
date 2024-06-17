@@ -15,8 +15,14 @@ export const BuildingFinancialTable: React.FC<BuildingFinancialTable> = ({
     <DetailTable {...props}>
       <DetailTableRow apiKey={"debt_per_unit"} value={data["debt_per_unit"]} />
       <DetailTableRow apiKey={"debt_total"} value={data["debt_total"]} />
-      <DetailTableRow apiKey={"last_sale_date"} value={data["last_sale_date"]} />
-      <DetailTableRow apiKey={"origination_date"} value={data["origination_date"]} />
+      <DetailTableRow
+        apiKey={"last_sale_date"}
+        value={data["last_sale_date"]}
+      />
+      <DetailTableRow
+        apiKey={"origination_date"}
+        value={data["origination_date"]}
+      />
     </DetailTable>
   );
 };

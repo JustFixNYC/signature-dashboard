@@ -14,7 +14,6 @@ export interface Indicators {
   borough: number;
   cong_dist: number;
   coun_dist: number;
-  debt_per_building: number;
   debt_per_unit: number;
   debt_total: number;
   dob_ecb_viol_open: number;
@@ -74,8 +73,9 @@ export type BuildingInfo = {
   water_charges: string;
   lat: string;
   lng: string;
-  placeholder_vacate_order: string;
-  placeholder_dob_permit_applications: string;
+  placeholder_vacate_order: number;
+  placeholder_dob_permit_applications: number;
+  placeholder_outstanding_water: number;
 } & Pick<
   Indicators,
   | "bbl"
@@ -162,7 +162,6 @@ export type CollectionInfo = {
   | "dob_ecb_viol_open_per_unit"
   | "water_charges"
   | "debt_total"
-  | "debt_per_building"
   | "debt_per_unit"
 >;
 

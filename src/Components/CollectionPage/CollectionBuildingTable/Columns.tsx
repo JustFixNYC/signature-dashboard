@@ -1,192 +1,410 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { DISPLAY_NAMES } from "../../../util/helpers";
+import { createColumnHelper } from "@tanstack/react-table";
+import {
+  INDICATOR_STRINGS,
+  apiKeys,
+  formatMoney,
+  formatNumber,
+  formatPercent,
+} from "../../../util/helpers";
 import { BuildingInfo } from "../../../types/APIDataTypes";
 import { Link } from "react-router-dom";
 
-export const columns: ColumnDef<BuildingInfo, string | number>[] = [
-  {
-    accessorKey: "address",
-    header: DISPLAY_NAMES["address"],
+const columnHelper = createColumnHelper<BuildingInfo>();
+
+const getColumnHeader = (apiKey: apiKeys) => {
+  const indicator = INDICATOR_STRINGS[apiKey];
+  if (indicator) {
+    return indicator.short_name ? indicator.short_name : indicator.name;
+  } else {
+    return apiKey;
+  }
+};
+
+const round = (value: number) => {
+  if (typeof value !== "number") {
+    return value;
+  }
+  return value.toFixed(2);
+};
+
+const showYesNo = (value: boolean) => {
+  if (value === true) {
+    return "yes";
+  } else if (value === false) {
+    return "no";
+  }
+};
+
+export const columns = [
+  columnHelper.accessor("address", {
+    header: getColumnHeader("address"),
     cell: (info) => (
       <Link to={`/building?bbl=${info.row.original.bbl}`}>
         {info.getValue()}
       </Link>
     ),
-  },
-  {
-    accessorKey: "zip",
-    header: DISPLAY_NAMES["zip"],
-    meta: {
-      inputWidth: "3rem",
-    },
-  },
-  {
-    accessorKey: "borough",
-    header: DISPLAY_NAMES["borough"],
-    meta: {
-      inputWidth: "1.5rem",
-    },
-  },
-  {
-    accessorKey: "hpd_viol_bc_open",
-    header: DISPLAY_NAMES["hpd_viol_bc_open"],
-    meta: {
-      filterVariant: "range",
-    },
-  },
-  {
-    accessorKey: "evictions_executed",
-    header: DISPLAY_NAMES["evictions_executed"],
-    meta: {
-      filterVariant: "range",
-    },
-  },
-  {
-    accessorKey: "hpd_viol_bc_open_per_unit",
-    header: DISPLAY_NAMES["hpd_viol_bc_open_per_unit"],
-    cell: (info) => (info.getValue() as number).toFixed(2),
-    meta: {
-      filterVariant: "range",
-    },
-  },
-  {
-    accessorKey: "in_aep",
-    header: DISPLAY_NAMES["in_aep"],
-    meta: {
-      filterVariant: "boolean",
-    },
-  },
-  {
-    accessorKey: "in_conh",
-    header: DISPLAY_NAMES["in_conh"],
-    meta: {
-      filterVariant: "boolean",
-    },
-  },
-  {
-    accessorKey: "in_ucp",
-    header: DISPLAY_NAMES["in_ucp"],
-    meta: {
-      filterVariant: "boolean",
-    },
-  },
-  {
-    accessorKey: "hpd_comp_emerg_total",
-    header: DISPLAY_NAMES["hpd_comp_emerg_total"],
-    meta: {
-      filterVariant: "range",
-    },
-  },
-  {
-    accessorKey: "hpd_comp_emerg_total_per_unit",
-    header: DISPLAY_NAMES["hpd_comp_emerg_total_per_unit"],
-  },
-  {
-    accessorKey: "hpd_comp_apts_pct",
-    header: DISPLAY_NAMES["hpd_comp_apts_pct"],
-    cell: (info) => ((info.getValue() as number) * 100).toFixed(2) + "%",
-    meta: {
-      filterVariant: "range",
-    },
-  },
-  {
-    accessorKey: "units_res",
-    header: DISPLAY_NAMES["units_res"],
-    meta: {
-      filterVariant: "range",
-    },
-  },
-  {
-    accessorKey: "year_built",
-    header: DISPLAY_NAMES["year_built"],
-    meta: {
-      filterVariant: "range",
-    },
-  },
-  {
-    accessorKey: "units_nonres",
-    header: DISPLAY_NAMES["units_nonres"],
-    meta: {
-      filterVariant: "boolean",
-    },
-  },
-  {
-    accessorKey: "landlord",
-    header: DISPLAY_NAMES["landlord"],
-  },
-  {
-    accessorKey: "lender",
-    header: DISPLAY_NAMES["lender"],
-    meta: {
-      inputWidth: "4rem",
-    },
-  },
-  {
-    accessorKey: "assem_dist",
-    header: DISPLAY_NAMES["assem_dist"],
-    meta: {
-      inputWidth: "1.5rem",
-    },
-  },
-  {
-    accessorKey: "cong_dist",
-    header: DISPLAY_NAMES["cong_dist"],
-    meta: {
-      inputWidth: "1.5rem",
-    },
-  },
-  {
-    accessorKey: "coun_dist",
-    header: DISPLAY_NAMES["coun_dist"],
-    meta: {
-      inputWidth: "1.5rem",
-    },
-  },
-  {
-    accessorKey: "stsen_dist",
-    header: DISPLAY_NAMES["stsen_dist"],
-    meta: {
-      inputWidth: "1.5rem",
-    },
-  },
-  {
-    accessorKey: "placeholder_active_vacate_orders",
-    header: DISPLAY_NAMES["placeholder_active_vacate_orders"],
-  },
-  {
-    accessorKey: "placeholder__dob_open_violations",
-    header: DISPLAY_NAMES["placeholder__dob_open_violations"],
-  },
-  {
-    accessorKey: "placeholder_failed_rodents",
-    header: DISPLAY_NAMES["placeholder_failed_rodents"],
-  },
-  {
-    accessorKey: "placeholder__outstanding_charges_water",
-    header: DISPLAY_NAMES["placeholder__outstanding_charges_water"],
-  },
-  {
-    accessorKey: "placeholder__bip_score",
-    header: DISPLAY_NAMES["placeholder__bip_score"],
-  },
-  {
-    accessorKey: "placeholder__rent_stab_units",
-    header: DISPLAY_NAMES["placeholder__rent_stab_units"],
-  },
-  {
-    accessorKey: "placeholder__hpd_emerg",
-    header: DISPLAY_NAMES["placeholder__hpd_emerg"],
-  },
-  {
-    accessorKey: "placeholder__active_hp",
-    header: DISPLAY_NAMES["placeholder__active_hp"],
-  },
-  {
-    accessorKey: "placeholder_elected_official_districts",
-    header: DISPLAY_NAMES["placeholder_elected_official_districts"],
-  },
-  {
-    accessorKey: "placeholder__total_evictions",
-    header: DISPLAY_NAMES["placeholder__total_evictions"],
-  },
+  }),
+  columnHelper.group({
+    id: "location",
+    header: () => "Location",
+    columns: [
+      columnHelper.accessor("zip", {
+        header: getColumnHeader("zip"),
+        meta: {
+          inputWidth: "3rem",
+        },
+      }),
+      columnHelper.accessor("borough", {
+        header: getColumnHeader("borough"),
+        meta: {
+          inputWidth: "1.5rem",
+        },
+      }),
+    ],
+  }),
+
+  columnHelper.group({
+    id: "building_info",
+    header: () => "Building Info",
+    columns: [
+      columnHelper.accessor("landlord", {
+        header: getColumnHeader("landlord"),
+      }),
+      columnHelper.accessor("lender", {
+        header: getColumnHeader("lender"),
+        meta: {
+          inputWidth: "4rem",
+        },
+      }),
+      columnHelper.accessor("units_nonres", {
+        header: getColumnHeader("units_nonres"),
+        cell: (info) => showYesNo(info.getValue()),
+        meta: {
+          filterVariant: "boolean",
+        },
+      }),
+      columnHelper.accessor("rs_units", {
+        header: getColumnHeader("rs_units"),
+        cell: (info) => formatNumber(info.getValue()),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("year_built", {
+        header: getColumnHeader("year_built"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+    ],
+  }),
+  columnHelper.group({
+    id: "bip",
+    header: () => "BIP Score",
+    columns: [
+      columnHelper.accessor("bip", {
+        header: getColumnHeader("bip"),
+        cell: (info) => formatNumber(info.getValue()),
+        meta: {
+          inputWidth: "2.5rem",
+        },
+      }),
+    ],
+  }),
+  columnHelper.group({
+    id: "hpd_violations",
+    header: () => "HPD Violations",
+    columns: [
+      columnHelper.accessor("hpd_viol_bc_open", {
+        header: getColumnHeader("hpd_viol_bc_open"),
+        cell: (info) => formatNumber(info.getValue()),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hpd_viol_bc_open_per_unit", {
+        header: getColumnHeader("hpd_viol_bc_open_per_unit"),
+        cell: (info) => round(info.getValue()),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hpd_viol_bc_total", {
+        header: getColumnHeader("hpd_viol_bc_total"),
+        cell: (info) => info.getValue(),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      // columnHelper.accessor("hpd_viol_bc_total_per_unit", {
+      //   header: getColumnHeader("hpd_viol_bc_total_per_unit"),
+      //   cell: (info) => round(info.getValue()),
+      //   meta: {
+      //     filterVariant: "range",
+      //   },
+      // }),
+      columnHelper.accessor("hpd_viol_heat", {
+        header: getColumnHeader("hpd_viol_heat"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hpd_viol_pests", {
+        header: getColumnHeader("hpd_viol_pests"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hpd_viol_water", {
+        header: getColumnHeader("hpd_viol_water"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+    ],
+  }),
+  columnHelper.group({
+    id: "hpd_emerg_repairs",
+    header: () => "HPD Emergency Repairs",
+    columns: [
+      columnHelper.accessor("hpd_erp_orders", {
+        header: getColumnHeader("hpd_erp_orders"),
+        cell: (info) => formatNumber(info.getValue()),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      // columnHelper.accessor("hpd_erp_orders_per_unit", {
+      //   header: getColumnHeader("hpd_erp_orders_per_unit"),
+      // }),
+    ],
+  }),
+  columnHelper.group({
+    id: "hpd_complaints",
+    header: () => "HPD Complaints",
+    columns: [
+      columnHelper.accessor("hpd_comp_emerg_total", {
+        header: getColumnHeader("hpd_comp_emerg_total"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hpd_comp_emerg_total_per_unit", {
+        header: getColumnHeader("hpd_comp_emerg_total_per_unit"),
+        meta: {
+          // filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hpd_comp_heat", {
+        header: getColumnHeader("hpd_comp_heat"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hpd_comp_water", {
+        header: getColumnHeader("hpd_comp_water"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hpd_comp_pests", {
+        header: getColumnHeader("hpd_comp_pests"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hpd_comp_apts_pct", {
+        header: getColumnHeader("hpd_comp_apts_pct"),
+        cell: (info) => formatPercent(info.getValue()),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+    ],
+  }),
+  columnHelper.group({
+    id: "hpd_programs",
+    header: () => "HPD Programs",
+    columns: [
+      columnHelper.accessor("in_aep", {
+        header: getColumnHeader("in_aep"),
+        cell: (info) => showYesNo(info.getValue()),
+        meta: {
+          filterVariant: "boolean",
+        },
+      }),
+      columnHelper.accessor("in_conh", {
+        header: getColumnHeader("in_conh"),
+        cell: (info) => showYesNo(info.getValue()),
+        meta: {
+          filterVariant: "boolean",
+        },
+      }),
+      columnHelper.accessor("in_ucp", {
+        header: getColumnHeader("in_ucp"),
+        cell: (info) => showYesNo(info.getValue()),
+        meta: {
+          filterVariant: "boolean",
+        },
+      }),
+    ],
+  }),
+  columnHelper.group({
+    id: "vacate_orders",
+    header: () => "Vacate Orders",
+    columns: [
+      columnHelper.accessor("placeholder_vacate_order", {
+        header: getColumnHeader("placeholder_vacate_order"),
+      }),
+    ],
+  }),
+
+  columnHelper.group({
+    id: "hp_cases",
+    header: () => "HP Cases",
+    columns: [
+      columnHelper.accessor("hp_active", {
+        header: getColumnHeader("hp_active"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hp_find_harassment", {
+        header: getColumnHeader("hp_find_harassment"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hp_open_judgements", {
+        header: getColumnHeader("hp_open_judgements"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+    ],
+  }),
+  columnHelper.group({
+    id: "evictions",
+    header: () => "Evictions",
+    columns: [
+      columnHelper.accessor("evictions_filed", {
+        header: getColumnHeader("evictions_filed"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("evictions_executed", {
+        header: getColumnHeader("evictions_executed"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+    ],
+  }),
+  columnHelper.group({
+    id: "dob_permits",
+    header: () => "DOB Permits",
+    columns: [
+      columnHelper.accessor("placeholder_dob_permit_applications", {
+        header: getColumnHeader("placeholder_dob_permit_applications"),
+      }),
+      columnHelper.accessor("dob_jobs", {
+        header: getColumnHeader("dob_jobs"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+    ],
+  }),
+  columnHelper.group({
+    id: "dob_violations",
+    header: () => "DOB Violations",
+    columns: [
+      columnHelper.accessor("dob_ecb_viol_total", {
+        header: getColumnHeader("dob_ecb_viol_total"),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+    ],
+  }),
+  columnHelper.group({
+    id: "fines_fees_charges",
+    header: () => "Fines, Fees & Charges",
+    columns: [
+      columnHelper.accessor("hpd_erp_charges", {
+        header: getColumnHeader("hpd_erp_charges"),
+        cell: (info) => formatMoney(info.getValue()),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("hpd_erp_charges_per_unit", {
+        header: getColumnHeader("hpd_erp_charges_per_unit"),
+        cell: (info) => formatMoney(info.getValue()),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("placeholder_outstanding_water", {
+        header: getColumnHeader("placeholder_outstanding_water"),
+      }),
+    ],
+  }),
+  columnHelper.group({
+    id: "financial",
+    header: () => "Financial",
+    columns: [
+      columnHelper.accessor("last_sale_date", {
+        header: getColumnHeader("last_sale_date"),
+      }),
+      columnHelper.accessor("origination_date", {
+        header: getColumnHeader("origination_date"),
+      }),
+      columnHelper.accessor("debt_total", {
+        header: getColumnHeader("debt_total"),
+        cell: (info) => formatMoney(info.getValue()),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("debt_per_unit", {
+        header: getColumnHeader("debt_per_unit"),
+        cell: (info) => formatMoney(info.getValue()),
+        meta: {
+          filterVariant: "range",
+        },
+      }),
+    ],
+  }),
+  columnHelper.group({
+    id: "political_districts",
+    header: () => "Political Districts",
+    columns: [
+      columnHelper.accessor("coun_dist", {
+        header: getColumnHeader("coun_dist"),
+        meta: {
+          inputWidth: "1.5rem",
+        },
+      }),
+      columnHelper.accessor("assem_dist", {
+        header: getColumnHeader("assem_dist"),
+        meta: {
+          inputWidth: "1.5rem",
+        },
+      }),
+      columnHelper.accessor("stsen_dist", {
+        header: getColumnHeader("stsen_dist"),
+        meta: {
+          inputWidth: "1.5rem",
+        },
+      }),
+      columnHelper.accessor("cong_dist", {
+        header: getColumnHeader("cong_dist"),
+        meta: {
+          inputWidth: "1.5rem",
+        },
+      }),
+    ],
+  }),
 ];

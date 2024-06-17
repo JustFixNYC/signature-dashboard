@@ -1,6 +1,12 @@
 import { Icon } from "@justfixnyc/component-library";
 import { useState } from "react";
-import { INDICATOR_STRINGS, apiKeys, formatMoney } from "../../util/helpers";
+import {
+  INDICATOR_STRINGS,
+  apiKeys,
+  formatMoney,
+  formatNumber,
+  formatPercent,
+} from "../../util/helpers";
 
 type DetailTableRowProps = {
   apiKey: apiKeys;
@@ -9,7 +15,7 @@ type DetailTableRowProps = {
 
 export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   apiKey,
-  value
+  value,
 }) => {
   const [showDesc, setShowDesc] = useState(false);
 
@@ -23,12 +29,20 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   const description = indicator?.description;
   let displayValue = value;
 
-  if (indicator?.format === 'round' && typeof value === 'number') {
+  if (indicator?.format === "round" && typeof value === "number") {
     displayValue = value.toFixed(2);
   }
 
-  if (indicator?.format === 'money' && typeof value === 'number') {
+  if (indicator?.format === "money" && typeof value === "number") {
     displayValue = formatMoney(value);
+  }
+
+  if (indicator?.format === "percent" && typeof value === "number") {
+    displayValue = formatPercent(value);
+  }
+
+  if (typeof indicator?.format === "undefined" && typeof value === "number") {
+    displayValue = formatNumber(value);
   }
 
   return (
@@ -43,10 +57,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
         <dt className="detail-table__name">
           {name}
           {description && (
-            <Icon
-              icon="circleInfo"
-              className="detail-table__name_icon"
-            />
+            <Icon icon="circleInfo" className="detail-table__name_icon" />
           )}
         </dt>
         <dd className="detail-table__value">{displayValue}</dd>
