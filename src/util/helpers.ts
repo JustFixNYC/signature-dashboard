@@ -13,6 +13,9 @@ export function splitBBL(bbl: string) {
 }
 
 export function formatMoney(amount: number): string {
+  if (typeof amount !== "number") {
+    return amount;
+  }
   const formatmoney = new Intl.NumberFormat("en", {
     style: "currency",
     currency: "USD",
@@ -23,10 +26,16 @@ export function formatMoney(amount: number): string {
 }
 
 export const formatPercent = (value: number) => {
+  if (typeof value !== "number") {
+    return value;
+  }
   return value.toFixed(0) + "%";
 };
 
 export const formatNumber = (value: number) => {
+  if (typeof value !== "number") {
+    return value;
+  }
   return new Intl.NumberFormat("en").format(value);
 };
 
