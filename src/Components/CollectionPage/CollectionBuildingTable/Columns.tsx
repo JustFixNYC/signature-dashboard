@@ -21,11 +21,10 @@ const getColumnHeader = (apiKey: apiKeys) => {
 };
 
 const round = (value: number) => {
-  if (typeof value === "number") {
-    return value.toFixed(2);
-  } else {
+  if (typeof value !== "number") {
     return value;
   }
+  return value.toFixed(2);
 };
 
 const showYesNo = (value: boolean) => {
@@ -216,7 +215,7 @@ export const columns = [
       }),
       columnHelper.accessor("hpd_comp_apts_pct", {
         header: getColumnHeader("hpd_comp_apts_pct"),
-        cell: (info) => formatPercent(info.getValue()), //((info.getValue() as number) * 100).toFixed(2) + "%",
+        cell: (info) => formatPercent(info.getValue()),
         meta: {
           filterVariant: "range",
         },
