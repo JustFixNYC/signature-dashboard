@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../auth";
+import { AuthContext } from "../../../auth";
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();

@@ -1,19 +1,18 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
-import { useSearchParams } from "react-router-dom";
 import { useGetCollectionInfo } from "../../api/hooks";
 import { CollectionSummaryTable } from "./CollectionSummaryTable/CollectionSummaryTable";
 import { CollectionBuildingTable } from "./CollectionBuildingTable/CollectionBuildingTable";
 
-export const CollectionPage: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const collection = searchParams.get("collection") || "";
+type CollectionProps = {
+  collection: string;
+};
 
+export const Collection: React.FC<CollectionProps> = ({ collection }) => {
   const { data, error, isLoading } = useGetCollectionInfo(collection);
 
   return (
     <div style={{ minHeight: "1500px" }}>
-      <h2>Collection Page</h2>
       {isLoading && <div>loading...</div>}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {/* {data && <pre>{JSON.stringify(data, null, 2)}</pre>} */}
