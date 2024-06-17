@@ -1,3 +1,5 @@
+@import "./../../../colors.scss";
+
 table.collection-building-table,
 table.collection-building-table td,
 table.collection-building-table th {
@@ -5,12 +7,15 @@ table.collection-building-table th {
   border-collapse: collapse;
   text-align: center;
   padding: 2px 4px;
-  background-color: white;
+}
+
+table.collection-building-table {
+  background-color: $WHITE;
 }
 
 table.collection-building-table tbody tr {
   &:hover {
-    background-color: #f2f2f2;
+    background-color: $GREY_50;
   }
   td {
     font-weight: 500;
