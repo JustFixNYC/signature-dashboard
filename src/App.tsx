@@ -3,7 +3,7 @@ import { Buildings } from "./Components/Pages/Buildings/Buildings";
 import { useRollbar } from "@rollbar/react";
 import { SWRConfig } from "swr";
 import { NetworkError } from "./api/error-reporting";
-import { APIDocs } from "./Components/APIDocs/APIDocs";
+import { APIDocs } from "./Components/Pages/APIDocs/APIDocs";
 import { Login } from "./Components/Pages/Login/Login";
 import { PrivateRoutes } from "./auth";
 import "./App.scss";
