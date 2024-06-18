@@ -16,9 +16,11 @@ export const columns = [
   columnHelper.accessor("address", {
     header: getColumnHeader("address"),
     cell: (info) => (
-      <Link to={`/buildings?bbl=${info.row.original.bbl}`}>
-        {info.getValue()}
-      </Link>
+      <div className="cell__address">
+        <Link to={`/buildings?bbl=${info.row.original.bbl}`}>
+          {info.getValue()}
+        </Link>
+      </div>
     ),
   }),
   columnHelper.group({

@@ -4,6 +4,7 @@ import { useGetCollectionInfo } from "../../api/hooks";
 import { CollectionSummaryTable } from "./CollectionSummaryTable/CollectionSummaryTable";
 import { columns as buildingColumns } from "./BuildingTableColumns";
 import { Table } from "../Table/Table";
+import "./style.scss";
 
 type CollectionProps = {
   collection: string;

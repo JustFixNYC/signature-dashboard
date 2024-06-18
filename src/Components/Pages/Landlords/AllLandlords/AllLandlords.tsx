@@ -1,19 +1,28 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
 import { LandlordInfo } from "../../../../types/APIDataTypes";
-import { getColumnHeader, round, formatMoney, formatNumber } from "../../../../util/helpers";
+import {
+  getColumnHeader,
+  round,
+  formatMoney,
+  formatNumber,
+} from "../../../../util/helpers";
 import { useGetAllLandlords } from "../../../../api/hooks";
 import { Table } from "../../../Table/Table";
+import "./style.scss";
 
 const columnHelper = createColumnHelper<LandlordInfo>();
 
 export const columns = [
   columnHelper.accessor("landlord_name", {
+    id: "landlord_name",
     header: getColumnHeader("landlord_name"),
     cell: (info) => (
-      <Link to={`/landlords?landlord=${info.row.original.landlord_slug}`}>
-        {info.getValue()}
-      </Link>
+      <div className="cell__landlord-name">
+        <Link to={`/landlords?landlord=${info.row.original.landlord_slug}`}>
+          {info.getValue()}
+        </Link>
+      </div>
     ),
   }),
   columnHelper.accessor("lender_name", {
