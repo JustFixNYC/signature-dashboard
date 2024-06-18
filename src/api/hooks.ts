@@ -1,5 +1,10 @@
 import useSWR from "swr";
-import { BuildingInfo, ChartData, CollectionInfo } from "../types/APIDataTypes";
+import {
+  BuildingInfo,
+  ChartData,
+  CollectionInfo,
+  LandlordInfo,
+} from "../types/APIDataTypes";
 import { apiFetcher } from "./helpers";
 
 type BuildingInfoSWRResponse = {
@@ -81,6 +86,30 @@ export function useGetCollectionChartData(
 ): ChartDataSWRResponse {
   const { data, error, isLoading } = useSWR(
     `/signature/collection/charts?collection=${collection}`,
+    apiFetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
+
+  return {
+    data: data?.result,
+    isLoading,
+    error: error,
+  };
+}
+
+type LandlordInfoSWRResponse = {
+  data: LandlordInfo[];
+  isLoading: boolean;
+  error: Error | undefined;
+};
+
+export function useGetAllLandlords(): LandlordInfoSWRResponse {
+  const { data, error, isLoading } = useSWR(
+    `/signature/landlords`,
     apiFetcher,
     {
       revalidateIfStale: false,

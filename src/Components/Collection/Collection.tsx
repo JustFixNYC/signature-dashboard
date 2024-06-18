@@ -2,7 +2,8 @@
 import React from "react";
 import { useGetCollectionInfo } from "../../api/hooks";
 import { CollectionSummaryTable } from "./CollectionSummaryTable/CollectionSummaryTable";
-import { CollectionBuildingTable } from "./CollectionBuildingTable/CollectionBuildingTable";
+import { columns as buildingColumns } from "./BuildingTableColumns";
+import { Table } from "../Table/Table";
 
 type CollectionProps = {
   collection: string;
@@ -15,13 +16,12 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
     <div style={{ minHeight: "1500px" }}>
       {isLoading && <div>loading...</div>}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-      {/* {data && <pre>{JSON.stringify(data, null, 2)}</pre>} */}
       {data && (
         <>
           <h3>Summary Table</h3>
           <CollectionSummaryTable data={data} />
           <h3>Building Table</h3>
-          <CollectionBuildingTable data={data.bldg_data} />
+          <Table data={data.bldg_data} columns={buildingColumns} />
         </>
       )}
     </div>

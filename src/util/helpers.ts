@@ -2,6 +2,7 @@ import {
   BuildingInfo,
   CollectionInfo,
   Indicators,
+  LandlordInfo,
 } from "../types/APIDataTypes";
 
 export function splitBBL(bbl: string) {
@@ -42,7 +43,8 @@ export const formatNumber = (value: number) => {
 export type apiKeys =
   | keyof BuildingInfo
   | keyof CollectionInfo
-  | keyof Indicators;
+  | keyof Indicators
+  | keyof LandlordInfo;
 
 type indicatorObj = {
   name: string;
@@ -227,7 +229,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "lng",
   },
   buildings: {
-    name: "buildings",
+    name: "Buildings",
     description: "The number of properties in the portfolio.",
   },
   bip: {
@@ -325,50 +327,34 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Active Vacate Order",
     description: "(include links to each agency page to learn more)",
   },
+  landlord_name: {
+    name: "Landlord",
+  },
+  lender_name: {
+    name: "Lender",
+  },
 };
 
-export const DISPLAY_NAMES: { [key: string]: string } = {
-  bbl: "BBL",
-  hpd_viol_bc_open: "Open B & C HPD Violations (since 2010)",
-  hpd_viol_bc_open_per_unit: "Open B & C HPD Violations, per unit (since 2010)",
-  hpd_viol_bc_total: "Total B & C HPD Violations in last 12 months",
-  hpd_viol_bc_total_per_unit:
-    "Total B & C HPD Violations in last 12 months, per unit",
-  hpd_comp_emerg_total: "Total Emergency HPD Complaints in last 12 months",
-  hpd_comp_emerg_total_per_unit:
-    "Total Emergency HPD Complaints in last 12 months, per unit",
-  hpd_comp_heat: "Total HPD Complaints for Heat/Hot Water",
-  hpd_comp_water: "Total HPD Complaints for Leak/Mold",
-  hpd_comp_pests: "Total HPD Complaints for Pests",
-  hpd_comp_apts: "List of Apt Numbers that have complaints in last 12 months",
-  hpd_comp_apts_pct:
-    "Percent of Units that have HPD Complaints in last 12 months",
-  debt_per_unit: "Debt Per Unit (Signature)",
-  debt_total: "Total Outstanding Debt (Signature)",
-  evictions_executed: "Total Executed Evictions since [date]",
-  in_aep: "In AEP (yes/no)",
-  in_conh: "In CONH (yes/no)",
-  in_ucp: "HPD Underlying Conditions Program (yes/no)",
-  origination_date: "Loan Origination Date (Signature)",
-  units_res: "Residential Units",
-  year_built: "Year Built",
-  units_nonres: "Non-Residential Units (yes/no)",
-  landlord: "Landlord",
-  lender: "Lender",
-  zip: "Zip code",
-  address: "Address",
-  borough: "Borough",
-  assem_dist: "State Assembly District",
-  cong_dist: "Congressional District",
-  coun_dist: "City Council District",
-  stsen_dist: "State Senate District",
-  last_sale_date: "Date of Last Sale",
-  water_charges: "Outstanding Charges for Water/Sewer",
-  placeholder__hpd_emerg: "Number of HPD Emergency Repairs since [date]",
-  placeholder__hpd_erp: "HPD ERP Charges per Unit",
-  placeholder__total_evictions: "Total Eviction Filings since [date]",
-  placeholder__dob_open_violations: "Open DOB Violations",
-  placeholder__bip_score: "BIP score (violations + charges)",
-  placeholder__rent_stab_units: "Rent Stabilized Units",
-  placeholder__outstanding_hpd_charges: "Total Outstanding HPD Charges",
+export const getColumnHeader = (apiKey: apiKeys) => {
+  const indicator = INDICATOR_STRINGS[apiKey];
+  if (indicator) {
+    return indicator.short_name ? indicator.short_name : indicator.name;
+  } else {
+    return apiKey;
+  }
+};
+
+export const round = (value: number) => {
+  if (typeof value !== "number") {
+    return value;
+  }
+  return value.toFixed(2);
+};
+
+export const showYesNo = (value: boolean) => {
+  if (value === true) {
+    return "yes";
+  } else if (value === false) {
+    return "no";
+  }
 };

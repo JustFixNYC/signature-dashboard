@@ -1,6 +1,6 @@
-import { BuildingInfo } from "../../../types/APIDataTypes";
 import {
   Column,
+  ColumnDef,
   RowData,
   flexRender,
   getCoreRowModel,
@@ -9,13 +9,13 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import "./style.scss";
-import React from "react";
-import { columns } from "./Columns";
-import DebouncedInput from "../../DebouncedInput";
+import DebouncedInput from "../DebouncedInput";
 
-type CollectionBuildingTableProps = {
-  data: BuildingInfo[];
-};
+interface TableProps<T extends object> {
+  data: T[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  columns: ColumnDef<T, any>[];
+}
 
 declare module "@tanstack/react-table" {
   //allows us to define custom properties for our columns
@@ -26,9 +26,8 @@ declare module "@tanstack/react-table" {
   }
 }
 
-export const CollectionBuildingTable: React.FC<
-  CollectionBuildingTableProps
-> = ({ data }) => {
+export const Table = <T extends object>(props: TableProps<T>) => {
+  const { data, columns } = props;
   const table = useReactTable({
     data,
     columns,
@@ -102,7 +101,7 @@ export const CollectionBuildingTable: React.FC<
   );
 };
 
-function Filter({ column }: { column: Column<BuildingInfo, unknown> }) {
+function Filter<T>({ column }: { column: Column<T, unknown> }) {
   const columnFilterValue = column.getFilterValue();
   const { filterVariant, inputWidth } = column.columnDef.meta ?? {};
 
