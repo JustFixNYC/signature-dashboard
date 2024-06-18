@@ -1,7 +1,7 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
 import { LandlordInfo } from "../../../../types/APIDataTypes";
-import { getColumnHeader, round, formatMoney } from "../../../../util/helpers";
+import { getColumnHeader, round, formatMoney, formatNumber } from "../../../../util/helpers";
 import { useGetAllLandlords } from "../../../../api/hooks";
 import { Table } from "../../../Table/Table";
 
@@ -30,7 +30,7 @@ export const columns = [
   }),
   columnHelper.accessor("units_res", {
     header: getColumnHeader("units_res"),
-    cell: (info) => info.getValue(),
+    cell: (info) => formatNumber(info.getValue()),
     filterFn: "inNumberRange",
     meta: {
       filterVariant: "range",
