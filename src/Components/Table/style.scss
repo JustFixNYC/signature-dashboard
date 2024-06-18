@@ -34,8 +34,20 @@ table.collection-building-table tbody tr {
     justify-content: center;
   }
 
+  .column-header__label_sort {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .column-header__sort-area {
     cursor: pointer;
+
+    .column-header__sort-icons {
+      display: flex;
+      margin-left: 5px;
+      font-size: 0.7rem; // 11.2px
+    }
   }
 }
 

@@ -22,7 +22,11 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
           <h3>Summary Table</h3>
           <CollectionSummaryTable data={data} />
           <h3>Building Table</h3>
-          <Table data={data.bldg_data} columns={buildingColumns} />
+          <Table
+            data={data.bldg_data}
+            columns={buildingColumns}
+            initialSorting={[{ id: "rs_units", desc: true }]}
+          />
         </>
       )}
     </div>

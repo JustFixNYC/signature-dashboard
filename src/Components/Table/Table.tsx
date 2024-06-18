@@ -14,6 +14,7 @@ import {
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
 import { useState } from "react";
+import { Icon } from "@justfixnyc/component-library";
 
 interface TableProps<T extends object> {
   data: T[];
@@ -88,14 +89,38 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                             onClick: header.column.getToggleSortingHandler(),
                           }}
                         >
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                          {{
-                            asc: " 🔼",
-                            desc: " 🔽",
-                          }[header.column.getIsSorted() as string] ?? null}
+                          <div className="column-header__label_sort">
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                            {header.column.getCanSort() && (
+                              <span className="column-header__sort-icons">
+                                {header.column.getIsSorted() === "asc" ? (
+                                  <Icon
+                                    icon="arrowUp"
+                                    className="column-header__sort-icon"
+                                  />
+                                ) : header.column.getIsSorted() === "desc" ? (
+                                  <Icon
+                                    icon="arrowDown"
+                                    className="column-header__sort-icon"
+                                  />
+                                ) : (
+                                  <>
+                                    <Icon
+                                      icon="arrowUp"
+                                      className="column-header__sort-icon"
+                                    />
+                                    <Icon
+                                      icon="arrowDown"
+                                      className="column-header__sort-icon"
+                                    />
+                                  </>
+                                )}
+                              </span>
+                            )}
+                          </div>
                         </div>
                         {header.column.getCanFilter() ? (
                           <div className="column-header__filter">
