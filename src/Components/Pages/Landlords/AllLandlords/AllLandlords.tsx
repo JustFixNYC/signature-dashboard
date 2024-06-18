@@ -62,7 +62,14 @@ export const AllLandlords: React.FC = () => {
       <h2>Landlords</h2>
       {isLoading && <div>loading...</div>}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-      {data && <Table data={data} columns={columns} />}
+      {data && (
+        <Table
+          data={data}
+          columns={columns}
+          pagination
+          initialSorting={[{ id: "units_res", desc: true }]}
+        />
+      )}
     </>
   );
 };

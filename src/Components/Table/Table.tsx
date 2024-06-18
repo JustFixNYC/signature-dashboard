@@ -1,24 +1,30 @@
 import {
   Column,
   ColumnDef,
+  PaginationState,
   RowData,
+  TableOptions,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
+import { useState } from "react";
 
 interface TableProps<T extends object> {
   data: T[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<T, any>[];
+  pagination?: boolean;
+  initialSorting?: { id: string; desc: boolean }[];
 }
 
 declare module "@tanstack/react-table" {
-  //allows us to define custom properties for our columns
+  // allows us to define custom properties for our columns (copied from WoW)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ColumnMeta<TData extends RowData, TValue> {
     filterVariant?: "text" | "range" | "boolean";
@@ -27,18 +33,37 @@ declare module "@tanstack/react-table" {
 }
 
 export const Table = <T extends object>(props: TableProps<T>) => {
-  const { data, columns } = props;
-  const table = useReactTable({
+  const { data, columns, initialSorting, pagination: hasPagination } = props;
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  const options: TableOptions<T> = {
     data,
     columns,
     filterFns: {},
+    initialState: {},
+    state: {},
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(), //client side filtering
     debugTable: false,
     debugHeaders: false,
     debugColumns: false,
-  });
+  };
+
+  if (initialSorting) {
+    options.initialState = { sorting: initialSorting };
+  }
+
+  if (hasPagination) {
+    options.getPaginationRowModel = getPaginationRowModel();
+    options.onPaginationChange = setPagination;
+    options.state = { pagination };
+  }
+
+  const table = useReactTable(options);
 
   return (
     <>
@@ -97,6 +122,71 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           ))}
         </tbody>
       </table>
+      {/* ------------------------------------------------------- */}
+      {/* -------------- Pagination Footer ---------------------- */}
+      {/* ------------------------------------------------------- */}
+      {hasPagination && (
+        <div className="pagination-container">
+          <div className="pagination-controls">
+            <button
+              onClick={() => table.firstPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {"<<"}
+            </button>
+            <button
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {"<"}
+            </button>
+            <button
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              {">"}
+            </button>
+            <button
+              onClick={() => table.lastPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              {">>"}
+            </button>
+            <span className="pagination-controls__pages">
+              Page {table.getState().pagination.pageIndex + 1} of{" "}
+              {table.getPageCount().toLocaleString()}
+            </span>
+            <span>
+              | Go to page:
+              <input
+                type="number"
+                defaultValue={table.getState().pagination.pageIndex + 1}
+                onChange={(e) => {
+                  const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                  table.setPageIndex(page);
+                }}
+              />
+            </span>
+            <select
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => {
+                table.setPageSize(Number(e.target.value));
+              }}
+            >
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            Showing {table.getRowModel().rows.length.toLocaleString()} of{" "}
+            {table.getRowCount().toLocaleString()} Rows
+          </div>
+          {/* <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre> */}
+        </div>
+      )}
     </>
   );
 };
