@@ -1,7 +1,7 @@
 import { HTMLAttributes } from "react";
-import { BuildingInfo } from "../../../types/APIDataTypes";
-import { DetailTable } from "../../DetailTable/DetailTable";
-import { DetailTableRow } from "../../DetailTable/DetailTableRow";
+import { BuildingInfo } from "../../../../types/APIDataTypes";
+import { DetailTable } from "../../../DetailTable/DetailTable";
+import { DetailTableRow } from "../../../DetailTable/DetailTableRow";
 
 interface BuildingHPDComplaintsTable extends HTMLAttributes<HTMLDListElement> {
   data: BuildingInfo;

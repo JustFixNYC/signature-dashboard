@@ -1,7 +1,7 @@
-import { BuildingInfo } from "../../../types/APIDataTypes";
+import { BuildingInfo } from "../../../../types/APIDataTypes";
 import React, { HTMLAttributes } from "react";
-import { DetailTable } from "../../DetailTable/DetailTable";
-import { DetailTableRow } from "../../DetailTable/DetailTableRow";
+import { DetailTable } from "../../../DetailTable/DetailTable";
+import { DetailTableRow } from "../../../DetailTable/DetailTableRow";
 
 interface BuildingSummaryTableProps extends HTMLAttributes<HTMLDListElement> {
   data: BuildingInfo;
