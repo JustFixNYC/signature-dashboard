@@ -95,3 +95,23 @@ export function useGetCollectionChartData(
     error: error,
   };
 }
+
+type BBLSWRResponse = {
+  data: string[];
+  isLoading: boolean;
+  error: Error | undefined;
+};
+
+export function useGetAllBBLs(): BBLSWRResponse {
+  const { data, error, isLoading } = useSWR(`/signature/bbls`, apiFetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+
+  return {
+    data: data?.result,
+    isLoading,
+    error: error,
+  };
+}
