@@ -14,7 +14,7 @@ import { BuildingFinancialTable } from "./Tables/BuildingFinancialTable";
 import { BuildingHPDViolationsTable } from "./Tables/BuildingHPDViolationsTable";
 import { BuildingHPDComplaintsTable } from "./Tables/BuildingHPDComplaints";
 import { BuildingEvictionsTable } from "./Tables/BuildingEvictionsTable";
-import { BuildingHPDLitigationTable } from "./Tables/BuildingHPdLitigationTable";
+import { BuildingHPDLitigationTable } from "./Tables/BuildingHPDLitigationTable";
 import { BuildingHPDProgramsTable } from "./Tables/BuildingHPDProgramsTable";
 import { BuildingPoliticalDistrictsTable } from "./Tables/BuildingPoliticalDistrictsTable";
 import { BuildingDOHMHInspectionsTable } from "./Tables/BuildingDOHMHInspectionsTable";
