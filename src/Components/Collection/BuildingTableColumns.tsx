@@ -1,47 +1,26 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import {
-  INDICATOR_STRINGS,
-  apiKeys,
   formatMoney,
   formatNumber,
   formatPercent,
-} from "../../../util/helpers";
-import { BuildingInfo } from "../../../types/APIDataTypes";
+  getColumnHeader,
+  round,
+  showYesNo,
+} from "../../util/helpers";
+import { BuildingInfo } from "../../types/APIDataTypes";
 import { Link } from "react-router-dom";
 
 const columnHelper = createColumnHelper<BuildingInfo>();
-
-const getColumnHeader = (apiKey: apiKeys) => {
-  const indicator = INDICATOR_STRINGS[apiKey];
-  if (indicator) {
-    return indicator.short_name ? indicator.short_name : indicator.name;
-  } else {
-    return apiKey;
-  }
-};
-
-const round = (value: number) => {
-  if (typeof value !== "number") {
-    return value;
-  }
-  return value.toFixed(2);
-};
-
-const showYesNo = (value: boolean) => {
-  if (value === true) {
-    return "yes";
-  } else if (value === false) {
-    return "no";
-  }
-};
 
 export const columns = [
   columnHelper.accessor("address", {
     header: getColumnHeader("address"),
     cell: (info) => (
-      <Link to={`/buildings?bbl=${info.row.original.bbl}`}>
-        {info.getValue()}
-      </Link>
+      <div className="cell__address">
+        <Link to={`/buildings?bbl=${info.row.original.bbl}`}>
+          {info.getValue()}
+        </Link>
+      </div>
     ),
   }),
   columnHelper.group({

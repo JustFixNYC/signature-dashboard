@@ -180,3 +180,14 @@ export interface ChartData {
   dobviolations_ecb: number;
   dobviolations_total: number;
 }
+
+export interface LandlordInfo {
+  landlord_name: string;
+  landlord_slug: string;
+  lender_name: string;
+  lender_slug: string;
+  buildings: number;
+  units_res: number;
+  hpd_viol_bc_open_per_unit: number;
+  debt_per_unit: number;
+}
