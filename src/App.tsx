@@ -1,15 +1,21 @@
 import { Routes, Route, Outlet, Link } from "react-router-dom";
-import { Portfolio } from "./Components/Portfolio/Portfolio";
-import { Indicators } from "./Components/Indicators/Indicators";
+import { Buildings } from "./Components/Pages/Buildings/Buildings";
 import { useRollbar } from "@rollbar/react";
 import { SWRConfig } from "swr";
 import { NetworkError } from "./api/error-reporting";
-import { MapBox } from "./Components/MapBox/MapBox";
-import { APIDocs } from "./Components/APIDocs/APIDocs";
+import { APIDocs } from "./Components/Pages/APIDocs/APIDocs";
+import { Login } from "./Components/Pages/Login/Login";
+import { PrivateRoutes } from "./auth";
 import "./App.scss";
+import { Landlords } from "./Components/Pages/Landlords/Landlords";
+import { Lenders } from "./Components/Pages/Lenders/Lenders";
+import { Home } from "./Components/Pages/Home/Home";
+import { About } from "./Components/Pages/About/About";
+import { Map } from "./Components/Pages/Map/Map";
 
 function App() {
   const rollbar = useRollbar();
+
   return (
     <SWRConfig
       value={{
@@ -21,11 +27,16 @@ function App() {
     >
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<>home</>} />
-          <Route path="mapbox" element={<MapBox />} />
-          <Route path="portfolio" element={<Portfolio />} />
-          <Route path="indicators" element={<Indicators />} />
-          <Route path="*" element={<>home</>} />
+          <Route element={<PrivateRoutes />}>
+            <Route index element={<Home />} />
+            <Route path="buildings" element={<Buildings />} />
+            <Route path="landlords" element={<Landlords />} />
+            <Route path="lenders" element={<Lenders />} />
+            <Route path="about" element={<About />} />
+            <Route path="map" element={<Map />} />
+            <Route path="*" element={<Home />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
         </Route>
         <Route path="/api_docs" element={<APIDocs />} />
       </Routes>
@@ -35,37 +46,73 @@ function App() {
 
 function Layout() {
   return (
-    <div>
-      <h1>Signature Dashboard</h1>
-      <Link className="api-link" to="/api_docs">
-        API Docs
-      </Link>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/mapbox?bbl=2042900008">
-              Map For Portfolio of BBL 2042900008
-            </Link>
-          </li>
-          <li>
-            <Link to="/portfolio?bbl=2042900008">
-              Table For Portfolio of BBL 2042900008
-            </Link>
-          </li>
-          <li>
-            <Link to="/indicators?bbl=2042900008">
-              Indicators Chart For Portfolio of BBL 2042900008
-            </Link>
-          </li>
-        </ul>
-      </nav>
+    <>
+      <header id="header">Signature Data Dashboard</header>
+      <div id="main">
+        <div id="sidebar">
+          <nav id="nav">
+            <ul id="nav-links">
+              <li>
+                <Link to="/" className="nav-link">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/buildings" className="nav-link">
+                  Buildings
+                </Link>
+              </li>
+              <li>
+                <Link to="/landlords" className="nav-link">
+                  Landlords
+                </Link>
+              </li>
+              <li>
+                <Link to="/lenders" className="nav-link">
+                  Lenders
+                </Link>
+                <ul className="sublinks">
+                  <li>
+                    <Link to="/lenders?lender=cpc" className="nav-link">
+                      CPC
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/lenders?lender=santander" className="nav-link">
+                      Santander
+                    </Link>
+                  </li>
+                </ul>
+              </li>
 
-      <hr />
-      <Outlet />
-    </div>
+              <li>
+                <Link to="/about" className="nav-link">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link to="/map" className="nav-link">
+                  Map
+                </Link>
+              </li>
+              {/* <li>
+                <Link to="/building?bbl=3071980006">
+                  Building Page for 3071980006
+                </Link>
+              </li>
+              <li>
+                <Link to="/collection?collection=ved-parkash">
+                  Collection Page for Ved Parkash
+                </Link>
+              </li> */}
+            </ul>
+          </nav>
+        </div>
+        <div id="content">
+          <Outlet />
+        </div>
+      </div>
+    </>
   );
 }
 

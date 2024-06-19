@@ -1,22 +1,21 @@
 import useSWR from "swr";
-import { SearchResults } from "../types/APIDataTypes";
-import { IndicatorsDataFromAPI } from "../types/IndicatorsTypes";
-import { splitBBL } from "../util/helpers";
+import {
+  BuildingInfo,
+  ChartData,
+  CollectionInfo,
+  LandlordInfo,
+} from "../types/APIDataTypes";
 import { apiFetcher } from "./helpers";
 
-/** ----------------------------------------------------------------------- */
-/** ------------------------ Get Indicator History ------------------------ */
-/** ----------------------------------------------------------------------- */
-
-type IndicatorSWRResponse = {
-  indicators: IndicatorsDataFromAPI[];
+type BuildingInfoSWRResponse = {
+  data: BuildingInfo;
   isLoading: boolean;
   error: Error | undefined;
 };
 
-export function useGetIndicatorHistory(bbl: string): IndicatorSWRResponse {
+export function useGetBuildingInfo(bbl: string): BuildingInfoSWRResponse {
   const { data, error, isLoading } = useSWR(
-    `/api/address/indicatorhistory?bbl=${bbl}`,
+    `/signature/building?bbl=${bbl}`,
     apiFetcher,
     {
       revalidateIfStale: false,
@@ -26,26 +25,23 @@ export function useGetIndicatorHistory(bbl: string): IndicatorSWRResponse {
   );
 
   return {
-    indicators: data?.result,
+    data: data?.result[0],
     isLoading,
     error: error,
   };
 }
 
-/** ----------------------------------------------------------------------- */
-/** --------------------------- Search for BBL ---------------------------- */
-/** ----------------------------------------------------------------------- */
-
-type PortfolioSWRResponse = {
-  data: SearchResults;
+type CollectionInfoSWRResponse = {
+  data: CollectionInfo;
   isLoading: boolean;
   error: Error | undefined;
 };
 
-export function useSearchForBBL(bbl: string): PortfolioSWRResponse {
-  const { block, boro, lot } = splitBBL(bbl);
+export function useGetCollectionInfo(
+  collection: string,
+): CollectionInfoSWRResponse {
   const { data, error, isLoading } = useSWR(
-    `/api/address/wowza?block=${block}&borough=${boro}&lot=${lot}`,
+    `/signature/collection?collection=${collection}`,
     apiFetcher,
     {
       revalidateIfStale: false,
@@ -55,7 +51,94 @@ export function useSearchForBBL(bbl: string): PortfolioSWRResponse {
   );
 
   return {
-    data: data,
+    data: data?.result[0],
+    isLoading,
+    error: error,
+  };
+}
+
+type ChartDataSWRResponse = {
+  data: ChartData[];
+  isLoading: boolean;
+  error: Error | undefined;
+};
+
+export function useGetBuildingChartData(bbl: string): ChartDataSWRResponse {
+  const { data, error, isLoading } = useSWR(
+    `/signature/building/charts?bbl=${bbl}`,
+    apiFetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
+
+  return {
+    data: data?.result,
+    isLoading,
+    error: error,
+  };
+}
+
+export function useGetCollectionChartData(
+  collection: string,
+): ChartDataSWRResponse {
+  const { data, error, isLoading } = useSWR(
+    `/signature/collection/charts?collection=${collection}`,
+    apiFetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
+
+  return {
+    data: data?.result,
+    isLoading,
+    error: error,
+  };
+}
+
+type BBLSWRResponse = {
+  data: string[];
+  isLoading: boolean;
+  error: Error | undefined;
+};
+
+type LandlordInfoSWRResponse = {
+  data: LandlordInfo[];
+  isLoading: boolean;
+  error: Error | undefined;
+};
+
+export function useGetAllBBLs(): BBLSWRResponse {
+  const { data, error, isLoading } = useSWR(`/signature/bbls`, apiFetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+  return {
+    data: data?.result,
+    isLoading,
+    error: error,
+  };
+}
+
+export function useGetAllLandlords(): LandlordInfoSWRResponse {
+  const { data, error, isLoading } = useSWR(
+    `/signature/landlords`,
+    apiFetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
+
+  return {
+    data: data?.result,
     isLoading,
     error: error,
   };
