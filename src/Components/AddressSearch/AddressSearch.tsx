@@ -14,27 +14,27 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({
   onSelection,
   options,
 }) => {
-  const [openMenu, setOpenMenu] = useState(false);
+  // const [openMenu, setOpenMenu] = useState(false);
 
   const handleOnChange = (newValue: OnChangeValue<SelectOption, false>) => {
-    hideMenu();
+    // hideMenu();
     if (onSelection) {
       onSelection(newValue ? newValue.value : null);
     }
   };
 
-  const handleInputChange: (
-    newValue: string,
-    actionMeta: InputActionMeta,
-  ) => void = (_query, { action }) => {
-    if (action === "input-change") {
-      setOpenMenu(true);
-    }
-  };
+  // const handleInputChange: (
+  //   newValue: string,
+  //   actionMeta: InputActionMeta,
+  // ) => void = (_query, { action }) => {
+  //   if (action === "input-change") {
+  //     setOpenMenu(true);
+  //   }
+  // };
 
-  const hideMenu = () => {
-    setOpenMenu(false);
-  };
+  // const hideMenu = () => {
+  //   setOpenMenu(false);
+  // };
 
   return (
     <Select
@@ -42,13 +42,8 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({
       placeholder={"Select address..."}
       noOptionsMessage={() => "No match"}
       onChange={handleOnChange}
-      menuIsOpen={openMenu}
-      onInputChange={handleInputChange}
-      onBlur={hideMenu}
-      components={{
-        IndicatorSeparator: () => null,
-        DropdownIndicator: () => null,
-      }}
+      // onInputChange={handleInputChange}
+      // onBlur={hideMenu}
     />
   );
 };
