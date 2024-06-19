@@ -39,7 +39,7 @@ export const columns = [
   columnHelper.accessor("address", {
     header: getColumnHeader("address"),
     cell: (info) => (
-      <Link to={`/building?bbl=${info.row.original.bbl}`}>
+      <Link to={`/buildings?bbl=${info.row.original.bbl}`}>
         {info.getValue()}
       </Link>
     ),
