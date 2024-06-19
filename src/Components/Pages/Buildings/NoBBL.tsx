@@ -16,7 +16,7 @@ export const NoBBL: React.FC = () => {
   return (
     <>
       <h2>Buildings</h2>
-      Search for a building by address
+      Find a building by entering the address
       <br />
       <br />
       <AddressSearch options={selectOptions} onSelection={onSelection} />

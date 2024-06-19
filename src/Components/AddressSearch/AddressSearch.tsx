@@ -39,6 +39,8 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({
   return (
     <Select
       options={options}
+      placeholder={"Select address..."}
+      noOptionsMessage={() => "No match"}
       onChange={handleOnChange}
       menuIsOpen={openMenu}
       onInputChange={handleInputChange}
