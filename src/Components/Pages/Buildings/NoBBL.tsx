@@ -1,5 +1,5 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetAllBBLs } from "../../../api/hooks";
 // import { BuildingHPDCompEmerg } from "../BuildingHPDCompEmerg/BuildingHPDCompEmerg";
@@ -13,6 +13,8 @@ import selectOptions from "./buildings_options.json";
 
 export const NoBBL: React.FC = () => {
   const navigate = useNavigate();
+  const [selectedBBL, setSelectedBBL] = useState<string>();
+
   const { data, isLoading, error } = useGetAllBBLs();
 
   const onFormSubmit: (
@@ -21,11 +23,24 @@ export const NoBBL: React.FC = () => {
   ) => void = ({ bbl }) => {
     navigate(`/buildings?bbl=${bbl}`);
   };
+  const onSelection = (newValue: SelectOption) => {
+    console.log(newValue);
+    setSelectedBBL(newValue.value);
+  };
+
+  const onSubmit = () => {
+    navigate(`/buildings?bbl=${selectedBBL}`);
+  };
 
   return (
     <>
       <h2>Buildings</h2>
       Search for a building by address
+      <br />
+      <br />
+      <AddressSearch options={selectOptions} onSelection={onSelection} />
+      <br />
+      <Button labelText="Search Building" size="small" onClick={onSubmit} />
 
       <br />
       <br />
