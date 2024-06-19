@@ -1,6 +1,7 @@
 import {
   Column,
   ColumnDef,
+  InitialTableState,
   PaginationState,
   RowData,
   TableOptions,
@@ -13,7 +14,7 @@ import {
 } from "@tanstack/react-table";
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
-import { useState } from "react";
+import { CSSProperties, useRef, useState } from "react";
 import { Icon } from "@justfixnyc/component-library";
 
 interface TableProps<T extends object> {
@@ -21,7 +22,7 @@ interface TableProps<T extends object> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<T, any>[];
   pagination?: boolean;
-  initialSorting?: { id: string; desc: boolean }[];
+  initialState?: InitialTableState;
 }
 
 declare module "@tanstack/react-table" {
@@ -33,18 +34,43 @@ declare module "@tanstack/react-table" {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
+  const isPinned = column.getIsPinned();
+  const isLastLeftPinnedColumn =
+    isPinned === "left" && column.getIsLastColumn("left");
+  const isFirstRightPinnedColumn =
+    isPinned === "right" && column.getIsFirstColumn("right");
+
+  return {
+    boxShadow: isLastLeftPinnedColumn
+      ? "-4px 0 4px -4px gray inset"
+      : isFirstRightPinnedColumn
+        ? "4px 0 4px -4px gray inset"
+        : undefined,
+    left: isPinned === "left" ? `${column.getStart("left")}px` : undefined,
+    right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
+    backgroundColor: isPinned ? "white" : "initial",
+    position: isPinned ? "sticky" : "relative",
+    width: column.getSize(),
+    zIndex: isPinned ? 1 : 0,
+  };
+};
+
 export const Table = <T extends object>(props: TableProps<T>) => {
-  const { data, columns, initialSorting, pagination: hasPagination } = props;
+  const { data, columns, initialState, pagination: hasPagination } = props;
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 50,
   });
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const options: TableOptions<T> = {
     data,
     columns,
     filterFns: {},
-    initialState: {},
+    initialState: { ...initialState },
     state: {},
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -54,10 +80,6 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     debugColumns: false,
   };
 
-  if (initialSorting) {
-    options.initialState = { sorting: initialSorting };
-  }
-
   if (hasPagination) {
     options.getPaginationRowModel = getPaginationRowModel();
     options.onPaginationChange = setPagination;
@@ -65,9 +87,18 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   }
 
   const table = useReactTable(options);
-
+  const calculateContainerWidth = () => {
+    if (containerRef.current) {
+      return `calc(100vw - ${containerRef.current.offsetLeft + 20}px`;
+    }
+    return "calc(100vw)";
+  };
   return (
-    <>
+    <div
+      className="table-container"
+      ref={containerRef}
+      style={{ maxWidth: calculateContainerWidth() }}
+    >
       <table className="collection-building-table">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -77,7 +108,10 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                   <th
                     key={header.column.id}
                     colSpan={header.colSpan}
-                    style={{ minWidth: header.getSize() || undefined }}
+                    style={{
+                      minWidth: header.getSize() || undefined,
+                      ...getCommonPinningStyles(header.column),
+                    }}
                   >
                     {header.isPlaceholder ? null : (
                       <div className="column-header">
@@ -129,7 +163,10 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td
+                  key={cell.id}
+                  style={{ ...getCommonPinningStyles(cell.column) }}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
@@ -202,7 +239,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           {/* <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre> */}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -25,7 +25,10 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
           <Table
             data={data.bldg_data}
             columns={buildingColumns}
-            initialSorting={[{ id: "rs_units", desc: true }]}
+            initialState={{
+              sorting: [{ id: "rs_units", desc: true }],
+              columnPinning: { left: ["address"] },
+            }}
           />
         </>
       )}

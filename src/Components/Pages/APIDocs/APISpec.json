@@ -142,7 +142,7 @@
           },
           "water_charges": {
             "type": "number",
-            "example": 500.00,
+            "example": 500.0,
             "description": "Outstanding water charges due to the city"
           },
           "bip": {
@@ -187,7 +187,7 @@
           },
           "hp_penalies": {
             "type": "number",
-            "example": 2250.00,
+            "example": 2250.0,
             "description": "Total value of civil penalties from HP cases against the landlord with an open judgement."
           },
           "hp_find_harassment": {
@@ -267,7 +267,7 @@
           },
           "hpd_erp_charges": {
             "type": "number",
-            "example": 454.00,
+            "example": 454.0,
             "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months"
           },
           "hpd_erp_charges_per_unit": {
@@ -320,59 +320,59 @@
             "description": "The month of data for all chart values, in YYYY-MM format. Values can be aggregated for quarterly or yearly chart versions."
           },
           "hpdviolations_class_a": {
-              "type": "integer",
-              "example": 1,
-              "description": "Number of class A HPD violations in the given month."
+            "type": "integer",
+            "example": 1,
+            "description": "Number of class A HPD violations in the given month."
           },
           "hpdviolations_class_b": {
-              "type": "integer",
-              "example": 1,
-              "description": "Number of class B HPD violations in the given month."
+            "type": "integer",
+            "example": 1,
+            "description": "Number of class B HPD violations in the given month."
           },
           "hpdviolations_class_c": {
-              "type": "integer",
-              "example": 1,
-              "description": "Number of class C HPD violations in the given month."
+            "type": "integer",
+            "example": 1,
+            "description": "Number of class C HPD violations in the given month."
           },
           "hpdviolations_class_i": {
-              "type": "integer",
-              "example": 1,
-              "description": "Number of class I HPD violations in the given month."
+            "type": "integer",
+            "example": 1,
+            "description": "Number of class I HPD violations in the given month."
           },
           "hpdviolations_total": {
-              "type": "integer",
-              "example": 1,
-              "description": "Total nNumber of HPD violations in the given month."
+            "type": "integer",
+            "example": 1,
+            "description": "Total nNumber of HPD violations in the given month."
           },
           "hpdcomplaints_emergency": {
-              "type": "integer",
-              "example": 1,
-              "description": "Number of emergency HPD complaints in the given month."
+            "type": "integer",
+            "example": 1,
+            "description": "Number of emergency HPD complaints in the given month."
           },
           "hpdcomplaints_nonemergency": {
-              "type": "integer",
-              "example": 1,
-              "description": "Number of class non-emergency HPD complaints in the given month."
+            "type": "integer",
+            "example": 1,
+            "description": "Number of class non-emergency HPD complaints in the given month."
           },
           "hpdcomplaints_total": {
-              "type": "integer",
-              "example": 1,
-              "description": "Total number of HPD complaints in the given month."
+            "type": "integer",
+            "example": 1,
+            "description": "Total number of HPD complaints in the given month."
           },
           "dobviolations_regular": {
-              "type": "integer",
-              "example": 1,
-              "description": "Number of regular DOB violations in the given month."
+            "type": "integer",
+            "example": 1,
+            "description": "Number of regular DOB violations in the given month."
           },
           "dobviolations_ecb": {
-              "type": "integer",
-              "example": 1,
-              "description": "Number of ECB type DOB violations in the given month."
+            "type": "integer",
+            "example": 1,
+            "description": "Number of ECB type DOB violations in the given month."
           },
           "dobviolations_total": {
-              "type": "integer",
-              "example": 1,
-              "description": "Total number of DOB violations in the given month."
+            "type": "integer",
+            "example": 1,
+            "description": "Total number of DOB violations in the given month."
           }
         }
       },
@@ -470,17 +470,17 @@
           },
           "hpd_erp_charges_per_unit": {
             "type": "number",
-            "example": 24.20,
+            "example": 24.2,
             "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months per unit in the collection"
           },
           "dob_ecb_viol_open_per_unit": {
             "type": "number",
-            "example": 24.20,
+            "example": 24.2,
             "description": "Number of active DOB/ECB violations per unit in the collection (since 2010)"
           },
           "water_charges": {
             "type": "number",
-            "example": 5500.00,
+            "example": 5500.0,
             "description": "Total outstanding water charges due to the city for all buildings in the collection"
           },
           "debt_total": {

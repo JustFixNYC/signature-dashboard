@@ -1,16 +1,19 @@
 @import "../../colors.scss";
+.table-container {
+  border: 1px solid lightgray;
+  overflow-x: scroll;
+  width: 100%;
+  position: relative;
+}
 
 table.collection-building-table,
 table.collection-building-table td,
 table.collection-building-table th {
+  background-color: $WHITE;
   border: 1px solid;
   border-collapse: collapse;
   text-align: center;
   padding: 2px 4px;
-}
-
-table.collection-building-table {
-  background-color: $WHITE;
 }
 
 table.collection-building-table tbody tr {

@@ -76,7 +76,7 @@ export const AllLandlords: React.FC = () => {
           data={data}
           columns={columns}
           pagination
-          initialSorting={[{ id: "units_res", desc: true }]}
+          initialState={{ sorting: [{ id: "units_res", desc: true }] }}
         />
       )}
     </>
