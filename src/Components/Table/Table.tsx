@@ -37,7 +37,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   const { data, columns, initialSorting, pagination: hasPagination } = props;
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 10,
+    pageSize: 50,
   });
 
   const options: TableOptions<T> = {
@@ -92,31 +92,21 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                           <div className="column-header__label_sort">
                             {flexRender(
                               header.column.columnDef.header,
-                              header.getContext(),
+                              header.getContext()
                             )}
                             {header.column.getCanSort() && (
                               <span className="column-header__sort-icons">
-                                {header.column.getIsSorted() === "asc" ? (
+                                {header.column.getIsSorted() === "asc" && (
                                   <Icon
                                     icon="arrowUp"
                                     className="column-header__sort-icon"
                                   />
-                                ) : header.column.getIsSorted() === "desc" ? (
+                                )}
+                                {header.column.getIsSorted() === "desc" && (
                                   <Icon
                                     icon="arrowDown"
                                     className="column-header__sort-icon"
                                   />
-                                ) : (
-                                  <>
-                                    <Icon
-                                      icon="arrowUp"
-                                      className="column-header__sort-icon"
-                                    />
-                                    <Icon
-                                      icon="arrowDown"
-                                      className="column-header__sort-icon"
-                                    />
-                                  </>
                                 )}
                               </span>
                             )}
