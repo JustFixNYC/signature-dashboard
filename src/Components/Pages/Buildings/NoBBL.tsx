@@ -8,7 +8,7 @@ import "./style.scss";
 import GeoAddressSearch, {
   SearchAddress,
 } from "../../AddressSearch/GeoAddressSearch";
-import { AddressSearch, SelectOption } from "../../AddressSearch/AddressSearch";
+import { AddressSearch } from "../../AddressSearch/AddressSearch";
 import selectOptions from "./buildings_options.json";
 
 export const NoBBL: React.FC = () => {
@@ -19,13 +19,12 @@ export const NoBBL: React.FC = () => {
 
   const onFormSubmit: (
     searchAddress: SearchAddress,
-    error: unknown,
+    error: unknown
   ) => void = ({ bbl }) => {
     navigate(`/buildings?bbl=${bbl}`);
   };
-  const onSelection = (newValue: SelectOption) => {
-    console.log(newValue);
-    setSelectedBBL(newValue.value);
+  const onSelection = (newValue: string | null) => {
+    setSelectedBBL(newValue ?? "");
   };
 
   const onSubmit = () => {
@@ -44,7 +43,8 @@ export const NoBBL: React.FC = () => {
       <br />
       <br />
       <br />
-      Search for a building by address (using the city's api and filtering results)
+      Search for a building by address (using the city's api and filtering
+      results)
       <br />
       <br />
       {isLoading && <div>loading...</div>}

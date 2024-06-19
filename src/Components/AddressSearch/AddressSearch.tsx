@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Select, {
-  ActionMeta,
   InputActionMeta,
   OnChangeValue,
   Props,
@@ -12,22 +11,21 @@ export type SelectOption = {
 };
 interface AddressSearchProps extends Props {
   options: SelectOption[];
-  onSelection: (newValue: SelectOption) => void;
+  onSelection: (newValue: string | null) => void;
 }
 
 export const AddressSearch: React.FC<AddressSearchProps> = ({
-  onChange,
+  onSelection,
   options,
 }) => {
   const [openMenu, setOpenMenu] = useState(false);
 
   const handleOnChange = (
     newValue: OnChangeValue<SelectOption, false>,
-    actionMeta: ActionMeta<SelectOption>,
   ) => {
     hideMenu();
-    if (onChange) {
-      onChange(newValue, actionMeta);
+    if (onSelection) {
+      onSelection(newValue ? newValue.value: null);
     }
   };
 
