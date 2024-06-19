@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet, Link } from "react-router-dom";
+import { Routes, Route, Outlet, NavLink } from "react-router-dom";
 import { Buildings } from "./Components/Pages/Buildings/Buildings";
 import { useRollbar } from "@rollbar/react";
 import { SWRConfig } from "swr";
@@ -53,57 +53,90 @@ function Layout() {
           <nav id="nav">
             <ul id="nav-links">
               <li>
-                <Link to="/" className="nav-link">
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link nav-link-active" : "nav-link"
+                  }
+                >
                   Home
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/buildings" className="nav-link">
+                <NavLink
+                  to="/buildings"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link nav-link-active" : "nav-link"
+                  }
+                >
                   Buildings
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/landlords" className="nav-link">
+                <NavLink
+                  to="/landlords"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link nav-link-active" : "nav-link"
+                  }
+                >
                   Landlords
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/lenders" className="nav-link">
+                <NavLink
+                  to="/lenders"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link nav-link-active" : "nav-link"
+                  }
+                >
                   Lenders
-                </Link>
+                </NavLink>
                 <ul className="sublinks">
                   <li>
-                    <Link to="/lenders?lender=cpc" className="nav-link">
+                    <NavLink to="/lenders?lender=cpc" className="nav-link">
                       CPC
-                    </Link>
+                    </NavLink>
                   </li>
                   <li>
-                    <Link to="/lenders?lender=santander" className="nav-link">
+                    <NavLink
+                      to="/lenders?lender=santander"
+                      className="nav-link"
+                    >
                       Santander
-                    </Link>
+                    </NavLink>
                   </li>
                 </ul>
               </li>
 
               <li>
-                <Link to="/about" className="nav-link">
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link nav-link-active" : "nav-link"
+                  }
+                >
                   About
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/map" className="nav-link">
+                <NavLink
+                  to="/map"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link nav-link-active" : "nav-link"
+                  }
+                >
                   Map
-                </Link>
+                </NavLink>
               </li>
               {/* <li>
-                <Link to="/building?bbl=3071980006">
+                <NavLink to="/building?bbl=3071980006">
                   Building Page for 3071980006
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/collection?collection=ved-parkash">
+                <NavLink to="/collection?collection=ved-parkash">
                   Collection Page for Ved Parkash
-                </Link>
+                </NavLink>
               </li> */}
             </ul>
           </nav>
