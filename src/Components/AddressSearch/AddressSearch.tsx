@@ -1,9 +1,5 @@
 import { useState } from "react";
-import Select, {
-  InputActionMeta,
-  OnChangeValue,
-  Props,
-} from "react-select";
+import Select, { InputActionMeta, OnChangeValue, Props } from "react-select";
 
 export type SelectOption = {
   value: string;
@@ -20,12 +16,10 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({
 }) => {
   const [openMenu, setOpenMenu] = useState(false);
 
-  const handleOnChange = (
-    newValue: OnChangeValue<SelectOption, false>,
-  ) => {
+  const handleOnChange = (newValue: OnChangeValue<SelectOption, false>) => {
     hideMenu();
     if (onSelection) {
-      onSelection(newValue ? newValue.value: null);
+      onSelection(newValue ? newValue.value : null);
     }
   };
 

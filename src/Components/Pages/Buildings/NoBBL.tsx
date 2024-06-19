@@ -13,7 +13,6 @@ export const NoBBL: React.FC = () => {
     }
   };
 
-
   return (
     <>
       <h2>Buildings</h2>
