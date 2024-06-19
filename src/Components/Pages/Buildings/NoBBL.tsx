@@ -41,7 +41,6 @@ export const NoBBL: React.FC = () => {
       <AddressSearch options={selectOptions} onSelection={onSelection} />
       <br />
       <Button labelText="Search Building" size="small" onClick={onSubmit} />
-
       <br />
       <br />
       <br />

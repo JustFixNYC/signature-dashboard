@@ -23,7 +23,7 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({
 
   const handleOnChange = (
     newValue: OnChangeValue<SelectOption, false>,
-    actionMeta: ActionMeta<SelectOption>
+    actionMeta: ActionMeta<SelectOption>,
   ) => {
     hideMenu();
     if (onChange) {
@@ -33,7 +33,7 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({
 
   const handleInputChange: (
     newValue: string,
-    actionMeta: InputActionMeta
+    actionMeta: InputActionMeta,
   ) => void = (_query, { action }) => {
     if (action === "input-change") {
       setOpenMenu(true);
