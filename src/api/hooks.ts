@@ -101,11 +101,30 @@ export function useGetCollectionChartData(
   };
 }
 
+type BBLSWRResponse = {
+  data: string[];
+  isLoading: boolean;
+  error: Error | undefined;
+};
+
 type LandlordInfoSWRResponse = {
   data: LandlordInfo[];
   isLoading: boolean;
   error: Error | undefined;
 };
+
+export function useGetAllBBLs(): BBLSWRResponse {
+  const { data, error, isLoading } = useSWR(`/signature/bbls`, apiFetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+  return {
+    data: data?.result,
+    isLoading,
+    error: error,
+  };
+}
 
 export function useGetAllLandlords(): LandlordInfoSWRResponse {
   const { data, error, isLoading } = useSWR(

@@ -1,0 +1,75 @@
+@import "../../colors.scss";
+
+$dark: #454d5d;
+$primary-color: $dark;
+$primary-color-dark: darken($primary-color, 3%);
+$primary-color-light: lighten($primary-color, 3%);
+$secondary-color: lighten($primary-color, 40%);
+$secondary-color-dark: darken($secondary-color, 3%);
+$secondary-color-light: lighten($secondary-color, 3%);
+.AddressSearch form {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media screen and (max-width: 480px) {
+  .AddressSearch form {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.AddressSearch form .form-group {
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+.AddressSearch form .form-group .btn {
+  margin-top: 32px;
+}
+
+.AddressSearch {
+  .geosuggest {
+    margin-bottom: 15px;
+    // max-width: 600px;
+    // margin: 0 auto;
+
+    .geosuggest__suggests-wrapper {
+      background-color: #fff;
+
+      .geosuggest__suggests {
+        &:not(.geosuggest__suggests--hidden) {
+          border: 1px solid $GREY_400;
+          border-top: none;
+        }
+      }
+
+      ul {
+        margin: 0;
+
+        .geosuggest__item {
+          margin-top: 0;
+          padding: 0.47rem 0.63rem;
+          list-style-type: none;
+
+          &:hover {
+            background-color: $secondary-color;
+            cursor: pointer;
+          }
+
+          &.geosuggest__item--active {
+            background-color: $primary-color;
+            color: #fff;
+
+            &:hover {
+              background-color: $primary-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
