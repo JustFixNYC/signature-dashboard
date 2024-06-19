@@ -2,44 +2,658 @@
   "openapi": "3.0.0",
   "info": {
     "title": "JustFix API",
-    "description": "Api for accessing housing data maintained by JustFix."
+    "description": "Api for accessing housing data maintained by JustFix.",
+    "version": "v1"
   },
   "servers": [
     {
-      "url": "https://wow-django.herokuapp.com/api"
+      "url": "https://demo-api.justfix.org/api"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Building": {
+        "properties": {
+          "bbl": {
+            "type": "string",
+            "example": "3071980006",
+            "description": "Borough-Block-Lot of property, 10-digit zero-padded"
+          },
+          "address": {
+            "type": "string",
+            "example": "410 AVENUE X",
+            "description": "Street address (house number and street name) of property."
+          },
+          "borough": {
+            "type": "string",
+            "example": "Brooklyn",
+            "description": "Borough name"
+          },
+          "zip": {
+            "type": "string",
+            "example": "11223",
+            "description": "Zip Code of the property"
+          },
+          "landlord": {
+            "type": "string",
+            "example": "A&E Real Estate Holdings (Doug Eisenberg)",
+            "description": "Landlord name"
+          },
+          "landlord_slug": {
+            "type": "string",
+            "example": "a-e-real-estate-holdings-doug-eisenberg",
+            "description": "Landlord name in slug format. Same as 'collection_slug' for collection page"
+          },
+          "lender": {
+            "type": "string",
+            "example": "Santander",
+            "description": "Name of lender for Signature debt"
+          },
+          "lender_slug": {
+            "type": "string",
+            "example": "santander",
+            "description": "Lender name in slug format. Same as 'collection_slug' for collection page"
+          },
+          "link_hpd": {
+            "type": "string",
+            "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
+            "description": "Link to HPD Online for the building. Direct to building page if property has only building, to BBL search results if there are multiple buildings in the BBL"
+          },
+          "link_acris": {
+            "type": "string",
+            "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
+            "description": "Link to ACRIS for the building."
+          },
+          "link_dob": {
+            "type": "string",
+            "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
+            "description": "Link to DOB's website for the building."
+          },
+          "link_dap": {
+            "type": "string",
+            "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
+            "description": "Link to ANHD's DAP Portal for the building."
+          },
+          "units_nonres": {
+            "type": "boolean",
+            "example": false,
+            "description": "Presence of any non-residential units"
+          },
+          "units_res": {
+            "type": "integer",
+            "example": 45,
+            "description": "Number of residential units"
+          },
+          "rs_units": {
+            "type": "integer",
+            "example": 45,
+            "description": "Number of registered rent stabilized units. Most recent non-zero value 2019-2022."
+          },
+          "year_built": {
+            "type": "integer",
+            "example": 1957,
+            "description": "Year the property was built"
+          },
+          "assem_dist": {
+            "type": "string",
+            "example": "45",
+            "description": "State Assembly district"
+          },
+          "stsen_dist": {
+            "type": "string",
+            "example": "23",
+            "description": "State Senate district"
+          },
+          "cong_dist": {
+            "type": "string",
+            "example": "8",
+            "description": "Congressional district"
+          },
+          "coun_dist": {
+            "type": "string",
+            "example": "47",
+            "description": "City Council district"
+          },
+          "origination_date": {
+            "type": "string",
+            "example": "2022-11-07",
+            "description": "Origination date of Signature loan"
+          },
+          "last_sale_date": {
+            "type": "date",
+            "example": "2022-11-06",
+            "description": "Date of the most recent sale of the property, from deed record"
+          },
+          "debt_total": {
+            "type": "number",
+            "example": 5325000,
+            "description": "Property's total Signature debt (includes portion of multi-property loans)"
+          },
+          "debt_per_unit": {
+            "type": "number",
+            "example": 118333.333333333,
+            "description": "Property's Signature debt per unit"
+          },
+          "water_charges": {
+            "type": "number",
+            "example": 500.00,
+            "description": "Outstanding water charges due to the city"
+          },
+          "bip": {
+            "type": "integer",
+            "example": 19,
+            "description": "UNHP's Building Indicator Project (BIP) score. Combines unpaid charges to the city and HPD violations."
+          },
+          "in_aep": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether the building is currently in HPD's Alternative Enforcement Program"
+          },
+          "in_conh": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether the building is currently in HPD's Certificate of No Harassment pilot program"
+          },
+          "in_ucp": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether the building is currently in HPD's Underlying Conditions Program"
+          },
+          "evictions_executed": {
+            "type": "integer",
+            "example": 1,
+            "description": "Evictions executed by marshals in last 12 months"
+          },
+          "evictions_filed": {
+            "type": "integer",
+            "example": 3,
+            "description": "Eviction cases filed in housing court in last 12 months"
+          },
+          "hp_total": {
+            "type": "integer",
+            "example": 3,
+            "description": "Total number of HP cases against the landlord, since Aug 2006."
+          },
+          "hp_open_judgements": {
+            "type": "integer",
+            "example": 1,
+            "description": "Number of HP cases against the landlord with an open judgement."
+          },
+          "hp_penalies": {
+            "type": "number",
+            "example": 2250.00,
+            "description": "Total value of civil penalties from HP cases against the landlord with an open judgement."
+          },
+          "hp_find_harassment": {
+            "type": "integer",
+            "example": 1,
+            "description": "Number of HP cases against the landlord with a finding of harassment."
+          },
+          "hp_active": {
+            "type": "integer",
+            "example": 2,
+            "description": "Number of active HP cases against the landlord."
+          },
+          "hpd_comp_emerg_total": {
+            "type": "integer",
+            "example": 111,
+            "description": "Number of Emergency HPD complaints in last 12 months"
+          },
+          "hpd_comp_apts": {
+            "type": "string",
+            "example": "1D, 1G, 2A, 2B, 2C, 2D, 2F, 2G, 3B, 3C, 3D, 3E, 3F, 3G, 4C, 4D, 4E, 4J, 5C, 5G, 6A, 6C, 6D, 6E, 6F, 6G, 7A, 7B, 7C, 7D, 7G",
+            "description": "List of apartments that have submitted HPD complaints in last 12 months"
+          },
+          "hpd_comp_apts_pct": {
+            "type": "integer",
+            "example": 68,
+            "description": "Share of units in the property that have made HPD complaints in last 12 months"
+          },
+          "hpd_comp_heat": {
+            "type": "integer",
+            "example": 1,
+            "description": "Number of HPD complaints related to lack of heat or hot water in last 12 months"
+          },
+          "hpd_comp_water": {
+            "type": "integer",
+            "example": 1,
+            "description": "Number of HPD complaints related to water leaks or mold in last 12 months"
+          },
+          "hpd_comp_pests": {
+            "type": "integer",
+            "example": 1,
+            "description": "Number of HPD complaints related to pests in last 12 months"
+          },
+          "hpd_viol_bc_total": {
+            "type": "integer",
+            "example": 141,
+            "description": "Total number of B & C class HPD violations issued in last 12 months"
+          },
+          "hpd_viol_bc_open": {
+            "type": "integer",
+            "example": 141,
+            "description": "Number of open B & C class HPD violations issued in last 5 years"
+          },
+          "hpd_viol_bc_open_per_unit": {
+            "type": "number",
+            "example": 1.5,
+            "description": "Number of open B & C class HPD violations issued in last 5 years, per unit"
+          },
+          "hpd_viol_heat": {
+            "type": "integer",
+            "example": 8,
+            "description": "Number of HPD violations related to heat/hot water issued in the last 12 months"
+          },
+          "hpd_viol_water": {
+            "type": "integer",
+            "example": 4,
+            "description": "Number of HPD violations related to leaks/mold issued in the last 12 months"
+          },
+          "hpd_viol_pests": {
+            "type": "integer",
+            "example": 3,
+            "description": "Number of HPD violations related to pests issued in the last 12 months"
+          },
+          "hpd_erp_orders": {
+            "type": "integer",
+            "example": 4,
+            "description": "Number of HPD Emergency Repair Program work orders in the last 12 months"
+          },
+          "hpd_erp_charges": {
+            "type": "number",
+            "example": 454.00,
+            "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months"
+          },
+          "hpd_erp_charges_per_unit": {
+            "type": "number",
+            "example": 44.23,
+            "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months, per unit"
+          },
+          "last_rodent_date": {
+            "type": "string",
+            "example": "2024-01-06",
+            "description": "The date of the most recent DOHMH rodent inspection"
+          },
+          "last_rodent_result": {
+            "type": "string",
+            "example": "Failed",
+            "description": "Result of the most recent DOHMH rodent inspection ('Passed' or 'Failed')."
+          },
+          "dob_jobs": {
+            "type": "integer",
+            "example": 3,
+            "description": "Number of DOB Job Application Filings for the building in the last 12 months."
+          },
+          "dob_ecb_viol_total": {
+            "type": "integer",
+            "example": 3,
+            "description": "Number of DOB/ECB violations in the last 12 months."
+          },
+          "dob_ecb_viol_open": {
+            "type": "integer",
+            "example": 3,
+            "description": "Number of active DOB/ECB violations (since 2010)."
+          },
+          "lat": {
+            "type": "number",
+            "example": 40.5905737,
+            "description": "Latitude (lot centroid)"
+          },
+          "lng": {
+            "type": "number",
+            "example": -73.9676815,
+            "description": "Longitude (lot centroid)"
+          }
+        }
+      },
+      "Charts": {
+        "properties": {
+          "month": {
+            "type": "string",
+            "example": "2024-01",
+            "description": "The month of data for all chart values, in YYYY-MM format. Values can be aggregated for quarterly or yearly chart versions."
+          },
+          "hpdviolations_class_a": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of class A HPD violations in the given month."
+          },
+          "hpdviolations_class_b": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of class B HPD violations in the given month."
+          },
+          "hpdviolations_class_c": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of class C HPD violations in the given month."
+          },
+          "hpdviolations_class_i": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of class I HPD violations in the given month."
+          },
+          "hpdviolations_total": {
+              "type": "integer",
+              "example": 1,
+              "description": "Total nNumber of HPD violations in the given month."
+          },
+          "hpdcomplaints_emergency": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of emergency HPD complaints in the given month."
+          },
+          "hpdcomplaints_nonemergency": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of class non-emergency HPD complaints in the given month."
+          },
+          "hpdcomplaints_total": {
+              "type": "integer",
+              "example": 1,
+              "description": "Total number of HPD complaints in the given month."
+          },
+          "dobviolations_regular": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of regular DOB violations in the given month."
+          },
+          "dobviolations_ecb": {
+              "type": "integer",
+              "example": 1,
+              "description": "Number of ECB type DOB violations in the given month."
+          },
+          "dobviolations_total": {
+              "type": "integer",
+              "example": 1,
+              "description": "Total number of DOB violations in the given month."
+          }
+        }
+      },
+      "Collection": {
+        "properties": {
+          "collection_name": {
+            "type": "string",
+            "example": "Ved Parkash",
+            "description": "Collection display name"
+          },
+          "collection_slug": {
+            "type": "string",
+            "example": "ved-parkash",
+            "description": "Collection name slug, used for API and URL"
+          },
+          "collection_type": {
+            "type": "string",
+            "example": "landlord",
+            "description": "Collection type (landlord or lender)"
+          },
+          "buildings": {
+            "type": "integer",
+            "example": 26,
+            "description": "Number of properties (BBLs) in the collection"
+          },
+          "units_res": {
+            "type": "integer",
+            "example": 1800,
+            "description": "Total number of residential units in the collection"
+          },
+          "rs_units": {
+            "type": "integer",
+            "example": 45,
+            "description": "Total number of registered rent stabilized units in the collection. Most recent non-zero value 2019-2022."
+          },
+          "evictions_filed": {
+            "type": "integer",
+            "example": 216,
+            "description": "Total number of eviction cases filed in the last 12 months in the collection."
+          },
+          "hp_active": {
+            "type": "integer",
+            "example": 6,
+            "description": "Total number of active HP cases against the landlord in the collection."
+          },
+          "bip_500_pct": {
+            "type": "float",
+            "example": 44,
+            "description": "Percent of buildings in the collection with a BIP score of 500 or greater."
+          },
+          "hpd_viol_bc_open": {
+            "type": "integer",
+            "example": 15291,
+            "description": "Total number of open B & C class HPD violations in the collection, issued in the last 5 years"
+          },
+          "hpd_viol_bc_open_per_unit": {
+            "type": "number",
+            "example": 8.495,
+            "description": "The average number of open B & C class HPD violations per unit in the collection, issued in the last 5 years"
+          },
+          "hpd_viol_bc_total": {
+            "type": "integer",
+            "example": 15291,
+            "description": "Total number of B & C class HPD violations issued in the last 12 months in the collection"
+          },
+          "hpd_viol_bc_total_per_unit": {
+            "type": "number",
+            "example": 8.495,
+            "description": "The average number of B & C class HPD violations per unit issued in the last 12 months in the collection"
+          },
+          "hpd_comp_emerg_total": {
+            "type": "integer",
+            "example": 19800,
+            "description": "Total number of Emergency HPD complaints in the last 12 months in the collection"
+          },
+          "hpd_comp_emerg_total_per_unit": {
+            "type": "number",
+            "example": 11,
+            "description": "The average number of Emergency HPD complaints per unit in the last 12 months in the collection"
+          },
+          "hpd_erp_orders": {
+            "type": "integer",
+            "example": 134,
+            "description": "Total number of HPD Emergency Repair Program work orders in the last 12 months in the collection"
+          },
+          "hpd_erp_orders_per_unit": {
+            "type": "number",
+            "example": 454.75,
+            "description": "Total number of HPD Emergency Repair Program work orders in the last 12 months per unit in the collection"
+          },
+          "hpd_erp_charges": {
+            "type": "number",
+            "example": 1544.23,
+            "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months in the collection"
+          },
+          "hpd_erp_charges_per_unit": {
+            "type": "number",
+            "example": 24.20,
+            "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months per unit in the collection"
+          },
+          "dob_ecb_viol_open_per_unit": {
+            "type": "number",
+            "example": 24.20,
+            "description": "Number of active DOB/ECB violations per unit in the collection (since 2010)"
+          },
+          "water_charges": {
+            "type": "number",
+            "example": 5500.00,
+            "description": "Total outstanding water charges due to the city for all buildings in the collection"
+          },
+          "debt_total": {
+            "type": "number",
+            "example": 140888559.23999998,
+            "description": "The total Signature debt of the collection"
+          },
+          "debt_per_building": {
+            "type": "number",
+            "example": 5418790.739999999,
+            "description": "The average Signature debt per building in the collection"
+          },
+          "debt_per_unit": {
+            "type": "number",
+            "example": 78271.42179999998,
+            "description": "The average Signature debt per unit in the collection"
+          },
+          "bldg_data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Building"
+            },
+            "description": "Array of buildings in the collection"
+          }
+        }
+      },
+      "Landlord": {
+        "properties": {
+          "landlord_name": {
+            "type": "string",
+            "example": "Ved Parkash",
+            "description": "Landlord display name"
+          },
+          "landlord_slug": {
+            "type": "string",
+            "example": "ved-parkash",
+            "description": "Landlord name slug, used for API and URL"
+          },
+          "lender_name": {
+            "type": "string",
+            "example": "CPC",
+            "description": "Lender display name"
+          },
+          "lender_slug": {
+            "type": "string",
+            "example": "cpc",
+            "description": "Lender name slug, used for API and URL"
+          },
+          "buildings": {
+            "type": "integer",
+            "example": 26,
+            "description": "Number of properties (BBLs) in the collection"
+          },
+          "units_res": {
+            "type": "integer",
+            "example": 1800,
+            "description": "Total number of residential units in the collection"
+          },
+          "hpd_viol_bc_open_per_unit": {
+            "type": "number",
+            "example": 8.495,
+            "description": "The average number of open B & C class HPD violations per unit in the collection, since 2010"
+          },
+          "debt_per_unit": {
+            "type": "number",
+            "example": 78271.42179999998,
+            "description": "The average Signature debt per unit in the collection"
+          }
+        }
+      },
+      "Portfolio": {
+        "properties": {
+          "collection_slug": {
+            "type": "string",
+            "example": "cpc",
+            "description": "Collection name slug for the portfolio, used for API and URL. (all, cpc, santander)"
+          },
+          "buildings": {
+            "type": "integer",
+            "example": 140,
+            "description": "Total number of buildings in the collection"
+          },
+          "landlords": {
+            "type": "integer",
+            "example": 57,
+            "description": "Total number of landlords in the collection"
+          }
+        }
+      },
+      "MapBuilding": {
+        "properties": {
+          "bbl": {
+            "type": "string",
+            "example": "3071980006",
+            "description": "Borough-Block-Lot of property, 10-digit zero-padded"
+          },
+          "address": {
+            "type": "string",
+            "example": "410 AVENUE X",
+            "description": "Street address (house number and street name) of property."
+          },
+          "borough": {
+            "type": "string",
+            "example": "Brooklyn",
+            "description": "Borough name"
+          },
+          "zip": {
+            "type": "string",
+            "example": "11223",
+            "description": "Zip Code of the property"
+          },
+          "landlord": {
+            "type": "string",
+            "example": "Ved Parkash",
+            "description": "Landlord display name"
+          },
+          "landlord_slug": {
+            "type": "string",
+            "example": "ved-parkash",
+            "description": "Landlord name slug, used for API and URL"
+          },
+          "lender_slug": {
+            "type": "string",
+            "example": "cpc",
+            "description": "Lender name slug, used for API and URL"
+          },
+          "lat": {
+            "type": "number",
+            "example": 40.5905737,
+            "description": "Latitude (lot centroid)"
+          },
+          "lng": {
+            "type": "number",
+            "example": -73.9676815,
+            "description": "Longitude (lot centroid)"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
     }
   ],
   "paths": {
-    "/address/dap-portfoliosize": {
+    "/signature/building": {
       "get": {
-        "summary": "Returns the size of the portfolio associated with the BBL or null if the BBL is not registered with HPD.",
+        "summary": "Returns data for the dashboard's Building page for the requested property (BBL).",
         "parameters": [
           {
             "name": "bbl",
             "in": "query",
-            "description": "BBL of the portfolio requested",
+            "description": "BBL of the property, in 10-digit zero-padded format",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "example": "3009580018"
+            "example": "3071980006"
           }
         ],
         "responses": {
           "200": {
-            "description": "Size of the portfolio associated with the BBL. Returns null if the BBL is not registered with HPD.",
+            "description": "Data for the dashboard's Building page associated with the BBL. Returns empty list if the BBL is not part of the Signature portfolio.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "result": {
-                      "type": "object",
-                      "properties": {
-                        "portfolio_size": {
-                          "type": "integer",
-                          "example": 20
-                        }
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Building"
                       }
                     }
                   }
@@ -49,6 +663,239 @@
           },
           "400": {
             "description": "Bad Request. BBL should be a 10-digit padded BBL."
+          }
+        }
+      }
+    },
+    "/signature/building/charts": {
+      "get": {
+        "summary": "Returns data for charts on the dashboard's Building page for the requested property (BBL).",
+        "parameters": [
+          {
+            "name": "bbl",
+            "in": "query",
+            "description": "BBL of the property, in 10-digit zero-padded format",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "3071980006"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Monthly longitudinal data (2010-present) for the charts on the dashboard's Building page associated with the BBL. Returns empty list if the BBL is not part of the Signature portfolio. The first portion of the indicator names indicate the chart it belongs too, and some charts will include multiple indicators, for example as stacked bars.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Charts"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. BBL should be a 10-digit padded BBL."
+          }
+        }
+      }
+    },
+    "/signature/collection": {
+      "get": {
+        "summary": "Returns data for the dashboard's Collection page for the requested collection (landlord, lender, all).",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "description": "Name for the collection in slug format. (<landlord-name>, cpc, santander, all)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ved-parkash"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data for the dashboard's Collection page for the requested collection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Collection"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Collection should be 'all' or landlord/lender name in slug format."
+          }
+        }
+      }
+    },
+    "/signature/collection/charts": {
+      "get": {
+        "summary": "Returns data for charts on the dashboard's Collection page for the requested collection (landlord, lender, all).",
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "description": "Name for the collection in slug format. (<landlord-name>, cpc, santander, all)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ved-parkash"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Monthly longitudinal data (2010-present) for the charts on the dashboard's Collection page for the requested collection. Returns empty list if the collection is not part of the Signature portfolio. The first portion of the indicator names indicate the chart it belongs too, and some charts will include multiple indicators, for example as stacked bars.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Charts"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Collection should be 'all' or landlord/lender name in slug format."
+          }
+        }
+      }
+    },
+    "/signature/landlords": {
+      "get": {
+        "summary": "Returns data for table of all landlords on the dashboard's Landlord search page.",
+        "responses": {
+          "200": {
+            "description": "Data for every landlord in the signature portfolio, with select aggregate stats, to populate the exploration table on the landlord search page.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Landlord"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          }
+        }
+      }
+    },
+    "/signature/portfolios": {
+      "get": {
+        "summary": "Returns data for signature/lender portfolios to use on home page cards.",
+        "responses": {
+          "200": {
+            "description": "Data for entire Signature portfolio and each lender for cards on home and lender pages.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Portfolio"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          }
+        }
+      }
+    },
+    "/signature/bbls": {
+      "get": {
+        "summary": "Returns a list of all BBLs in the Signature portfolio, to limit results from GeoSearch Autocomplete API for address search function",
+        "responses": {
+          "200": {
+            "description": "List of all BBLs in the Signature portfolio",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "3071980006"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          }
+        }
+      }
+    },
+    "/signature/map": {
+      "get": {
+        "summary": "Returns a data for all properties in the Signature portfolio to populate the dedicated map page of the dashboard.",
+        "responses": {
+          "200": {
+            "description": "List properties with address, lender/landlord links, and lat/long coordinates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MapBuilding"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
           }
         }
       }
