@@ -55,11 +55,12 @@ export const columns = [
           inputWidth: "4rem",
         },
       }),
-      columnHelper.accessor("units_nonres", {
-        header: getColumnHeader("units_nonres"),
-        cell: (info) => showYesNo(info.getValue()),
+      columnHelper.accessor("units_res", {
+        header: getColumnHeader("units_res"),
+        cell: (info) => formatNumber(info.getValue()),
+        filterFn: "inNumberRange",
         meta: {
-          filterVariant: "boolean",
+          filterVariant: "range",
         },
       }),
       columnHelper.accessor("rs_units", {
@@ -68,6 +69,13 @@ export const columns = [
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
+        },
+      }),
+      columnHelper.accessor("units_nonres", {
+        header: getColumnHeader("units_nonres"),
+        cell: (info) => showYesNo(info.getValue()),
+        meta: {
+          filterVariant: "boolean",
         },
       }),
       columnHelper.accessor("year_built", {
@@ -81,7 +89,7 @@ export const columns = [
   }),
   columnHelper.group({
     id: "bip",
-    header: () => "BIP Score",
+    header: () => "Building Indicator Project (BIP)",
     columns: [
       columnHelper.accessor("bip", {
         header: getColumnHeader("bip"),
@@ -162,9 +170,14 @@ export const columns = [
           filterVariant: "range",
         },
       }),
-      // columnHelper.accessor("hpd_erp_orders_per_unit", {
-      //   header: getColumnHeader("hpd_erp_orders_per_unit"),
-      // }),
+      columnHelper.accessor("hpd_erp_orders_per_unit", {
+        header: getColumnHeader("hpd_erp_orders_per_unit"),
+        cell: (info) => round(info.getValue()),
+        filterFn: "inNumberRange",
+        meta: {
+          filterVariant: "range",
+        },
+      }),
     ],
   }),
   columnHelper.group({
@@ -180,6 +193,7 @@ export const columns = [
       }),
       columnHelper.accessor("hpd_comp_emerg_total_per_unit", {
         header: getColumnHeader("hpd_comp_emerg_total_per_unit"),
+        cell: (info) => round(info.getValue()),
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -304,9 +318,9 @@ export const columns = [
     id: "dob_permits",
     header: () => "DOB Permits",
     columns: [
-      columnHelper.accessor("placeholder_dob_permit_applications", {
-        header: getColumnHeader("placeholder_dob_permit_applications"),
-      }),
+      // columnHelper.accessor("placeholder_dob_permit_applications", {
+      //   header: getColumnHeader("placeholder_dob_permit_applications"),
+      // }),
       columnHelper.accessor("dob_jobs", {
         header: getColumnHeader("dob_jobs"),
         filterFn: "inNumberRange",
@@ -349,8 +363,13 @@ export const columns = [
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("placeholder_outstanding_water", {
-        header: getColumnHeader("placeholder_outstanding_water"),
+      columnHelper.accessor("water_charges", {
+        header: getColumnHeader("water_charges"),
+        cell: (info) => formatMoney(info.getValue()),
+        filterFn: "inNumberRange",
+        meta: {
+          filterVariant: "range",
+        },
       }),
     ],
   }),

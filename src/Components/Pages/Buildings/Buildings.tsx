@@ -1,6 +1,6 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   useGetBuildingChartData,
   useGetBuildingInfo,
@@ -13,6 +13,16 @@ import "./style.scss";
 import { BuildingFinancialTable } from "./Tables/BuildingFinancialTable";
 import { BuildingHPDViolationsTable } from "./Tables/BuildingHPDViolationsTable";
 import { BuildingHPDComplaintsTable } from "./Tables/BuildingHPDComplaints";
+import { BuildingEvictionsTable } from "./Tables/BuildingEvictionsTable";
+import { BuildingHPDLitigationTable } from "./Tables/BuildingHPDLitigationTable";
+import { BuildingHPDProgramsTable } from "./Tables/BuildingHPDProgramsTable";
+import { BuildingPoliticalDistrictsTable } from "./Tables/BuildingPoliticalDistrictsTable";
+import { BuildingDOHMHInspectionsTable } from "./Tables/BuildingDOHMHInspectionsTable";
+import { BuildingDOBPermitsViolationsTable } from "./Tables/BuildingDOBPermitsViolationsTable";
+import { BuildingFinesFeesChargesTable } from "./Tables/BuildingFinesFeesChargesTable";
+import { BuildingHPDRepairsTable } from "./Tables/BuildingHPDRepairsTable";
+import { BuildingInformationTable } from "./Tables/BuildingInformationTable";
+import { BuildingBIPTable } from "./Tables/BuildingBIPTable";
 
 export const Buildings: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -47,8 +57,18 @@ export const Buildings: React.FC = () => {
               <div>BBL: {buildingInfo.bbl}</div>
               <div>Borough: {buildingInfo.borough}</div>
               <div>Zip: {buildingInfo.zip}</div>
-              <div>Landlord: {buildingInfo.landlord}</div>
-              <div>Lender: {buildingInfo.lender}</div>
+              <div>
+                Landlord:{" "}
+                <Link to={`/landlords?landlord=${buildingInfo.landlord_slug}`}>
+                  {buildingInfo.landlord}
+                </Link>
+              </div>
+              <div>
+                Lender:{" "}
+                <Link to={`/lenders?lender=${buildingInfo.lender_slug}`}>
+                  {buildingInfo.lender}
+                </Link>
+              </div>
 
               <h3>Summary Table</h3>
               <BuildingSummaryTable
@@ -56,6 +76,24 @@ export const Buildings: React.FC = () => {
                 className="building-detail-table"
               />
             </>
+          )}
+
+          <h3>Building Info</h3>
+          {buildingInfoIsLoading && <div>loading...</div>}
+          {buildingInfo && (
+            <BuildingInformationTable
+              data={buildingInfo}
+              className="building-detail-table"
+            />
+          )}
+
+          <h3>Building Indicators Project (BIP)</h3>
+          {buildingInfoIsLoading && <div>loading...</div>}
+          {buildingInfo && (
+            <BuildingBIPTable
+              data={buildingInfo}
+              className="building-detail-table"
+            />
           )}
 
           <h3>Financials</h3>
@@ -80,6 +118,78 @@ export const Buildings: React.FC = () => {
           {buildingInfoIsLoading && <div>loading...</div>}
           {buildingInfo && (
             <BuildingHPDComplaintsTable
+              data={buildingInfo}
+              className="building-detail-table"
+            />
+          )}
+
+          <h3>HPD Emergency Repairs</h3>
+          {buildingInfoIsLoading && <div>loading...</div>}
+          {buildingInfo && (
+            <BuildingHPDRepairsTable
+              data={buildingInfo}
+              className="building-detail-table"
+            />
+          )}
+
+          <h3>Department of Health Inspections</h3>
+          {buildingInfoIsLoading && <div>loading...</div>}
+          {buildingInfo && (
+            <BuildingDOHMHInspectionsTable
+              data={buildingInfo}
+              className="building-detail-table"
+            />
+          )}
+
+          <h3>Evictions</h3>
+          {buildingInfoIsLoading && <div>loading...</div>}
+          {buildingInfo && (
+            <BuildingEvictionsTable
+              data={buildingInfo}
+              className="building-detail-table"
+            />
+          )}
+
+          <h3>HPD Litigation Against Landlords</h3>
+          {buildingInfoIsLoading && <div>loading...</div>}
+          {buildingInfo && (
+            <BuildingHPDLitigationTable
+              data={buildingInfo}
+              className="building-detail-table"
+            />
+          )}
+
+          <h3>DOB Permits & Violations</h3>
+          {buildingInfoIsLoading && <div>loading...</div>}
+          {buildingInfo && (
+            <BuildingDOBPermitsViolationsTable
+              data={buildingInfo}
+              className="building-detail-table"
+            />
+          )}
+
+          <h3>HPD Programs</h3>
+          {buildingInfoIsLoading && <div>loading...</div>}
+          {buildingInfo && (
+            <BuildingHPDProgramsTable
+              data={buildingInfo}
+              className="building-detail-table"
+            />
+          )}
+
+          <h3>Fines, Fees & Charges</h3>
+          {buildingInfoIsLoading && <div>loading...</div>}
+          {buildingInfo && (
+            <BuildingFinesFeesChargesTable
+              data={buildingInfo}
+              className="building-detail-table"
+            />
+          )}
+
+          <h3>Political Districts</h3>
+          {buildingInfoIsLoading && <div>loading...</div>}
+          {buildingInfo && (
+            <BuildingPoliticalDistrictsTable
               data={buildingInfo}
               className="building-detail-table"
             />

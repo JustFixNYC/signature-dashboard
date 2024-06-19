@@ -125,6 +125,7 @@ export type BuildingInfo = {
   | "hpd_viol_water"
   | "hpd_viol_pests"
   | "hpd_erp_orders"
+  | "hpd_erp_orders_per_unit"
   | "hpd_erp_charges"
   | "hpd_erp_charges_per_unit"
   | "last_rodent_date"
