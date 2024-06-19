@@ -1,5 +1,10 @@
 import useSWR from "swr";
-import { BuildingInfo, ChartData, CollectionInfo } from "../types/APIDataTypes";
+import {
+  BuildingInfo,
+  ChartData,
+  CollectionInfo,
+  LandlordInfo,
+} from "../types/APIDataTypes";
 import { apiFetcher } from "./helpers";
 
 type BuildingInfoSWRResponse = {
@@ -102,12 +107,35 @@ type BBLSWRResponse = {
   error: Error | undefined;
 };
 
+type LandlordInfoSWRResponse = {
+  data: LandlordInfo[];
+  isLoading: boolean;
+  error: Error | undefined;
+};
+
 export function useGetAllBBLs(): BBLSWRResponse {
   const { data, error, isLoading } = useSWR(`/signature/bbls`, apiFetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
+  return {
+    data: data?.result,
+    isLoading,
+    error: error,
+  };
+}
+
+export function useGetAllLandlords(): LandlordInfoSWRResponse {
+  const { data, error, isLoading } = useSWR(
+    `/signature/landlords`,
+    apiFetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
 
   return {
     data: data?.result,

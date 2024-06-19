@@ -1,4 +1,4 @@
-@import "../../../colors.scss";
+@import "../../colors.scss";
 
 table.collection-building-table,
 table.collection-building-table td,
@@ -34,8 +34,20 @@ table.collection-building-table tbody tr {
     justify-content: center;
   }
 
+  .column-header__label_sort {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .column-header__sort-area {
     cursor: pointer;
+
+    .column-header__sort-icons {
+      display: flex;
+      margin-left: 5px;
+      font-size: 0.7rem; // 11.2px
+    }
   }
 }
 
@@ -56,4 +68,14 @@ table.collection-building-table tbody tr {
   width: 12rem;
   border-radius: 4px;
   border-width: 1px;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .pagination-controls__pages {
+    display: flex;
+  }
 }

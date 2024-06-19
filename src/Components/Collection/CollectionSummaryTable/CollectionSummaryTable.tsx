@@ -9,12 +9,13 @@ type CollectionSummaryTableProps = {
 };
 
 const keys: Partial<keyof Omit<CollectionInfo, "bldg_data">>[] = [
-  "evictions_filed",
+  "units_res",
+  "buildings",
   "rs_units",
   "bip_500_pct",
   "debt_total",
   "debt_per_unit",
-  "dob_ecb_viol_open",
+  "evictions_filed",
   "hp_active",
   "hpd_comp_emerg_total",
   "hpd_comp_emerg_total_per_unit",
@@ -22,7 +23,7 @@ const keys: Partial<keyof Omit<CollectionInfo, "bldg_data">>[] = [
   "hpd_erp_orders",
   "hpd_viol_bc_open_per_unit",
   "hpd_viol_bc_total_per_unit",
-  "units_res",
+  "dob_ecb_viol_open",
 ];
 
 export const CollectionSummaryTable: React.FC<CollectionSummaryTableProps> = ({

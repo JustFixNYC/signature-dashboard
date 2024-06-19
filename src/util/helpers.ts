@@ -2,6 +2,7 @@ import {
   BuildingInfo,
   CollectionInfo,
   Indicators,
+  LandlordInfo,
 } from "../types/APIDataTypes";
 
 export function splitBBL(bbl: string) {
@@ -42,7 +43,8 @@ export const formatNumber = (value: number) => {
 export type apiKeys =
   | keyof BuildingInfo
   | keyof CollectionInfo
-  | keyof Indicators;
+  | keyof Indicators
+  | keyof LandlordInfo;
 
 type indicatorObj = {
   name: string;
@@ -62,64 +64,76 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hpd_viol_bc_open: {
     name: "Open HPD violations (B & C)",
+    short_name: "Open B & C violations",
     description:
       "Number of HPD violations of class B (hazardous) and C (immediately hazardous) issued in the last 5 years that have not yet been corrected. Read more on HPD Violations.",
   },
   hpd_viol_bc_open_per_unit: {
-    name: "Open HPD violations (B & C), per unit",
+    name: "Open HPD violations (B & C) per unit",
+    short_name: "Open B & C violations per unit",
     description:
       "Number of HPD violations of class B (hazardous) and C (immediately hazardous) issued in the last 5 years that have not yet been corrected, divided by the number of units. Read more on HPD Violations.",
     format: "round",
   },
   hpd_viol_bc_total: {
     name: "HPD violations (B & C), last 12 mo.",
+    short_name: "B & C violations, last 12 mo.",
     description:
       "Number of HPD violations of class B (hazardous) and C (immediately hazardous) issued in the last 12 months. Read more on HPD Violations.",
   },
   hpd_viol_bc_total_per_unit: {
-    name: "HPD violations (B & C), last 12 mo., per unit",
+    name: "HPD violations (B & C) per unit, last 12 mo.",
+    short_name: "B & C violations per unit, last 12 mo.",
     description:
       "Number of HPD violations of class B (hazardous) and C (immediately hazardous) issued in the last 12 months, divided by the number of units. Read more on HPD Violations.",
     format: "round",
   },
   hpd_viol_heat: {
     name: "HPD violations for heat/hot water, last 12 mo.",
+    short_name: "Violations for heat/hot water, last 12 mo.",
     description:
       "Number of HPD violations related to lack of heat or hot water issued in the last 12 months. Read more on HPD Violations.",
   },
   hpd_viol_pests: {
     name: "HPD violations for pests, last 12 mo.",
+    short_name: "Violations for pests, last 12 mo.",
     description:
       "Number of HPD violations related to pests issued in the last 12 months. Read more on HPD Violations.",
   },
   hpd_viol_water: {
     name: "HPD violations for leak/mold, last 12 mo.",
+    short_name: "Violations for leak/mold, last 12 mo.",
     description:
       "Number of HPD violations related to leaks or mold issued in the last 12 months. Read more on HPD Violations.",
   },
   hpd_comp_emerg_total: {
     name: "HPD complaints (emergency), last 12 mo.",
+    short_name: "Emergency complaints, last 12 mo.",
     description:
       "Number of HPD complaints of emergency class received in the last 12 months. Read more on HPD Complaints.",
   },
   hpd_comp_emerg_total_per_unit: {
-    name: "HPD complaints (emergency), last 12 mo., per unit",
+    name: "HPD complaints (emergency) per unit, last 12 mo.",
+    short_name: "Emergency complaints per unit, last 12 mo.",
     description:
       "Number of HPD complaints of emergency class received in the last 12 months, divided by the number of units. Read more on HPD Complaints.",
     format: "round",
   },
   hpd_comp_heat: {
     name: "HPD complaints for heat/hot water, last 12 mo.",
+    short_name: "Complaints for heat/hot water, last 12 mo.",
     description:
       "Number of HPD complaints related to lack of heat or hot water received in the last 12 months. Read more on HPD Complaints.",
   },
   hpd_comp_pests: {
     name: "HPD complaints for pests, last 12 mo.",
+    short_name: "Complaints for pests, last 12 mo.",
     description:
       "Number of HPD complaints related to lack of pests received in the last 12 months. Read more on HPD Complaints.",
   },
   hpd_comp_water: {
     name: "HPD complaints for leak/mold, last 12 mo.",
+    short_name: "Complaints for leak/mold, last 12 mo.",
     description:
       "Number of HPD complaints related to leaks or mold received in the last 12 months. Read more on HPD Complaints.",
   },
@@ -130,11 +144,12 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hpd_comp_apts_pct: {
     name: "Percent of units with HPD complaints, last 12 mo.",
+    short_name: "Percent of units with complaints, last 12 mo ",
     description:
       "The percent of all apartments in the building that have submitted any HPD complaints in the last 12 months. Read more on HPD Complaints.",
   },
   debt_per_unit: {
-    name: "Signature debt, per unit",
+    name: "Signature debt per unit",
     description:
       "The total debt originated divided by the number of residential units. Debt per unit can be used as a proxy to understand how a property was valued by the lender and investor, and (depending on the geography, type of building, and year of mortgage origination) whether the mortgage is likely to be speculative in nature.",
     format: "money",
@@ -227,11 +242,12 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "lng",
   },
   buildings: {
-    name: "buildings",
+    name: "Buildings",
     description: "The number of properties in the portfolio.",
   },
   bip: {
     name: "Building Indicator Project (BIP) score",
+    short_name: "BIP score",
     description:
       "The BIP score takes into account violation and overdue charge data to come up with an indicator of likely physical or financial distress: a building with a score of 500 or more is likely to be in physical or financial distress, while a building with a score of 800 or more is highly likely to be in physical or financial distress. (Note that the BIP score is a conservative indicator, and scores below 500 do not necessarily indicate that is a building is financially and physically stable.)",
   },
@@ -285,11 +301,12 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   dob_jobs: {
     name: "DOB job applications, last 12 mo.",
+    short_name: "Job applications, last 12 mo.",
     description:
       "Initial applications a landlord submits to DOB for a planned construction job. If approved, landlords can apply for individual permits for each piece of work. Read more on DOB Permits",
   },
   hpd_erp_charges_per_unit: {
-    name: "HPD emergency repair charges, last 12 mo., per unit",
+    name: "HPD emergency repair charges per unit, last 12 mo.",
     description:
       "Total cost charged to the landlord for work orders completed as part of HPD programs (Emergency Repairs, Alternative Enforcement, etc.) in the last 12 months, divided by the total number of units. Read more on HPD Emergency Repairs",
     format: "money",
@@ -306,7 +323,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       "Number of work orders as part of HPD programs (Emergency Repairs, Alternative Enforcement, etc.) in the last 12 months. Read more on HPD Emergency Repairs",
   },
   hpd_erp_orders_per_unit: {
-    name: "HPD emergency repair work orders, last 12 mo., per unit",
+    name: "HPD emergency repair work orders per unit, last 12 mo.",
     description:
       "Number of work orders as part of HPD programs (Emergency Repairs, Alternative Enforcement, etc.) in the last 12 months, divided by the number of units. Read more on HPD Emergency Repairs",
     format: "round",
@@ -325,50 +342,34 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Active Vacate Order",
     description: "(include links to each agency page to learn more)",
   },
+  landlord_name: {
+    name: "Landlord",
+  },
+  lender_name: {
+    name: "Lender",
+  },
 };
 
-export const DISPLAY_NAMES: { [key: string]: string } = {
-  bbl: "BBL",
-  hpd_viol_bc_open: "Open B & C HPD Violations (since 2010)",
-  hpd_viol_bc_open_per_unit: "Open B & C HPD Violations, per unit (since 2010)",
-  hpd_viol_bc_total: "Total B & C HPD Violations in last 12 months",
-  hpd_viol_bc_total_per_unit:
-    "Total B & C HPD Violations in last 12 months, per unit",
-  hpd_comp_emerg_total: "Total Emergency HPD Complaints in last 12 months",
-  hpd_comp_emerg_total_per_unit:
-    "Total Emergency HPD Complaints in last 12 months, per unit",
-  hpd_comp_heat: "Total HPD Complaints for Heat/Hot Water",
-  hpd_comp_water: "Total HPD Complaints for Leak/Mold",
-  hpd_comp_pests: "Total HPD Complaints for Pests",
-  hpd_comp_apts: "List of Apt Numbers that have complaints in last 12 months",
-  hpd_comp_apts_pct:
-    "Percent of Units that have HPD Complaints in last 12 months",
-  debt_per_unit: "Debt Per Unit (Signature)",
-  debt_total: "Total Outstanding Debt (Signature)",
-  evictions_executed: "Total Executed Evictions since [date]",
-  in_aep: "In AEP (yes/no)",
-  in_conh: "In CONH (yes/no)",
-  in_ucp: "HPD Underlying Conditions Program (yes/no)",
-  origination_date: "Loan Origination Date (Signature)",
-  units_res: "Residential Units",
-  year_built: "Year Built",
-  units_nonres: "Non-Residential Units (yes/no)",
-  landlord: "Landlord",
-  lender: "Lender",
-  zip: "Zip code",
-  address: "Address",
-  borough: "Borough",
-  assem_dist: "State Assembly District",
-  cong_dist: "Congressional District",
-  coun_dist: "City Council District",
-  stsen_dist: "State Senate District",
-  last_sale_date: "Date of Last Sale",
-  water_charges: "Outstanding Charges for Water/Sewer",
-  placeholder__hpd_emerg: "Number of HPD Emergency Repairs since [date]",
-  placeholder__hpd_erp: "HPD ERP Charges per Unit",
-  placeholder__total_evictions: "Total Eviction Filings since [date]",
-  placeholder__dob_open_violations: "Open DOB Violations",
-  placeholder__bip_score: "BIP score (violations + charges)",
-  placeholder__rent_stab_units: "Rent Stabilized Units",
-  placeholder__outstanding_hpd_charges: "Total Outstanding HPD Charges",
+export const getColumnHeader = (apiKey: apiKeys) => {
+  const indicator = INDICATOR_STRINGS[apiKey];
+  if (indicator) {
+    return indicator.short_name ? indicator.short_name : indicator.name;
+  } else {
+    return apiKey;
+  }
+};
+
+export const round = (value: number) => {
+  if (typeof value !== "number") {
+    return value;
+  }
+  return value.toFixed(2);
+};
+
+export const showYesNo = (value: boolean) => {
+  if (value === true) {
+    return "yes";
+  } else if (value === false) {
+    return "no";
+  }
 };

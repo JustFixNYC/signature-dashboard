@@ -125,6 +125,7 @@ export type BuildingInfo = {
   | "hpd_viol_water"
   | "hpd_viol_pests"
   | "hpd_erp_orders"
+  | "hpd_erp_orders_per_unit"
   | "hpd_erp_charges"
   | "hpd_erp_charges_per_unit"
   | "last_rodent_date"
@@ -178,4 +179,15 @@ export interface ChartData {
   dobviolations_regular: number;
   dobviolations_ecb: number;
   dobviolations_total: number;
+}
+
+export interface LandlordInfo {
+  landlord_name: string;
+  landlord_slug: string;
+  lender_name: string;
+  lender_slug: string;
+  buildings: number;
+  units_res: number;
+  hpd_viol_bc_open_per_unit: number;
+  debt_per_unit: number;
 }
