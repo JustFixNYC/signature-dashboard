@@ -35,7 +35,7 @@ export const NoBBL: React.FC = () => {
   return (
     <>
       <h2>Buildings</h2>
-      Search for a building by address
+      Search for a building by address (Pre-filtered local list)
       <br />
       <br />
       <AddressSearch options={selectOptions} onSelection={onSelection} />
@@ -44,7 +44,7 @@ export const NoBBL: React.FC = () => {
       <br />
       <br />
       <br />
-      Search for a building by address
+      Search for a building by address (using the city's api and filtering results)
       <br />
       <br />
       {isLoading && <div>loading...</div>}
