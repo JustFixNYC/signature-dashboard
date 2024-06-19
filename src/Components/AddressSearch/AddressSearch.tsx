@@ -1,5 +1,4 @@
-import { useState } from "react";
-import Select, { InputActionMeta, OnChangeValue, Props } from "react-select";
+import Select, { OnChangeValue, Props } from "react-select";
 
 export type SelectOption = {
   value: string;
