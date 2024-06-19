@@ -19,7 +19,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
         <>
-          <h3>Summary Table</h3>
+          <h3>Key Indicators</h3>
           <CollectionSummaryTable data={data} />
           <h3>Building Table</h3>
           <Table

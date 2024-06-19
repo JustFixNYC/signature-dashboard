@@ -68,14 +68,20 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
               {buildingInfo.lender}
             </Link>
           </div>
-
-          <h3>Summary Table</h3>
-          <BuildingSummaryTable
-            data={buildingInfo}
-            className="building-detail-table"
-          />
         </>
       )}
+
+      <h2>Summary</h2>
+
+      <h3>Key Indicators</h3>
+      {buildingInfo && (
+        <BuildingSummaryTable
+          data={buildingInfo}
+          className="building-detail-table"
+        />
+      )}
+
+      <h2>Detail Tables</h2>
       <h3>Building Info</h3>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
@@ -193,6 +199,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
+      <h2>Trend Charts</h2>
       <h3>HPD Violations</h3>
 
       {chartIsLoading && <div>loading...</div>}
