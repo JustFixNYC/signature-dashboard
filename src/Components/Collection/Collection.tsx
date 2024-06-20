@@ -19,7 +19,9 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
         <>
-          <h3 className="landlord-name">{data.collection_name}</h3>
+          {data.collection_type === "landlord" && (
+            <h3 className="landlord-name">{data.collection_name}</h3>
+          )}
           <h2>Key Indicators</h2>
           <CollectionSummaryTable data={data} />
           <h2>Building Table</h2>
