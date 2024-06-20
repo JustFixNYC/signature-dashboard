@@ -8,6 +8,8 @@ interface BuildingSummaryTableProps extends HTMLAttributes<HTMLDListElement> {
 }
 
 const keys: Partial<keyof BuildingInfo>[] = [
+  "units_res",
+  "rs_units",
   "bip",
   "hpd_viol_bc_open",
   "hpd_viol_bc_open_per_unit",

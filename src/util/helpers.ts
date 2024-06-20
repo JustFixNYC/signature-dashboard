@@ -50,7 +50,7 @@ type indicatorObj = {
   name: string;
   short_name?: string;
   description?: string;
-  format?: "money" | "round" | "percent";
+  format?: "money" | "round" | "percent" | "boolean";
 };
 
 export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
@@ -174,16 +174,19 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Alternative Enforcement Program",
     description:
       "The Alternative Enforcement Program (AEP) is an HPD program for buildings many violations. The goal is to improve conditions with more frequent inspections to monitor correction of violations, and issue Orders to Correct if the landlord fails to act. The program also allows HPD to make repairs and replace building systems if necessary. Read more on AEP.",
+    format: "boolean",
   },
   in_conh: {
     name: "Certificate of No Harassment (CONH) pilot program",
     description:
       "A local law that applies to some residential buildings requires the landlord to apply for and receive a Certification of No Harassment (CONH) before applying to the Department of Buildings (DOB) for a permit to change the use or occupancy of a building or to demolish a building or any part thereof. HPD selected a set of buildings that are subject to other enforcement programs or have serious with existing conditions to be included in a pilot program for CONH. REad more on CONH",
+    format: "boolean",
   },
   in_ucp: {
     name: "Underlying Conditions Program",
     description:
       "The Underlying Conditions Program allows HPD to issue an administrative order to landlords to correct underlying conditions that have caused, or are causing, a violation. HPD selects approximately 50-100 buildings for participation in the program each year based on the number of apartments affected and the number and severity of the violations. Read more on the Underlying Conditions Program",
+    format: "boolean",
   },
   origination_date: {
     name: "Signature loan origination date",
@@ -200,6 +203,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Non-Residential Units",
     description:
       "Presence of any non-residential units. May include one or more types of units (offices, retail stores, etc.)",
+    format: "boolean",
   },
   landlord: {
     name: "Landlord",

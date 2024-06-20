@@ -6,6 +6,7 @@ import {
   formatMoney,
   formatNumber,
   formatPercent,
+  showYesNo,
 } from "../../util/helpers";
 
 type DetailTableRowProps = {
@@ -39,6 +40,10 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
 
   if (indicator?.format === "percent" && typeof value === "number") {
     displayValue = formatPercent(value);
+  }
+
+  if (indicator?.format === "boolean" && typeof value === "boolean") {
+    displayValue = showYesNo(value) as string;
   }
 
   if (typeof indicator?.format === "undefined" && typeof value === "number") {
