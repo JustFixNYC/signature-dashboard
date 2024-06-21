@@ -17,7 +17,6 @@ export const BuildingInformationTable: React.FC<BuildingInformationTable> = ({
       <DetailTableRow apiKey={"units_res"} value={data["units_res"]} />
       <DetailTableRow apiKey={"units_nonres"} value={data["units_nonres"]} />
       <DetailTableRow apiKey={"year_built"} value={data["year_built"]} />
-      <DetailTableRow apiKey={"bip"} value={data["bip"]} />
     </DetailTable>
   );
 };
