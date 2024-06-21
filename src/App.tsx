@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet, NavLink } from "react-router-dom";
+import { Routes, Route, Outlet, NavLink, Link } from "react-router-dom";
 import { Buildings } from "./Components/Pages/Buildings/Buildings";
 import { useRollbar } from "@rollbar/react";
 import { SWRConfig } from "swr";
@@ -47,7 +47,9 @@ function App() {
 function Layout() {
   return (
     <>
-      <header id="header">Signature Data Dashboard</header>
+      <header id="header">
+        <Link to="/">Signature Portfolio Dashboard</Link>
+      </header>
       <div id="main">
         <div id="sidebar">
           <nav id="nav">

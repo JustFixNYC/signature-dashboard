@@ -9,7 +9,8 @@ html {
 
 body {
   font-family: "Degular";
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 1.2rem;
   letter-spacing: 0.54px;
   background-color: rgba($OFF_WHITE_100, 0.5);
   margin: 0;
@@ -27,6 +28,16 @@ body {
   display: flex;
   align-items: center;
   text-wrap: nowrap;
+
+  a {
+    text-decoration: none;
+
+    &:visited,
+    &:active,
+    &:hover {
+      color: $OFF_WHITE_100;
+    }
+  }
 }
 
 #root {

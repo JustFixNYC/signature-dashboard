@@ -14,6 +14,16 @@ export const Lenders: React.FC = () => {
       {!lender && (
         <>
           <h2>Lenders</h2>
+          <p>
+            <JFCLLinkInternal href="lenders?lender=cpc">
+              CPC Portfolio
+            </JFCLLinkInternal>
+          </p>
+          <p>
+            <JFCLLinkInternal href="lenders?lender=santander">
+              Santander Portfolio
+            </JFCLLinkInternal>
+          </p>
           <h3>About lender portfolios</h3>
           <div style={{ width: "600px" }}>
             <p>
@@ -43,16 +53,6 @@ export const Lenders: React.FC = () => {
               </li>
             </ul>
           </div>
-          <p>
-            <JFCLLinkInternal href="lenders?lender=cpc">
-              CPC Portfolio
-            </JFCLLinkInternal>
-          </p>
-          <p>
-            <JFCLLinkInternal href="lenders?lender=santander">
-              Santander
-            </JFCLLinkInternal>
-          </p>
         </>
       )}
       {lender === "cpc" && <h2>CPC Portfolio</h2>}
