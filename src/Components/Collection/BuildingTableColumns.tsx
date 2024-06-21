@@ -49,7 +49,7 @@ export const columns = [
       columnHelper.accessor("landlord", {
         header: getColumnHeader("landlord"),
         cell: (info) => (
-          <div className="cell__address">
+          <div className="cell__landlord">
             <Link to={`/landlords?landlord=${info.row.original.landlord_slug}`}>
               {info.getValue()}
             </Link>
