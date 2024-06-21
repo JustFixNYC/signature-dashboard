@@ -28,7 +28,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
 
           <h2>Building Table</h2>
           <p>
-            {data.bldg_data.length} buildings in {data.collection_name}
+            {data.bldg_data.length} buildings owned by {data.collection_name}
           </p>
           <Table
             data={data.bldg_data}
