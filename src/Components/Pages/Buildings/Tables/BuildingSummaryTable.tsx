@@ -16,6 +16,7 @@ const keys: Partial<keyof BuildingInfo>[] = [
   "hpd_viol_bc_total",
   "hpd_erp_orders",
   "hpd_comp_emerg_total",
+  "hpd_comp_apts_pct",
   "hp_total",
   "hp_active",
   "evictions_filed",

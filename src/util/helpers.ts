@@ -147,6 +147,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     short_name: "Percent of units with complaints, last 12 mo ",
     description:
       "The percent of all apartments in the building that have submitted any HPD complaints in the last 12 months. Read more on HPD Complaints.",
+    format: "percent",
   },
   debt_per_unit: {
     name: "Signature debt per unit",
