@@ -28,8 +28,9 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
           <Table
             data={data.bldg_data}
             columns={buildingColumns}
+            pagination={data.collection_type !== "landlord"}
             initialState={{
-              sorting: [{ id: "rs_units", desc: true }],
+              sorting: [{ id: "units_res", desc: true }],
               columnPinning: { left: ["address"] },
             }}
           />
