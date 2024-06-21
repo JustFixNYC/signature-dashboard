@@ -17,11 +17,15 @@ import DebouncedInput from "../DebouncedInput";
 import { CSSProperties, useRef, useState } from "react";
 import { Icon } from "@justfixnyc/component-library";
 
+const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
+type PageSizeOptions = typeof pageSizeOptions[number];
+
 interface TableProps<T extends object> {
   data: T[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<T, any>[];
   pagination?: boolean;
+  pageSize?: PageSizeOptions;
   initialState?: InitialTableState;
 }
 
@@ -58,10 +62,10 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
 };
 
 export const Table = <T extends object>(props: TableProps<T>) => {
-  const { data, columns, initialState, pagination: hasPagination } = props;
+  const { data, columns, initialState, pagination: hasPagination, pageSize = 50 } = props;
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 50,
+    pageSize: pageSize,
   });
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -225,7 +229,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                 table.setPageSize(Number(e.target.value));
               }}
             >
-              {[10, 20, 30, 40, 50].map((pageSize) => (
+              {pageSizeOptions.map((pageSize) => (
                 <option key={pageSize} value={pageSize}>
                   Show {pageSize}
                 </option>
