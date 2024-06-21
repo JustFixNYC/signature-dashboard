@@ -62,7 +62,13 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
 };
 
 export const Table = <T extends object>(props: TableProps<T>) => {
-  const { data, columns, initialState, pagination: hasPagination, pageSize = 50 } = props;
+  const {
+    data,
+    columns,
+    initialState,
+    pagination: hasPagination,
+    pageSize = 50,
+  } = props;
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: pageSize,
