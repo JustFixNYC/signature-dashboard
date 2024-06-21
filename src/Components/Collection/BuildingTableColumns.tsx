@@ -51,6 +51,13 @@ export const columns = [
     columns: [
       columnHelper.accessor("landlord", {
         header: getColumnHeader("landlord"),
+        cell: (info) => (
+          <div className="cell__landlord">
+            <Link to={`/landlords?landlord=${info.row.original.landlord_slug}`}>
+              {info.getValue()}
+            </Link>
+          </div>
+        ),
         filterFn: "includesString",
       }),
       columnHelper.accessor("lender", {
