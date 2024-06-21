@@ -18,7 +18,7 @@ import { CSSProperties, useRef, useState } from "react";
 import { Icon } from "@justfixnyc/component-library";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
-type PageSizeOptions = typeof pageSizeOptions[number];
+type PageSizeOptions = (typeof pageSizeOptions)[number];
 
 interface TableProps<T extends object> {
   data: T[];
