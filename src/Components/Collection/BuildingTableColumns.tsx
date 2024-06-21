@@ -22,6 +22,7 @@ export const columns = [
         </Link>
       </div>
     ),
+    filterFn: "includesString",
   }),
   columnHelper.group({
     id: "location",
@@ -29,12 +30,14 @@ export const columns = [
     columns: [
       columnHelper.accessor("zip", {
         header: getColumnHeader("zip"),
+        filterFn: "includesString",
         meta: {
           inputWidth: "3rem",
         },
       }),
       columnHelper.accessor("borough", {
         header: getColumnHeader("borough"),
+        filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
         },
@@ -55,9 +58,11 @@ export const columns = [
             </Link>
           </div>
         ),
+        filterFn: "includesString",
       }),
       columnHelper.accessor("lender", {
         header: getColumnHeader("lender"),
+        filterFn: "includesString",
         meta: {
           inputWidth: "4rem",
         },
@@ -81,6 +86,7 @@ export const columns = [
       columnHelper.accessor("units_nonres", {
         header: getColumnHeader("units_nonres"),
         cell: (info) => showYesNo(info.getValue()),
+        filterFn: "equals",
         meta: {
           filterVariant: "boolean",
         },
@@ -101,8 +107,10 @@ export const columns = [
       columnHelper.accessor("bip", {
         header: getColumnHeader("bip"),
         cell: (info) => formatNumber(info.getValue()),
+        filterFn: "inNumberRange",
         meta: {
           inputWidth: "2.5rem",
+          filterVariant: "range",
         },
       }),
     ],
@@ -244,6 +252,7 @@ export const columns = [
       columnHelper.accessor("in_aep", {
         header: getColumnHeader("in_aep"),
         cell: (info) => showYesNo(info.getValue()),
+        filterFn: "equals",
         meta: {
           filterVariant: "boolean",
         },
@@ -251,6 +260,7 @@ export const columns = [
       columnHelper.accessor("in_conh", {
         header: getColumnHeader("in_conh"),
         cell: (info) => showYesNo(info.getValue()),
+        filterFn: "equals",
         meta: {
           filterVariant: "boolean",
         },
@@ -258,6 +268,7 @@ export const columns = [
       columnHelper.accessor("in_ucp", {
         header: getColumnHeader("in_ucp"),
         cell: (info) => showYesNo(info.getValue()),
+        filterFn: "equals",
         meta: {
           filterVariant: "boolean",
         },
@@ -270,6 +281,7 @@ export const columns = [
     columns: [
       columnHelper.accessor("placeholder_vacate_order", {
         header: getColumnHeader("placeholder_vacate_order"),
+        filterFn: "includesString",
       }),
     ],
   }),
@@ -386,9 +398,11 @@ export const columns = [
     columns: [
       columnHelper.accessor("last_sale_date", {
         header: getColumnHeader("last_sale_date"),
+        filterFn: "includesString",
       }),
       columnHelper.accessor("origination_date", {
         header: getColumnHeader("origination_date"),
+        filterFn: "includesString",
       }),
       columnHelper.accessor("debt_total", {
         header: getColumnHeader("debt_total"),
@@ -414,24 +428,28 @@ export const columns = [
     columns: [
       columnHelper.accessor("coun_dist", {
         header: getColumnHeader("coun_dist"),
+        filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
         },
       }),
       columnHelper.accessor("assem_dist", {
         header: getColumnHeader("assem_dist"),
+        filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
         },
       }),
       columnHelper.accessor("stsen_dist", {
         header: getColumnHeader("stsen_dist"),
+        filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
         },
       }),
       columnHelper.accessor("cong_dist", {
         header: getColumnHeader("cong_dist"),
+        filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
         },
