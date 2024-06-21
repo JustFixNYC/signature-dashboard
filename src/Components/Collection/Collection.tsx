@@ -35,7 +35,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
             columns={buildingColumns}
             {...(data.collection_type === 'lender' && {pagination: true, pageSize: 100})}
             initialState={{
-              sorting: [{ id: "rs_units", desc: true }],
+              sorting: [{ id: "units_res", desc: true }],
               columnPinning: { left: ["address"] },
             }}
           />

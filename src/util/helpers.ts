@@ -147,6 +147,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     short_name: "Percent of units with complaints, last 12 mo ",
     description:
       "The percent of all apartments in the building that have submitted any HPD complaints in the last 12 months. Read more on HPD Complaints.",
+    format: "percent",
   },
   debt_per_unit: {
     name: "Signature debt per unit",
@@ -178,6 +179,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   in_conh: {
     name: "Certificate of No Harassment (CONH) pilot program",
+    short_name: "Certificate of No Harassment pilot program",
     description:
       "A local law that applies to some residential buildings requires the landlord to apply for and receive a Certification of No Harassment (CONH) before applying to the Department of Buildings (DOB) for a permit to change the use or occupancy of a building or to demolish a building or any part thereof. HPD selected a set of buildings that are subject to other enforcement programs or have serious with existing conditions to be included in a pilot program for CONH. REad more on CONH",
     format: "boolean",
