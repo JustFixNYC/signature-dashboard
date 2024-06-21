@@ -48,6 +48,13 @@ export const columns = [
     columns: [
       columnHelper.accessor("landlord", {
         header: getColumnHeader("landlord"),
+        cell: (info) => (
+          <div className="cell__address">
+            <Link to={`/landlords?landlord=${info.row.original.landlord_slug}`}>
+              {info.getValue()}
+            </Link>
+          </div>
+        ),
       }),
       columnHelper.accessor("lender", {
         header: getColumnHeader("lender"),
