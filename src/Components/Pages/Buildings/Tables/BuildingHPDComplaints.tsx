@@ -2,6 +2,7 @@ import { HTMLAttributes } from "react";
 import { BuildingInfo } from "../../../../types/APIDataTypes";
 import { DetailTable } from "../../../DetailTable/DetailTable";
 import { DetailTableRow } from "../../../DetailTable/DetailTableRow";
+import { formatPercent } from "../../../../util/helpers";
 
 interface BuildingHPDComplaintsTable extends HTMLAttributes<HTMLDListElement> {
   data: BuildingInfo;
@@ -18,7 +19,7 @@ export const BuildingHPDComplaintsTable: React.FC<
       />
       <DetailTableRow
         apiKey={"hpd_comp_emerg_total_per_unit"}
-        value={data["hpd_comp_emerg_total_per_unit"]}
+        value={formatPercent(data["hpd_comp_emerg_total_per_unit"])}
       />
       <DetailTableRow apiKey={"hpd_comp_apts"} value={data["hpd_comp_apts"]} />
       <DetailTableRow

@@ -3,6 +3,7 @@ import { CollectionInfo } from "../../../types/APIDataTypes";
 import { DetailTable } from "../../DetailTable/DetailTable";
 import { DetailTableRow } from "../../DetailTable/DetailTableRow";
 import "./style.scss";
+import { formatPercent } from "../../../util/helpers";
 
 type CollectionSummaryTableProps = {
   data: CollectionInfo;
@@ -30,7 +31,11 @@ export const CollectionSummaryTable: React.FC<CollectionSummaryTableProps> = ({
   data,
 }) => {
   const rows = keys.map((key) => {
-    return <DetailTableRow key={key} apiKey={key} value={data[key]} />;
+    let value = data[key];
+    if (key === "hpd_comp_emerg_total_per_unit" && typeof value === "number") {
+      value = formatPercent(value);
+    }
+    return <DetailTableRow key={key} apiKey={key} value={value} />;
   });
 
   return <DetailTable className="collection-summary-table">{rows}</DetailTable>;

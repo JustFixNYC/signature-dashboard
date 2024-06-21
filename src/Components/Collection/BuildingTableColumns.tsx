@@ -201,7 +201,7 @@ export const columns = [
       }),
       columnHelper.accessor("hpd_comp_emerg_total_per_unit", {
         header: getColumnHeader("hpd_comp_emerg_total_per_unit"),
-        cell: (info) => round(info.getValue()),
+        cell: (info) => formatPercent(info.getValue()),
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",

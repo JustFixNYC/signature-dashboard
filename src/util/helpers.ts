@@ -117,7 +117,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     short_name: "Emergency complaints per unit, last 12 mo.",
     description:
       "Number of HPD complaints of emergency class received in the last 12 months, divided by the number of units. Read more on HPD Complaints.",
-    format: "round",
+    format: "percent",
   },
   hpd_comp_heat: {
     name: "HPD complaints for heat/hot water, last 12 mo.",
