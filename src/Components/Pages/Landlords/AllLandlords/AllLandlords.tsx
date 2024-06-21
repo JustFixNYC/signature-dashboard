@@ -72,12 +72,19 @@ export const AllLandlords: React.FC = () => {
       {isLoading && <div>loading...</div>}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
-        <Table
-          data={data}
-          columns={columns}
-          pagination
-          initialState={{ sorting: [{ id: "units_res", desc: true }] }}
-        />
+        <>
+          <p>
+            {data.length} landlords with rent-regulated properties financed by
+            Signature Bank. Each one will have their portfolios entirely in
+            either the CPC or Santander joint ventures.
+          </p>
+          <Table
+            data={data}
+            columns={columns}
+            pagination
+            initialState={{ sorting: [{ id: "units_res", desc: true }] }}
+          />
+        </>
       )}
     </>
   );

@@ -22,9 +22,14 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
           {data.collection_type === "landlord" && (
             <h3 className="landlord-name">{data.collection_name}</h3>
           )}
+
           <h2>Key Indicators</h2>
           <CollectionSummaryTable data={data} />
+
           <h2>Building Table</h2>
+          <p>
+            {data.bldg_data.length} buildings in {data.collection_name}
+          </p>
           <Table
             data={data.bldg_data}
             columns={buildingColumns}
