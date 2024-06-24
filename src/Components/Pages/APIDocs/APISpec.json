@@ -393,6 +393,16 @@
             "example": "landlord",
             "description": "Collection type (landlord or lender)"
           },
+          "lender_name": {
+            "type": "string",
+            "example": "CPC",
+            "description": "Lender display name. Available for Landlord records only"
+          },
+          "lender_slug": {
+            "type": "string",
+            "example": "cpc",
+            "description": "Lender name slug, used for API and URL. Available for Landlord records only"
+          },
           "buildings": {
             "type": "integer",
             "example": 26,
