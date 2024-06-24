@@ -52,7 +52,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
       )}
       {buildingInfo && (
         <>
-          <h3 className="building-address">{buildingInfo.address}</h3>
+          <h2 className="building-address">{buildingInfo.address}</h2>
           <div>BBL: {buildingInfo.bbl}</div>
           <div>Borough: {buildingInfo.borough}</div>
           <div>Zip: {buildingInfo.zip}</div>
@@ -68,12 +68,13 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
               {buildingInfo.lender}
             </Link>
           </div>
+          <div></div>
         </>
       )}
 
-      <h2>Summary</h2>
+      <h3>Summary</h3>
 
-      <h3>Key Indicators</h3>
+      <h4>Key Indicators</h4>
       {buildingInfo && (
         <BuildingSummaryTable
           data={buildingInfo}
@@ -81,8 +82,8 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h2>Detail Tables</h2>
-      <h3>Building Info</h3>
+      <h3>Detail Tables</h3>
+      <h4>Building Info</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingInformationTable
@@ -91,7 +92,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>Building Indicators Project (BIP)</h3>
+      <h4>Building Indicators Project (BIP)</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingBIPTable
@@ -100,7 +101,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>Financials</h3>
+      <h4>Financials</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingFinancialTable
@@ -109,7 +110,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>HPD Violations</h3>
+      <h4>HPD Violations</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingHPDViolationsTable
@@ -118,7 +119,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>HPD Complaints</h3>
+      <h4>HPD Complaints</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingHPDComplaintsTable
@@ -127,7 +128,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>HPD Emergency Repairs</h3>
+      <h4>HPD Emergency Repairs</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingHPDRepairsTable
@@ -136,7 +137,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>Department of Health Inspections</h3>
+      <h4>Department of Health Inspections</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingDOHMHInspectionsTable
@@ -145,7 +146,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>Evictions</h3>
+      <h4>Evictions</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingEvictionsTable
@@ -154,7 +155,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>HPD Litigation Against Landlords</h3>
+      <h4>HPD Litigation Against Landlords</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingHPDLitigationTable
@@ -163,7 +164,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>DOB Permits & Violations</h3>
+      <h4>DOB Permits & Violations</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingDOBPermitsViolationsTable
@@ -172,7 +173,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>HPD Programs</h3>
+      <h4>HPD Programs</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingHPDProgramsTable
@@ -181,7 +182,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>Fines, Fees & Charges</h3>
+      <h4>Fines, Fees & Charges</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingFinesFeesChargesTable
@@ -190,7 +191,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h3>Political Districts</h3>
+      <h4>Political Districts</h4>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfo && (
         <BuildingPoliticalDistrictsTable
@@ -199,8 +200,8 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         />
       )}
 
-      <h2>Trend Charts</h2>
-      <h3>HPD Violations</h3>
+      <h3>Trend Charts</h3>
+      <h4>HPD Violations</h4>
 
       {chartIsLoading && <div>loading...</div>}
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}

@@ -20,13 +20,13 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
       {data && (
         <>
           {data.collection_type === "landlord" && (
-            <h3 className="landlord-name">{data.collection_name}</h3>
+            <h2 className="landlord-name">{data.collection_name}</h2>
           )}
 
-          <h2>Key Indicators</h2>
+          <h3>Key Indicators</h3>
           <CollectionSummaryTable data={data} />
 
-          <h2>Building Table</h2>
+          <h3>Building Table</h3>
           <p>
             {data.bldg_data.length} buildings owned by {data.collection_name}
           </p>
