@@ -293,15 +293,17 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
       onChange={(e) => {
         if (e.target.value === "true") {
           column.setFilterValue(true);
-        } else {
+        } else if (e.target.value === "false"){
           column.setFilterValue(false);
+        } else {
+          column.setFilterValue(null);
         }
       }}
       value={columnFilterValue?.toString()}
     >
       <option value="">All</option>
-      <option value="true">True</option>
-      <option value="false">False</option>
+      <option value="true">yes</option>
+      <option value="false">no</option>
     </select>
   ) : (
     <DebouncedInput
