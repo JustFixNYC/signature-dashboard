@@ -5,6 +5,7 @@ import { CollectionSummaryTable } from "./CollectionSummaryTable/CollectionSumma
 import { columns as buildingColumns } from "./BuildingTableColumns";
 import { Table } from "../Table/Table";
 import "./style.scss";
+import { InternalLinks } from "../LinksBox/InternalLinks";
 
 type CollectionProps = {
   collection: string;
@@ -21,6 +22,11 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
         <>
           {data.collection_type === "landlord" && (
             <h2 className="landlord-name">{data.collection_name}</h2>
+          )}
+          {data.collection_type === "landlord" && (
+            <aside className="related-links-container">
+              <InternalLinks collectionInfo={data} />
+            </aside>
           )}
 
           <h3>Key Indicators</h3>

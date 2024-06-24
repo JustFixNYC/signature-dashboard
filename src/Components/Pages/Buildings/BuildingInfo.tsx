@@ -23,6 +23,9 @@ import { BuildingHPDRepairsTable } from "./Tables/BuildingHPDRepairsTable";
 import { BuildingInformationTable } from "./Tables/BuildingInformationTable";
 import { BuildingBIPTable } from "./Tables/BuildingBIPTable";
 import { Link } from "react-router-dom";
+import { InternalLinks } from "../../LinksBox/InternalLinks";
+import { ExternalLinks } from "../../LinksBox/ExternalLinks";
+
 export interface BuildingInfoProps {
   bbl: string;
 }
@@ -68,7 +71,10 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
               {buildingInfo.lender}
             </Link>
           </div>
-          <div></div>
+          <aside className="related-links-container">
+            <InternalLinks buildingInfo={buildingInfo} />
+            <ExternalLinks buildingInfo={buildingInfo} />
+          </aside>
         </>
       )}
 
