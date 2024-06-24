@@ -140,17 +140,27 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                             )}
                             {header.column.getCanSort() && (
                               <span className="column-header__sort-icons">
-                                {header.column.getIsSorted() === "asc" && (
+                                {header.column.getIsSorted() === "asc" ? (
                                   <Icon
                                     icon="arrowUp"
                                     className="column-header__sort-icon"
                                   />
-                                )}
-                                {header.column.getIsSorted() === "desc" && (
+                                ) : header.column.getIsSorted() === "desc" ? (
                                   <Icon
                                     icon="arrowDown"
                                     className="column-header__sort-icon"
                                   />
+                                ) : (
+                                  <>
+                                    <Icon
+                                      icon="arrowUp"
+                                      className="column-header__sort-icon"
+                                    />
+                                    <Icon
+                                      icon="arrowDown"
+                                      className="column-header__sort-icon"
+                                    />
+                                  </>
                                 )}
                               </span>
                             )}
