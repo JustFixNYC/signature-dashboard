@@ -1,5 +1,11 @@
 @import "../../../App.scss";
 
+.layout-two-col {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
 .building-address {
   font-size: 2.25rem; // 36px
   line-height: 100%;
@@ -23,13 +29,6 @@
 }
 
 .related-links-container {
-  position: absolute;
+  position: sticky;
   top: calc($headerH + 1.5rem);
-
-  @media (min-width: 1280px) {
-    right: 1.5rem;
-  }
-  @media (max-width: 1280px) {
-    left: 869px; // hacky. hopefully won't stay like this forever. Keeps the box from continuing to move to the left.
-  }
 }
