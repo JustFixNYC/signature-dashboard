@@ -6,7 +6,7 @@ import { useState } from "react";
 import { MapData } from "../../types/APIDataTypes";
 import mapboxgl from "mapbox-gl";
 import { Link } from "react-router-dom";
-import { Icon } from "@justfixnyc/component-library";
+// import { Icon } from "@justfixnyc/component-library";
 
 const STYLE_SIGNATURE_LIGHT =
   "mapbox://styles/justfix/clxummt2k047a01qj3ra1gjf6";
@@ -123,7 +123,7 @@ export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
               {`${selectedAddr.address}, ${selectedAddr.borough.toUpperCase()}`}
             </Link>
             <button onClick={() => setSelectedAddr(null)}>
-              <Icon icon="xmark" />
+              X{/* <Icon icon="xmark" /> */}
             </button>
           </div>
 
