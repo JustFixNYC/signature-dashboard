@@ -52,7 +52,8 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
       : isFirstRightPinnedColumn
         ? "4px 0 4px -4px gray inset"
         : undefined,
-    left: isPinned === "left" ? `${column.getStart("left") + 127}px` : undefined, // The 127px is due to the sidebar.
+    left:
+      isPinned === "left" ? `${column.getStart("left") + 127}px` : undefined, // The 127px is due to the sidebar.
     right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
     backgroundColor: isPinned ? "white" : "initial",
     position: isPinned ? "sticky" : "relative",
@@ -99,10 +100,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   const table = useReactTable(options);
 
   return (
-    <div
-      className="table-container"
-      ref={containerRef}
-    >
+    <div className="table-container" ref={containerRef}>
       <table className="collection-building-table">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -287,7 +285,7 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
       onChange={(e) => {
         if (e.target.value === "true") {
           column.setFilterValue(true);
-        } else if (e.target.value === "false"){
+        } else if (e.target.value === "false") {
           column.setFilterValue(false);
         } else {
           column.setFilterValue(null);

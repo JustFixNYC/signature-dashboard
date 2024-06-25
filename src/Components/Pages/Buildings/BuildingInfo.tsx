@@ -32,7 +32,7 @@ export interface BuildingInfoProps {
 
 export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
   const [bAndCTimeSpan, setBAndCTimespan] = useState<"two-years" | "all-time">(
-    "two-years"
+    "two-years",
   );
 
   const {
