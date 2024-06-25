@@ -1,6 +1,6 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import "./style.scss";
 import { Collection } from "../../Collection/Collection";
 import JFCLLinkInternal from "../../JFCLLinkInternal";
@@ -40,9 +40,14 @@ export const Lenders: React.FC = () => {
               their new lender.
             </p>
             <p>
-              Lenders and are responsible for carrying out the operating
-              agreements (rows 37-39) set out by the FDIC. These agreements
-              include:
+              Lenders and are responsible for carrying out the{" "}
+              <Link
+                to="https://www.fdic.gov/buying/historical/structured/documents.html"
+                target="_blank"
+              >
+                operating agreements (rows 37-39)
+              </Link>{" "}
+              set out by the FDIC. These agreements include:
             </p>
             <ul>
               <li>regular loan servicing</li>

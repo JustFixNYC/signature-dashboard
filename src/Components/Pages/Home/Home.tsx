@@ -24,7 +24,7 @@ export const Home: React.FC = () => {
         Signature Bank multifamily loan portfolio.
       </p>
       <div style={{ width: "fit-content" }}>
-        Find a building by entering the address
+        Find a building in the Signature portfolio by entering the address
         <br />
         <br />
         <AddressSearch options={selectOptions} onSelection={onSelection} />
