@@ -20,7 +20,7 @@ export const NoBBL: React.FC = () => {
       <PageTitle>Buildings</PageTitle>
 
       <div style={{ width: "fit-content" }}>
-        Find a building by entering the address
+        Find a building in the Signature portfolio by entering the address
         <br />
         <br />
         <AddressSearch options={selectOptions} onSelection={onSelection} />

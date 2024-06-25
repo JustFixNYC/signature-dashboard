@@ -17,7 +17,7 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({
     <Select
       options={options}
       placeholder={"Select address..."}
-      noOptionsMessage={() => "No match"}
+      noOptionsMessage={() => "No match found in Signature portfolio"}
       onChange={onSelection}
     />
   );

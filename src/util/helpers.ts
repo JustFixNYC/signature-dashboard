@@ -60,7 +60,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   rs_units: {
     name: "Rent Stabilized Units",
     description:
-      "The number of rent stabilized units most recently registered with DHCR.",
+      "The number of rent stabilized units most recently registered with DHCR. All properties in the Signature portfolio have rent stabilized units, so any zero values are most likely a reporting error.",
   },
   hpd_viol_bc_open: {
     name: "Open HPD violations (B & C)",
@@ -249,7 +249,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   buildings: {
     name: "Buildings",
-    description: "The number of properties in the portfolio.",
+    description: "The number of Signature properties in the portfolio.",
   },
   bip: {
     name: "Building Indicator Project (BIP) score",
