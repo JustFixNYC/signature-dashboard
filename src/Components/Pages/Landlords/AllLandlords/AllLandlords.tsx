@@ -10,6 +10,7 @@ import {
 import { useGetAllLandlords } from "../../../../api/hooks";
 import { Table } from "../../../Table/Table";
 import "./style.scss";
+import { PageTitle } from "../../../PageTitle/PageTitle";
 
 const columnHelper = createColumnHelper<LandlordInfo>();
 
@@ -70,7 +71,7 @@ export const AllLandlords: React.FC = () => {
 
   return (
     <>
-      <h2>Landlords</h2>
+      <PageTitle>Landlords</PageTitle>
       {isLoading && <div>loading...</div>}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (

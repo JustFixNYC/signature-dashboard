@@ -1,11 +1,12 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
 import "./style.scss";
+import { PageTitle } from "../../PageTitle/PageTitle";
 
 export const About: React.FC = () => {
   return (
     <>
-      <h2>About the dashboard</h2>
+      <PageTitle>About the dashboard</PageTitle>
       <div style={{ width: "600px" }}>
         <p>
           This project is a collaboration between JustFix and UNHP to track

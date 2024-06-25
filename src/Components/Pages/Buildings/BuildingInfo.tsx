@@ -23,6 +23,7 @@ import { BuildingHPDRepairsTable } from "./Tables/BuildingHPDRepairsTable";
 import { BuildingInformationTable } from "./Tables/BuildingInformationTable";
 import { BuildingBIPTable } from "./Tables/BuildingBIPTable";
 import { Link } from "react-router-dom";
+import { PageTitle } from "../../PageTitle/PageTitle";
 export interface BuildingInfoProps {
   bbl: string;
 }
@@ -52,7 +53,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
       )}
       {buildingInfo && (
         <>
-          <h2 className="building-address">{buildingInfo.address}</h2>
+          <PageTitle className="building-address">{buildingInfo.address}</PageTitle>
           <div>BBL: {buildingInfo.bbl}</div>
           <div>Borough: {buildingInfo.borough}</div>
           <div>Zip: {buildingInfo.zip}</div>

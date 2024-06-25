@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AddressSearch, SelectOption } from "../../AddressSearch/AddressSearch";
 import selectOptions from "./buildings_options.json";
 import "./style.scss";
+import { PageTitle } from "../../PageTitle/PageTitle";
 
 export const NoBBL: React.FC = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export const NoBBL: React.FC = () => {
 
   return (
     <>
-      <h2>Buildings</h2>
+      <PageTitle>Buildings</PageTitle>
       Find a building by entering the address
       <br />
       <br />

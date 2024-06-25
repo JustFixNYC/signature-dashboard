@@ -5,6 +5,7 @@ import { CollectionSummaryTable } from "./CollectionSummaryTable/CollectionSumma
 import { columns as buildingColumns } from "./BuildingTableColumns";
 import { Table } from "../Table/Table";
 import "./style.scss";
+import { PageTitle } from "../PageTitle/PageTitle";
 
 type CollectionProps = {
   collection: string;
@@ -20,7 +21,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
       {data && (
         <>
           {data.collection_type === "landlord" && (
-            <h2 className="landlord-name">{data.collection_name}</h2>
+            <PageTitle className="landlord-name">{data.collection_name}</PageTitle>
           )}
 
           <h3>Key Indicators</h3>
