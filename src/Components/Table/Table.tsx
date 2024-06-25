@@ -52,7 +52,7 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
       : isFirstRightPinnedColumn
         ? "4px 0 4px -4px gray inset"
         : undefined,
-    left: isPinned === "left" ? `${column.getStart("left")}px` : undefined,
+    left: isPinned === "left" ? `${column.getStart("left") + 127}px` : undefined, // The 127px is due to the sidebar.
     right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
     backgroundColor: isPinned ? "white" : "initial",
     position: isPinned ? "sticky" : "relative",
