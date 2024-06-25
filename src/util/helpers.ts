@@ -325,11 +325,13 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hpd_erp_orders: {
     name: "HPD emergency repair work orders, last 12 mo.",
+    short_name: "Work orders, last 12 mo.",
     description:
       "Number of work orders as part of HPD programs (Emergency Repairs, Alternative Enforcement, etc.) in the last 12 months. Read more on HPD Emergency Repairs",
   },
   hpd_erp_orders_per_unit: {
     name: "HPD emergency repair work orders per unit, last 12 mo.",
+    short_name: "Work orders per unit, last 12 mo.",
     description:
       "Number of work orders as part of HPD programs (Emergency Repairs, Alternative Enforcement, etc.) in the last 12 months, divided by the number of units. Read more on HPD Emergency Repairs",
     format: "round",
