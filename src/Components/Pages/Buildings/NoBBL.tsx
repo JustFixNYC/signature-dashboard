@@ -18,10 +18,13 @@ export const NoBBL: React.FC = () => {
   return (
     <>
       <PageTitle>Buildings</PageTitle>
-      Find a building by entering the address
-      <br />
-      <br />
-      <AddressSearch options={selectOptions} onSelection={onSelection} />
+
+      <div style={{ width: "fit-content" }}>
+        Find a building by entering the address
+        <br />
+        <br />
+        <AddressSearch options={selectOptions} onSelection={onSelection} />
+      </div>
     </>
   );
 };

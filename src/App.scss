@@ -69,6 +69,8 @@ body {
 
 #content {
   padding: calc($headerH + 1.5rem) 1.5rem 1.5rem calc($sidebarW + 1.5rem); // 0 24px 0 ($sidebarW + 24px)
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #nav-links {

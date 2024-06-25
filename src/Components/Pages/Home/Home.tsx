@@ -23,7 +23,7 @@ export const Home: React.FC = () => {
         available public data on the rent-regulated portion of the former
         Signature Bank multifamily loan portfolio.
       </p>
-      <div style={{ width: "300px" }}>
+      <div style={{ width: "fit-content" }}>
         Find a building by entering the address
         <br />
         <br />
