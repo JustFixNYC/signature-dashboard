@@ -10,8 +10,6 @@ import { Link } from "react-router-dom";
 
 const STYLE_SIGNATURE_LIGHT =
   "mapbox://styles/justfix/clxummt2k047a01qj3ra1gjf6";
-// const STYLE_STABILIZING_NYC =
-//   "mapbox://styles/justfix/clxopp04602yz01qmg0w5dg6i";
 
 const DEFAULT_COLOR = "#43B19F";
 const SELECTED_COLOR = "#AF59A0";
@@ -20,7 +18,6 @@ type MapBoxProps = { data: MapData[] };
 
 export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
   const [cursor, setCursor] = useState("");
-  // const [mapStyle, setMapStyle] = useState(STYLE_SIGNATURE_LIGHT);
   const [selectedAddr, setSelectedAddr] = useState<MapData | null>(null);
 
   const onMouseEnter = (event: mapboxgl.MapLayerMouseEvent) => {
@@ -119,14 +116,6 @@ export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
     },
   };
 
-  // const toggleMapStyle = () => {
-  //   setMapStyle((prev) =>
-  //     prev === STYLE_SIGNATURE_LIGHT
-  //       ? STYLE_STABILIZING_NYC
-  //       : STYLE_SIGNATURE_LIGHT
-  //   );
-  // };
-
   return (
     <>
       <div className="map-container">
@@ -183,23 +172,6 @@ export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
           </div>
         )}
       </div>
-      {/* <div className="map-style-toggle-container">
-        <div className="map-style-toggle">
-          Map Style:{" "}
-          <button
-            onClick={toggleMapStyle}
-            disabled={mapStyle == STYLE_SIGNATURE_LIGHT}
-          >
-            Default
-          </button>
-          <button
-            onClick={toggleMapStyle}
-            disabled={mapStyle == STYLE_STABILIZING_NYC}
-          >
-            Stabilizing NYC
-          </button>
-        </div>
-      </div> */}
     </>
   );
 };
