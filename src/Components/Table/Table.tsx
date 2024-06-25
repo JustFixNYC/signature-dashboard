@@ -7,6 +7,7 @@ import {
   TableOptions,
   flexRender,
   getCoreRowModel,
+  getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
@@ -14,7 +15,7 @@ import {
 } from "@tanstack/react-table";
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
-import { CSSProperties, useRef, useState } from "react";
+import { CSSProperties, useMemo, useRef, useState } from "react";
 import { Icon } from "@justfixnyc/component-library";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
@@ -33,7 +34,7 @@ declare module "@tanstack/react-table" {
   // allows us to define custom properties for our columns (copied from WoW)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ColumnMeta<TData extends RowData, TValue> {
-    filterVariant?: "text" | "range" | "boolean";
+    filterVariant?: "range" | "boolean" | "select" | "text";
     inputWidth?: string;
   }
 }
@@ -86,6 +87,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(), //client side filtering
+    getFacetedUniqueValues: getFacetedUniqueValues(), // generate unique values for select filter/autocomplete
     debugTable: false,
     debugHeaders: false,
     debugColumns: false,
@@ -257,7 +259,17 @@ export const Table = <T extends object>(props: TableProps<T>) => {
 
 function Filter<T>({ column }: { column: Column<T, unknown> }) {
   const columnFilterValue = column.getFilterValue();
-  const { filterVariant, inputWidth } = column.columnDef.meta ?? {};
+  const { filterVariant } = column.columnDef.meta ?? {};
+
+  const uniqeValues = column.getFacetedUniqueValues();
+
+  const sortedUniqueValues = useMemo(
+    () =>
+      filterVariant === "range" || filterVariant === "boolean"
+        ? []
+        : Array.from(uniqeValues.keys()).sort(),
+    [uniqeValues, filterVariant],
+  );
 
   return filterVariant === "range" ? (
     <div>
@@ -297,15 +309,34 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
       <option value="true">yes</option>
       <option value="false">no</option>
     </select>
+  ) : filterVariant === "select" ? (
+    <select
+      onChange={(e) => column.setFilterValue(e.target.value)}
+      value={columnFilterValue?.toString()}
+    >
+      <option value="">All</option>
+      {sortedUniqueValues.map((value) => (
+        <option value={value} key={value}>
+          {value}
+        </option>
+      ))}
+    </select>
   ) : (
-    <DebouncedInput
-      className="filter__input_text"
-      onChange={(value) => {
-        column.setFilterValue(value);
-      }}
-      type="text"
-      value={(columnFilterValue ?? "") as string}
-      {...(inputWidth && { style: { width: inputWidth } })}
-    />
+    <>
+      <datalist id={column.id + "list"}>
+        {sortedUniqueValues.map((value) => (
+          <option value={value} key={value} />
+        ))}
+      </datalist>
+      <DebouncedInput
+        type="text"
+        value={(columnFilterValue ?? "") as string}
+        onChange={(value) => column.setFilterValue(value)}
+        placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
+        className="w-36 border shadow rounded"
+        list={column.id + "list"}
+      />
+      <div className="h-1" />
+    </>
   );
 }
