@@ -53,155 +53,159 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
       {buildingInfoError && (
         <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>
       )}
-      {buildingInfo && (
-        <div className="layout-two-col">
-          <div>
-            <PageTitle className="building-address">
-              {buildingInfo.address}
-            </PageTitle>
-            <div>BBL: {buildingInfo.bbl}</div>
-            <div>Borough: {buildingInfo.borough}</div>
-            <div>Zip: {buildingInfo.zip}</div>
-            <div>
-              Landlord:{" "}
-              <Link to={`/landlords?landlord=${buildingInfo.landlord_slug}`}>
-                {buildingInfo.landlord}
-              </Link>
-            </div>
-            <div>
-              Lender:{" "}
-              <Link to={`/lenders?lender=${buildingInfo.lender_slug}`}>
-                {buildingInfo.lender}
-              </Link>
-            </div>
-            <h3>Summary</h3>
 
-            <h4>Key Indicators</h4>
-            <BuildingSummaryTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+      <div className="layout-two-col">
+        <div>
+          {buildingInfo && (
+            <>
+              <PageTitle className="building-address">
+                {buildingInfo.address}
+              </PageTitle>
+              <div>BBL: {buildingInfo.bbl}</div>
+              <div>Borough: {buildingInfo.borough}</div>
+              <div>Zip: {buildingInfo.zip}</div>
+              <div>
+                Landlord:{" "}
+                <Link to={`/landlords?landlord=${buildingInfo.landlord_slug}`}>
+                  {buildingInfo.landlord}
+                </Link>
+              </div>
+              <div>
+                Lender:{" "}
+                <Link to={`/lenders?lender=${buildingInfo.lender_slug}`}>
+                  {buildingInfo.lender}
+                </Link>
+              </div>
+              <h3>Summary</h3>
 
-            <h3>Detail Tables</h3>
-            <h4>Building Info</h4>
-            <BuildingInformationTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h4>Key Indicators</h4>
+              <BuildingSummaryTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>Building Indicators Project (BIP)</h4>
-            <BuildingBIPTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h3>Detail Tables</h3>
+              <h4>Building Info</h4>
+              <BuildingInformationTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>Financials</h4>
-            <BuildingFinancialTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h4>Building Indicators Project (BIP)</h4>
+              <BuildingBIPTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>HPD Violations</h4>
-            <BuildingHPDViolationsTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h4>Financials</h4>
+              <BuildingFinancialTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>HPD Complaints</h4>
-            <BuildingHPDComplaintsTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h4>HPD Violations</h4>
+              <BuildingHPDViolationsTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>HPD Emergency Repairs</h4>
-            <BuildingHPDRepairsTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h4>HPD Complaints</h4>
+              <BuildingHPDComplaintsTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>Department of Health Inspections</h4>
-            <BuildingDOHMHInspectionsTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h4>HPD Emergency Repairs</h4>
+              <BuildingHPDRepairsTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>Evictions</h4>
-            <BuildingEvictionsTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h4>Department of Health Inspections</h4>
+              <BuildingDOHMHInspectionsTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>HPD Litigation Against Landlords</h4>
-            <BuildingHPDLitigationTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h4>Evictions</h4>
+              <BuildingEvictionsTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>DOB Permits & Violations</h4>
-            <BuildingDOBPermitsViolationsTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h4>HPD Litigation Against Landlords</h4>
+              <BuildingHPDLitigationTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>HPD Programs</h4>
-            <BuildingHPDProgramsTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h4>DOB Permits & Violations</h4>
+              <BuildingDOBPermitsViolationsTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>Fines, Fees & Charges</h4>
-            <BuildingFinesFeesChargesTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
+              <h4>HPD Programs</h4>
+              <BuildingHPDProgramsTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
-            <h4>Political Districts</h4>
-            <BuildingPoliticalDistrictsTable
-              data={buildingInfo}
-              className="building-detail-table"
-            />
-          </div>
+              <h4>Fines, Fees & Charges</h4>
+              <BuildingFinesFeesChargesTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
 
+              <h4>Political Districts</h4>
+              <BuildingPoliticalDistrictsTable
+                data={buildingInfo}
+                className="building-detail-table"
+              />
+            </>
+          )}
+          {chartIsLoading && <div>loading...</div>}
+          {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
+          {chartData && (
+            <>
+              <h3>Trend Charts</h3>
+              <h4>HPD Violations</h4>
+              <div className="chart__timespan_filter">
+                <RadioButton
+                  name="b-and-c-timespan"
+                  labelText="Past 2 years"
+                  id="radio-two-years"
+                  value="two-years"
+                  checked={bAndCTimeSpan === "two-years"}
+                  onChange={() => setBAndCTimespan("two-years")}
+                />
+                <RadioButton
+                  name="b-and-c-timespan"
+                  labelText="All time"
+                  id="radio-all-time"
+                  value="all-time"
+                  checked={bAndCTimeSpan === "all-time"}
+                  onChange={() => setBAndCTimespan("all-time")}
+                />
+              </div>
+              <BuildingBandCChart
+                data={chartData}
+                timespan={bAndCTimeSpan}
+                buildingInfo={buildingInfo}
+                className="building-chart"
+              />
+            </>
+          )}
+        </div>
+        {buildingInfo && (
           <div>
             <aside className="related-links-container">
               <InternalLinks buildingInfo={buildingInfo} />
               <ExternalLinks buildingInfo={buildingInfo} />
             </aside>
           </div>
-        </div>
-      )}
-
-      <h3>Trend Charts</h3>
-      <h4>HPD Violations</h4>
-      {chartIsLoading && <div>loading...</div>}
-      {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
-      {chartData && (
-        <>
-          <div className="chart__timespan_filter">
-            <RadioButton
-              name="b-and-c-timespan"
-              labelText="Past 2 years"
-              id="radio-two-years"
-              value="two-years"
-              checked={bAndCTimeSpan === "two-years"}
-              onChange={() => setBAndCTimespan("two-years")}
-            />
-            <RadioButton
-              name="b-and-c-timespan"
-              labelText="All time"
-              id="radio-all-time"
-              value="all-time"
-              checked={bAndCTimeSpan === "all-time"}
-              onChange={() => setBAndCTimespan("all-time")}
-            />
-          </div>
-          <BuildingBandCChart
-            data={chartData}
-            timespan={bAndCTimeSpan}
-            buildingInfo={buildingInfo}
-          />
-        </>
-      )}
+        )}
+      </div>
     </>
   );
 };
