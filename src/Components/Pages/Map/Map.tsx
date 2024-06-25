@@ -2,18 +2,24 @@
 import React from "react";
 import "./style.scss";
 import { PageTitle } from "../../PageTitle/PageTitle";
+import { useGetMapData } from "../../../api/hooks";
+import { MapBox } from "../../MapBox/MapBox";
 
 export const Map: React.FC = () => {
+  const {
+    data: mapData,
+    error: mapDataError,
+    isLoading: mapDataIsLoading,
+  } = useGetMapData();
+
   return (
     <>
       <PageTitle>Map</PageTitle>
 
-      <div style={{ width: "600px" }}>
-        <p>
-          This page will have a map of all buildings in the Signature Bank
-          portfolio
-        </p>
-      </div>
+      {mapDataIsLoading && <div>loading...</div>}
+      {mapDataError && <pre>{JSON.stringify(mapDataError, null, 2)}</pre>}
+
+      {!!mapData && <MapBox data={mapData} />}
     </>
   );
 };

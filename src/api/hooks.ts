@@ -4,6 +4,7 @@ import {
   APIChartData,
   CollectionInfo,
   LandlordInfo,
+  MapData,
 } from "../types/APIDataTypes";
 import { apiFetcher } from "./helpers";
 
@@ -136,6 +137,26 @@ export function useGetAllLandlords(): LandlordInfoSWRResponse {
       revalidateOnReconnect: false,
     },
   );
+
+  return {
+    data: data?.result,
+    isLoading,
+    error: error,
+  };
+}
+
+type MapDataSWRResponse = {
+  data: MapData[];
+  isLoading: boolean;
+  error: Error | undefined;
+};
+
+export function useGetMapData(): MapDataSWRResponse {
+  const { data, error, isLoading } = useSWR(`/signature/map`, apiFetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   return {
     data: data?.result,
