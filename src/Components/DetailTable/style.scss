@@ -27,6 +27,7 @@
         display: flex;
         align-items: center;
         font-weight: 500;
+        text-align: left;
 
         .detail-table__name_icon {
           margin-left: 5px;
@@ -37,6 +38,7 @@
       .detail-table__value {
         font-weight: 700;
         font-size: 1.1rem;
+        width: fit-content;
       }
     }
 
