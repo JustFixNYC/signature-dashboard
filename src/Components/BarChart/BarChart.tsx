@@ -9,12 +9,14 @@ import {
   BarElement,
   TimeScale,
   TooltipItem,
+  ChartDataset,
 } from "chart.js";
 import "chartjs-adapter-luxon";
 import annotationPlugin from "chartjs-plugin-annotation";
-import { BuildingInfo, ChartData } from "../../../types/APIDataTypes";
 import { Bar } from "react-chartjs-2";
 import classNames from "classnames";
+import { useId, useState } from "react";
+import { RadioButton } from "@justfixnyc/component-library";
 
 ChartJS.register(
   CategoryScale,
@@ -26,49 +28,32 @@ ChartJS.register(
   TimeScale,
   annotationPlugin,
 );
+
 const twoYearsAgo = new Date();
 twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
 
 type BuildingBAndCChartProps = {
-  data: ChartData[];
-  timespan: "two-years" | "all-time";
-  buildingInfo: BuildingInfo;
+  datasets: ChartDataset<"bar", { x?: string; y?: number }[]>[];
+  origination_date: string;
+  last_sale_date: string;
+  yAxisTitle: string;
   className?: string;
 };
 
-export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
-  data,
-  timespan,
-  buildingInfo,
+export const BarChart: React.FC<BuildingBAndCChartProps> = ({
+  datasets,
+  origination_date,
+  last_sale_date,
+  yAxisTitle,
   className,
 }) => {
-  const chartData = {
-    datasets: [
-      {
-        label: "Class B",
-        data: data.map((data) => ({
-          x: data.month,
-          y: data.hpdviolations_class_b,
-        })),
-        backgroundColor: "rgb(255, 99, 132)",
-      },
-      {
-        label: "Class C",
-        data: data.map((data) => ({
-          x: data.month,
-          y: data.hpdviolations_class_c,
-        })),
-        backgroundColor: "rgb(75, 192, 192)",
-      },
-    ],
-  };
+  const [timespan, setTimespan] = useState<"two-years" | "all-time">(
+    "two-years",
+  );
+  const radioID = useId();
 
   const options = {
     plugins: {
-      title: {
-        display: false,
-        text: "HPD Violations",
-      },
       tooltip: {
         callbacks: {
           title: (context: TooltipItem<"bar">[]) => {
@@ -94,29 +79,26 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
             size: 14,
           },
         },
-        position: "bottom",
+        position: "bottom" as const,
       },
       annotation: {
         annotations: {
           line1: {
             type: "line",
-            display: !!buildingInfo?.origination_date,
-            xMin: buildingInfo?.origination_date,
-            xMax: buildingInfo?.origination_date,
+            display: !!origination_date,
+            xMin: origination_date,
+            xMax: origination_date,
             borderColor: "black",
             borderWidth: 2,
             label: {
               display: true,
               content:
                 "Origination: " +
-                new Date(buildingInfo?.origination_date).toLocaleDateString(
-                  "en",
-                  {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  },
-                ),
+                new Date(origination_date).toLocaleDateString("en", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                }),
               font: {
                 family: "Degular",
                 size: 14,
@@ -130,23 +112,20 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
           },
           line2: {
             type: "line",
-            display: !!buildingInfo?.last_sale_date,
-            xMin: buildingInfo?.last_sale_date,
-            xMax: buildingInfo?.last_sale_date,
+            display: !!last_sale_date,
+            xMin: last_sale_date,
+            xMax: last_sale_date,
             borderColor: "black",
             borderWidth: 2,
             label: {
               display: true,
               content:
                 "Sold: " +
-                new Date(buildingInfo?.last_sale_date).toLocaleDateString(
-                  "en",
-                  {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  },
-                ),
+                new Date(last_sale_date).toLocaleDateString("en", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                }),
               font: {
                 family: "Degular",
                 size: 14,
@@ -162,7 +141,7 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
       },
     },
     interaction: {
-      mode: "index",
+      mode: "index" as const,
     },
     scales: {
       x: {
@@ -191,8 +170,8 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
       y: {
         stacked: true,
         title: {
-          display: true,
-          text: "HPD Violations",
+          display: !!yAxisTitle,
+          text: yAxisTitle,
           font: {
             family: "Degular",
             size: 16,
@@ -213,8 +192,28 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
   const classes = classNames("chart-container", className);
 
   return (
-    <div className={classes} style={{ position: "relative" }}>
-      <Bar options={options} data={chartData} height={300}></Bar>
-    </div>
+    <>
+      <div className="chart__timespan_filter">
+        <RadioButton
+          name={`b-and-c-timespan-${radioID}`}
+          labelText="Past 2 years"
+          id={`radio-two-years-${radioID}`}
+          value="two-years"
+          checked={timespan === "two-years"}
+          onChange={() => setTimespan("two-years")}
+        />
+        <RadioButton
+          name={`b-and-c-timespan-${radioID}`}
+          labelText="All time"
+          id={`radio-all-time-${radioID}`}
+          value="all-time"
+          checked={timespan === "all-time"}
+          onChange={() => setTimespan("all-time")}
+        />
+      </div>
+      <div className={classes} style={{ position: "relative" }}>
+        <Bar options={options} data={{ datasets }} height={300}></Bar>
+      </div>
+    </>
   );
 };

@@ -1,13 +1,12 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
-import React, { useState } from "react";
+import React from "react";
 import {
   useGetBuildingChartData,
   useGetBuildingInfo,
 } from "../../../api/hooks";
 import { BuildingSummaryTable } from "./Tables/BuildingSummaryTable";
-import { BuildingBandCChart } from "./Charts/BuildingBAndCChart/BuildingBAndCChart";
+import { BuildingHPDViolations } from "./Charts/BuildingHPDViolations";
 // import { BuildingHPDCompEmerg } from "../BuildingHPDCompEmerg/BuildingHPDCompEmerg";
-import { RadioButton } from "@justfixnyc/component-library";
 import "./style.scss";
 import { BuildingFinancialTable } from "./Tables/BuildingFinancialTable";
 import { BuildingHPDViolationsTable } from "./Tables/BuildingHPDViolationsTable";
@@ -26,15 +25,13 @@ import { Link } from "react-router-dom";
 import { InternalLinks } from "../../LinksBox/InternalLinks";
 import { ExternalLinks } from "../../LinksBox/ExternalLinks";
 import { PageTitle } from "../../PageTitle/PageTitle";
+import { BuildingHPDComplaints } from "./Charts/BuildingHPDCompEmerg";
+import { BuildingDOBViolations } from "./Charts/BuildingDOBViolations";
 export interface BuildingInfoProps {
   bbl: string;
 }
 
 export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
-  const [bAndCTimeSpan, setBAndCTimespan] = useState<"two-years" | "all-time">(
-    "two-years",
-  );
-
   const {
     data: buildingInfo,
     error: buildingInfoError,
@@ -170,29 +167,21 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
             <>
               <h3>Trend Charts</h3>
               <h4>HPD Violations</h4>
-              <div className="chart__timespan_filter">
-                <RadioButton
-                  name="b-and-c-timespan"
-                  labelText="Past 2 years"
-                  id="radio-two-years"
-                  value="two-years"
-                  checked={bAndCTimeSpan === "two-years"}
-                  onChange={() => setBAndCTimespan("two-years")}
-                />
-                <RadioButton
-                  name="b-and-c-timespan"
-                  labelText="All time"
-                  id="radio-all-time"
-                  value="all-time"
-                  checked={bAndCTimeSpan === "all-time"}
-                  onChange={() => setBAndCTimespan("all-time")}
-                />
-              </div>
-              <BuildingBandCChart
+              <BuildingHPDViolations
                 data={chartData}
-                timespan={bAndCTimeSpan}
                 buildingInfo={buildingInfo}
-                className="building-chart"
+              />
+
+              <h4>HPD Complaints</h4>
+              <BuildingHPDComplaints
+                data={chartData}
+                buildingInfo={buildingInfo}
+              />
+
+              <h4>DOB/ECB Violations</h4>
+              <BuildingDOBViolations
+                data={chartData}
+                buildingInfo={buildingInfo}
               />
             </>
           )}

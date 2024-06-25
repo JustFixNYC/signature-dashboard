@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import {
   BuildingInfo,
-  ChartData,
+  APIChartData,
   CollectionInfo,
   LandlordInfo,
 } from "../types/APIDataTypes";
@@ -58,7 +58,7 @@ export function useGetCollectionInfo(
 }
 
 type ChartDataSWRResponse = {
-  data: ChartData[];
+  data: APIChartData[];
   isLoading: boolean;
   error: Error | undefined;
 };

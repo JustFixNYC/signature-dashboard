@@ -52,13 +52,13 @@ export interface Indicators {
   landlord: number;
   last_rodent_date: number;
   last_rodent_result: number;
-  last_sale_date: number;
+  last_sale_date: string;
   lender: number;
   link_acris: string;
   link_dap: string;
   link_dob: string;
   link_hpd: string;
-  origination_date: number;
+  origination_date: string;
   rs_units: number;
   stsen_dist: number;
   units_nonres: number;
@@ -166,7 +166,7 @@ export type CollectionInfo = {
   | "debt_per_unit"
 >;
 
-export interface ChartData {
+export interface APIChartData {
   month: string;
   hpdviolations_class_a: number;
   hpdviolations_class_b: number;
