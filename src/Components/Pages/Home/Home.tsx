@@ -5,6 +5,7 @@ import { AddressSearch, SelectOption } from "../../AddressSearch/AddressSearch";
 
 import selectOptions from "../Buildings/buildings_options.json";
 import { useNavigate } from "react-router-dom";
+import { PageTitle } from "../../PageTitle/PageTitle";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export const Home: React.FC = () => {
   };
   return (
     <>
-      <h2>Home</h2>
+      <PageTitle>Home</PageTitle>
       <p style={{ width: "600px" }}>
         This project is a collaboration between JustFix and UNHP to track
         available public data on the rent-regulated portion of the former

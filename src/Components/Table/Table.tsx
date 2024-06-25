@@ -52,7 +52,7 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
       : isFirstRightPinnedColumn
         ? "4px 0 4px -4px gray inset"
         : undefined,
-    left: isPinned === "left" ? `${column.getStart("left")}px` : undefined,
+    left: isPinned === "left" ? `${column.getStart("left") + 127}px` : undefined, // The 127px is due to the sidebar.
     right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
     backgroundColor: isPinned ? "white" : "initial",
     position: isPinned ? "sticky" : "relative",
@@ -293,15 +293,17 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
       onChange={(e) => {
         if (e.target.value === "true") {
           column.setFilterValue(true);
-        } else {
+        } else if (e.target.value === "false"){
           column.setFilterValue(false);
+        } else {
+          column.setFilterValue(null);
         }
       }}
       value={columnFilterValue?.toString()}
     >
       <option value="">All</option>
-      <option value="true">True</option>
-      <option value="false">False</option>
+      <option value="true">yes</option>
+      <option value="false">no</option>
     </select>
   ) : (
     <DebouncedInput

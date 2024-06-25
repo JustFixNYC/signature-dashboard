@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import "./style.scss";
 import { Collection } from "../../Collection/Collection";
 import JFCLLinkInternal from "../../JFCLLinkInternal";
+import { PageTitle } from "../../PageTitle/PageTitle";
 
 export const Lenders: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -13,7 +14,7 @@ export const Lenders: React.FC = () => {
     <>
       {!lender && (
         <>
-          <h2>Lenders</h2>
+          <PageTitle>Lenders</PageTitle>
           <p>
             <JFCLLinkInternal href="lenders?lender=cpc">
               CPC Portfolio
@@ -55,8 +56,8 @@ export const Lenders: React.FC = () => {
           </div>
         </>
       )}
-      {lender === "cpc" && <h2>CPC Portfolio</h2>}
-      {lender === "santander" && <h2>Santander Portfolio</h2>}
+      {lender === "cpc" && <PageTitle>CPC Portfolio</PageTitle>}
+      {lender === "santander" && <PageTitle>Santander Portfolio</PageTitle>}
       {lender && <Collection collection={lender} />}
     </>
   );
