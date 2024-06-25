@@ -2,11 +2,11 @@
 @import "../../../colors.scss";
 
 .map-container {
-  width: calc(100vw - ($sidebarW + 1.5rem));
-  height: calc(100vh - 12rem);
+  width: calc(100vw - ($sidebarW));
+  height: calc(100vh - 9rem);
   display: flex;
   border-top: 1px solid $GREY_400;
-  margin-left: -1.5rem;
+  margin: 0 -1.5rem -1.5rem -1.5rem;
 
   // Something is broken with the way react-mapbox-gl is trying to load an svg
   // an background-image for the +/- zoom icons, so added this temporary hack
