@@ -18,7 +18,7 @@ import { CSSProperties, useRef, useState } from "react";
 import { Icon } from "@justfixnyc/component-library";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
-type PageSizeOptions = typeof pageSizeOptions[number];
+type PageSizeOptions = (typeof pageSizeOptions)[number];
 
 interface TableProps<T extends object> {
   data: T[];
@@ -62,7 +62,13 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
 };
 
 export const Table = <T extends object>(props: TableProps<T>) => {
-  const { data, columns, initialState, pagination: hasPagination, pageSize = 50 } = props;
+  const {
+    data,
+    columns,
+    initialState,
+    pagination: hasPagination,
+    pageSize = 50,
+  } = props;
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: pageSize,
@@ -134,17 +140,27 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                             )}
                             {header.column.getCanSort() && (
                               <span className="column-header__sort-icons">
-                                {header.column.getIsSorted() === "asc" && (
+                                {header.column.getIsSorted() === "asc" ? (
                                   <Icon
                                     icon="arrowUp"
                                     className="column-header__sort-icon"
                                   />
-                                )}
-                                {header.column.getIsSorted() === "desc" && (
+                                ) : header.column.getIsSorted() === "desc" ? (
                                   <Icon
                                     icon="arrowDown"
                                     className="column-header__sort-icon"
                                   />
+                                ) : (
+                                  <>
+                                    <Icon
+                                      icon="arrowUp"
+                                      className="column-header__sort-icon"
+                                    />
+                                    <Icon
+                                      icon="arrowDown"
+                                      className="column-header__sort-icon"
+                                    />
+                                  </>
                                 )}
                               </span>
                             )}
@@ -277,15 +293,17 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
       onChange={(e) => {
         if (e.target.value === "true") {
           column.setFilterValue(true);
-        } else {
+        } else if (e.target.value === "false"){
           column.setFilterValue(false);
+        } else {
+          column.setFilterValue(null);
         }
       }}
       value={columnFilterValue?.toString()}
     >
       <option value="">All</option>
-      <option value="true">True</option>
-      <option value="false">False</option>
+      <option value="true">yes</option>
+      <option value="false">no</option>
     </select>
   ) : (
     <DebouncedInput

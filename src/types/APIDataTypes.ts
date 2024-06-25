@@ -54,10 +54,10 @@ export interface Indicators {
   last_rodent_result: number;
   last_sale_date: number;
   lender: number;
-  link_acris: number;
-  link_dap: number;
-  link_dob: number;
-  link_hpd: number;
+  link_acris: string;
+  link_dap: string;
+  link_dob: string;
+  link_hpd: string;
   origination_date: number;
   rs_units: number;
   stsen_dist: number;

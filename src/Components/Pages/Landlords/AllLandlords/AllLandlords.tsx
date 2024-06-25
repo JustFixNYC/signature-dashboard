@@ -24,10 +24,12 @@ export const columns = [
         </Link>
       </div>
     ),
+    filterFn: "includesString",
   }),
   columnHelper.accessor("lender_name", {
     header: getColumnHeader("lender_name"),
     cell: (info) => info.getValue(),
+    filterFn: "includesString",
   }),
   columnHelper.accessor("buildings", {
     header: getColumnHeader("buildings"),
