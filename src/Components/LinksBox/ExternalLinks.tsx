@@ -12,7 +12,7 @@ export const ExternalLinks: React.FC<RelatedLinksProps> = ({
   return (
     <>
       {buildingInfo && (
-        <div className="related-links">
+        <div className="related-links related-links-external">
           <h3 className="related-links-header">External Links</h3>
           <Link href={buildingInfo.link_acris} className="related-link">
             View documents on ACRIS

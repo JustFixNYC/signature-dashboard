@@ -14,7 +14,7 @@ export const InternalLinks: React.FC<RelatedLinksProps> = ({
   return (
     <>
       {buildingInfo && (
-        <div className="related-links">
+        <div className="related-links related-links-internal">
           <h3 className="related-links-header">Related pages</h3>
           {buildingInfo.landlord && (
             <Link
@@ -36,7 +36,7 @@ export const InternalLinks: React.FC<RelatedLinksProps> = ({
         </div>
       )}
       {collectionInfo && (
-        <div className="related-links">
+        <div className="related-links related-links-internal">
           <h3 className="related-links-header">Related pages</h3>
           <Link
             href={`/lenders?lender=${collectionInfo.bldg_data[0].lender_slug}`}
