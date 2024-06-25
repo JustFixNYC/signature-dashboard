@@ -4,6 +4,7 @@
 $headerH: 3.25rem; // 52px
 $sidebarW: 8rem; // 128px
 
+
 html {
   height: 100%;
 }
@@ -67,7 +68,7 @@ body {
 }
 
 #content {
-  padding: 0 1.5rem 0 calc($sidebarW + 1.5rem); // 0 24px 0 ($sidebarW + 24px)
+  padding: calc($headerH + 1.5rem) 1.5rem 1.5rem calc($sidebarW + 1.5rem); // 0 24px 0 ($sidebarW + 24px)
 }
 
 #nav-links {
