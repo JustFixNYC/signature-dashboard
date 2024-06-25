@@ -73,15 +73,14 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                   {buildingInfo.lender}
                 </Link>
               </div>
-              <h3>Summary</h3>
 
-              <h4>Key Indicators</h4>
+              <h3>Summary</h3>
               <BuildingSummaryTable
                 data={buildingInfo}
                 className="building-detail-table"
               />
 
-              <h3>Detail Tables</h3>
+              <h3>All Data</h3>
               <h4>Building Info</h4>
               <BuildingInformationTable
                 data={buildingInfo}
