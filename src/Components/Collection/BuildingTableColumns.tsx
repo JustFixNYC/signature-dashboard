@@ -40,6 +40,7 @@ export const columns = [
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
+          filterVariant: "select",
         },
       }),
     ],
@@ -65,6 +66,7 @@ export const columns = [
         filterFn: "includesString",
         meta: {
           inputWidth: "4rem",
+          filterVariant: "select",
         },
       }),
       columnHelper.accessor("units_res", {
@@ -431,6 +433,7 @@ export const columns = [
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
+          filterVariant: "select",
         },
       }),
       columnHelper.accessor("assem_dist", {
@@ -438,6 +441,7 @@ export const columns = [
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
+          filterVariant: "select",
         },
       }),
       columnHelper.accessor("stsen_dist", {
@@ -445,6 +449,7 @@ export const columns = [
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
+          filterVariant: "select",
         },
       }),
       columnHelper.accessor("cong_dist", {
@@ -452,6 +457,7 @@ export const columns = [
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
+          filterVariant: "select",
         },
       }),
     ],

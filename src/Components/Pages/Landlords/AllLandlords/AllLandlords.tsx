@@ -31,6 +31,9 @@ export const columns = [
     header: getColumnHeader("lender_name"),
     cell: (info) => info.getValue(),
     filterFn: "includesString",
+    meta: {
+      filterVariant: "select",
+    },
   }),
   columnHelper.accessor("buildings", {
     header: getColumnHeader("buildings"),
