@@ -191,3 +191,15 @@ export interface LandlordInfo {
   hpd_viol_bc_open_per_unit: number;
   debt_per_unit: number;
 }
+
+export interface MapData {
+  bbl: string;
+  address: string;
+  borough: string;
+  zip: string;
+  landlord: string;
+  landlord_slug: string;
+  lender_slug: string;
+  lat: number;
+  lng: number;
+}

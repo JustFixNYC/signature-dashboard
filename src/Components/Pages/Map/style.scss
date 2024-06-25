@@ -1,0 +1,19 @@
+@import "../../../App.scss";
+
+.map-container {
+  width: calc(100vw - $sidebarW - 3rem);
+  height: calc(100vh - 12rem);
+  display: flex;
+
+  .map-sidepane {
+    width: 348px;
+    height: 100%;
+    div {
+      padding-top: 1.5rem; // 24px
+    }
+    .building-address-row {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
