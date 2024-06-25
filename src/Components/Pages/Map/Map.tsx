@@ -19,9 +19,7 @@ export const Map: React.FC = () => {
       {mapDataIsLoading && <div>loading...</div>}
       {mapDataError && <pre>{JSON.stringify(mapDataError, null, 2)}</pre>}
 
-      <div className="map-container">
-        {!!mapData && <MapBox data={mapData} />}
-      </div>
+      {!!mapData && <MapBox data={mapData} />}
     </>
   );
 };

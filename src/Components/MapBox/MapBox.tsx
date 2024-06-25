@@ -1,4 +1,4 @@
-import Map, { Source, Layer } from "react-map-gl";
+import Map, { Source, Layer, NavigationControl } from "react-map-gl";
 import type { CircleLayer } from "react-map-gl";
 import type { FeatureCollection } from "geojson";
 import "mapbox-gl/src/css/mapbox-gl.css";
@@ -11,12 +11,16 @@ import { Link } from "react-router-dom";
 const STYLE_SIGNATURE_LIGHT =
   "mapbox://styles/justfix/clxummt2k047a01qj3ra1gjf6";
 // const STYLE_STABILIZING_NYC =
-// "mapbox://styles/justfix/clxopp04602yz01qmg0w5dg6i";
+//   "mapbox://styles/justfix/clxopp04602yz01qmg0w5dg6i";
+
+const DEFAULT_COLOR = "#43B19F";
+const SELECTED_COLOR = "#AF59A0";
 
 type MapBoxProps = { data: MapData[] };
 
 export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
   const [cursor, setCursor] = useState("");
+  // const [mapStyle, setMapStyle] = useState(STYLE_SIGNATURE_LIGHT);
   const [selectedAddr, setSelectedAddr] = useState<MapData | null>(null);
 
   const onMouseEnter = (event: mapboxgl.MapLayerMouseEvent) => {
@@ -79,10 +83,10 @@ export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
       "circle-color": {
         property: "selected",
         type: "categorical",
-        default: "#4BC0C0",
+        default: DEFAULT_COLOR,
         stops: [
-          [true, "#EFB083"],
-          [false, "#4BC0C0"],
+          [true, SELECTED_COLOR],
+          [false, DEFAULT_COLOR],
         ],
       },
       "circle-opacity": {
@@ -97,10 +101,10 @@ export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
       "circle-stroke-color": {
         property: "selected",
         type: "categorical",
-        default: "#4BC0C0",
+        default: DEFAULT_COLOR,
         stops: [
-          [true, "#EFB083"],
-          [false, "#4BC0C0"],
+          [true, SELECTED_COLOR],
+          [false, DEFAULT_COLOR],
         ],
       },
       "circle-stroke-opacity": {
@@ -114,57 +118,88 @@ export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
       },
     },
   };
+
+  // const toggleMapStyle = () => {
+  //   setMapStyle((prev) =>
+  //     prev === STYLE_SIGNATURE_LIGHT
+  //       ? STYLE_STABILIZING_NYC
+  //       : STYLE_SIGNATURE_LIGHT
+  //   );
+  // };
+
   return (
     <>
-      {!!selectedAddr && (
-        <div className="map-sidepane">
-          <div className="building-address-row">
-            <Link to={`/buildings?bbl=${selectedAddr.bbl}`}>
-              {`${selectedAddr.address}, ${selectedAddr.borough.toUpperCase()}`}
-            </Link>
-            <button onClick={() => setSelectedAddr(null)}>
-              X{/* <Icon icon="xmark" /> */}
-            </button>
-          </div>
+      <div className="map-container">
+        {!!selectedAddr && (
+          <div className="map-sidepane">
+            <div className="building-address-row">
+              <Link to={`/buildings?bbl=${selectedAddr.bbl}`}>
+                {`${selectedAddr.address}, ${selectedAddr.borough.toUpperCase()}`}
+              </Link>
+              <button onClick={() => setSelectedAddr(null)}>
+                ✕{/* <Icon icon="xmark" /> */}
+              </button>
+            </div>
 
-          <div>
-            Landlord:{" "}
-            <Link to={`/landlords?landlord=${selectedAddr.landlord_slug}`}>
-              {selectedAddr.landlord}
-            </Link>
+            <div>
+              <span className="label-name">Landlord:</span>{" "}
+              <Link to={`/landlords?landlord=${selectedAddr.landlord_slug}`}>
+                {selectedAddr.landlord}
+              </Link>
+            </div>
+            <div>
+              <span className="label-name">Lender:</span>{" "}
+              <Link to={`/lenders?lender=${selectedAddr.lender_slug}`}>
+                {selectedAddr.lender_slug == "cpc" ? "CPC" : "Santander"}
+              </Link>
+            </div>
+            <div>
+              <span className="label-name">Zip:</span> {selectedAddr.zip}
+            </div>
           </div>
-          <div>
-            Lender:{" "}
-            <Link to={`/lenders?lender=${selectedAddr.lender_slug}`}>
-              {selectedAddr.lender_slug == "cpc" ? "CPC" : "Santander"}
-            </Link>
-          </div>
-          <div>Zip: {selectedAddr.zip}</div>
+        )}
+        <Map
+          mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
+          initialViewState={{
+            bounds: [
+              [-74.0802831, 40.6267844],
+              [-73.8545909, 40.8667808],
+            ],
+            fitBoundsOptions: {
+              padding: { top: 50, bottom: 50, left: 50, right: 50 },
+              maxZoom: 10,
+            },
+          }}
+          mapStyle={STYLE_SIGNATURE_LIGHT}
+          cursor={cursor}
+          interactiveLayerIds={["bbl"]}
+          onClick={onClick}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          <NavigationControl showCompass={false} visualizePitch={false} />
+          <Source id="my-data" type="geojson" data={geojson}>
+            <Layer {...layerStyle} />
+          </Source>
+        </Map>
+      </div>
+      {/* <div className="map-style-toggle-container">
+        <div className="map-style-toggle">
+          Map Style:{" "}
+          <button
+            onClick={toggleMapStyle}
+            disabled={mapStyle == STYLE_SIGNATURE_LIGHT}
+          >
+            Default
+          </button>
+          <button
+            onClick={toggleMapStyle}
+            disabled={mapStyle == STYLE_STABILIZING_NYC}
+          >
+            Stabilizing NYC
+          </button>
         </div>
-      )}
-      <Map
-        mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
-        initialViewState={{
-          bounds: [
-            [-74.0802831, 40.6267844],
-            [-73.8545909, 40.8667808],
-          ],
-          fitBoundsOptions: {
-            padding: { top: 50, bottom: 50, left: 50, right: 50 },
-            maxZoom: 10,
-          },
-        }}
-        mapStyle={STYLE_SIGNATURE_LIGHT}
-        cursor={cursor}
-        interactiveLayerIds={["bbl"]}
-        onClick={onClick}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      >
-        <Source id="my-data" type="geojson" data={geojson}>
-          <Layer {...layerStyle} />
-        </Source>
-      </Map>
+      </div> */}
     </>
   );
 };
