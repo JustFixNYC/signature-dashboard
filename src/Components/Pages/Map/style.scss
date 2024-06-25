@@ -6,7 +6,8 @@
   height: calc(100vh - 9rem);
   display: flex;
   border-top: 1px solid $GREY_400;
-  margin: 0 -1.5rem -1.5rem -1.5rem;
+  margin: 0 -1.5rem -1.5rem -1.5rem; // #content padding
+  position: relative;
 
   // Something is broken with the way react-mapbox-gl is trying to load an svg
   // an background-image for the +/- zoom icons, so added this temporary hack
@@ -31,10 +32,14 @@
 
   .map-sidepane {
     min-width: 348px;
-    height: 100%;
+    height: calc(100vh - 10rem);
     box-shadow: 15px 0 15px -7px $GREY_400;
     z-index: 1;
     padding: 0.625rem 1rem; // 10px 16px
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: $OFF_WHITE_100;
 
     div {
       padding: 0.75rem 0; // 12px
@@ -58,6 +63,15 @@
     .label-name {
       font-weight: 700;
     }
+  }
+  .mapboxgl-map {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 // .map-style-toggle-container {

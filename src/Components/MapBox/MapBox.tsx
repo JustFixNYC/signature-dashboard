@@ -130,6 +130,30 @@ export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
   return (
     <>
       <div className="map-container">
+        <Map
+          mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
+          initialViewState={{
+            bounds: [
+              [-74.43542435256518, 40.56005960547242],
+              [-73.50284564953185, 40.91593904663844],
+            ],
+            fitBoundsOptions: {
+              padding: { top: 40, bottom: 40, left: 40, right: 40 },
+              maxZoom: 11,
+            },
+          }}
+          mapStyle={STYLE_SIGNATURE_LIGHT}
+          cursor={cursor}
+          interactiveLayerIds={["bbl"]}
+          onClick={onClick}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          <NavigationControl showCompass={false} visualizePitch={false} />
+          <Source id="my-data" type="geojson" data={geojson}>
+            <Layer {...layerStyle} />
+          </Source>
+        </Map>
         {!!selectedAddr && (
           <div className="map-sidepane">
             <div className="building-address-row">
@@ -158,30 +182,6 @@ export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
             </div>
           </div>
         )}
-        <Map
-          mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
-          initialViewState={{
-            bounds: [
-              [-74.0802831, 40.6267844],
-              [-73.8545909, 40.8667808],
-            ],
-            fitBoundsOptions: {
-              padding: { top: 50, bottom: 50, left: 50, right: 50 },
-              maxZoom: 10,
-            },
-          }}
-          mapStyle={STYLE_SIGNATURE_LIGHT}
-          cursor={cursor}
-          interactiveLayerIds={["bbl"]}
-          onClick={onClick}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        >
-          <NavigationControl showCompass={false} visualizePitch={false} />
-          <Source id="my-data" type="geojson" data={geojson}>
-            <Layer {...layerStyle} />
-          </Source>
-        </Map>
       </div>
       {/* <div className="map-style-toggle-container">
         <div className="map-style-toggle">
