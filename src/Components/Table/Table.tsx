@@ -97,17 +97,11 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   }
 
   const table = useReactTable(options);
-  const calculateContainerWidth = () => {
-    if (containerRef.current) {
-      return `calc(100vw - ${containerRef.current.offsetLeft + 20}px`;
-    }
-    return "calc(100vw)";
-  };
+
   return (
     <div
       className="table-container"
       ref={containerRef}
-      style={{ maxWidth: calculateContainerWidth() }}
     >
       <table className="collection-building-table">
         <thead>

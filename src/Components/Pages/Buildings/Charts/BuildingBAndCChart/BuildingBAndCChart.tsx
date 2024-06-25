@@ -14,6 +14,7 @@ import "chartjs-adapter-luxon";
 import annotationPlugin from "chartjs-plugin-annotation";
 import { BuildingInfo, ChartData } from "../../../types/APIDataTypes";
 import { Bar } from "react-chartjs-2";
+import classNames from "classnames";
 
 ChartJS.register(
   CategoryScale,
@@ -32,12 +33,14 @@ type BuildingBAndCChartProps = {
   data: ChartData[];
   timespan: "two-years" | "all-time";
   buildingInfo: BuildingInfo;
+  className?: string;
 };
 
 export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
   data,
   timespan,
   buildingInfo,
+  className,
 }) => {
   const chartData = {
     datasets: [
@@ -207,8 +210,10 @@ export const BuildingBandCChart: React.FC<BuildingBAndCChartProps> = ({
     maintainAspectRatio: false,
   };
 
+  const classes = classNames("chart-container", className);
+
   return (
-    <div className="chart-container" style={{ position: "relative" }}>
+    <div className={classes} style={{ position: "relative" }}>
       <Bar options={options} data={chartData} height={300}></Bar>
     </div>
   );

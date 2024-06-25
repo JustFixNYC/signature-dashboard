@@ -5,6 +5,7 @@ import { CollectionSummaryTable } from "./CollectionSummaryTable/CollectionSumma
 import { columns as buildingColumns } from "./BuildingTableColumns";
 import { Table } from "../Table/Table";
 import "./style.scss";
+import { InternalLinks } from "../LinksBox/InternalLinks";
 import { PageTitle } from "../PageTitle/PageTitle";
 
 type CollectionProps = {
@@ -20,13 +21,26 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
         <>
-          {data.collection_type === "landlord" && (
-            <PageTitle className="landlord-name">{data.collection_name}</PageTitle>
-          )}
+          <div className="layout-two-col">
+            <div>
+              {data.collection_type === "landlord" && (
+                <PageTitle className="landlord-name">
+                  {data.collection_name}
+                </PageTitle>
+              )}
 
-          <h3>Key Indicators</h3>
-          <CollectionSummaryTable data={data} />
+              <h3>Key Indicators</h3>
+              <CollectionSummaryTable data={data} />
+            </div>
 
+            <div>
+              {data.collection_type === "landlord" && (
+                <aside className="related-links-container">
+                  <InternalLinks collectionInfo={data} />
+                </aside>
+              )}
+            </div>
+          </div>
           <h3>Building Table</h3>
           <p>
             {data.bldg_data.length} buildings owned by {data.collection_name}
