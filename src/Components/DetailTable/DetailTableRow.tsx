@@ -5,6 +5,7 @@ import {
   apiKeys,
   formatMoney,
   formatNumber,
+  formatNumberNoComma,
   formatPercent,
   showYesNo,
 } from "../../util/helpers";
@@ -46,8 +47,12 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
     displayValue = showYesNo(value) as string;
   }
 
+  if (indicator?.format === "comma" && typeof value === "number") {
+    displayValue = formatNumber(value) as string;
+  }
+
   if (typeof indicator?.format === "undefined" && typeof value === "number") {
-    displayValue = formatNumber(value);
+    displayValue = formatNumberNoComma(value);
   }
 
   return (
