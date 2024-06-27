@@ -162,7 +162,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
           )}
           {chartIsLoading && <div>loading...</div>}
           {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
-          {chartData && (
+          {chartData && buildingInfo && (
             <>
               <h3>Trend Charts</h3>
               <h4>HPD Violations</h4>

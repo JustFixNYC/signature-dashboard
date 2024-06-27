@@ -9,7 +9,7 @@ import {
 import { apiFetcher } from "./helpers";
 
 type BuildingInfoSWRResponse = {
-  data: BuildingInfo;
+  data: BuildingInfo | undefined;
   isLoading: boolean;
   error: Error | undefined;
 };
@@ -33,7 +33,7 @@ export function useGetBuildingInfo(bbl: string): BuildingInfoSWRResponse {
 }
 
 type CollectionInfoSWRResponse = {
-  data: CollectionInfo;
+  data: CollectionInfo | undefined;
   isLoading: boolean;
   error: Error | undefined;
 };
@@ -59,7 +59,7 @@ export function useGetCollectionInfo(
 }
 
 type ChartDataSWRResponse = {
-  data: APIChartData[];
+  data: APIChartData[] | undefined;
   isLoading: boolean;
   error: Error | undefined;
 };
@@ -103,13 +103,7 @@ export function useGetCollectionChartData(
 }
 
 type BBLSWRResponse = {
-  data: string[];
-  isLoading: boolean;
-  error: Error | undefined;
-};
-
-type LandlordInfoSWRResponse = {
-  data: LandlordInfo[];
+  data: string[] | undefined;
   isLoading: boolean;
   error: Error | undefined;
 };
@@ -126,6 +120,12 @@ export function useGetAllBBLs(): BBLSWRResponse {
     error: error,
   };
 }
+
+type LandlordInfoSWRResponse = {
+  data: LandlordInfo[] | undefined;
+  isLoading: boolean;
+  error: Error | undefined;
+};
 
 export function useGetAllLandlords(): LandlordInfoSWRResponse {
   const { data, error, isLoading } = useSWR(
@@ -146,7 +146,7 @@ export function useGetAllLandlords(): LandlordInfoSWRResponse {
 }
 
 type MapDataSWRResponse = {
-  data: MapData[];
+  data: MapData[] | undefined;
   isLoading: boolean;
   error: Error | undefined;
 };
