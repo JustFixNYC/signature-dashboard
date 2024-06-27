@@ -373,6 +373,16 @@
             "type": "integer",
             "example": 1,
             "description": "Total number of DOB violations in the given month."
+          },
+          "evictions_executed": {
+            "type": "integer",
+            "example": 1,
+            "description": "Total number of executed warrants of evictions in the given month."
+          },
+          "evictions_filed": {
+            "type": "integer",
+            "example": 1,
+            "description": "Total number of residential eviction cases filed against tenants in the given month."
           }
         }
       },
