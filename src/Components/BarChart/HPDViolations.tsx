@@ -1,15 +1,17 @@
-import { APIChartData, BuildingInfo } from "../../../../types/APIDataTypes";
-import { BarChart } from "../../../BarChart/BarChart";
+import { APIChartData } from "../../types/APIDataTypes";
+import { BarChart } from "./BarChart";
 
-type BuildingHPDViolationsProps = {
+type HPDViolationsChartProps = {
   data: APIChartData[];
-  buildingInfo: BuildingInfo;
   className?: string;
+  originationDate?: string;
+  lastSaleDate?: string;
 };
 
-export const BuildingHPDViolations: React.FC<BuildingHPDViolationsProps> = ({
+export const HPDViolationsChart: React.FC<HPDViolationsChartProps> = ({
   data,
-  buildingInfo,
+  originationDate,
+  lastSaleDate,
   className,
 }) => {
   const datasets = [
@@ -48,10 +50,10 @@ export const BuildingHPDViolations: React.FC<BuildingHPDViolationsProps> = ({
   ];
   return (
     <BarChart
+      originationDate={originationDate}
+      lastSaleDate={lastSaleDate}
       datasets={datasets}
       yAxisTitle="Violations Issued"
-      origination_date={buildingInfo.origination_date}
-      last_sale_date={buildingInfo.last_sale_date}
       className={className}
     />
   );

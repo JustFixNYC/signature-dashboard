@@ -1,15 +1,17 @@
-import { APIChartData, BuildingInfo } from "../../../../types/APIDataTypes";
-import { BarChart } from "../../../BarChart/BarChart";
+import { APIChartData } from "../../types/APIDataTypes";
+import { BarChart } from "./BarChart";
 
-type BuildingDOBViolationsProps = {
+type DOBViolationsChartProps = {
   data: APIChartData[];
-  buildingInfo: BuildingInfo;
   className?: string;
+  originationDate?: string;
+  lastSaleDate?: string;
 };
 
-export const BuildingDOBViolations: React.FC<BuildingDOBViolationsProps> = ({
+export const DOBViolationsChart: React.FC<DOBViolationsChartProps> = ({
   data,
-  buildingInfo,
+  originationDate,
+  lastSaleDate,
   className,
 }) => {
   const datasets = [
@@ -35,8 +37,8 @@ export const BuildingDOBViolations: React.FC<BuildingDOBViolationsProps> = ({
     <BarChart
       datasets={datasets}
       yAxisTitle="Violations Issued"
-      origination_date={buildingInfo.origination_date}
-      last_sale_date={buildingInfo.last_sale_date}
+      originationDate={originationDate}
+      lastSaleDate={lastSaleDate}
       className={className}
     />
   );

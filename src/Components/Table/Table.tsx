@@ -267,10 +267,9 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
     () =>
       filterVariant === "range" || filterVariant === "boolean"
         ? []
-        : Array.from(uniqeValues.keys()).sort(),
+        : Array.from(uniqeValues.keys()).filter(v => v !== undefined).sort(),
     [uniqeValues, filterVariant],
   );
-
   return filterVariant === "range" ? (
     <div>
       <div className="filter__input_range">
@@ -315,11 +314,14 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
       value={columnFilterValue?.toString()}
     >
       <option value="">All</option>
-      {sortedUniqueValues.map((value) => (
+      {sortedUniqueValues.map((value) => {
+
+        // console.log('~~~', value);
+        return (
         <option value={value} key={value}>
           {value}
         </option>
-      ))}
+      )})}
     </select>
   ) : (
     <>

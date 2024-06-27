@@ -47,6 +47,14 @@ export const formatNumberNoComma = (value: number) => {
   return value.toString();
 };
 
+export const formatDate = (value: string) => {
+  return new Date(value).toLocaleDateString("en", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+}
+
 export type apiKeys =
   | keyof BuildingInfo
   | keyof CollectionInfo

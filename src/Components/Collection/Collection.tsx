@@ -1,12 +1,18 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
-import { useGetCollectionInfo } from "../../api/hooks";
+import {
+  useGetCollectionChartData,
+  useGetCollectionInfo,
+} from "../../api/hooks";
 import { CollectionSummaryTable } from "./CollectionSummaryTable/CollectionSummaryTable";
 import { columns as buildingColumns } from "./BuildingTableColumns";
 import { Table } from "../Table/Table";
-import "./style.scss";
 import { InternalLinks } from "../LinksBox/InternalLinks";
 import { PageTitle } from "../PageTitle/PageTitle";
+import { DOBViolationsChart } from "../BarChart/DOBViolations";
+import { HPDComplaintsChart } from "../BarChart/HPDComplaints";
+import { HPDViolationsChart } from "../BarChart/HPDViolations";
+import "./style.scss";
 
 type CollectionProps = {
   collection: string;
@@ -14,6 +20,12 @@ type CollectionProps = {
 
 export const Collection: React.FC<CollectionProps> = ({ collection }) => {
   const { data, error, isLoading } = useGetCollectionInfo(collection);
+
+  const {
+    data: chartData,
+    error: chartError,
+    isLoading: chartIsLoading,
+  } = useGetCollectionChartData(collection);
 
   return (
     <div style={{ minHeight: "1500px" }}>
@@ -58,6 +70,20 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
             }}
           />
         </>
+      )}
+      {chartIsLoading && <div>loading...</div>}
+      {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
+      {chartData && data && (
+        <div className="collection-charts">
+          <h3>Trend Charts</h3>
+          <h4>HPD Violations</h4>
+          <HPDViolationsChart data={chartData} />
+          <h4>HPD Complaints</h4>
+          <HPDComplaintsChart data={chartData} />
+
+          <h4>DOB/ECB Violations</h4>
+          <DOBViolationsChart data={chartData} />
+        </div>
       )}
     </div>
   );

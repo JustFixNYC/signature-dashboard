@@ -5,8 +5,6 @@ import {
   useGetBuildingInfo,
 } from "../../../api/hooks";
 import { BuildingSummaryTable } from "./Tables/BuildingSummaryTable";
-import { BuildingHPDViolations } from "./Charts/BuildingHPDViolations";
-// import { BuildingHPDCompEmerg } from "../BuildingHPDCompEmerg/BuildingHPDCompEmerg";
 import "./style.scss";
 import { BuildingFinancialTable } from "./Tables/BuildingFinancialTable";
 import { BuildingHPDViolationsTable } from "./Tables/BuildingHPDViolationsTable";
@@ -25,8 +23,9 @@ import { Link } from "react-router-dom";
 import { InternalLinks } from "../../LinksBox/InternalLinks";
 import { ExternalLinks } from "../../LinksBox/ExternalLinks";
 import { PageTitle } from "../../PageTitle/PageTitle";
-import { BuildingHPDComplaints } from "./Charts/BuildingHPDCompEmerg";
-import { BuildingDOBViolations } from "./Charts/BuildingDOBViolations";
+import { DOBViolationsChart } from "../../BarChart/DOBViolations";
+import { HPDViolationsChart } from "../../BarChart/HPDViolations";
+import { HPDComplaintsChart } from "../../BarChart/HPDComplaints";
 export interface BuildingInfoProps {
   bbl: string;
 }
@@ -166,21 +165,23 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
             <>
               <h3>Trend Charts</h3>
               <h4>HPD Violations</h4>
-              <BuildingHPDViolations
+              <HPDViolationsChart
                 data={chartData}
-                buildingInfo={buildingInfo}
+                originationDate={buildingInfo.origination_date}
+                lastSaleDate={buildingInfo.last_sale_date}
               />
-
               <h4>HPD Complaints</h4>
-              <BuildingHPDComplaints
+              <HPDComplaintsChart
                 data={chartData}
-                buildingInfo={buildingInfo}
+                originationDate={buildingInfo.origination_date}
+                lastSaleDate={buildingInfo.last_sale_date}
               />
 
               <h4>DOB/ECB Violations</h4>
-              <BuildingDOBViolations
+              <DOBViolationsChart
                 data={chartData}
-                buildingInfo={buildingInfo}
+                originationDate={buildingInfo.origination_date}
+                lastSaleDate={buildingInfo.last_sale_date}
               />
             </>
           )}
