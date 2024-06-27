@@ -50,10 +50,11 @@ export const HPDViolationsChart: React.FC<HPDViolationsChartProps> = ({
   ];
   return (
     <BarChart
-      originationDate={originationDate}
-      lastSaleDate={lastSaleDate}
       datasets={datasets}
       yAxisTitle="Violations Issued"
+      originationDate={originationDate}
+      lastSaleDate={lastSaleDate}
+      stacked={true}
       className={className}
     />
   );

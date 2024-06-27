@@ -40,6 +40,7 @@ export const HPDComplaintsChart: React.FC<HPDComplaintsChartProps> = ({
       yAxisTitle="Complaints Received"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}
+      stacked={true}
       className={className}
     />
   );

@@ -26,6 +26,7 @@ import { PageTitle } from "../../PageTitle/PageTitle";
 import { DOBViolationsChart } from "../../BarChart/DOBViolations";
 import { HPDViolationsChart } from "../../BarChart/HPDViolations";
 import { HPDComplaintsChart } from "../../BarChart/HPDComplaints";
+import { EvictionsChart } from "../../BarChart/Evictions";
 export interface BuildingInfoProps {
   bbl: string;
 }
@@ -179,6 +180,13 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
 
               <h4>DOB/ECB Violations</h4>
               <DOBViolationsChart
+                data={chartData}
+                originationDate={buildingInfo.origination_date}
+                lastSaleDate={buildingInfo.last_sale_date}
+              />
+
+              <h4>Evictions</h4>
+              <EvictionsChart
                 data={chartData}
                 originationDate={buildingInfo.origination_date}
                 lastSaleDate={buildingInfo.last_sale_date}

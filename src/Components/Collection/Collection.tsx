@@ -13,6 +13,7 @@ import { DOBViolationsChart } from "../BarChart/DOBViolations";
 import { HPDComplaintsChart } from "../BarChart/HPDComplaints";
 import { HPDViolationsChart } from "../BarChart/HPDViolations";
 import "./style.scss";
+import { EvictionsChart } from "../BarChart/Evictions";
 
 type CollectionProps = {
   collection: string;
@@ -83,6 +84,9 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
 
           <h4>DOB/ECB Violations</h4>
           <DOBViolationsChart data={chartData} />
+
+          <h4>Evictions</h4>
+          <EvictionsChart data={chartData} />
         </div>
       )}
     </div>

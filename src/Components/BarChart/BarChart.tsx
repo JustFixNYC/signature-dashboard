@@ -39,12 +39,14 @@ type BuildingBAndCChartProps = {
   lastSaleDate?: string;
   yAxisTitle: string;
   className?: string;
+  stacked?: boolean;
 };
 
 export const BarChart: React.FC<BuildingBAndCChartProps> = ({
   datasets,
   originationDate,
   lastSaleDate,
+  stacked,
   yAxisTitle,
   className,
 }) => {
@@ -134,7 +136,7 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
     },
     scales: {
       x: {
-        stacked: true,
+        stacked: stacked,
         type: "time",
         min: timespan === "two-years" ? twoYearsAgo : null,
         autoSkip: false,
@@ -157,7 +159,7 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
         },
       },
       y: {
-        stacked: true,
+        stacked: stacked,
         title: {
           display: !!yAxisTitle,
           text: yAxisTitle,
