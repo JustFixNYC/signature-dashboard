@@ -179,6 +179,8 @@ export interface APIChartData {
   dobviolations_regular: number;
   dobviolations_ecb: number;
   dobviolations_total: number;
+  evictions_executed: number;
+  evictions_filed: number;
 }
 
 export interface LandlordInfo {

@@ -1,15 +1,18 @@
-import { APIChartData, BuildingInfo } from "../../../../types/APIDataTypes";
-import { BarChart } from "../../../BarChart/BarChart";
+import { APIChartData } from "../../types/APIDataTypes";
+import { BarChart } from "./BarChart";
 
-type BuildingHPDComplaintsProps = {
+
+type HPDComplaintsChartProps = {
   data: APIChartData[];
-  buildingInfo: BuildingInfo;
   className?: string;
+  originationDate?: string;
+  lastSaleDate?: string;
 };
 
-export const BuildingHPDComplaints: React.FC<BuildingHPDComplaintsProps> = ({
+export const HPDComplaintsChart: React.FC<HPDComplaintsChartProps> = ({
   data,
-  buildingInfo,
+  originationDate,
+  lastSaleDate,
   className,
 }) => {
   const datasets = [
@@ -35,8 +38,9 @@ export const BuildingHPDComplaints: React.FC<BuildingHPDComplaintsProps> = ({
     <BarChart
       datasets={datasets}
       yAxisTitle="Complaints Received"
-      origination_date={buildingInfo.origination_date}
-      last_sale_date={buildingInfo.last_sale_date}
+      originationDate={originationDate}
+      lastSaleDate={lastSaleDate}
+      stacked={true}
       className={className}
     />
   );

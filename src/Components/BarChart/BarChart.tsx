@@ -17,6 +17,7 @@ import { Bar } from "react-chartjs-2";
 import classNames from "classnames";
 import { useId, useState } from "react";
 import { RadioButton } from "@justfixnyc/component-library";
+import { formatDate } from "../../util/helpers";
 
 ChartJS.register(
   CategoryScale,
@@ -26,7 +27,7 @@ ChartJS.register(
   Tooltip,
   Legend,
   TimeScale,
-  annotationPlugin,
+  annotationPlugin
 );
 
 const twoYearsAgo = new Date();
@@ -34,21 +35,23 @@ twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
 
 type BuildingBAndCChartProps = {
   datasets: ChartDataset<"bar", { x?: string; y?: number }[]>[];
-  origination_date: string;
-  last_sale_date: string;
+  originationDate?: string;
+  lastSaleDate?: string;
   yAxisTitle: string;
   className?: string;
+  stacked?: boolean;
 };
 
 export const BarChart: React.FC<BuildingBAndCChartProps> = ({
   datasets,
-  origination_date,
-  last_sale_date,
+  originationDate,
+  lastSaleDate,
+  stacked,
   yAxisTitle,
   className,
 }) => {
   const [timespan, setTimespan] = useState<"two-years" | "all-time">(
-    "two-years",
+    "two-years"
   );
   const radioID = useId();
 
@@ -85,20 +88,14 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
         annotations: {
           line1: {
             type: "line",
-            display: !!origination_date,
-            xMin: origination_date,
-            xMax: origination_date,
+            display: !!originationDate,
+            xMin: originationDate,
+            xMax: originationDate,
             borderColor: "black",
             borderWidth: 2,
             label: {
               display: true,
-              content:
-                "Origination: " +
-                new Date(origination_date).toLocaleDateString("en", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                }),
+              content: `Origination: ${originationDate && formatDate(originationDate)}`,
               font: {
                 family: "Degular",
                 size: 14,
@@ -112,20 +109,14 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
           },
           line2: {
             type: "line",
-            display: !!last_sale_date,
-            xMin: last_sale_date,
-            xMax: last_sale_date,
+            display: !!lastSaleDate,
+            xMin: lastSaleDate,
+            xMax: lastSaleDate,
             borderColor: "black",
             borderWidth: 2,
             label: {
               display: true,
-              content:
-                "Sold: " +
-                new Date(last_sale_date).toLocaleDateString("en", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                }),
+              content: `Sold: ${lastSaleDate && formatDate(lastSaleDate)}`,
               font: {
                 family: "Degular",
                 size: 14,
@@ -145,7 +136,7 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
     },
     scales: {
       x: {
-        stacked: true,
+        stacked: stacked,
         type: "time",
         min: timespan === "two-years" ? twoYearsAgo : null,
         autoSkip: false,
@@ -168,7 +159,7 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
         },
       },
       y: {
-        stacked: true,
+        stacked: stacked,
         title: {
           display: !!yAxisTitle,
           text: yAxisTitle,
