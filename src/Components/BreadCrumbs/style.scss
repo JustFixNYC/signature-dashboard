@@ -1,0 +1,16 @@
+@import "../../colors.scss";
+
+.breadCrumbs {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+
+  .breadCrumbs__last-crumb {
+    font-weight: 500;
+    color: $GREY_600;
+  }
+
+  .breadCrumbs__caret {
+    margin: 0 0.5rem;
+  }
+}
