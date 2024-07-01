@@ -1,7 +1,6 @@
 import { APIChartData } from "../../types/APIDataTypes";
 import { BarChart } from "./BarChart";
 
-
 type HPDComplaintsChartProps = {
   data: APIChartData[];
   className?: string;

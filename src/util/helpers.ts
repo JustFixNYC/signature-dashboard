@@ -52,8 +52,8 @@ export const formatDate = (value: string) => {
     year: "numeric",
     month: "short",
     day: "numeric",
-  })
-}
+  });
+};
 
 export type apiKeys =
   | keyof BuildingInfo

@@ -267,7 +267,9 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
     () =>
       filterVariant === "range" || filterVariant === "boolean"
         ? []
-        : Array.from(uniqeValues.keys()).filter(v => v !== undefined).sort(),
+        : Array.from(uniqeValues.keys())
+            .filter((v) => v !== undefined)
+            .sort(),
     [uniqeValues, filterVariant],
   );
   return filterVariant === "range" ? (
@@ -315,13 +317,13 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
     >
       <option value="">All</option>
       {sortedUniqueValues.map((value) => {
-
         // console.log('~~~', value);
         return (
-        <option value={value} key={value}>
-          {value}
-        </option>
-      )})}
+          <option value={value} key={value}>
+            {value}
+          </option>
+        );
+      })}
     </select>
   ) : (
     <>
