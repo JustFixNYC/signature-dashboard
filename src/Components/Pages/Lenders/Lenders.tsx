@@ -61,8 +61,6 @@ export const Lenders: React.FC = () => {
           </div>
         </>
       )}
-      {lender === "cpc" && <PageTitle>CPC Portfolio</PageTitle>}
-      {lender === "santander" && <PageTitle>Santander Portfolio</PageTitle>}
       {lender && <Collection collection={lender} />}
     </>
   );

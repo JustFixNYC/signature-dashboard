@@ -14,6 +14,7 @@ import { HPDComplaintsChart } from "../BarChart/HPDComplaints";
 import { HPDViolationsChart } from "../BarChart/HPDViolations";
 import "./style.scss";
 import { EvictionsChart } from "../BarChart/Evictions";
+import { BreadCrumbs } from "../BreadCrumbs/BreadCrumbs";
 
 type CollectionProps = {
   collection: string;
@@ -34,12 +35,20 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
         <>
+          {data.collection_type === "landlord" && (
+            <BreadCrumbs crumbs={["Landlords", <>{data.collection_name}</>]} />
+          )}
+          {data.collection_type === "lender" && (
+            <BreadCrumbs crumbs={["Lenders", <>{data.collection_name}</>]} />
+          )}
           <div className="layout-two-col">
             <div>
               {data.collection_type === "landlord" && (
-                <PageTitle className="landlord-name">
-                  {data.collection_name}
-                </PageTitle>
+                <PageTitle>{data.collection_name}</PageTitle>
+              )}
+
+              {data.collection_type === "lender" && (
+                <PageTitle>{data.collection_name} Portfolio</PageTitle>
               )}
 
               <h3>Key Indicators</h3>

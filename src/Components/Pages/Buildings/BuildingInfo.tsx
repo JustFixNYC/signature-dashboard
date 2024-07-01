@@ -27,6 +27,7 @@ import { DOBViolationsChart } from "../../BarChart/DOBViolations";
 import { HPDViolationsChart } from "../../BarChart/HPDViolations";
 import { HPDComplaintsChart } from "../../BarChart/HPDComplaints";
 import { EvictionsChart } from "../../BarChart/Evictions";
+import { BreadCrumbs } from "../../BreadCrumbs/BreadCrumbs";
 export interface BuildingInfoProps {
   bbl: string;
 }
@@ -46,6 +47,10 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
 
   return (
     <>
+      <BreadCrumbs
+        crumbs={["Buildings", <>{buildingInfo && buildingInfo.address}</>]}
+      />
+
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfoError && (
         <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>
