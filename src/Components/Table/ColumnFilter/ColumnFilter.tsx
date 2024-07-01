@@ -2,7 +2,7 @@ import { Checkbox, Icon } from "@justfixnyc/component-library";
 import { Table } from "@tanstack/react-table";
 import "./style.scss";
 import { INDICATOR_STRINGS, apiKeys } from "../../../util/helpers";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface ColumnFilter {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -12,6 +12,27 @@ interface ColumnFilter {
 export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
   const [showMenu, setShowMenu] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (showMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showMenu]);
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (
+      popupRef.current &&
+      !popupRef.current.contains(e.target as HTMLElement) &&
+      !buttonRef.current?.contains(e.target as HTMLElement)
+    ) {
+      setShowMenu(false);
+    }
+  };
 
   const onClick = () => {
     setShowMenu(!showMenu);
@@ -34,6 +55,7 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
       <div
         className={`popover-menu ${showMenu ? "popover-menu--show" : ""}`}
         style={{ top: `${btnHeight + 16}px` }}
+        ref={popupRef}
       >
         <div className="popover-menu__header">
           <Checkbox
