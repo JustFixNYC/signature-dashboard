@@ -382,7 +382,22 @@
           "evictions_filed": {
             "type": "integer",
             "example": 1,
-            "description": "Total number of residential eviction cases filed against tenants in the given month."
+            "description": "Total number of residential eviction cases filed against tenants. Data only available by year, month field will use format 'YYYY-01'."
+          },
+          "rentstab_units": {
+            "type": "integer",
+            "example": 10,
+            "description": "Number of number of rent stabilized units registered with DHCR. Data only available by year, month field will use format 'YYYY-01'."
+          },
+          "dobpermits_jobs": {
+            "type": "integer",
+            "example": 1,
+            "description": "Total number of DOB job application filings filed in the given month."
+          },
+          "hpderp_charges": {
+            "type": "number",
+            "example": 10.50,
+            "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the given month."
           }
         }
       },
