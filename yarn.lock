@@ -385,10 +385,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-2.0.3.tgz#4a2868d75d6d6963e423bcf90b7fd1be343409d3"
   integrity sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==
 
-"@justfixnyc/component-library@^0.41.0":
-  version "0.41.0"
-  resolved "https://registry.yarnpkg.com/@justfixnyc/component-library/-/component-library-0.41.0.tgz#0f1fbd204c0841d107d9c90fc671eeba134ee562"
-  integrity sha512-MlW4ork7+TCdNS3+n8nx0Xg5Uwm/zOn9UUJT0vmaZjCLXOW4ggnh+1FzKNu9wBubCI1ahlB2KBWEGge22BYrOA==
+"@justfixnyc/component-library@^0.42.0":
+  version "0.42.0"
+  resolved "https://registry.yarnpkg.com/@justfixnyc/component-library/-/component-library-0.42.0.tgz#633f73cc06715f33a482ef203aba45c62b8e3d28"
+  integrity sha512-MANwg6slUVno7yyJYuL7//nAx87crcPBKo+o8n/ZQFbPcX86L6u/WkTgJSnrm9bnB8hxvkDrobH8Fj65PwGWBQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@fortawesome/fontawesome-svg-core" "6.5.1"
