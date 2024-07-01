@@ -6,12 +6,11 @@ interface BreadCrumbs {
   crumbs: ReactNode[];
 }
 export const BreadCrumbs: React.FC<BreadCrumbs> = ({ crumbs }) => {
-  console.log({ crumbs });
   const crumbpath = crumbs.flatMap((crumb, index, array) => {
     if (index !== array.length - 1) {
       return [
         <span key={index}>{crumb}</span>,
-        <span key={index} className="breadCrumbs__caret">
+        <span key={index + "caret"} className="breadCrumbs__caret">
           <Icon icon="caretRight" className="" />
         </span>,
       ];
