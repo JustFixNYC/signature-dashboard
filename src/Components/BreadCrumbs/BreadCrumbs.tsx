@@ -1,15 +1,15 @@
 import { Icon } from "@justfixnyc/component-library";
-import { ReactNode } from "react";
 import "./style.scss";
+import { Link } from "react-router-dom";
 
 interface BreadCrumbs {
-  crumbs: ReactNode[];
+  crumbs: {path?: string, name?: string}[];
 }
 export const BreadCrumbs: React.FC<BreadCrumbs> = ({ crumbs }) => {
   const crumbpath = crumbs.flatMap((crumb, index, array) => {
     if (index !== array.length - 1) {
       return [
-        <span key={index}>{crumb}</span>,
+        <Link key={index} to={crumb.path ?? "/"}>{crumb.name}</Link>,
         <span key={index + "caret"} className="breadCrumbs__caret">
           <Icon icon="caretRight" className="" />
         </span>,
@@ -17,7 +17,7 @@ export const BreadCrumbs: React.FC<BreadCrumbs> = ({ crumbs }) => {
     }
     return (
       <span key={index} className="breadCrumbs__last-crumb">
-        {crumb}
+        {crumb.name}
       </span>
     );
   });

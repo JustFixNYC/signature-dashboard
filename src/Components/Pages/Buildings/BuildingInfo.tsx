@@ -48,7 +48,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
   return (
     <>
       <BreadCrumbs
-        crumbs={["Buildings", <>{buildingInfo && buildingInfo.address}</>]}
+        crumbs={[{path: '/buildings', name:"Buildings"}, {name: buildingInfo?.address}]}
       />
 
       {buildingInfoIsLoading && <div>loading...</div>}

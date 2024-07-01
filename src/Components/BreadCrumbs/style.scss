@@ -5,6 +5,17 @@
   font-weight: 600;
   margin-bottom: 1.5rem;
 
+  a {
+    text-decoration: none;
+    color: initial;
+
+    &:visited,
+    &:hover,
+    &:active {
+      color: initial;
+    }
+  }
+
   .breadCrumbs__last-crumb {
     font-weight: 500;
     color: $GREY_600;

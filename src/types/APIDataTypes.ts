@@ -7,7 +7,7 @@ export type Borough =
 
 export interface Indicators {
   bbl: string;
-  address: number;
+  address: string;
   assem_dist: number;
   bip: number;
   bip_500_pct: number;

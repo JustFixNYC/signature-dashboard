@@ -36,10 +36,15 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
       {data && (
         <>
           {data.collection_type === "landlord" && (
-            <BreadCrumbs crumbs={["Landlords", <>{data.collection_name}</>]} />
+            <BreadCrumbs
+              crumbs={[
+                { path: "/landlords", name: "Landlords" },
+                { name: data.collection_name },
+              ]}
+            />
           )}
           {data.collection_type === "lender" && (
-            <BreadCrumbs crumbs={["Lenders", <>{data.collection_name}</>]} />
+            <BreadCrumbs crumbs={[{path: "/lenders", name: "Lenders"}, {name: data.collection_name}]} />
           )}
           <div className="layout-two-col">
             <div>
