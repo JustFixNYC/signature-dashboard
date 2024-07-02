@@ -5,7 +5,7 @@ import React from "react";
 // has the internal icon for passing into react router Links.
 
 const JFCLLinkExternal: React.FC<LinkProps> = (props) => {
-  return <Link icon="external" target="_blank" {...props} />;
+  return <Link icon="external" {...props} />;
 };
 
 export default JFCLLinkExternal;
