@@ -1,29 +1,20 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
-import {
-  useGetCollectionChartData,
-  useGetCollectionInfo,
-} from "../../api/hooks";
-import { CollectionSummaryTable } from "./CollectionSummaryTable/CollectionSummaryTable";
-import { columns as buildingColumns } from "./BuildingTableColumns";
-import { Table } from "../Table/Table";
-import { InternalLinks } from "../LinksBox/InternalLinks";
-import { PageTitle } from "../PageTitle/PageTitle";
+import { useGetCollectionChartData } from "../../api/hooks";
 import { DOBViolationsChart } from "../BarChart/DOBViolations";
 import { HPDComplaintsChart } from "../BarChart/HPDComplaints";
 import { HPDViolationsChart } from "../BarChart/HPDViolations";
-import "./style.scss";
 import { EvictionsChart } from "../BarChart/Evictions";
-import { BreadCrumbs } from "../BreadCrumbs/BreadCrumbs";
-import { DownloadMultiBuildingCSV } from "../CSVDownload/CSVDownload";
+import { BuildingTable } from "../BuildingTable/BuildingTable";
+import { CollectionInfo } from "../../types/APIDataTypes";
+import "./style.scss";
 
 type CollectionProps = {
   collection: string;
+  data: CollectionInfo;
 };
 
-export const Collection: React.FC<CollectionProps> = ({ collection }) => {
-  const { data, error, isLoading } = useGetCollectionInfo(collection);
-
+export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
   const {
     data: chartData,
     error: chartError,
@@ -32,76 +23,19 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
 
   return (
     <div style={{ minHeight: "1500px" }}>
-      {isLoading && <div>loading...</div>}
-      {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-      {data && (
-        <>
-          <div className="top-bar">
-            {data.collection_type === "landlord" && (
-              <BreadCrumbs
-                crumbs={[
-                  { path: "/landlords", name: "Landlords" },
-                  { name: data.collection_name },
-                ]}
-              />
-            )}
-            {data.collection_type === "lender" && (
-              <BreadCrumbs
-                crumbs={[
-                  { path: "/lenders", name: "Lenders" },
-                  { name: data.collection_name },
-                ]}
-              />
-            )}
-            <div className="top-bar-actions">
-              {!!data && (
-                <DownloadMultiBuildingCSV
-                  data={data}
-                  labelText="Download building data"
-                />
-              )}
-            </div>
-          </div>
-          <div className="layout-two-col">
-            <div>
-              {data.collection_type === "landlord" && (
-                <PageTitle>{data.collection_name}</PageTitle>
-              )}
+      <h3>Building Table</h3>
+      <p>
+        {data.bldg_data.length} buildings owned by {data.collection_name}
+      </p>
+      <BuildingTable
+        data={data.bldg_data}
+        {...((data.collection_type === "lender" ||
+          data.collection_type === "all") && {
+          pagination: true,
+          pageSize: 100,
+        })}
+      />
 
-              {data.collection_type === "lender" && (
-                <PageTitle>{data.collection_name} Portfolio</PageTitle>
-              )}
-
-              <h3>Key Indicators</h3>
-              <CollectionSummaryTable data={data} />
-            </div>
-
-            <div>
-              {data.collection_type === "landlord" && (
-                <aside className="related-links-container">
-                  <InternalLinks collectionInfo={data} />
-                </aside>
-              )}
-            </div>
-          </div>
-          <h3>Building Table</h3>
-          <p>
-            {data.bldg_data.length} buildings owned by {data.collection_name}
-          </p>
-          <Table
-            data={data.bldg_data}
-            columns={buildingColumns}
-            {...(data.collection_type === "lender" && {
-              pagination: true,
-              pageSize: 100,
-            })}
-            initialState={{
-              sorting: [{ id: "units_res", desc: true }],
-              columnPinning: { left: ["address"] },
-            }}
-          />
-        </>
-      )}
       {chartIsLoading && <div>loading...</div>}
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
       {chartData && data && (

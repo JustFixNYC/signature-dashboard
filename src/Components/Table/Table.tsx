@@ -21,9 +21,9 @@ import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
 import { Button, Icon } from "@justfixnyc/component-library";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
-type PageSizeOptions = (typeof pageSizeOptions)[number];
+export type PageSizeOptions = (typeof pageSizeOptions)[number];
 
-interface TableProps<T extends object> {
+export interface TableProps<T extends object> {
   data: T[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<T, any>[];
@@ -73,7 +73,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     pagination: hasPagination,
     pageSize = 50,
   } = props;
-
+  console.log('~~~ pagination', hasPagination)
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: pageSize,

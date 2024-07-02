@@ -5,19 +5,20 @@ import { AddressSearch, SelectOption } from "../../AddressSearch/AddressSearch";
 import selectOptions from "./buildings_options.json";
 import "./style.scss";
 import { PageTitle } from "../../PageTitle/PageTitle";
+import { BuildingTable } from "../../BuildingTable/BuildingTable";
 import { DownloadMultiBuildingCSV } from "../../CSVDownload/CSVDownload";
 import { useGetCollectionInfo } from "../../../api/hooks";
 
 export const NoBBL: React.FC = () => {
   const navigate = useNavigate();
 
+  const { data, error, isLoading } = useGetCollectionInfo("all");
+
   const onSelection = (newValue: SelectOption | null) => {
     if (newValue) {
       navigate(`/buildings?bbl=${newValue.value}`);
     }
   };
-
-  const { data, error, isLoading } = useGetCollectionInfo("all");
 
   return (
     <>
@@ -38,10 +39,13 @@ export const NoBBL: React.FC = () => {
         <br />
         <br />
         <AddressSearch options={selectOptions} onSelection={onSelection} />
+        <br />
       </div>
-
       {isLoading && <div>loading...</div>}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
+      {data && (
+        <BuildingTable data={data.bldg_data} pagination={true} pageSize={100} />
+      )}
     </>
   );
 };

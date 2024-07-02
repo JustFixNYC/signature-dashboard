@@ -6,6 +6,7 @@ import { AddressSearch, SelectOption } from "../../AddressSearch/AddressSearch";
 import selectOptions from "../Buildings/buildings_options.json";
 import { useNavigate } from "react-router-dom";
 import { PageTitle } from "../../PageTitle/PageTitle";
+import JFCLLinkInternal from "../../JFCLLinkInternal";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -28,6 +29,10 @@ export const Home: React.FC = () => {
         <br />
         <br />
         <AddressSearch options={selectOptions} onSelection={onSelection} />
+        <br />
+        <JFCLLinkInternal href="/entire-portfolio">
+          Entire Signature Portfolio
+        </JFCLLinkInternal>
       </div>
     </>
   );
