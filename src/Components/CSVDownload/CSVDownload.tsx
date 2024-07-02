@@ -50,7 +50,7 @@ export const generateMultiBuildingCSV = (data: CollectionInfo) => {
   const csvData = [];
   csvData.push(indicator_names);
   csvData.push(api_keys);
-  [...Array(bldgData.length).keys()].map((i) => {
+  [...Array(bldgData.length).keys()].forEach((i) => {
     const row = api_keys.map((x) => bldgData[i][x]);
     csvData.push(row);
   });
