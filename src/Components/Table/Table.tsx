@@ -17,6 +17,7 @@ import {
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
 import { CSSProperties, useMemo, useRef, useState } from "react";
+import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
 import { Button, Icon } from "@justfixnyc/component-library";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
@@ -77,6 +78,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     pageIndex: 0,
     pageSize: pageSize,
   });
+  const [columnVisibility, setColumnVisibility] = useState({});
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -88,8 +90,10 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     filterFns: {},
     initialState: { ...initialState },
     state: {
+      columnVisibility,
       columnFilters,
     },
+    onColumnVisibilityChange: setColumnVisibility,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -116,6 +120,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
 
   return (
     <>
+      <ColumnFilter table={table} />
       {!!columnFilters.length && (
         <Button
           labelText="Clear all filters"
@@ -152,7 +157,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                             <div className="column-header__label_sort">
                               {flexRender(
                                 header.column.columnDef.header,
-                                header.getContext()
+                                header.getContext(),
                               )}
                               {header.column.getCanSort() && (
                                 <span className="column-header__sort-icons">
