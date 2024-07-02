@@ -1,9 +1,9 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
+import { NoLandlord } from "./NoLandlord";
+import { LandlordInfo } from "./LandlordInfo";
 import "./style.scss";
-import { Collection } from "../../Collection/Collection";
-import { AllLandlords } from "./AllLandlords/AllLandlords";
 
 export const Landlords: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -11,8 +11,8 @@ export const Landlords: React.FC = () => {
 
   return (
     <>
-      {!landlord && <AllLandlords />}
-      {landlord && <Collection collection={landlord} />}
+      {!landlord && <NoLandlord />}
+      {landlord && <LandlordInfo landlord={landlord} />}
     </>
   );
 };
