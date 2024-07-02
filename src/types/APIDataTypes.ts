@@ -179,6 +179,7 @@ export interface APIChartData {
   dobviolations_regular: number;
   dobviolations_ecb: number;
   dobviolations_total: number;
+  dobpermits_jobs: number;
   evictions_executed: number;
   evictions_filed: number;
 }
