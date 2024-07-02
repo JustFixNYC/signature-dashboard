@@ -5,6 +5,8 @@ import { AddressSearch, SelectOption } from "../../AddressSearch/AddressSearch";
 import selectOptions from "./buildings_options.json";
 import "./style.scss";
 import { PageTitle } from "../../PageTitle/PageTitle";
+import { DownloadMultiBuildingCSV } from "../../CSVDownload/CSVDownload";
+import { useGetCollectionInfo } from "../../../api/hooks";
 
 export const NoBBL: React.FC = () => {
   const navigate = useNavigate();
@@ -15,8 +17,20 @@ export const NoBBL: React.FC = () => {
     }
   };
 
+  const { data, error, isLoading } = useGetCollectionInfo("all");
+
   return (
     <>
+      <div className="top-bar no-breadcrumbs">
+        <div className="top-bar-actions">
+          {!!data && (
+            <DownloadMultiBuildingCSV
+              data={data}
+              labelText="Download all data"
+            />
+          )}
+        </div>
+      </div>
       <PageTitle>Buildings</PageTitle>
 
       <div style={{ width: "fit-content" }}>
@@ -25,6 +39,9 @@ export const NoBBL: React.FC = () => {
         <br />
         <AddressSearch options={selectOptions} onSelection={onSelection} />
       </div>
+
+      {isLoading && <div>loading...</div>}
+      {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
     </>
   );
 };
