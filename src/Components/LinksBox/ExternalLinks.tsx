@@ -22,50 +22,40 @@ export const ExternalLinks: React.FC<RelatedLinksProps> = ({
           <JFCLLinkExternal
             href={buildingInfo.link_acris}
             className="related-link"
-            target="_blank"
           >
             View documents on ACRIS
           </JFCLLinkExternal>
           <JFCLLinkExternal
             href={buildingInfo.link_dob}
             className="related-link"
-            target="_blank"
           >
             DOB Building Profile
           </JFCLLinkExternal>
           <JFCLLinkExternal
             href={buildingInfo.link_hpd}
             className="related-link"
-            target="_blank"
           >
             HPD Building Profile
           </JFCLLinkExternal>
           <JFCLLinkExternal
             href={buildingInfo.link_wow}
             className="related-link"
-            target="_blank"
           >
             Who Owns What
           </JFCLLinkExternal>
           <JFCLLinkExternal
             href={buildingInfo.link_dap}
             className="related-link"
-            target="_blank"
           >
             ANHD DAP Portal
           </JFCLLinkExternal>
           <JFCLLinkExternal
             href={buildingInfo.link_political}
             className="related-link"
-            target="_blank"
           >
             Political Representatives
           </JFCLLinkExternal>
-          <JFCLLinkExternal
-            href={googleMapURL}
-            className="related-link"
-            target="_blank"
-          >
+          <JFCLLinkExternal href={googleMapURL} className="related-link">
             View on Google Maps
           </JFCLLinkExternal>
         </div>
