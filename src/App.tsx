@@ -12,6 +12,7 @@ import { Lenders } from "./Components/Pages/Lenders/Lenders";
 import { Home } from "./Components/Pages/Home/Home";
 import { About } from "./Components/Pages/About/About";
 import { Map } from "./Components/Pages/Map/Map";
+import { EntirePortfolio } from "./Components/Pages/EntirePortfolio/EntirePortfolio";
 
 function App() {
   const rollbar = useRollbar();
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route element={<PrivateRoutes />}>
             <Route index element={<Home />} />
+            <Route path="entire-portfolio" element={<EntirePortfolio />} />
             <Route path="buildings" element={<Buildings />} />
             <Route path="landlords" element={<Landlords />} />
             <Route path="lenders" element={<Lenders />} />
