@@ -30,6 +30,7 @@ import { EvictionsChart } from "../../BarChart/Evictions";
 import { BreadCrumbs } from "../../BreadCrumbs/BreadCrumbs";
 import { DOBPermitsChart } from "../../BarChart/DOBPermits";
 import { HPDERPChargesChart } from "../../BarChart/HPDERPCharges";
+import { RentStabilizedUnitsChart } from "../../BarChart/RentStabilized";
 export interface BuildingInfoProps {
   bbl: string;
 }
@@ -50,7 +51,10 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
   return (
     <>
       <BreadCrumbs
-        crumbs={[{path: '/buildings', name:"Buildings"}, {name: buildingInfo?.address}]}
+        crumbs={[
+          { path: "/buildings", name: "Buildings" },
+          { name: buildingInfo?.address },
+        ]}
       />
 
       {buildingInfoIsLoading && <div>loading...</div>}
@@ -201,6 +205,13 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
 
               <h4>HPD Emergency Repair Program Charges</h4>
               <HPDERPChargesChart
+                data={chartData}
+                originationDate={buildingInfo.origination_date}
+                lastSaleDate={buildingInfo.last_sale_date}
+              />
+
+              <h4>Rent Stabilized Units</h4>
+              <RentStabilizedUnitsChart
                 data={chartData}
                 originationDate={buildingInfo.origination_date}
                 lastSaleDate={buildingInfo.last_sale_date}
