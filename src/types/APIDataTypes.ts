@@ -5,6 +5,9 @@ export type Borough =
   | "Queens"
   | "Staten Island";
 
+export const indicatorsTimeSpans = ["month", "quarter", "year"] as const;
+export type IndicatorsTimeSpan = typeof indicatorsTimeSpans[number];
+
 export interface Indicators {
   bbl: string;
   address: string;
@@ -176,9 +179,12 @@ export interface APIChartData {
   hpdcomplaints_emergency: number;
   hpdcomplaints_nonemergency: number;
   hpdcomplaints_total: number;
+  hpderp_charges: number;
   dobviolations_regular: number;
   dobviolations_ecb: number;
   dobviolations_total: number;
+  dobpermits_jobs: number;
+  rentstab_units: number;
   evictions_executed: number;
   evictions_filed: number;
 }
