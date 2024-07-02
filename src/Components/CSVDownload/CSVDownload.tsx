@@ -1,5 +1,5 @@
 import React from "react";
-// import { Icon } from "@justfixnyc/component-library";
+import { Icon } from "@justfixnyc/component-library";
 import { BuildingInfo, CollectionInfo } from "../../types/APIDataTypes";
 import { INDICATOR_STRINGS, apiKeys, slugify } from "../../util/helpers";
 import { useCSVDownloader } from "react-papaparse";
@@ -83,7 +83,7 @@ export const DownloadCSV: React.FC<DownloadProps> = ({
       }}
       data={csvData}
     >
-      {/* <Icon icon="download" /> */}
+      <Icon icon="download" />
       {labelText}
     </CSVDownloader>
   );
