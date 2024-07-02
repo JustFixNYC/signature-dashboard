@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon } from "@justfixnyc/component-library";
+import "./styles.scss";
 import { BuildingInfo, CollectionInfo } from "../../types/APIDataTypes";
 import { INDICATOR_STRINGS, apiKeys, slugify } from "../../util/helpers";
 import { useCSVDownloader } from "react-papaparse";
