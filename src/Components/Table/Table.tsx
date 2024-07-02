@@ -1,6 +1,7 @@
 import {
   Column,
   ColumnDef,
+  ColumnFiltersState,
   InitialTableState,
   PaginationState,
   RowData,
@@ -71,10 +72,13 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     pagination: hasPagination,
     pageSize = 50,
   } = props;
+
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: pageSize,
   });
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -83,7 +87,10 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     columns,
     filterFns: {},
     initialState: { ...initialState },
-    state: {},
+    state: {
+      columnFilters,
+    },
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(), //client side filtering
@@ -96,7 +103,9 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   if (hasPagination) {
     options.getPaginationRowModel = getPaginationRowModel();
     options.onPaginationChange = setPagination;
-    options.state = { pagination };
+    if (options.state) {
+      options.state.pagination = pagination;
+    }
   }
 
   const table = useReactTable(options);
@@ -107,12 +116,14 @@ export const Table = <T extends object>(props: TableProps<T>) => {
 
   return (
     <>
-      <Button
-        labelText="Clear all filters"
-        onClick={clearFilters}
-        size="small"
-        className="clear-all"
-      />
+      {!!columnFilters.length && (
+        <Button
+          labelText="Clear all filters"
+          onClick={clearFilters}
+          size="small"
+          className="clear-all"
+        />
+      )}
       <div className="table-container" ref={containerRef}>
         <table className="collection-building-table">
           <thead>
@@ -318,7 +329,7 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
           column.setFilterValue(null);
         }
       }}
-      value={columnFilterValue?.toString()}
+      value={columnFilterValue ? columnFilterValue.toString() : ""}
     >
       <option value="">All</option>
       <option value="true">yes</option>
@@ -327,11 +338,10 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
   ) : filterVariant === "select" ? (
     <select
       onChange={(e) => column.setFilterValue(e.target.value)}
-      value={columnFilterValue?.toString()}
+      value={(columnFilterValue ?? "") as string}
     >
       <option value="">All</option>
       {sortedUniqueValues.map((value) => {
-        // console.log('~~~', value);
         return (
           <option value={value} key={value}>
             {value}
