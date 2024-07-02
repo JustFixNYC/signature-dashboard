@@ -29,6 +29,7 @@ import { HPDComplaintsChart } from "../../BarChart/HPDComplaints";
 import { EvictionsChart } from "../../BarChart/Evictions";
 import { BreadCrumbs } from "../../BreadCrumbs/BreadCrumbs";
 import { DOBPermitsChart } from "../../BarChart/DOBPermits";
+import { HPDERPChargesChart } from "../../BarChart/HPDERPCharges";
 export interface BuildingInfoProps {
   bbl: string;
 }
@@ -193,6 +194,13 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
 
               <h4>DOB Permits</h4>
               <DOBPermitsChart
+                data={chartData}
+                originationDate={buildingInfo.origination_date}
+                lastSaleDate={buildingInfo.last_sale_date}
+              />
+
+              <h4>HPD Emergency Repair Program Charges</h4>
+              <HPDERPChargesChart
                 data={chartData}
                 originationDate={buildingInfo.origination_date}
                 lastSaleDate={buildingInfo.last_sale_date}

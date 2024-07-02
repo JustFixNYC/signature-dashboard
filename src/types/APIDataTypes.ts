@@ -176,6 +176,7 @@ export interface APIChartData {
   hpdcomplaints_emergency: number;
   hpdcomplaints_nonemergency: number;
   hpdcomplaints_total: number;
+  hpderp_charges: number;
   dobviolations_regular: number;
   dobviolations_ecb: number;
   dobviolations_total: number;
