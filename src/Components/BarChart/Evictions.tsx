@@ -1,4 +1,5 @@
 import { APIChartData } from "../../types/APIDataTypes";
+import { yearlyChartData, groupData } from "../../util/helpers";
 import { BarChart } from "./BarChart";
 
 type EvictionsChartProps = {
@@ -14,19 +15,22 @@ export const EvictionsChart: React.FC<EvictionsChartProps> = ({
   lastSaleDate,
   className,
 }) => {
+  console.log({ data });
+  const yearlyFiledData: yearlyChartData[] = groupData(data, "evictions_filed", "year") as yearlyChartData[];
+  const yearlyExecutedData: yearlyChartData[] = groupData(data, "evictions_filed", "year") as yearlyChartData[];
   const datasets = [
     {
       label: "Cases Filed",
-      data: data.map((data) => ({
-        x: data.month,
+      data: yearlyFiledData.map((data) => ({
+        x: data.year,
         y: data.evictions_filed,
       })),
       backgroundColor: "#95CFEC",
     },
     {
       label: "Evictions Executed",
-      data: data.map((data) => ({
-        x: data.month,
+      data: yearlyExecutedData.map((data) => ({
+        x: data.year,
         y: data.evictions_executed,
       })),
       backgroundColor: "#43B19F",
@@ -38,6 +42,7 @@ export const EvictionsChart: React.FC<EvictionsChartProps> = ({
       yAxisTitle="Evictions"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}
+      timeUnit="year"
       className={className}
     />
   );

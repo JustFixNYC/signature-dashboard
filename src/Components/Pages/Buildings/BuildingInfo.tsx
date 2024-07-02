@@ -29,6 +29,9 @@ import { HPDComplaintsChart } from "../../BarChart/HPDComplaints";
 import { EvictionsChart } from "../../BarChart/Evictions";
 import { BreadCrumbs } from "../../BreadCrumbs/BreadCrumbs";
 import { DownloadBuildingCSV } from "../../CSVDownload/CSVDownload";
+import { DOBPermitsChart } from "../../BarChart/DOBPermits";
+import { HPDERPChargesChart } from "../../BarChart/HPDERPCharges";
+import { RentStabilizedUnitsChart } from "../../BarChart/RentStabilized";
 export interface BuildingInfoProps {
   bbl: string;
 }
@@ -198,6 +201,27 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
 
               <h4>DOB/ECB Violations</h4>
               <DOBViolationsChart
+                data={chartData}
+                originationDate={buildingInfo.origination_date}
+                lastSaleDate={buildingInfo.last_sale_date}
+              />
+
+              <h4>DOB Permits</h4>
+              <DOBPermitsChart
+                data={chartData}
+                originationDate={buildingInfo.origination_date}
+                lastSaleDate={buildingInfo.last_sale_date}
+              />
+
+              <h4>HPD Emergency Repair Program Charges</h4>
+              <HPDERPChargesChart
+                data={chartData}
+                originationDate={buildingInfo.origination_date}
+                lastSaleDate={buildingInfo.last_sale_date}
+              />
+
+              <h4>Rent Stabilized Units</h4>
+              <RentStabilizedUnitsChart
                 data={chartData}
                 originationDate={buildingInfo.origination_date}
                 lastSaleDate={buildingInfo.last_sale_date}

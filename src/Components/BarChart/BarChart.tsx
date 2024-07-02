@@ -18,6 +18,7 @@ import classNames from "classnames";
 import { useId, useState } from "react";
 import { RadioButton } from "@justfixnyc/component-library";
 import { formatDate } from "../../util/helpers";
+import { IndicatorsTimeSpan } from "../../types/APIDataTypes";
 
 ChartJS.register(
   CategoryScale,
@@ -40,7 +41,33 @@ type BuildingBAndCChartProps = {
   yAxisTitle: string;
   className?: string;
   stacked?: boolean;
+  timeUnit?: IndicatorsTimeSpan;
 };
+
+const getTooltipDate = (value: string, timeUnit: IndicatorsTimeSpan) => {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+  };
+
+  if (timeUnit === "month") {
+    options.month = "long"
+  }
+
+  const formattedDate = new Date(value).toLocaleDateString("en", options);
+  return formattedDate;
+}
+
+const getXTickLabel = (value: number, timeUnit: IndicatorsTimeSpan) => {
+  const date = new Date(value);
+  if (timeUnit === "year") {
+    return date.getFullYear();
+  } else {
+    const month = date.toLocaleDateString("en", { month: "short" });
+    return (
+      (date.getMonth() === 0 ? date.getFullYear() + "  " : "") + month
+    );
+  }
+}
 
 export const BarChart: React.FC<BuildingBAndCChartProps> = ({
   datasets,
@@ -48,10 +75,11 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
   lastSaleDate,
   stacked,
   yAxisTitle,
+  timeUnit = "month",
   className,
 }) => {
   const [timespan, setTimespan] = useState<"two-years" | "all-time">(
-    "two-years",
+    timeUnit !== "year" ? "two-years": "all-time",
   );
   const radioID = useId();
 
@@ -60,16 +88,14 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
       tooltip: {
         callbacks: {
           title: (context: TooltipItem<"bar">[]) => {
-            const date = new Date(context[0].label).toLocaleDateString("en", {
-              year: "numeric",
-              month: "long",
-            });
-            return date;
+            return getTooltipDate(context[0].label, timeUnit)
           },
           footer: (context: TooltipItem<"bar">[]) => {
             let total = 0;
             context.forEach((context) => {
-              total += context.raw.y;
+              // in cace the y value is null or undefined
+              const value = context.raw.y || 0
+              total += value;
             });
             return "Total: " + total;
           },
@@ -141,20 +167,15 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
         min: timespan === "two-years" ? twoYearsAgo : null,
         autoSkip: false,
         time: {
-          unit: "month",
+          unit: timeUnit,
         },
         ticks: {
           font: {
             family: "Degular",
             size: 13,
           },
-          callback: function (value: string | number) {
-            const fullDate: string = this.getLabelForValue(value); // Make date value include a day so it can be parsed
-            const date = new Date(fullDate);
-            const month = date.toLocaleDateString("en", { month: "short" });
-            return (
-              (date.getMonth() === 0 ? date.getFullYear() + "  " : "") + month
-            );
+          callback: function (value: number) {
+            return getXTickLabel(value, timeUnit);
           },
         },
       },
