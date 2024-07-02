@@ -58,6 +58,8 @@ export interface Indicators {
   link_dap: string;
   link_dob: string;
   link_hpd: string;
+  link_wow: string;
+  link_political: string;
   origination_date: string;
   rs_units: number;
   stsen_dist: number;
@@ -88,6 +90,8 @@ export type BuildingInfo = {
   | "link_acris"
   | "link_dob"
   | "link_dap"
+  | "link_wow"
+  | "link_political"
   | "units_nonres"
   | "units_res"
   | "rs_units"
