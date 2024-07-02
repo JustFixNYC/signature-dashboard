@@ -1,14 +1,14 @@
 import { APIChartData } from "../../types/APIDataTypes";
 import { BarChart } from "./BarChart";
 
-type HPDERPChargesChartChartProps = {
+type HPDERPChargesChartProps = {
   data: APIChartData[];
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
 };
 
-export const HPDERPChargesChart: React.FC<HPDERPChargesChartChartProps> = ({
+export const HPDERPChargesChart: React.FC<HPDERPChargesChartProps> = ({
   data,
   originationDate,
   lastSaleDate,
