@@ -21,18 +21,18 @@ export const generateBuildingCSV = (data: BuildingInfo) => {
     csvData.push([api_keys[i], indicator_names[i], descriptions[i], values[i]]);
   });
 
-  const base_url = import.meta.env.BASE_URL;
+  const base_url = window.location.host;
   csvData.push([
     "link_lender",
     "",
     "",
-    `${base_url}lenders?lender=${data.lender_slug}`,
+    `${base_url}/lenders?lender=${data.lender_slug}`,
   ]);
   csvData.push([
     "link_landlord",
     "",
     "",
-    `${base_url}landlords?landlord=${data.landlord_slug}`,
+    `${base_url}/landlords?landlord=${data.landlord_slug}`,
   ]);
 
   return csvData;
