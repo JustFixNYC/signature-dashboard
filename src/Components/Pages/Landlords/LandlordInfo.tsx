@@ -1,12 +1,13 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
-import "./style.scss";
 import { Collection } from "../../Collection/Collection";
 import { BreadCrumbs } from "../../BreadCrumbs/BreadCrumbs";
 import { PageTitle } from "../../PageTitle/PageTitle";
 import { useGetCollectionInfo } from "../../../api/hooks";
 import { CollectionSummaryTable } from "../../Collection/CollectionSummaryTable/CollectionSummaryTable";
 import { InternalLinks } from "../../LinksBox/InternalLinks";
+import { DownloadMultiBuildingCSV } from "../../CSVDownload/CSVDownload";
+import "./style.scss";
 
 interface LandlordInfoProps {
   landlord: string;
@@ -20,12 +21,22 @@ export const LandlordInfo: React.FC<LandlordInfoProps> = ({ landlord }) => {
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
         <>
-          <BreadCrumbs
-            crumbs={[
-              { path: "/landlords", name: "Landlords" },
-              { name: data.collection_name },
-            ]}
-          />
+          <div className="top-bar">
+            <BreadCrumbs
+              crumbs={[
+                { path: "/landlords", name: "Landlords" },
+                { name: data.collection_name },
+              ]}
+            />
+            <div className="top-bar-actions">
+              {!!data && (
+                <DownloadMultiBuildingCSV
+                  data={data}
+                  labelText="Download building data"
+                />
+              )}
+            </div>
+          </div>
           <div className="layout-two-col">
             <div>
               <PageTitle>{data.collection_name}</PageTitle>

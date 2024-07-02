@@ -7,6 +7,7 @@ import { PageTitle } from "../../PageTitle/PageTitle";
 import { useGetCollectionInfo } from "../../../api/hooks";
 import { CollectionSummaryTable } from "../../Collection/CollectionSummaryTable/CollectionSummaryTable";
 import { InternalLinks } from "../../LinksBox/InternalLinks";
+import { DownloadMultiBuildingCSV } from "../../CSVDownload/CSVDownload";
 
 interface LenderInfoProps {
   lender: string;
@@ -20,12 +21,22 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
         <>
-          <BreadCrumbs
-            crumbs={[
-              { path: "/lenders", name: "Lenders" },
-              { name: data.collection_name },
-            ]}
-          />
+          <div className="top-bar">
+            <BreadCrumbs
+              crumbs={[
+                { path: "/lenders", name: "Lenders" },
+                { name: data.collection_name },
+              ]}
+            />
+            <div className="top-bar-actions">
+              {!!data && (
+                <DownloadMultiBuildingCSV
+                  data={data}
+                  labelText="Download building data"
+                />
+              )}
+            </div>
+          </div>
           <div className="layout-two-col">
             <div>
               <PageTitle>{data.collection_name}</PageTitle>
