@@ -6,6 +6,7 @@ import selectOptions from "./buildings_options.json";
 import "./style.scss";
 import { PageTitle } from "../../PageTitle/PageTitle";
 import { BuildingTable } from "../../BuildingTable/BuildingTable";
+import { DownloadMultiBuildingCSV } from "../../CSVDownload/CSVDownload";
 import { useGetCollectionInfo } from "../../../api/hooks";
 
 export const NoBBL: React.FC = () => {
@@ -21,6 +22,16 @@ export const NoBBL: React.FC = () => {
 
   return (
     <>
+      <div className="top-bar no-breadcrumbs">
+        <div className="top-bar-actions">
+          {!!data && (
+            <DownloadMultiBuildingCSV
+              data={data}
+              labelText="Download all data"
+            />
+          )}
+        </div>
+      </div>
       <PageTitle>Buildings</PageTitle>
 
       <div style={{ width: "fit-content" }}>

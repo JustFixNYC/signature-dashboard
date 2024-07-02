@@ -4,10 +4,10 @@ import { useGetCollectionChartData } from "../../api/hooks";
 import { DOBViolationsChart } from "../BarChart/DOBViolations";
 import { HPDComplaintsChart } from "../BarChart/HPDComplaints";
 import { HPDViolationsChart } from "../BarChart/HPDViolations";
-import "./style.scss";
 import { EvictionsChart } from "../BarChart/Evictions";
 import { BuildingTable } from "../BuildingTable/BuildingTable";
 import { CollectionInfo } from "../../types/APIDataTypes";
+import "./style.scss";
 
 type CollectionProps = {
   collection: string;

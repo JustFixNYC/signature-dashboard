@@ -28,6 +28,7 @@ import { HPDViolationsChart } from "../../BarChart/HPDViolations";
 import { HPDComplaintsChart } from "../../BarChart/HPDComplaints";
 import { EvictionsChart } from "../../BarChart/Evictions";
 import { BreadCrumbs } from "../../BreadCrumbs/BreadCrumbs";
+import { DownloadBuildingCSV } from "../../CSVDownload/CSVDownload";
 import { DOBPermitsChart } from "../../BarChart/DOBPermits";
 import { HPDERPChargesChart } from "../../BarChart/HPDERPCharges";
 import { RentStabilizedUnitsChart } from "../../BarChart/RentStabilized";
@@ -50,13 +51,22 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
 
   return (
     <>
-      <BreadCrumbs
-        crumbs={[
-          { path: "/buildings", name: "Buildings" },
-          { name: buildingInfo?.address },
-        ]}
-      />
-
+      <div className="top-bar">
+        <BreadCrumbs
+          crumbs={[
+            { path: "/buildings", name: "Buildings" },
+            { name: buildingInfo?.address },
+          ]}
+        />
+        <div className="top-bar-actions">
+          {!!buildingInfo && (
+            <DownloadBuildingCSV
+              data={buildingInfo}
+              labelText="Download building data"
+            />
+          )}
+        </div>
+      </div>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfoError && (
         <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>
