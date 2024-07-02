@@ -5,6 +5,9 @@ export type Borough =
   | "Queens"
   | "Staten Island";
 
+export const indicatorsTimeSpans = ["month", "quarter", "year"] as const;
+export type IndicatorsTimeSpan = typeof indicatorsTimeSpans[number];
+
 export interface Indicators {
   bbl: string;
   address: string;

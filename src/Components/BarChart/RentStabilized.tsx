@@ -1,4 +1,5 @@
 import { APIChartData } from "../../types/APIDataTypes";
+import { groupData, yearlyChartData } from "../../util/helpers";
 import { BarChart } from "./BarChart";
 
 type RentStabilizedUnitsChartProps = {
@@ -8,17 +9,15 @@ type RentStabilizedUnitsChartProps = {
   lastSaleDate?: string;
 };
 
-export const RentStabilizedUnitsChart: React.FC<RentStabilizedUnitsChartProps> = ({
-  data,
-  originationDate,
-  lastSaleDate,
-  className,
-}) => {
+export const RentStabilizedUnitsChart: React.FC<
+  RentStabilizedUnitsChartProps
+> = ({ data, originationDate, lastSaleDate, className }) => {
+  const yearlyData: yearlyChartData[] = groupData(data, "rentstab_units", "year") as yearlyChartData[];
   const datasets = [
     {
       label: "Units",
-      data: data.map((data) => ({
-        x: data.month,
+      data: yearlyData.map((data) => ({
+        x: data.year,
         y: data.rentstab_units,
       })),
       backgroundColor: "#95CFEC",
@@ -32,6 +31,7 @@ export const RentStabilizedUnitsChart: React.FC<RentStabilizedUnitsChartProps> =
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}
       stacked={true}
+      timeUnit="year"
       className={className}
     />
   );
