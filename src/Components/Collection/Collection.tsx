@@ -15,6 +15,7 @@ import { HPDViolationsChart } from "../BarChart/HPDViolations";
 import "./style.scss";
 import { EvictionsChart } from "../BarChart/Evictions";
 import { BreadCrumbs } from "../BreadCrumbs/BreadCrumbs";
+import { DownloadMultiBuildingCSV } from "../CSVDownload/CSVDownload";
 
 type CollectionProps = {
   collection: string;
@@ -35,17 +36,32 @@ export const Collection: React.FC<CollectionProps> = ({ collection }) => {
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
         <>
-          {data.collection_type === "landlord" && (
-            <BreadCrumbs
-              crumbs={[
-                { path: "/landlords", name: "Landlords" },
-                { name: data.collection_name },
-              ]}
-            />
-          )}
-          {data.collection_type === "lender" && (
-            <BreadCrumbs crumbs={[{path: "/lenders", name: "Lenders"}, {name: data.collection_name}]} />
-          )}
+          <div className="top-bar">
+            {data.collection_type === "landlord" && (
+              <BreadCrumbs
+                crumbs={[
+                  { path: "/landlords", name: "Landlords" },
+                  { name: data.collection_name },
+                ]}
+              />
+            )}
+            {data.collection_type === "lender" && (
+              <BreadCrumbs
+                crumbs={[
+                  { path: "/lenders", name: "Lenders" },
+                  { name: data.collection_name },
+                ]}
+              />
+            )}
+            <div className="top-bar-actions">
+              {!!data && (
+                <DownloadMultiBuildingCSV
+                  data={data}
+                  labelText="Download building data"
+                />
+              )}
+            </div>
+          </div>
           <div className="layout-two-col">
             <div>
               {data.collection_type === "landlord" && (

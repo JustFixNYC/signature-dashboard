@@ -14,7 +14,6 @@ export const EvictionsChart: React.FC<EvictionsChartProps> = ({
   lastSaleDate,
   className,
 }) => {
-  console.log({ data });
   const datasets = [
     {
       label: "Cases Filed",
