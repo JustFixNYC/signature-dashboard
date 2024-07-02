@@ -9,6 +9,9 @@
 .top-bar {
   display: flex;
   justify-content: space-between;
+  &.no-breadcrumbs {
+    justify-content: end;
+  }
 }
 
 .building-address {

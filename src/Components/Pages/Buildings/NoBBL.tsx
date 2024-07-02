@@ -21,7 +21,7 @@ export const NoBBL: React.FC = () => {
 
   return (
     <>
-      <div className="top-bar">
+      <div className="top-bar no-breadcrumbs">
         <div className="top-bar-actions">
           {!!data && (
             <DownloadMultiBuildingCSV
