@@ -58,34 +58,39 @@ export const formatDate = (value: string) => {
 };
 
 export type yearlyChartData = {
-  [x in keyof Omit<APIChartData, 'month'>]: number;
+  [x in keyof Omit<APIChartData, "month">]: number;
 } & {
   year: string;
 };
-  /** Returns grouped data to match selected time span */
-export const groupData = (dataArray: APIChartData[], apiKey: keyof Omit<APIChartData, 'month'>, timeSpan: IndicatorsTimeSpan) => {
-    // if (dataArray && timeSpan === "quarter") {
-      // const dataByQuarter = [];
-      // for (let i = 2; i < dataArray.length; i = i + 3) {
-      //   const sumQuarter = dataArray[i] + dataArray[i - 1] + dataArray[i - 2];
-      //   dataByQuarter.push(sumQuarter);
-      // }
-      // return dataByQuarter;
-    // } else
-    if (timeSpan === "year") {
-      const dataByYear = [];
-      for (let i = 11; i < dataArray.length; i = i + 12) {
-        const chartData = dataArray[i];
-        const year = new Date(chartData.month).getFullYear().toString();
-        const sumYear = dataArray.slice(i - 11, i + 1).reduce((total, chartData) => total + chartData[apiKey], 0);
-        dataByYear.push({year: year, [apiKey]: sumYear});
-      }
-      console.log({dataByYear})
-      return dataByYear;
-    } else {
-      return dataArray;
+/** Returns grouped data to match selected time span */
+export const groupData = (
+  dataArray: APIChartData[],
+  apiKey: keyof Omit<APIChartData, "month">,
+  timeSpan: IndicatorsTimeSpan,
+) => {
+  // if (dataArray && timeSpan === "quarter") {
+  // const dataByQuarter = [];
+  // for (let i = 2; i < dataArray.length; i = i + 3) {
+  //   const sumQuarter = dataArray[i] + dataArray[i - 1] + dataArray[i - 2];
+  //   dataByQuarter.push(sumQuarter);
+  // }
+  // return dataByQuarter;
+  // } else
+  if (timeSpan === "year") {
+    const dataByYear = [];
+    for (let i = 11; i < dataArray.length; i = i + 12) {
+      const chartData = dataArray[i];
+      const year = new Date(chartData.month).getFullYear().toString();
+      const sumYear = dataArray
+        .slice(i - 11, i + 1)
+        .reduce((total, chartData) => total + chartData[apiKey], 0);
+      dataByYear.push({ year: year, [apiKey]: sumYear });
     }
+    return dataByYear;
+  } else {
+    return dataArray;
   }
+};
 
 export type apiKeys =
   | keyof BuildingInfo
@@ -450,4 +455,18 @@ export const showYesNo = (value: boolean) => {
   } else if (value === false) {
     return "no";
   }
+};
+
+export const slugify = (text: string) => {
+  // https://gist.github.com/codeguy/6684588?permalink_comment_id=4325476#gistcomment-4325476
+  return text
+    .toString() // Cast to string (optional)
+    .normalize("NFKD") // The normalize() using NFKD method returns the Unicode Normalization Form of a given string.
+    .toLowerCase() // Convert the string to lowercase letters
+    .trim() // Remove whitespace from both sides of a string (optional)
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/[^\w-]+/g, "") // Remove all non-word chars
+    .replace(/_/g, "-") // Replace _ with -
+    .replace(/--+/g, "-") // Replace multiple - with single -
+    .replace(/-$/g, ""); // Remove trailing -
 };

@@ -28,6 +28,7 @@ import { HPDViolationsChart } from "../../BarChart/HPDViolations";
 import { HPDComplaintsChart } from "../../BarChart/HPDComplaints";
 import { EvictionsChart } from "../../BarChart/Evictions";
 import { BreadCrumbs } from "../../BreadCrumbs/BreadCrumbs";
+import { DownloadBuildingCSV } from "../../CSVDownload/CSVDownload";
 import { DOBPermitsChart } from "../../BarChart/DOBPermits";
 import { HPDERPChargesChart } from "../../BarChart/HPDERPCharges";
 import { RentStabilizedUnitsChart } from "../../BarChart/RentStabilized";
@@ -50,13 +51,20 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
 
   return (
     <>
-      <BreadCrumbs
-        crumbs={[
-          { path: "/buildings", name: "Buildings" },
-          { name: buildingInfo?.address },
-        ]}
-      />
-
+      <div className="top-bar">
+        <BreadCrumbs
+          crumbs={[
+            { path: "/buildings", name: "Buildings" },
+            { name: buildingInfo?.address },
+          ]}
+        />
+        <div className="top-bar-actions">
+          <DownloadBuildingCSV
+            data={buildingInfo}
+            labelText="Download building data"
+          />
+        </div>
+      </div>
       {buildingInfoIsLoading && <div>loading...</div>}
       {buildingInfoError && (
         <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>
@@ -74,15 +82,25 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
               <div>Zip: {buildingInfo.zip}</div>
               <div>
                 Landlord:{" "}
-                <Link to={`/landlords?landlord=${buildingInfo.landlord_slug}`}>
-                  {buildingInfo.landlord}
-                </Link>
+                {buildingInfo.landlord ? (
+                  <Link
+                    to={`/landlords?landlord=${buildingInfo.landlord_slug}`}
+                  >
+                    {buildingInfo.landlord}
+                  </Link>
+                ) : (
+                  <span className="not-available">Not available</span>
+                )}
               </div>
               <div>
                 Lender:{" "}
-                <Link to={`/lenders?lender=${buildingInfo.lender_slug}`}>
-                  {buildingInfo.lender}
-                </Link>
+                {buildingInfo.lender ? (
+                  <Link to={`/lenders?lender=${buildingInfo.lender_slug}`}>
+                    {buildingInfo.lender}
+                  </Link>
+                ) : (
+                  <span className="not-available">N/A</span>
+                )}
               </div>
 
               <h3>Summary</h3>

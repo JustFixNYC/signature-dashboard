@@ -4,6 +4,11 @@
   gap: 1.5rem; // 24px
 }
 
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
 .cell__address,
 .cell__landlord {
   text-align: left;

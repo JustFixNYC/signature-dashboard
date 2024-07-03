@@ -1,8 +1,8 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import { Collection } from "../../Collection/Collection";
-import { AllLandlords } from "./AllLandlords/AllLandlords";
+import { NoLandlord } from "./NoLandlord";
+import { LandlordInfo } from "./LandlordInfo";
 import { LandlordSearch } from "../../AlgoliaSearch/AlgoliaSearch";
 import "./style.scss";
 
@@ -15,10 +15,10 @@ export const Landlords: React.FC = () => {
       {!landlord && (
         <>
           <LandlordSearch labelText="Search for landlord by name" />
-          <AllLandlords />
+          <NoLandlord />
         </>
       )}
-      {landlord && <Collection collection={landlord} />}
+      {landlord && <LandlordInfo landlord={landlord} />}
     </>
   );
 };

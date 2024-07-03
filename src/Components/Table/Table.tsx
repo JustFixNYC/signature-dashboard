@@ -1,6 +1,7 @@
 import {
   Column,
   ColumnDef,
+  ColumnFiltersState,
   InitialTableState,
   PaginationState,
   RowData,
@@ -16,12 +17,13 @@ import {
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
 import { CSSProperties, useMemo, useRef, useState } from "react";
+import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
 import { Button, Icon } from "@justfixnyc/component-library";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
-type PageSizeOptions = (typeof pageSizeOptions)[number];
+export type PageSizeOptions = (typeof pageSizeOptions)[number];
 
-interface TableProps<T extends object> {
+export interface TableProps<T extends object> {
   data: T[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<T, any>[];
@@ -75,6 +77,9 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     pageIndex: 0,
     pageSize: pageSize,
   });
+  const [columnVisibility, setColumnVisibility] = useState({});
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -83,7 +88,12 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     columns,
     filterFns: {},
     initialState: { ...initialState },
-    state: {},
+    state: {
+      columnVisibility,
+      columnFilters,
+    },
+    onColumnVisibilityChange: setColumnVisibility,
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(), //client side filtering
@@ -96,7 +106,9 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   if (hasPagination) {
     options.getPaginationRowModel = getPaginationRowModel();
     options.onPaginationChange = setPagination;
-    options.state = { pagination };
+    if (options.state) {
+      options.state.pagination = pagination;
+    }
   }
 
   const table = useReactTable(options);
@@ -107,12 +119,15 @@ export const Table = <T extends object>(props: TableProps<T>) => {
 
   return (
     <>
-      <Button
-        labelText="Clear all filters"
-        onClick={clearFilters}
-        size="small"
-        className="clear-all"
-      />
+      <ColumnFilter table={table} />
+      {!!columnFilters.length && (
+        <Button
+          labelText="Clear all filters"
+          onClick={clearFilters}
+          size="small"
+          className="clear-all"
+        />
+      )}
       <div className="table-container" ref={containerRef}>
         <table className="collection-building-table">
           <thead>
@@ -141,7 +156,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                             <div className="column-header__label_sort">
                               {flexRender(
                                 header.column.columnDef.header,
-                                header.getContext()
+                                header.getContext(),
                               )}
                               {header.column.getCanSort() && (
                                 <span className="column-header__sort-icons">
@@ -284,7 +299,7 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
         : Array.from(uniqeValues.keys())
             .filter((v) => v !== undefined)
             .sort(),
-    [uniqeValues, filterVariant]
+    [uniqeValues, filterVariant],
   );
   return filterVariant === "range" ? (
     <div>
@@ -318,7 +333,11 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
           column.setFilterValue(null);
         }
       }}
-      value={columnFilterValue?.toString()}
+      value={
+        columnFilterValue === true || columnFilterValue === false
+          ? columnFilterValue.toString()
+          : ""
+      }
     >
       <option value="">All</option>
       <option value="true">yes</option>
@@ -327,11 +346,10 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
   ) : filterVariant === "select" ? (
     <select
       onChange={(e) => column.setFilterValue(e.target.value)}
-      value={columnFilterValue?.toString()}
+      value={(columnFilterValue ?? "") as string}
     >
       <option value="">All</option>
       {sortedUniqueValues.map((value) => {
-        // console.log('~~~', value);
         return (
           <option value={value} key={value}>
             {value}

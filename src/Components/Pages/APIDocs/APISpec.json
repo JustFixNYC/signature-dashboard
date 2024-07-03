@@ -67,15 +67,25 @@
           },
           "link_acris": {
             "type": "string",
-            "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
+            "example": "http://a836-acris.nyc.gov/bblsearch/bblsearch.asp?borough=3&block=7198&lot=6",
             "description": "Link to ACRIS for the building."
           },
           "link_dob": {
             "type": "string",
-            "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
+            "example": "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=3&block=7198&lot=6",
             "description": "Link to DOB's website for the building."
           },
           "link_dap": {
+            "type": "string",
+            "example": "https://portal.displacementalert.org/property/3071980006",
+            "description": "Link to ANHD's DAP Portal for the building."
+          },
+          "link_wow": {
+            "type": "string",
+            "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
+            "description": "Link to ANHD's DAP Portal for the building."
+          },
+          "link_political": {
             "type": "string",
             "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
             "description": "Link to ANHD's DAP Portal for the building."
@@ -396,7 +406,7 @@
           },
           "hpderp_charges": {
             "type": "number",
-            "example": 10.50,
+            "example": 10.5,
             "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the given month."
           }
         }

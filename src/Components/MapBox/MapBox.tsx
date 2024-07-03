@@ -156,9 +156,13 @@ export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
 
             <div>
               <span className="label-name">Landlord:</span>{" "}
-              <Link to={`/landlords?landlord=${selectedAddr.landlord_slug}`}>
-                {selectedAddr.landlord}
-              </Link>
+              {selectedAddr.landlord ? (
+                <Link to={`/landlords?landlord=${selectedAddr.landlord_slug}`}>
+                  {selectedAddr.landlord}
+                </Link>
+              ) : (
+                <span className="not-available">Not available</span>
+              )}
             </div>
             <div>
               <span className="label-name">Lender:</span>{" "}
