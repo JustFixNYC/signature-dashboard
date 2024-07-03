@@ -22,17 +22,17 @@ export const NoBBL: React.FC = () => {
 
   return (
     <>
-      <div className="top-bar no-breadcrumbs">
+      <div className="top-bar">
+        <PageTitle>Buildings</PageTitle>
         <div className="top-bar-actions">
           {!!data && (
             <DownloadMultiBuildingCSV
               data={data}
-              labelText="Download all data"
+              labelText="Download all"
             />
           )}
         </div>
       </div>
-      <PageTitle>Buildings</PageTitle>
 
       <div style={{ width: "fit-content" }}>
         Find a building in the Signature portfolio by entering the address

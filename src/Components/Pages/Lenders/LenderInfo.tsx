@@ -32,7 +32,7 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
               {!!data && (
                 <DownloadMultiBuildingCSV
                   data={data}
-                  labelText="Download building data"
+                  labelText={`Download ${data.collection_name} data`}
                 />
               )}
             </div>
