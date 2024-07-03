@@ -91,7 +91,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                     {buildingInfo.landlord}
                   </Link>
                 ) : (
-                  <span className="not-available">N/A</span>
+                  <span className="not-available">Not available</span>
                 )}
               </div>
               <div>

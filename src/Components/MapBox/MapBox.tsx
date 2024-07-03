@@ -161,7 +161,7 @@ export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
                   {selectedAddr.landlord}
                 </Link>
               ) : (
-                <span className="not-available">N/A</span>
+                <span className="not-available">Not available</span>
               )}
             </div>
             <div>
