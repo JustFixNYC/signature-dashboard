@@ -334,7 +334,11 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
           column.setFilterValue(null);
         }
       }}
-      value={columnFilterValue ? columnFilterValue.toString() : ""}
+      value={
+        columnFilterValue === true || columnFilterValue === false
+          ? columnFilterValue.toString()
+          : ""
+      }
     >
       <option value="">All</option>
       <option value="true">yes</option>
