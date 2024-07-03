@@ -29,12 +29,10 @@ export const LandlordInfo: React.FC<LandlordInfoProps> = ({ landlord }) => {
               ]}
             />
             <div className="top-bar-actions">
-              {!!data && (
-                <DownloadMultiBuildingCSV
-                  data={data}
-                  labelText="Download building data"
-                />
-              )}
+              <DownloadMultiBuildingCSV
+                data={data}
+                labelText="Download landlord data"
+              />
             </div>
           </div>
           <div className="layout-two-col">

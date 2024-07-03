@@ -59,12 +59,10 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
           ]}
         />
         <div className="top-bar-actions">
-          {!!buildingInfo && (
-            <DownloadBuildingCSV
-              data={buildingInfo}
-              labelText="Download building data"
-            />
-          )}
+          <DownloadBuildingCSV
+            data={buildingInfo}
+            labelText="Download building data"
+          />
         </div>
       </div>
       {buildingInfoIsLoading && <div>loading...</div>}
