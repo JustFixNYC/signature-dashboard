@@ -2,6 +2,7 @@ import {
   Column,
   ColumnDef,
   ColumnFiltersState,
+  FilterFn,
   InitialTableState,
   PaginationState,
   RowData,
@@ -19,9 +20,38 @@ import DebouncedInput from "../DebouncedInput";
 import { CSSProperties, useMemo, useRef, useState } from "react";
 import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
 import { Button, Icon } from "@justfixnyc/component-library";
+import ReactSelect, { MultiValue } from "react-select";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
 export type PageSizeOptions = (typeof pageSizeOptions)[number];
+
+const includesMultiple: FilterFn<unknown> = (
+  row,
+  columnId: string,
+  filterValues: string[]
+) => {
+  // If no filter values, return all rows
+  if (!filterValues || !filterValues.length) {
+    return true;
+  }
+
+  const rowValue = row.getValue<string | null>(columnId)?.toLowerCase();
+
+  // if rowValue is null or undefined do NOT return it in the results
+  if (rowValue === null || rowValue === undefined) {
+    return false;
+  }
+
+  // check if the row value is in the array of filter values
+  return filterValues.includes(rowValue);
+};
+
+// remove the filter value from filter state if it is falsy (empty string in this case)
+includesMultiple.autoRemove = (val: string[]) => !val.length;
+
+// transform/sanitize/format the filter value before it is passed to the filter function
+includesMultiple.resolveFilterValue = (val: string) =>
+  val.toString().toLowerCase().trim();
 
 export interface TableProps<T extends object> {
   data: T[];
@@ -36,7 +66,7 @@ declare module "@tanstack/react-table" {
   // allows us to define custom properties for our columns (copied from WoW)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ColumnMeta<TData extends RowData, TValue> {
-    filterVariant?: "range" | "boolean" | "select" | "text";
+    filterVariant?: "range" | "boolean" | "select" | "multiselect" | "text";
     inputWidth?: string;
   }
 }
@@ -61,7 +91,7 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
     backgroundColor: isPinned ? "white" : "initial",
     position: isPinned ? "sticky" : "relative",
     width: column.getSize(),
-    zIndex: isPinned ? 1 : 0,
+    ...(isPinned && { zIndex: 10 }),
   };
 };
 
@@ -73,7 +103,6 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     pagination: hasPagination,
     pageSize = 50,
   } = props;
-  console.log('~~~ pagination', hasPagination)
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: pageSize,
@@ -87,7 +116,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   const options: TableOptions<T> = {
     data,
     columns,
-    filterFns: {},
+    filterFns: { includesMultiple },
     initialState: { ...initialState },
     state: {
       columnVisibility,
@@ -157,7 +186,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                             <div className="column-header__label_sort">
                               {flexRender(
                                 header.column.columnDef.header,
-                                header.getContext(),
+                                header.getContext()
                               )}
                               {header.column.getCanSort() && (
                                 <span className="column-header__sort-icons">
@@ -293,15 +322,21 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
 
   const uniqeValues = column.getFacetedUniqueValues();
 
-  const sortedUniqueValues = useMemo(
-    () =>
-      filterVariant === "range" || filterVariant === "boolean"
-        ? []
-        : Array.from(uniqeValues.keys())
-            .filter((v) => v !== undefined)
-            .sort(),
-    [uniqeValues, filterVariant]
-  );
+  const sortedUniqueValues = useMemo(() => {
+    if (filterVariant === "range" || filterVariant === "boolean") {
+      return [];
+    } else if (filterVariant === "multiselect") {
+      return Array.from(uniqeValues.keys())
+        .filter((v) => v !== undefined)
+        .sort()
+        .map((value) => {
+          return { value: value, label: value };
+        });
+    } else
+      return Array.from(uniqeValues.keys())
+        .filter((v) => v !== undefined)
+        .sort();
+  }, [uniqeValues, filterVariant]);
   return filterVariant === "range" ? (
     <div>
       <div className="filter__input_range">
@@ -354,6 +389,26 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
         );
       })}
     </select>
+  ) : filterVariant === "multiselect" ? (
+    <div>
+      <ReactSelect
+        options={sortedUniqueValues}
+        classNamePrefix="react-select"
+        value={
+          columnFilterValue
+            ? (columnFilterValue as MultiValue<string>[]).map(
+                (val: MultiValue<string>) => {
+                  return { value: val, label: val };
+                }
+              )
+            : null
+        }
+        onChange={(selections) => {
+          column.setFilterValue(selections.map((option) => option.value));
+        }}
+        isMulti
+      />
+    </div>
   ) : (
     <>
       <datalist id={column.id + "list"}>
