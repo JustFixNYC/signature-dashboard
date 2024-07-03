@@ -80,7 +80,6 @@ export const groupData = (dataArray: APIChartData[], apiKey: keyof Omit<APIChart
         const sumYear = dataArray.slice(i - 11, i + 1).reduce((total, chartData) => total + chartData[apiKey], 0);
         dataByYear.push({year: year, [apiKey]: sumYear});
       }
-      console.log({dataByYear})
       return dataByYear;
     } else {
       return dataArray;

@@ -73,7 +73,6 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     pagination: hasPagination,
     pageSize = 50,
   } = props;
-  console.log('~~~ pagination', hasPagination)
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: pageSize,
@@ -157,7 +156,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                             <div className="column-header__label_sort">
                               {flexRender(
                                 header.column.columnDef.header,
-                                header.getContext(),
+                                header.getContext()
                               )}
                               {header.column.getCanSort() && (
                                 <span className="column-header__sort-icons">
