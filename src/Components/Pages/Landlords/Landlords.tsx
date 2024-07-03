@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import "./style.scss";
 import { Collection } from "../../Collection/Collection";
 import { AllLandlords } from "./AllLandlords/AllLandlords";
+import AlgoliaSearch from "../../AlgoliaSearch/AlgoliaSearch";
 
 export const Landlords: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -11,7 +12,12 @@ export const Landlords: React.FC = () => {
 
   return (
     <>
-      {!landlord && <AllLandlords />}
+      {!landlord && (
+        <>
+          <AlgoliaSearch />
+          <AllLandlords />
+        </>
+      )}
       {landlord && <Collection collection={landlord} />}
     </>
   );
