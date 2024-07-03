@@ -7,15 +7,22 @@ import selectOptions from "../Buildings/buildings_options.json";
 import { useNavigate } from "react-router-dom";
 import { PageTitle } from "../../PageTitle/PageTitle";
 import JFCLLinkInternal from "../../JFCLLinkInternal";
+import { useGetPortfolios } from "../../../api/hooks";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
+
+  const { data } = useGetPortfolios();
+
 
   const onSelection = (newValue: SelectOption | null) => {
     if (newValue) {
       navigate(`/buildings?bbl=${newValue.value}`);
     }
   };
+
+  const entirePortfolio = data?.find(obj => obj.collection_slug === 'all');
+
   return (
     <>
       <PageTitle>Signature Portfolio Dashboard</PageTitle>
@@ -39,8 +46,7 @@ export const Home: React.FC = () => {
             Learn about the entire Signature Portfolio
           </h3>
           <p className="homepage-copy">
-            See aggregate stats on all 1,650 buildings on the dashboard. View
-            entire Signature Portfolio
+            See aggregate stats on all {entirePortfolio?.buildings} buildings on the dashboard.
           </p>
           <JFCLLinkInternal href="/entire-portfolio">
             Entire Signature Portfolio

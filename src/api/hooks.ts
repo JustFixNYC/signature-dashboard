@@ -5,6 +5,7 @@ import {
   CollectionInfo,
   LandlordInfo,
   MapData,
+  APIPortfolioData,
 } from "../types/APIDataTypes";
 import { apiFetcher } from "./helpers";
 
@@ -153,6 +154,26 @@ type MapDataSWRResponse = {
 
 export function useGetMapData(): MapDataSWRResponse {
   const { data, error, isLoading } = useSWR(`/signature/map`, apiFetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+
+  return {
+    data: data?.result,
+    isLoading,
+    error: error,
+  };
+}
+
+type GetPortfoliiosSWRResponse = {
+  data: APIPortfolioData[] | undefined;
+  isLoading: boolean;
+  error: Error | undefined;
+};
+
+export function useGetPortfolios(): GetPortfoliiosSWRResponse {
+  const { data, error, isLoading } = useSWR(`/signature/portfolios`, apiFetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,

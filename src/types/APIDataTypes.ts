@@ -215,3 +215,9 @@ export interface MapData {
   lat: number;
   lng: number;
 }
+
+export interface APIPortfolioData {
+  collection_slug: "cpc" | "santander" | "all";
+  buildings: number;
+  landlords: number;
+}
