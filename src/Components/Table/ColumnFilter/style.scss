@@ -5,6 +5,7 @@
 }
 
 .filter-button {
+  font-family: "Degular";
   font-size: 1.125rem;
   line-height: 120%;
   padding: 0.75rem; // 12px
@@ -21,8 +22,11 @@
   }
 
   &.filter-button--active {
-    background: $BLUE_100;
     border-color: $OFF_BLACK;
+  }
+
+  &.filter-button--has-hidden {
+    background: $BLUE_100;
   }
 }
 
@@ -32,8 +36,7 @@
   background: $OFF_WHITE_100;
   width: 256px;
   display: none;
-  max-height: 33rem;
-  overflow: scroll;
+  overflow: hidden;
 
   &.popover-menu--show {
     display: block;
@@ -49,6 +52,11 @@
     .jfcl-checkbox {
       margin-bottom: 0;
     }
+  }
+
+  .popover-menu__scroll-area {
+    overflow: scroll;
+    max-height: 33rem;
   }
 
   .popover-menu__body {
