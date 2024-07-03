@@ -30,9 +30,11 @@ export const columns = [
     columns: [
       columnHelper.accessor("zip", {
         header: getColumnHeader("zip"),
-        filterFn: "includesString",
+        /* @ts-expect-error I don't know how to add includesMultiple to expected values for filterFn */
+        filterFn: "includesMultiple",
         meta: {
           inputWidth: "3rem",
+          filterVariant: "multiselect",
         },
       }),
       columnHelper.accessor("borough", {
