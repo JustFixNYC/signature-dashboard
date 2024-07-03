@@ -25,12 +25,7 @@ export const NoBBL: React.FC = () => {
       <div className="top-bar">
         <PageTitle>Buildings</PageTitle>
         <div className="top-bar-actions">
-          {!!data && (
-            <DownloadMultiBuildingCSV
-              data={data}
-              labelText="Download all"
-            />
-          )}
+          <DownloadMultiBuildingCSV data={data} labelText="Download all" />
         </div>
       </div>
 

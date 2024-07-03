@@ -29,12 +29,10 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
               ]}
             />
             <div className="top-bar-actions">
-              {!!data && (
-                <DownloadMultiBuildingCSV
-                  data={data}
-                  labelText={`Download ${data.collection_name} data`}
-                />
-              )}
+              <DownloadMultiBuildingCSV
+                data={data}
+                labelText={`Download ${data.collection_name} data`}
+              />
             </div>
           </div>
           <div className="layout-two-col">
