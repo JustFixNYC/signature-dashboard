@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { PageTitle } from "../../PageTitle/PageTitle";
 import JFCLLinkInternal from "../../JFCLLinkInternal";
 import { useGetPortfolios } from "../../../api/hooks";
+import { formatNumber } from "../../../util/helpers";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export const Home: React.FC = () => {
             Learn about the entire Signature Portfolio
           </h3>
           <p className="homepage-copy">
-            See aggregate stats on all {entirePortfolio?.buildings} buildings on the dashboard.
+            See aggregate stats on all {!!entirePortfolio && formatNumber(entirePortfolio?.buildings)} buildings on the dashboard.
           </p>
           <JFCLLinkInternal href="/entire-portfolio">
             Entire Signature Portfolio
