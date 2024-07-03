@@ -20,6 +20,11 @@
   margin: 1.5rem 0; // 24px
 }
 
+.not-available {
+  color: $GREY_600;
+  font-weight: 500;
+}
+
 .chart__timespan_filter {
   display: flex;
 

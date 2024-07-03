@@ -84,15 +84,25 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
               <div>Zip: {buildingInfo.zip}</div>
               <div>
                 Landlord:{" "}
-                <Link to={`/landlords?landlord=${buildingInfo.landlord_slug}`}>
-                  {buildingInfo.landlord}
-                </Link>
+                {buildingInfo.landlord ? (
+                  <Link
+                    to={`/landlords?landlord=${buildingInfo.landlord_slug}`}
+                  >
+                    {buildingInfo.landlord}
+                  </Link>
+                ) : (
+                  <span className="not-available">N/A</span>
+                )}
               </div>
               <div>
                 Lender:{" "}
-                <Link to={`/lenders?lender=${buildingInfo.lender_slug}`}>
-                  {buildingInfo.lender}
-                </Link>
+                {buildingInfo.lender ? (
+                  <Link to={`/lenders?lender=${buildingInfo.lender_slug}`}>
+                    {buildingInfo.lender}
+                  </Link>
+                ) : (
+                  <span className="not-available">N/A</span>
+                )}
               </div>
 
               <h3>Summary</h3>
