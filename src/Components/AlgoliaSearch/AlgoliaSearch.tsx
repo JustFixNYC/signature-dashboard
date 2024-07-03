@@ -7,21 +7,23 @@ import {
   UseSearchBoxProps,
   useHits,
   UseHitsProps,
-  //   useInstantSearch,
-  //   connectSearchBox,
-  //   connectHits,
 } from "react-instantsearch";
 import type { Hit as AlgoliaHit } from "instantsearch.js/es/types";
 import { Link } from "react-router-dom";
+import { useSearchBox } from "react-instantsearch";
+import FocusTrap from "focus-trap-react";
+import classNames from "classnames";
 // import algoliaIcon from "../assets/img/algolia.svg";
 
-import FocusTrap from "focus-trap-react";
 import "./styles.scss";
+import { TextInput } from "@justfixnyc/component-library";
 
 const ALGOLIA_APP_ID = import.meta.env.VITE_ALGOLIA_APP_ID;
 const ALGOLIA_SEARCH_KEY = import.meta.env.VITE_ALGOLIA_SEARCH_KEY;
-const ALGOLIA_INDEX_NAME = "signature_landlords";
-const ALGOLIA_ATTRIBUTE_NAME = "landlord_name";
+const LANDLORD_INDEX_NAME = "signature_landlords";
+const LANDLORD_ATTRIBUTE_NAME = "landlord_name";
+const ADDRESS_INDEX_NAME = "signature_addresses";
+const ADDRESS_ATTRIBUTE_NAME = "address";
 const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_SEARCH_KEY);
 
 /**
@@ -30,17 +32,26 @@ const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_SEARCH_KEY);
  */
 const SEARCH_RESULTS_LIMIT = 5;
 
-import { useSearchBox } from "react-instantsearch";
+type CustomSearchBoxProps = UseSearchBoxProps & {
+  labelText: string;
+  className?: string;
+  placeholder?: string;
+} & Pick<CustomHitsProps, "toURL" | "attributeName">;
 
-function CustomSearchBox(props: UseSearchBoxProps) {
+const CustomSearchBox: React.FC<CustomSearchBoxProps> = ({
+  attributeName,
+  toURL,
+  placeholder,
+  labelText,
+  className,
+  ...props
+}) => {
   const { query, refine } = useSearchBox(props);
 
   //   const { status } = useInstantSearch();
   const [inputValue, setInputValue] = React.useState(query);
   const inputRef = React.useRef<HTMLInputElement>(null);
-
-  const [searchIsInFocus, setSearchFocus] = React.useState(true);
-  const userIsCurrentlySearching = searchIsInFocus; //&& !!currentRefinement;
+  const [searchIsInFocus, setSearchFocus] = React.useState(false);
 
   //   const isSearchStalled = status === "stalled";
 
@@ -51,38 +62,38 @@ function CustomSearchBox(props: UseSearchBoxProps) {
 
   return (
     <FocusTrap
-      active={userIsCurrentlySearching}
+      active={searchIsInFocus}
       focusTrapOptions={{
         clickOutsideDeactivates: true,
         onDeactivate: () => setSearchFocus(false),
       }}
     >
       <div
-        className="AlgoliaSearch"
+        className={classNames("AlgoliaSearch", className)}
         onFocus={() => setSearchFocus(true)}
-        onClick={() => setSearchFocus(true)}
+        // onClick={() => setSearchFocus(true)}
       >
         <form noValidate action="" role="search">
-          <input
+          <TextInput
             ref={inputRef}
+            labelText={labelText}
             autoComplete="off"
             autoCorrect="off"
             autoCapitalize="off"
             spellCheck={false}
             className="form-input"
+            id="searchbox-input"
             type="search"
-            placeholder={"Search landlords"}
-            aria-label={"Search by a landlord's name"}
+            placeholder={placeholder}
             value={inputValue}
             onChange={(event) => {
               setQuery(event.currentTarget.value);
-              setSearchFocus(true);
-              console.log(query);
+            //   setSearchFocus(true);
             }}
           />
         </form>
 
-        {userIsCurrentlySearching && (
+        {searchIsInFocus && (
           <>
             <div
               // hide the search results when the user is not currently searching a name here
@@ -90,7 +101,7 @@ function CustomSearchBox(props: UseSearchBoxProps) {
               aria-live="polite"
               aria-atomic={true}
             >
-              <CustomHits />
+              <CustomHits attributeName={attributeName} toURL={toURL} />
             </div>
             {/* <div className="search-by is-pulled-right">
               <img width="140" height="20" alt="Algolia" src={algoliaIcon} />
@@ -100,66 +111,7 @@ function CustomSearchBox(props: UseSearchBoxProps) {
       </div>
     </FocusTrap>
   );
-}
-
-// const SearchBox = ({ currentRefinement, refine }: SearchBoxProvided) => {
-//   const [searchIsInFocus, setSearchFocus] = useState(true);
-//   const [searchQuery, setSearchQuery] = useState("");
-//   const userIsCurrentlySearching = searchIsInFocus && !!currentRefinement;
-
-//   useEffect(() => {
-//     if (searchQuery.length >= SEARCH_INPUT_MINIMUM_LENGTH) {
-//       refine(searchQuery);
-//     } else {
-//       refine("");
-//     }
-//   }, [searchQuery, refine]);
-//   return (
-//     <FocusTrap
-//       active={userIsCurrentlySearching}
-//       focusTrapOptions={{
-//         clickOutsideDeactivates: true,
-//         onDeactivate: () => setSearchFocus(false),
-//       }}
-//     >
-//       <div
-//         className="LandlordSearch"
-//         onFocus={() => setSearchFocus(true)}
-//         onClick={() => setSearchFocus(true)}
-//       >
-//         <form noValidate action="" role="search">
-//           <input
-//             className="form-input"
-//             type="search"
-//             placeholder={"Search landlords"}
-//             aria-label={"Search by a landlord's name"}
-//             value={searchQuery}
-//             onChange={(event) => {
-//               setSearchQuery(event.currentTarget.value);
-//               setSearchFocus(true);
-//             }}
-//           />
-//         </form>
-
-//         {userIsCurrentlySearching && (
-//           <>
-//             <div
-//               // hide the search results when the user is not currently searching a name here
-//               role="region"
-//               aria-live="polite"
-//               aria-atomic={true}
-//             >
-//               <CustomHits />
-//             </div>
-//             <div className="search-by is-pulled-right">
-//               <img width="140" height="20" alt="Algolia" src={algoliaIcon} />
-//             </div>
-//           </>
-//         )}
-//       </div>
-//     </FocusTrap>
-//   );
-// };
+};
 
 const ScreenReaderAnnouncementOfSearchHits: React.FC<{
   numberOfHits: number;
@@ -174,29 +126,43 @@ const ScreenReaderAnnouncementOfSearchHits: React.FC<{
   </p>
 );
 
-type HitProps = AlgoliaHit<{
+type LandlordHitProps = AlgoliaHit<{
   landlord_name: string;
   landlord_slug: string;
 }>;
 
-const CustomHits = (props: UseHitsProps<HitProps>) => {
+type AddressHitProps = AlgoliaHit<{
+  address: string;
+  bbl: string;
+}>;
+
+type CustomHitsProps = UseHitsProps<LandlordHitProps | AddressHitProps> & {
+  attributeName: keyof LandlordHitProps | keyof AddressHitProps;
+  toURL: (hit: Partial<LandlordHitProps & AddressHitProps>) => string;
+};
+
+const CustomHits: React.FC<CustomHitsProps> = ({
+  attributeName,
+  toURL,
+  ...props
+}) => {
   const { hits } = useHits(props);
   const numberOfHits = Math.min(hits ? hits.length : 0, SEARCH_RESULTS_LIMIT);
 
   return (
     <>
       {hits && numberOfHits > 0 ? (
-        <div className="algolia__suggests">
+        <div className="algolia__suggests jfcl-dropdown__value-container" >
           {hits
-            .map((hit: HitProps) => (
+            .map((hit: LandlordHitProps | AddressHitProps, index: number) => (
               <Link
-                key={hit.landlord_slug}
-                to={`/landlords?landlord=${hit.landlord_slug}`}
-                className="algolia__item"
+                key={index}
+                to={toURL(hit)}
+                className="algolia__item jfcl-dropdown__option"
                 aria-hidden="true" // Make sure search results don't get announced until user is focused on them
               >
                 <div className="result__snippet">
-                  <Snippet attribute={ALGOLIA_ATTRIBUTE_NAME} hit={hit} />
+                  <Snippet attribute={[attributeName]} hit={hit} />
                 </div>
               </Link>
             ))
@@ -213,22 +179,87 @@ const CustomHits = (props: UseHitsProps<HitProps>) => {
   );
 };
 
-// const CustomSearchBox = connectSearchBox(SearchBox);
-// const CustomHits = connectHits(SearchHits);
+type AlgoliaSearchProps = Pick<
+  CustomSearchBoxProps,
+  "labelText" | "attributeName" | "className" | "placeholder" | "toURL"
+> & {
+  indexName: string;
+  hitsPerPage: number;
+};
 
-const AlgoliaSearch = () => {
+const AlgoliaSearch: React.FC<AlgoliaSearchProps> = ({
+  indexName,
+  attributeName,
+  toURL,
+  placeholder,
+  labelText,
+  hitsPerPage,
+}) => {
   return ALGOLIA_APP_ID && ALGOLIA_SEARCH_KEY ? (
-    <InstantSearch searchClient={searchClient} indexName={ALGOLIA_INDEX_NAME}>
+    <InstantSearch searchClient={searchClient} indexName={indexName}>
       <Configure
         analytics={false}
-        hitsPerPage={SEARCH_RESULTS_LIMIT}
-        attributesToSnippet={[ALGOLIA_ATTRIBUTE_NAME]}
+        hitsPerPage={hitsPerPage}
+        attributesToSnippet={[attributeName]}
       />
-      <CustomSearchBox />
+      <CustomSearchBox
+        attributeName={attributeName}
+        toURL={toURL}
+        placeholder={placeholder}
+        labelText={labelText}
+      />
     </InstantSearch>
   ) : (
     <React.Fragment />
   );
 };
 
-export default AlgoliaSearch;
+type SearchProps = Pick<CustomSearchBoxProps, "labelText" | "placeholder">;
+
+export const LandlordSearch: React.FC<SearchProps> = ({
+  placeholder,
+  labelText,
+}) => (
+  <AlgoliaSearch
+    indexName={LANDLORD_INDEX_NAME}
+    attributeName={LANDLORD_ATTRIBUTE_NAME}
+    toURL={(hit) => `/landlords?landlord=${hit.landlord_slug}`}
+    placeholder={placeholder}
+    labelText={labelText}
+    hitsPerPage={5}
+  />
+);
+
+export const AddressSearch: React.FC<SearchProps> = ({
+  placeholder,
+  labelText,
+}) => (
+  <AlgoliaSearch
+    indexName={ADDRESS_INDEX_NAME}
+    attributeName={ADDRESS_ATTRIBUTE_NAME}
+    toURL={(hit) => `/buildings?bbl=${hit.bbl}`}
+    placeholder={placeholder}
+    labelText={labelText}
+    hitsPerPage={5}
+  />
+);
+
+// export const LandlordSearch = () => {
+//   return ALGOLIA_APP_ID && ALGOLIA_SEARCH_KEY ? (
+//     <InstantSearch searchClient={searchClient} indexName={LANDLORD_INDEX_NAME}>
+//       <Configure
+//         analytics={false}
+//         hitsPerPage={SEARCH_RESULTS_LIMIT}
+//         attributesToSnippet={[LANDLORD_ATTRIBUTE_NAME]}
+//       />
+//       <CustomSearchBox
+//         attributeName={LANDLORD_ATTRIBUTE_NAME}
+//         toURL={(hit) => `/landlords?landlord=${hit.landlord_slug}`}
+//         placeholder=""
+//         ariaLabel="Search by landlord name"
+//       />
+//     </InstantSearch>
+//   ) : (
+//     <React.Fragment />
+//   );
+// };

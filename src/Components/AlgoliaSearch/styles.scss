@@ -28,6 +28,9 @@ $secondary-color-light: lighten($secondary-color, 3%);
   flex-wrap: wrap;
   justify-content: center;
 }
+.AlgoliaSearch .form-input {
+  margin-bottom: 0;
+}
 .AlgoliaSearch .algolia__suggests {
   background-color: #fff;
   border: 1px solid #acb3c2;
