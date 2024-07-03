@@ -18,21 +18,34 @@ export const Home: React.FC = () => {
   };
   return (
     <>
-      <PageTitle>Home</PageTitle>
-      <p style={{ width: "600px" }}>
-        This project is a collaboration between JustFix and UNHP to track
-        available public data on the rent-regulated portion of the former
-        Signature Bank multifamily loan portfolio.
-      </p>
-      <div style={{ width: "fit-content" }}>
-        Find a building in the Signature portfolio by entering the address
-        <br />
-        <br />
-        <AddressSearch options={selectOptions} onSelection={onSelection} />
-        <br />
-        <JFCLLinkInternal href="/entire-portfolio">
-          Entire Signature Portfolio
-        </JFCLLinkInternal>
+      <PageTitle>Signature Portfolio Dashboard</PageTitle>
+      <div style={{ width: "568px" }}>
+        <p>
+          This project is a collaboration between JustFix and UNHP to track
+          available public data on the rent-regulated portion of the former
+          Signature Bank multifamily loan portfolio.
+        </p>
+
+        <div style={{ width: "fit-content" }}>
+          <h3 className="homepage-section-header">Search building</h3>
+          <p className="homepage-copy">
+            Find a building in the Signature portfolio by entering the address
+          </p>
+          <AddressSearch
+            options={selectOptions}
+            onSelection={onSelection}
+          />
+          <h3 className="homepage-section-header">
+            Learn about the entire Signature Portfolio
+          </h3>
+          <p className="homepage-copy">
+            See aggregate stats on all 1,650 buildings on the dashboard. View
+            entire Signature Portfolio
+          </p>
+          <JFCLLinkInternal href="/entire-portfolio">
+            Entire Signature Portfolio
+          </JFCLLinkInternal>
+        </div>
       </div>
     </>
   );
