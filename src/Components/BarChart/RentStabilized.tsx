@@ -12,7 +12,11 @@ type RentStabilizedUnitsChartProps = {
 export const RentStabilizedUnitsChart: React.FC<
   RentStabilizedUnitsChartProps
 > = ({ data, originationDate, lastSaleDate, className }) => {
-  const yearlyData: yearlyChartData[] = groupData(data, "rentstab_units", "year") as yearlyChartData[];
+  const yearlyData: yearlyChartData[] = groupData(
+    data,
+    "rentstab_units",
+    "year",
+  ) as yearlyChartData[];
   const datasets = [
     {
       label: "Units",

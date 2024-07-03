@@ -15,14 +15,13 @@ export const Home: React.FC = () => {
 
   const { data } = useGetPortfolios();
 
-
   const onSelection = (newValue: SelectOption | null) => {
     if (newValue) {
       navigate(`/buildings?bbl=${newValue.value}`);
     }
   };
 
-  const entirePortfolio = data?.find(obj => obj.collection_slug === 'all');
+  const entirePortfolio = data?.find((obj) => obj.collection_slug === "all");
 
   return (
     <>
@@ -39,15 +38,14 @@ export const Home: React.FC = () => {
           <p className="homepage-copy">
             Find a building in the Signature portfolio by entering the address
           </p>
-          <AddressSearch
-            options={selectOptions}
-            onSelection={onSelection}
-          />
+          <AddressSearch options={selectOptions} onSelection={onSelection} />
           <h3 className="homepage-section-header">
             Learn about the entire Signature Portfolio
           </h3>
           <p className="homepage-copy">
-            See aggregate stats on all {!!entirePortfolio && formatNumber(entirePortfolio?.buildings)} buildings on the dashboard.
+            See aggregate stats on all{" "}
+            {!!entirePortfolio && formatNumber(entirePortfolio?.buildings)}{" "}
+            buildings on the dashboard.
           </p>
           <JFCLLinkInternal href="/entire-portfolio">
             Entire Signature Portfolio

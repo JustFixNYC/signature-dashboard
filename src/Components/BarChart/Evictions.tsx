@@ -15,8 +15,16 @@ export const EvictionsChart: React.FC<EvictionsChartProps> = ({
   lastSaleDate,
   className,
 }) => {
-  const yearlyFiledData: yearlyChartData[] = groupData(data, "evictions_filed", "year") as yearlyChartData[];
-  const yearlyExecutedData: yearlyChartData[] = groupData(data, "evictions_filed", "year") as yearlyChartData[];
+  const yearlyFiledData: yearlyChartData[] = groupData(
+    data,
+    "evictions_filed",
+    "year",
+  ) as yearlyChartData[];
+  const yearlyExecutedData: yearlyChartData[] = groupData(
+    data,
+    "evictions_filed",
+    "year",
+  ) as yearlyChartData[];
   const datasets = [
     {
       label: "Cases Filed",

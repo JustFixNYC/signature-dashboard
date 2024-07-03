@@ -58,33 +58,39 @@ export const formatDate = (value: string) => {
 };
 
 export type yearlyChartData = {
-  [x in keyof Omit<APIChartData, 'month'>]: number;
+  [x in keyof Omit<APIChartData, "month">]: number;
 } & {
   year: string;
 };
-  /** Returns grouped data to match selected time span */
-export const groupData = (dataArray: APIChartData[], apiKey: keyof Omit<APIChartData, 'month'>, timeSpan: IndicatorsTimeSpan) => {
-    // if (dataArray && timeSpan === "quarter") {
-      // const dataByQuarter = [];
-      // for (let i = 2; i < dataArray.length; i = i + 3) {
-      //   const sumQuarter = dataArray[i] + dataArray[i - 1] + dataArray[i - 2];
-      //   dataByQuarter.push(sumQuarter);
-      // }
-      // return dataByQuarter;
-    // } else
-    if (timeSpan === "year") {
-      const dataByYear = [];
-      for (let i = 11; i < dataArray.length; i = i + 12) {
-        const chartData = dataArray[i];
-        const year = new Date(chartData.month).getFullYear().toString();
-        const sumYear = dataArray.slice(i - 11, i + 1).reduce((total, chartData) => total + chartData[apiKey], 0);
-        dataByYear.push({year: year, [apiKey]: sumYear});
-      }
-      return dataByYear;
-    } else {
-      return dataArray;
+/** Returns grouped data to match selected time span */
+export const groupData = (
+  dataArray: APIChartData[],
+  apiKey: keyof Omit<APIChartData, "month">,
+  timeSpan: IndicatorsTimeSpan,
+) => {
+  // if (dataArray && timeSpan === "quarter") {
+  // const dataByQuarter = [];
+  // for (let i = 2; i < dataArray.length; i = i + 3) {
+  //   const sumQuarter = dataArray[i] + dataArray[i - 1] + dataArray[i - 2];
+  //   dataByQuarter.push(sumQuarter);
+  // }
+  // return dataByQuarter;
+  // } else
+  if (timeSpan === "year") {
+    const dataByYear = [];
+    for (let i = 11; i < dataArray.length; i = i + 12) {
+      const chartData = dataArray[i];
+      const year = new Date(chartData.month).getFullYear().toString();
+      const sumYear = dataArray
+        .slice(i - 11, i + 1)
+        .reduce((total, chartData) => total + chartData[apiKey], 0);
+      dataByYear.push({ year: year, [apiKey]: sumYear });
     }
+    return dataByYear;
+  } else {
+    return dataArray;
   }
+};
 
 export type apiKeys =
   | keyof BuildingInfo

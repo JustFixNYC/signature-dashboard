@@ -156,7 +156,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                             <div className="column-header__label_sort">
                               {flexRender(
                                 header.column.columnDef.header,
-                                header.getContext()
+                                header.getContext(),
                               )}
                               {header.column.getCanSort() && (
                                 <span className="column-header__sort-icons">
@@ -299,7 +299,7 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
         : Array.from(uniqeValues.keys())
             .filter((v) => v !== undefined)
             .sort(),
-    [uniqeValues, filterVariant]
+    [uniqeValues, filterVariant],
   );
   return filterVariant === "range" ? (
     <div>

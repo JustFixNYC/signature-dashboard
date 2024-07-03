@@ -406,7 +406,7 @@
           },
           "hpderp_charges": {
             "type": "number",
-            "example": 10.50,
+            "example": 10.5,
             "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the given month."
           }
         }
