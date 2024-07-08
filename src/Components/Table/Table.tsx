@@ -156,7 +156,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                             <div className="column-header__label_sort">
                               {flexRender(
                                 header.column.columnDef.header,
-                                header.getContext(),
+                                header.getContext()
                               )}
                               {header.column.getCanSort() && (
                                 <span className="column-header__sort-icons">
@@ -202,14 +202,23 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           <tbody>
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    style={{ ...getCommonPinningStyles(cell.column) }}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+                {row.getVisibleCells().map((cell) => {
+                  const valueExists =
+                    cell.getValue() !== null && cell.getValue() !== undefined;
+                  return (
+                    <td
+                      key={cell.id}
+                      style={{ ...getCommonPinningStyles(cell.column) }}
+                    >
+                      {valueExists
+                        ? flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )
+                        : "N/A"}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>
@@ -299,7 +308,7 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
         : Array.from(uniqeValues.keys())
             .filter((v) => v !== undefined)
             .sort(),
-    [uniqeValues, filterVariant],
+    [uniqeValues, filterVariant]
   );
   return filterVariant === "range" ? (
     <div>

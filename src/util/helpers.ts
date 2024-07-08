@@ -15,7 +15,7 @@ export function splitBBL(bbl: string) {
   return { boro, block, lot };
 }
 
-export function formatMoney(amount: number): string {
+export function formatMoney(amount: unknown) {
   if (typeof amount !== "number") {
     return amount;
   }
@@ -35,7 +35,7 @@ export const formatPercent = (value: number) => {
   return value.toFixed(0) + "%";
 };
 
-export const formatNumber = (value: number) => {
+export const formatNumber = (value: unknown) => {
   if (typeof value !== "number") {
     return value;
   }
@@ -442,7 +442,16 @@ export const getColumnHeader = (apiKey: apiKeys) => {
   }
 };
 
-export const round = (value: number) => {
+
+// Fall back to undefined for null values
+// This helps with sorting
+// react-table uses sortUndefined to define how to sort undefined values, but there's
+// no way to tell it how to properly sort null values
+export const getColumnAccessor = (val: string | number | null) =>
+  val !== null ? val : undefined;
+
+
+export const round = (value: unknown) => {
   if (typeof value !== "number") {
     return value;
   }

@@ -6,6 +6,7 @@ import {
   round,
   formatMoney,
   formatNumber,
+  getColumnAccessor,
 } from "../../../../util/helpers";
 import { useGetAllLandlords } from "../../../../api/hooks";
 import { Table } from "../../../Table/Table";
@@ -14,9 +15,10 @@ import "./style.scss";
 const columnHelper = createColumnHelper<LandlordInfo>();
 
 export const columns = [
-  columnHelper.accessor("landlord_name", {
+  columnHelper.accessor(row => getColumnAccessor(row.landlord_name), {
     id: "landlord_name",
     header: getColumnHeader("landlord_name"),
+    sortUndefined: "last",
     cell: (info) => (
       <div className="cell__landlord-name">
         <Link to={`/landlords?landlord=${info.row.original.landlord_slug}`}>
@@ -26,40 +28,46 @@ export const columns = [
     ),
     filterFn: "includesString",
   }),
-  columnHelper.accessor("lender_name", {
+  columnHelper.accessor(row => getColumnAccessor(row.lender_name), {
     header: getColumnHeader("lender_name"),
+    sortUndefined: "last",
     cell: (info) => info.getValue(),
     filterFn: "includesString",
     meta: {
       filterVariant: "select",
     },
   }),
-  columnHelper.accessor("buildings", {
+  columnHelper.accessor(row => getColumnAccessor(row.buildings), {
     header: getColumnHeader("buildings"),
+    sortUndefined: "last",
     cell: (info) => info.getValue(),
     filterFn: "inNumberRange",
     meta: {
       filterVariant: "range",
     },
   }),
-  columnHelper.accessor("units_res", {
+  columnHelper.accessor(row => getColumnAccessor(row.units_res), {
     header: getColumnHeader("units_res"),
+    id: 'unit_res',
+    sortUndefined: "last",
     cell: (info) => formatNumber(info.getValue()),
     filterFn: "inNumberRange",
     meta: {
       filterVariant: "range",
     },
   }),
-  columnHelper.accessor("hpd_viol_bc_open_per_unit", {
+  columnHelper.accessor(row => getColumnAccessor(row.hpd_viol_bc_open_per_unit), {
     header: getColumnHeader("hpd_viol_bc_open_per_unit"),
+    sortUndefined: "last",
     cell: (info) => round(info.getValue()),
     filterFn: "inNumberRange",
     meta: {
       filterVariant: "range",
     },
   }),
-  columnHelper.accessor("debt_per_unit", {
+  columnHelper.accessor(row => getColumnAccessor(row.debt_per_unit), {
     header: getColumnHeader("debt_per_unit"),
+    sortUndefined: "last",
     cell: (info) => formatMoney(info.getValue()),
     filterFn: "inNumberRange",
     meta: {
