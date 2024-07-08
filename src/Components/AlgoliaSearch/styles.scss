@@ -20,42 +20,60 @@ $secondary-color-light: lighten($secondary-color, 3%);
 }
 
 .AlgoliaSearch {
+  --border-color: #{$GREY_600};
+  --background-color: #{$OFF_WHITE_100};
+  --text-color: #{$OFF_BLACK};
+
   margin-top: 15px;
   margin-bottom: 15px;
+  position: relative;
+  width: fit-content;
+  min-width: 50%;
+
+  form label {
+    font-size: 1.2rem; // 19.2px (same as body)
+    font-weight: 400;
+  }
+  .form-input {
+    margin-bottom: 0;
+  }
+  .algolia__suggests {
+    background-color: #fff;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    position: absolute;
+    width: calc(100% - 4px);
+    margin-top: 0.5rem;
+
+    a.algolia__item {
+      display: block;
+      text-decoration: none !important;
+      .result__snippet {
+        display: block;
+        padding: 0.47rem 0.63rem;
+        color: $GREY_600;
+        .ais-Snippet-highlighted {
+          background-color: inherit;
+        }
+      }
+      &:hover,
+      &:focus {
+        background-color: var(--background-color);
+        outline: none;
+        .result__snippet,
+        .result__snippet b {
+          color: var(--text-color);
+        }
+      }
+    }
+  }
+  .search-by {
+    margin-top: 0.47rem;
+  }
 }
-.AlgoliaSearch form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.AlgoliaSearch .form-input {
-  margin-bottom: 0;
-}
-.AlgoliaSearch .algolia__suggests {
-  background-color: #fff;
-  border: 1px solid #acb3c2;
-  border-top: none;
-}
-.AlgoliaSearch .algolia__suggests a.algolia__item {
-  display: block;
-  text-decoration: none !important;
-}
-.AlgoliaSearch .algolia__suggests a.algolia__item .result__snippet {
-  display: block;
-  padding: 0.47rem 0.63rem;
-  color: #454d5d;
-}
-.AlgoliaSearch .algolia__suggests a.algolia__item:hover,
-.AlgoliaSearch .algolia__suggests a.algolia__item:focus {
-  background-color: #454d5d;
-  outline: none;
-}
-.AlgoliaSearch .algolia__suggests a.algolia__item:hover .result__snippet,
-.AlgoliaSearch .algolia__suggests a.algolia__item:hover .result__snippet b,
-.AlgoliaSearch .algolia__suggests a.algolia__item:focus .result__snippet,
-.AlgoliaSearch .algolia__suggests a.algolia__item:focus .result__snippet b {
-  color: #fff;
-}
-.AlgoliaSearch .search-by {
-  margin-top: 0.47rem;
+
+// Hide default x to clear text on input
+// https://stackoverflow.com/a/68316500/7051239
+#searchbox-input[type="search"]::-webkit-search-cancel-button {
+  display: none;
 }

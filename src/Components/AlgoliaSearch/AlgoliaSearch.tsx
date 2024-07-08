@@ -70,8 +70,7 @@ const CustomSearchBox: React.FC<CustomSearchBoxProps> = ({
     >
       <div
         className={classNames("AlgoliaSearch", className)}
-        onFocus={() => setSearchFocus(true)}
-        // onClick={() => setSearchFocus(true)}
+        onClick={() => setSearchFocus(true)}
       >
         <form noValidate action="" role="search">
           <TextInput
@@ -88,7 +87,7 @@ const CustomSearchBox: React.FC<CustomSearchBoxProps> = ({
             value={inputValue}
             onChange={(event) => {
               setQuery(event.currentTarget.value);
-            //   setSearchFocus(true);
+              setSearchFocus(true);
             }}
           />
         </form>
@@ -152,13 +151,13 @@ const CustomHits: React.FC<CustomHitsProps> = ({
   return (
     <>
       {hits && numberOfHits > 0 ? (
-        <div className="algolia__suggests jfcl-dropdown__value-container" >
+        <div className="algolia__suggests">
           {hits
             .map((hit: LandlordHitProps | AddressHitProps, index: number) => (
               <Link
                 key={index}
                 to={toURL(hit)}
-                className="algolia__item jfcl-dropdown__option"
+                className="algolia__item"
                 aria-hidden="true" // Make sure search results don't get announced until user is focused on them
               >
                 <div className="result__snippet">
@@ -181,7 +180,7 @@ const CustomHits: React.FC<CustomHitsProps> = ({
 
 type AlgoliaSearchProps = Pick<
   CustomSearchBoxProps,
-  "labelText" | "attributeName" | "className" | "placeholder" | "toURL"
+  "labelText" | "attributeName" | "toURL" | "className" | "placeholder"
 > & {
   indexName: string;
   hitsPerPage: number;
@@ -243,23 +242,3 @@ export const AddressSearch: React.FC<SearchProps> = ({
     hitsPerPage={5}
   />
 );
-
-// export const LandlordSearch = () => {
-//   return ALGOLIA_APP_ID && ALGOLIA_SEARCH_KEY ? (
-//     <InstantSearch searchClient={searchClient} indexName={LANDLORD_INDEX_NAME}>
-//       <Configure
-//         analytics={false}
-//         hitsPerPage={SEARCH_RESULTS_LIMIT}
-//         attributesToSnippet={[LANDLORD_ATTRIBUTE_NAME]}
-//       />
-//       <CustomSearchBox
-//         attributeName={LANDLORD_ATTRIBUTE_NAME}
-//         toURL={(hit) => `/landlords?landlord=${hit.landlord_slug}`}
-//         placeholder=""
-//         ariaLabel="Search by landlord name"
-//       />
-//     </InstantSearch>
-//   ) : (
-//     <React.Fragment />
-//   );
-// };

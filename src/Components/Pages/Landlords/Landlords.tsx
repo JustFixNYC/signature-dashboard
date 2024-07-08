@@ -3,7 +3,6 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { NoLandlord } from "./NoLandlord";
 import { LandlordInfo } from "./LandlordInfo";
-import { LandlordSearch } from "../../AlgoliaSearch/AlgoliaSearch";
 import "./style.scss";
 
 export const Landlords: React.FC = () => {
@@ -12,12 +11,7 @@ export const Landlords: React.FC = () => {
 
   return (
     <>
-      {!landlord && (
-        <>
-          <LandlordSearch labelText="Search for landlord by name" />
-          <NoLandlord />
-        </>
-      )}
+      {!landlord && <NoLandlord />}
       {landlord && <LandlordInfo landlord={landlord} />}
     </>
   );
