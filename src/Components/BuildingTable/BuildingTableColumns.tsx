@@ -3,6 +3,7 @@ import {
   formatMoney,
   formatNumber,
   formatPercent,
+  getColumnAccessor,
   getColumnHeader,
   round,
   showYesNo,
@@ -13,7 +14,7 @@ import { Link } from "react-router-dom";
 const columnHelper = createColumnHelper<BuildingInfo>();
 
 export const columns = [
-  columnHelper.accessor("address", {
+  columnHelper.accessor((row) => getColumnAccessor(row.address), {
     header: getColumnHeader("address"),
     cell: (info) => (
       <div className="cell__address">
@@ -22,21 +23,24 @@ export const columns = [
         </Link>
       </div>
     ),
+    sortUndefined: -1,
     filterFn: "includesString",
   }),
   columnHelper.group({
     id: "location",
     header: () => "Location",
     columns: [
-      columnHelper.accessor("zip", {
+      columnHelper.accessor((row) => getColumnAccessor(row.zip), {
         header: getColumnHeader("zip"),
+        sortUndefined: -1,
         filterFn: "includesString",
         meta: {
           inputWidth: "3rem",
         },
       }),
-      columnHelper.accessor("borough", {
+      columnHelper.accessor((row) => getColumnAccessor(row.borough), {
         header: getColumnHeader("borough"),
+        sortUndefined: -1,
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
@@ -50,7 +54,7 @@ export const columns = [
     id: "building_info",
     header: () => "Building Info",
     columns: [
-      columnHelper.accessor("landlord", {
+      columnHelper.accessor((row) => getColumnAccessor(row.landlord), {
         header: getColumnHeader("landlord"),
         cell: (info) => (
           <div className="cell__landlord">
@@ -59,42 +63,49 @@ export const columns = [
             </Link>
           </div>
         ),
+        sortUndefined: -1,
         filterFn: "includesString",
       }),
-      columnHelper.accessor("lender", {
+      columnHelper.accessor((row) => getColumnAccessor(row.lender), {
         header: getColumnHeader("lender"),
+        sortUndefined: -1,
         filterFn: "includesString",
         meta: {
           inputWidth: "4rem",
           filterVariant: "select",
         },
       }),
-      columnHelper.accessor("units_res", {
+      columnHelper.accessor((row) => getColumnAccessor(row.units_res), {
+        id: 'units_res',
         header: getColumnHeader("units_res"),
         cell: (info) => formatNumber(info.getValue()),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("rs_units", {
+      columnHelper.accessor((row) => getColumnAccessor(row.rs_units), {
         header: getColumnHeader("rs_units"),
         cell: (info) => formatNumber(info.getValue()),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("units_nonres", {
+      columnHelper.accessor((row) => getColumnAccessor(row.units_nonres), {
         header: getColumnHeader("units_nonres"),
         cell: (info) => showYesNo(info.getValue()),
+        sortUndefined: -1,
         filterFn: "equals",
         meta: {
           filterVariant: "boolean",
         },
       }),
-      columnHelper.accessor("year_built", {
+      columnHelper.accessor((row) => getColumnAccessor(row.year_built), {
         header: getColumnHeader("year_built"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -106,9 +117,10 @@ export const columns = [
     id: "bip",
     header: () => "Building Indicator Project (BIP)",
     columns: [
-      columnHelper.accessor("bip", {
+      columnHelper.accessor((row) => getColumnAccessor(row.bip), {
         header: getColumnHeader("bip"),
         cell: (info) => formatNumber(info.getValue()),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           inputWidth: "2.5rem",
@@ -121,53 +133,62 @@ export const columns = [
     id: "hpd_violations",
     header: () => "HPD Violations",
     columns: [
-      columnHelper.accessor("hpd_viol_bc_open", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_bc_open), {
         header: getColumnHeader("hpd_viol_bc_open"),
         cell: (info) => formatNumber(info.getValue()),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("hpd_viol_bc_open_per_unit", {
-        header: getColumnHeader("hpd_viol_bc_open_per_unit"),
-        cell: (info) => round(info.getValue()),
-        filterFn: "inNumberRange",
-        meta: {
-          filterVariant: "range",
-        },
-      }),
-      columnHelper.accessor("hpd_viol_bc_total", {
+      columnHelper.accessor(
+        (row) => getColumnAccessor(row.hpd_viol_bc_open_per_unit),
+        {
+          header: getColumnHeader("hpd_viol_bc_open_per_unit"),
+          cell: (info) => round(info.getValue()),
+          sortUndefined: -1,
+          filterFn: "inNumberRange",
+          meta: {
+            filterVariant: "range",
+          },
+        }
+      ),
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_bc_total), {
         header: getColumnHeader("hpd_viol_bc_total"),
         cell: (info) => info.getValue(),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      // columnHelper.accessor("hpd_viol_bc_total_per_unit", {
+      // columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_bc_total_per_unit), {
       //   header: getColumnHeader("hpd_viol_bc_total_per_unit"),
       //   cell: (info) => round(info.getValue()),
       //   meta: {
       //     filterVariant: "range",
       //   },
       // }),
-      columnHelper.accessor("hpd_viol_heat", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_heat), {
         header: getColumnHeader("hpd_viol_heat"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("hpd_viol_pests", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_pests), {
         header: getColumnHeader("hpd_viol_pests"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("hpd_viol_water", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_water), {
         header: getColumnHeader("hpd_viol_water"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -179,17 +200,19 @@ export const columns = [
     id: "hpd_emerg_repairs",
     header: () => "HPD Emergency Repairs",
     columns: [
-      columnHelper.accessor("hpd_erp_orders", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_erp_orders), {
         header: getColumnHeader("hpd_erp_orders"),
         cell: (info) => formatNumber(info.getValue()),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("hpd_erp_orders_per_unit", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_erp_orders_per_unit), {
         header: getColumnHeader("hpd_erp_orders_per_unit"),
         cell: (info) => round(info.getValue()),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -201,45 +224,54 @@ export const columns = [
     id: "hpd_complaints",
     header: () => "HPD Complaints",
     columns: [
-      columnHelper.accessor("hpd_comp_emerg_total", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_emerg_total), {
         header: getColumnHeader("hpd_comp_emerg_total"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("hpd_comp_emerg_total_per_unit", {
-        header: getColumnHeader("hpd_comp_emerg_total_per_unit"),
-        cell: (info) => round(info.getValue()),
-        filterFn: "inNumberRange",
-        meta: {
-          filterVariant: "range",
-        },
-      }),
-      columnHelper.accessor("hpd_comp_heat", {
+      columnHelper.accessor(
+        (row) => getColumnAccessor(row.hpd_comp_emerg_total_per_unit),
+        {
+          header: getColumnHeader("hpd_comp_emerg_total_per_unit"),
+          cell: (info) => round(info.getValue()),
+          sortUndefined: -1,
+          filterFn: "inNumberRange",
+          meta: {
+            filterVariant: "range",
+          },
+        }
+      ),
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_heat), {
         header: getColumnHeader("hpd_comp_heat"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("hpd_comp_water", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_water), {
         header: getColumnHeader("hpd_comp_water"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("hpd_comp_pests", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_pests), {
         header: getColumnHeader("hpd_comp_pests"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("hpd_comp_apts_pct", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_apts_pct), {
         header: getColumnHeader("hpd_comp_apts_pct"),
         cell: (info) => formatPercent(info.getValue()),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -251,25 +283,28 @@ export const columns = [
     id: "hpd_programs",
     header: () => "HPD Programs",
     columns: [
-      columnHelper.accessor("in_aep", {
+      columnHelper.accessor((row) => getColumnAccessor(row.in_aep), {
         header: getColumnHeader("in_aep"),
         cell: (info) => showYesNo(info.getValue()),
+        sortUndefined: -1,
         filterFn: "equals",
         meta: {
           filterVariant: "boolean",
         },
       }),
-      columnHelper.accessor("in_conh", {
+      columnHelper.accessor((row) => getColumnAccessor(row.in_conh), {
         header: getColumnHeader("in_conh"),
         cell: (info) => showYesNo(info.getValue()),
+        sortUndefined: -1,
         filterFn: "equals",
         meta: {
           filterVariant: "boolean",
         },
       }),
-      columnHelper.accessor("in_ucp", {
+      columnHelper.accessor((row) => getColumnAccessor(row.in_ucp), {
         header: getColumnHeader("in_ucp"),
         cell: (info) => showYesNo(info.getValue()),
+        sortUndefined: -1,
         filterFn: "equals",
         meta: {
           filterVariant: "boolean",
@@ -281,10 +316,14 @@ export const columns = [
     id: "vacate_orders",
     header: () => "Vacate Orders",
     columns: [
-      columnHelper.accessor("placeholder_vacate_order", {
-        header: getColumnHeader("placeholder_vacate_order"),
-        filterFn: "includesString",
-      }),
+      columnHelper.accessor(
+        (row) => getColumnAccessor(row.placeholder_vacate_order),
+        {
+          header: getColumnHeader("placeholder_vacate_order"),
+          sortUndefined: -1,
+          filterFn: "includesString",
+        }
+      ),
     ],
   }),
 
@@ -292,22 +331,25 @@ export const columns = [
     id: "hp_cases",
     header: () => "HP Cases",
     columns: [
-      columnHelper.accessor("hp_active", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hp_active), {
         header: getColumnHeader("hp_active"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("hp_find_harassment", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hp_find_harassment), {
         header: getColumnHeader("hp_find_harassment"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("hp_open_judgements", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hp_open_judgements), {
         header: getColumnHeader("hp_open_judgements"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -319,15 +361,17 @@ export const columns = [
     id: "evictions",
     header: () => "Evictions",
     columns: [
-      columnHelper.accessor("evictions_filed", {
+      columnHelper.accessor((row) => getColumnAccessor(row.evictions_filed), {
         header: getColumnHeader("evictions_filed"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("evictions_executed", {
+      columnHelper.accessor((row) => getColumnAccessor(row.evictions_executed), {
         header: getColumnHeader("evictions_executed"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -339,11 +383,12 @@ export const columns = [
     id: "dob_permits",
     header: () => "DOB Permits",
     columns: [
-      // columnHelper.accessor("placeholder_dob_permit_applications", {
+      // columnHelper.accessor((row) => getColumnAccessor(row.placeholder_dob_permit_applications), {
       //   header: getColumnHeader("placeholder_dob_permit_applications"),
       // }),
-      columnHelper.accessor("dob_jobs", {
+      columnHelper.accessor((row) => getColumnAccessor(row.dob_jobs), {
         header: getColumnHeader("dob_jobs"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -355,8 +400,9 @@ export const columns = [
     id: "dob_violations",
     header: () => "DOB Violations",
     columns: [
-      columnHelper.accessor("dob_ecb_viol_total", {
+      columnHelper.accessor((row) => getColumnAccessor(row.dob_ecb_viol_total), {
         header: getColumnHeader("dob_ecb_viol_total"),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -368,25 +414,31 @@ export const columns = [
     id: "fines_fees_charges",
     header: () => "Fines, Fees & Charges",
     columns: [
-      columnHelper.accessor("hpd_erp_charges", {
+      columnHelper.accessor((row) => getColumnAccessor(row.hpd_erp_charges), {
         header: getColumnHeader("hpd_erp_charges"),
         cell: (info) => formatMoney(info.getValue()),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("hpd_erp_charges_per_unit", {
-        header: getColumnHeader("hpd_erp_charges_per_unit"),
-        cell: (info) => formatMoney(info.getValue()),
-        filterFn: "inNumberRange",
-        meta: {
-          filterVariant: "range",
-        },
-      }),
-      columnHelper.accessor("water_charges", {
+      columnHelper.accessor(
+        (row) => getColumnAccessor(row.hpd_erp_charges_per_unit),
+        {
+          header: getColumnHeader("hpd_erp_charges_per_unit"),
+          cell: (info) => formatMoney(info.getValue()),
+          sortUndefined: -1,
+          filterFn: "inNumberRange",
+          meta: {
+            filterVariant: "range",
+          },
+        }
+      ),
+      columnHelper.accessor((row) => getColumnAccessor(row.water_charges), {
         header: getColumnHeader("water_charges"),
         cell: (info) => formatMoney(info.getValue()),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -398,25 +450,29 @@ export const columns = [
     id: "financial",
     header: () => "Financial",
     columns: [
-      columnHelper.accessor("last_sale_date", {
+      columnHelper.accessor((row) => getColumnAccessor(row.last_sale_date), {
         header: getColumnHeader("last_sale_date"),
+        sortUndefined: -1,
         filterFn: "includesString",
       }),
-      columnHelper.accessor("origination_date", {
+      columnHelper.accessor((row) => getColumnAccessor(row.origination_date), {
         header: getColumnHeader("origination_date"),
+        sortUndefined: -1,
         filterFn: "includesString",
       }),
-      columnHelper.accessor("debt_total", {
+      columnHelper.accessor((row) => getColumnAccessor(row.debt_total), {
         header: getColumnHeader("debt_total"),
         cell: (info) => formatMoney(info.getValue()),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
         },
       }),
-      columnHelper.accessor("debt_per_unit", {
+      columnHelper.accessor((row) => getColumnAccessor(row.debt_per_unit), {
         header: getColumnHeader("debt_per_unit"),
         cell: (info) => formatMoney(info.getValue()),
+        sortUndefined: -1,
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -428,32 +484,36 @@ export const columns = [
     id: "political_districts",
     header: () => "Political Districts",
     columns: [
-      columnHelper.accessor("coun_dist", {
+      columnHelper.accessor((row) => getColumnAccessor(row.coun_dist), {
         header: getColumnHeader("coun_dist"),
+        sortUndefined: -1,
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
           filterVariant: "select",
         },
       }),
-      columnHelper.accessor("assem_dist", {
+      columnHelper.accessor((row) => getColumnAccessor(row.assem_dist), {
         header: getColumnHeader("assem_dist"),
+        sortUndefined: -1,
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
           filterVariant: "select",
         },
       }),
-      columnHelper.accessor("stsen_dist", {
+      columnHelper.accessor((row) => getColumnAccessor(row.stsen_dist), {
         header: getColumnHeader("stsen_dist"),
+        sortUndefined: -1,
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
           filterVariant: "select",
         },
       }),
-      columnHelper.accessor("cong_dist", {
+      columnHelper.accessor((row) => getColumnAccessor(row.cong_dist), {
         header: getColumnHeader("cong_dist"),
+        sortUndefined: -1,
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",

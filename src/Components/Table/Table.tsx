@@ -202,14 +202,23 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           <tbody>
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    style={{ ...getCommonPinningStyles(cell.column) }}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+                {row.getVisibleCells().map((cell) => {
+                  const valueExists =
+                    cell.getValue() !== null && cell.getValue() !== undefined;
+                  return (
+                    <td
+                      key={cell.id}
+                      style={{ ...getCommonPinningStyles(cell.column) }}
+                    >
+                      {valueExists
+                        ? flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )
+                        : "N/A"}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>
