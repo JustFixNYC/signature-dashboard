@@ -119,13 +119,20 @@ const CustomSearchBox: React.FC<CustomSearchBoxProps> = ({
 
 const ScreenReaderAnnouncementOfSearchHits: React.FC<{
   numberOfHits: number;
-}> = ({ numberOfHits }) => (
+  noResultsText: string;
+}> = ({ numberOfHits, noResultsText }) => (
   <p className="text-assistive">
-    {numberOfHits} {numberOfHits == 1 ? "search result" : "search results"}.{" "}
-    {numberOfHits > 0 ? (
-      <>Use the tab key to navigate. Press the enter key to select.</>
+    {numberOfHits === 0 ? (
+      noResultsText
     ) : (
-      <>Use the escape key to quit searching.</>
+      <>
+        {numberOfHits} {numberOfHits == 1 ? "search result" : "search results"}.{" "}
+        {numberOfHits > 0 ? (
+          <>Use the tab key to navigate. Press the enter key to select.</>
+        ) : (
+          <>Use the escape key to quit searching.</>
+        )}
+      </>
     )}
   </p>
 );
@@ -181,7 +188,10 @@ const CustomHits: React.FC<CustomHitsProps> = ({
           </div>
         </div>
       )}
-      <ScreenReaderAnnouncementOfSearchHits numberOfHits={numberOfHits} />
+      <ScreenReaderAnnouncementOfSearchHits
+        numberOfHits={numberOfHits}
+        noResultsText={noResultsText}
+      />
     </>
   );
 };
