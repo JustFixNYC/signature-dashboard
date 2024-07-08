@@ -60,15 +60,25 @@ body {
   width: $sidebarW;
   margin-top: $headerH;
   padding: 24px 20px;
-  z-index: 100;
+  z-index: 90;
   box-sizing: border-box;
   background-color: $OFF_WHITE_100;
   border-right: 1px solid #d2d2d2;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  @media screen and (max-width: 480px) {
+    position: initial;
+    height: 100vh;
+  }
 }
 
 #content {
   padding: calc($headerH + 1.5rem) 1.5rem 1.5rem calc($sidebarW + 1.5rem); // 0 24px 0 ($sidebarW + 24px)
+
+  @media screen and (max-width: 480px) {
+    padding-left: 1.5rem;
+  }
+
   width: 100%;
   box-sizing: border-box;
 }
