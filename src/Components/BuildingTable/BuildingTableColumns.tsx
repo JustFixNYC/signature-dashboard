@@ -23,7 +23,7 @@ export const columns = [
         </Link>
       </div>
     ),
-    sortUndefined: -1,
+    sortUndefined: "last",
     filterFn: "includesString",
   }),
   columnHelper.group({
@@ -32,7 +32,7 @@ export const columns = [
     columns: [
       columnHelper.accessor((row) => getColumnAccessor(row.zip), {
         header: getColumnHeader("zip"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "includesString",
         meta: {
           inputWidth: "3rem",
@@ -40,7 +40,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.borough), {
         header: getColumnHeader("borough"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
@@ -63,12 +63,12 @@ export const columns = [
             </Link>
           </div>
         ),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "includesString",
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.lender), {
         header: getColumnHeader("lender"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "includesString",
         meta: {
           inputWidth: "4rem",
@@ -79,7 +79,7 @@ export const columns = [
         id: 'units_res',
         header: getColumnHeader("units_res"),
         cell: (info) => formatNumber(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -88,7 +88,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.rs_units), {
         header: getColumnHeader("rs_units"),
         cell: (info) => formatNumber(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -97,7 +97,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.units_nonres), {
         header: getColumnHeader("units_nonres"),
         cell: (info) => showYesNo(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "equals",
         meta: {
           filterVariant: "boolean",
@@ -105,7 +105,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.year_built), {
         header: getColumnHeader("year_built"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -120,7 +120,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.bip), {
         header: getColumnHeader("bip"),
         cell: (info) => formatNumber(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           inputWidth: "2.5rem",
@@ -136,7 +136,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_bc_open), {
         header: getColumnHeader("hpd_viol_bc_open"),
         cell: (info) => formatNumber(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -147,7 +147,7 @@ export const columns = [
         {
           header: getColumnHeader("hpd_viol_bc_open_per_unit"),
           cell: (info) => round(info.getValue()),
-          sortUndefined: -1,
+          sortUndefined: "last",
           filterFn: "inNumberRange",
           meta: {
             filterVariant: "range",
@@ -157,7 +157,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_bc_total), {
         header: getColumnHeader("hpd_viol_bc_total"),
         cell: (info) => info.getValue(),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -172,7 +172,7 @@ export const columns = [
       // }),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_heat), {
         header: getColumnHeader("hpd_viol_heat"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -180,7 +180,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_pests), {
         header: getColumnHeader("hpd_viol_pests"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -188,7 +188,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_water), {
         header: getColumnHeader("hpd_viol_water"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -203,7 +203,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_erp_orders), {
         header: getColumnHeader("hpd_erp_orders"),
         cell: (info) => formatNumber(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -212,7 +212,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_erp_orders_per_unit), {
         header: getColumnHeader("hpd_erp_orders_per_unit"),
         cell: (info) => round(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -226,7 +226,7 @@ export const columns = [
     columns: [
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_emerg_total), {
         header: getColumnHeader("hpd_comp_emerg_total"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -237,7 +237,7 @@ export const columns = [
         {
           header: getColumnHeader("hpd_comp_emerg_total_per_unit"),
           cell: (info) => round(info.getValue()),
-          sortUndefined: -1,
+          sortUndefined: "last",
           filterFn: "inNumberRange",
           meta: {
             filterVariant: "range",
@@ -246,7 +246,7 @@ export const columns = [
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_heat), {
         header: getColumnHeader("hpd_comp_heat"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -254,7 +254,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_water), {
         header: getColumnHeader("hpd_comp_water"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -262,7 +262,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_pests), {
         header: getColumnHeader("hpd_comp_pests"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -271,7 +271,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_apts_pct), {
         header: getColumnHeader("hpd_comp_apts_pct"),
         cell: (info) => formatPercent(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -286,7 +286,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.in_aep), {
         header: getColumnHeader("in_aep"),
         cell: (info) => showYesNo(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "equals",
         meta: {
           filterVariant: "boolean",
@@ -295,7 +295,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.in_conh), {
         header: getColumnHeader("in_conh"),
         cell: (info) => showYesNo(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "equals",
         meta: {
           filterVariant: "boolean",
@@ -304,7 +304,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.in_ucp), {
         header: getColumnHeader("in_ucp"),
         cell: (info) => showYesNo(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "equals",
         meta: {
           filterVariant: "boolean",
@@ -320,7 +320,7 @@ export const columns = [
         (row) => getColumnAccessor(row.placeholder_vacate_order),
         {
           header: getColumnHeader("placeholder_vacate_order"),
-          sortUndefined: -1,
+          sortUndefined: "last",
           filterFn: "includesString",
         }
       ),
@@ -333,7 +333,7 @@ export const columns = [
     columns: [
       columnHelper.accessor((row) => getColumnAccessor(row.hp_active), {
         header: getColumnHeader("hp_active"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -341,7 +341,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.hp_find_harassment), {
         header: getColumnHeader("hp_find_harassment"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -349,7 +349,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.hp_open_judgements), {
         header: getColumnHeader("hp_open_judgements"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -363,7 +363,7 @@ export const columns = [
     columns: [
       columnHelper.accessor((row) => getColumnAccessor(row.evictions_filed), {
         header: getColumnHeader("evictions_filed"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -371,7 +371,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.evictions_executed), {
         header: getColumnHeader("evictions_executed"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -388,7 +388,7 @@ export const columns = [
       // }),
       columnHelper.accessor((row) => getColumnAccessor(row.dob_jobs), {
         header: getColumnHeader("dob_jobs"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -402,7 +402,7 @@ export const columns = [
     columns: [
       columnHelper.accessor((row) => getColumnAccessor(row.dob_ecb_viol_total), {
         header: getColumnHeader("dob_ecb_viol_total"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -417,7 +417,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_erp_charges), {
         header: getColumnHeader("hpd_erp_charges"),
         cell: (info) => formatMoney(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -428,7 +428,7 @@ export const columns = [
         {
           header: getColumnHeader("hpd_erp_charges_per_unit"),
           cell: (info) => formatMoney(info.getValue()),
-          sortUndefined: -1,
+          sortUndefined: "last",
           filterFn: "inNumberRange",
           meta: {
             filterVariant: "range",
@@ -438,7 +438,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.water_charges), {
         header: getColumnHeader("water_charges"),
         cell: (info) => formatMoney(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -452,18 +452,18 @@ export const columns = [
     columns: [
       columnHelper.accessor((row) => getColumnAccessor(row.last_sale_date), {
         header: getColumnHeader("last_sale_date"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "includesString",
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.origination_date), {
         header: getColumnHeader("origination_date"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "includesString",
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.debt_total), {
         header: getColumnHeader("debt_total"),
         cell: (info) => formatMoney(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -472,7 +472,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.debt_per_unit), {
         header: getColumnHeader("debt_per_unit"),
         cell: (info) => formatMoney(info.getValue()),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
           filterVariant: "range",
@@ -486,7 +486,7 @@ export const columns = [
     columns: [
       columnHelper.accessor((row) => getColumnAccessor(row.coun_dist), {
         header: getColumnHeader("coun_dist"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
@@ -495,7 +495,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.assem_dist), {
         header: getColumnHeader("assem_dist"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
@@ -504,7 +504,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.stsen_dist), {
         header: getColumnHeader("stsen_dist"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
@@ -513,7 +513,7 @@ export const columns = [
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.cong_dist), {
         header: getColumnHeader("cong_dist"),
-        sortUndefined: -1,
+        sortUndefined: "last",
         filterFn: "includesString",
         meta: {
           inputWidth: "1.5rem",
