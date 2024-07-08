@@ -2,7 +2,8 @@ import React from "react";
 import { Icon, Link } from "@justfixnyc/component-library";
 import "./styles.scss";
 import { BuildingInfo, CollectionInfo } from "../../types/APIDataTypes";
-import { INDICATOR_STRINGS, apiKeys, slugify } from "../../util/helpers";
+import { apiKeys, slugify } from "../../util/helpers";
+import { INDICATOR_STRINGS } from "../../util/indicators";
 import { useCSVDownloader } from "react-papaparse";
 
 export const generateBuildingCSV = (data: BuildingInfo) => {
@@ -11,15 +12,12 @@ export const generateBuildingCSV = (data: BuildingInfo) => {
   const indicator_names = api_keys.map(
     (x) => INDICATOR_STRINGS[x as apiKeys]?.name || "",
   );
-  const descriptions = api_keys.map(
-    (x) => INDICATOR_STRINGS[x as apiKeys]?.description || "",
-  );
 
   const csvData = [];
-  csvData.push(["name", "key", "description", "value"]);
+  csvData.push(["name", "key", "value"]);
   [...Array(values.length).keys()].forEach((i) => {
     if (["lender_slug", "landlord_slug"].includes(api_keys[i])) return;
-    csvData.push([api_keys[i], indicator_names[i], descriptions[i], values[i]]);
+    csvData.push([api_keys[i], indicator_names[i], values[i]]);
   });
 
   const base_url = window.location.host;
