@@ -44,7 +44,7 @@ export const Home: React.FC = () => {
           </h3>
           <p className="homepage-copy">
             See aggregate stats on all{" "}
-            {!!entirePortfolio && formatNumber(entirePortfolio?.buildings)}{" "}
+            <>{!!entirePortfolio && formatNumber(entirePortfolio?.buildings)}</>{" "}
             buildings on the dashboard.
           </p>
           <JFCLLinkInternal href="/entire-portfolio">
