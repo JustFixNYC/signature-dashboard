@@ -45,7 +45,7 @@ $secondary-color-light: lighten($secondary-color, 3%);
     width: calc(100% - 4px);
     margin-top: 0.5rem;
 
-    a.algolia__item {
+    .algolia__item {
       display: block;
       text-decoration: none !important;
       .result__snippet {
@@ -54,10 +54,11 @@ $secondary-color-light: lighten($secondary-color, 3%);
         color: $GREY_600;
         .ais-Snippet-highlighted {
           background-color: inherit;
+          color: inherit;
         }
       }
-      &:hover,
-      &:focus {
+      &:not(.algolia__no_results):hover,
+      &:not(.algolia__no_results):focus {
         background-color: var(--background-color);
         outline: none;
         .result__snippet,

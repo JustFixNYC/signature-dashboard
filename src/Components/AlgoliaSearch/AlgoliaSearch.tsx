@@ -36,12 +36,13 @@ type CustomSearchBoxProps = UseSearchBoxProps & {
   labelText: string;
   className?: string;
   placeholder?: string;
-} & Pick<CustomHitsProps, "toURL" | "attributeName">;
+} & Pick<CustomHitsProps, "toURL" | "attributeName" | "noResultsText">;
 
 const CustomSearchBox: React.FC<CustomSearchBoxProps> = ({
   attributeName,
   toURL,
   placeholder,
+  noResultsText,
   labelText,
   className,
   ...props
@@ -100,7 +101,11 @@ const CustomSearchBox: React.FC<CustomSearchBoxProps> = ({
               aria-live="polite"
               aria-atomic={true}
             >
-              <CustomHits attributeName={attributeName} toURL={toURL} />
+              <CustomHits
+                attributeName={attributeName}
+                toURL={toURL}
+                noResultsText={noResultsText}
+              />
             </div>
             {/* <div className="search-by is-pulled-right">
               <img width="140" height="20" alt="Algolia" src={algoliaIcon} />
@@ -138,11 +143,13 @@ type AddressHitProps = AlgoliaHit<{
 type CustomHitsProps = UseHitsProps<LandlordHitProps | AddressHitProps> & {
   attributeName: keyof LandlordHitProps | keyof AddressHitProps;
   toURL: (hit: Partial<LandlordHitProps & AddressHitProps>) => string;
+  noResultsText: string;
 };
 
 const CustomHits: React.FC<CustomHitsProps> = ({
   attributeName,
   toURL,
+  noResultsText,
   ...props
 }) => {
   const { hits } = useHits(props);
@@ -168,9 +175,10 @@ const CustomHits: React.FC<CustomHitsProps> = ({
             .slice(0, SEARCH_RESULTS_LIMIT)}
         </div>
       ) : (
-        <div className="label">
-          <br />
-          No landlords in the Signature portfolio match your search.
+        <div className="algolia__suggests">
+          <div className="algolia__item algolia__no_results">
+            <div className="result__snippet">{noResultsText}</div>
+          </div>
         </div>
       )}
       <ScreenReaderAnnouncementOfSearchHits numberOfHits={numberOfHits} />
@@ -180,7 +188,12 @@ const CustomHits: React.FC<CustomHitsProps> = ({
 
 type AlgoliaSearchProps = Pick<
   CustomSearchBoxProps,
-  "labelText" | "attributeName" | "toURL" | "className" | "placeholder"
+  | "labelText"
+  | "attributeName"
+  | "toURL"
+  | "className"
+  | "placeholder"
+  | "noResultsText"
 > & {
   indexName: string;
   hitsPerPage: number;
@@ -191,6 +204,7 @@ const AlgoliaSearch: React.FC<AlgoliaSearchProps> = ({
   attributeName,
   toURL,
   placeholder,
+  noResultsText,
   labelText,
   hitsPerPage,
 }) => {
@@ -206,6 +220,7 @@ const AlgoliaSearch: React.FC<AlgoliaSearchProps> = ({
         toURL={toURL}
         placeholder={placeholder}
         labelText={labelText}
+        noResultsText={noResultsText}
       />
     </InstantSearch>
   ) : (
@@ -213,11 +228,15 @@ const AlgoliaSearch: React.FC<AlgoliaSearchProps> = ({
   );
 };
 
-type SearchProps = Pick<CustomSearchBoxProps, "labelText" | "placeholder">;
+type SearchProps = Pick<
+  CustomSearchBoxProps,
+  "labelText" | "placeholder" | "noResultsText"
+>;
 
 export const LandlordSearch: React.FC<SearchProps> = ({
   placeholder,
   labelText,
+  noResultsText,
 }) => (
   <AlgoliaSearch
     indexName={LANDLORD_INDEX_NAME}
@@ -225,6 +244,7 @@ export const LandlordSearch: React.FC<SearchProps> = ({
     toURL={(hit) => `/landlords?landlord=${hit.landlord_slug}`}
     placeholder={placeholder}
     labelText={labelText}
+    noResultsText={noResultsText}
     hitsPerPage={5}
   />
 );
@@ -232,6 +252,7 @@ export const LandlordSearch: React.FC<SearchProps> = ({
 export const AddressSearch: React.FC<SearchProps> = ({
   placeholder,
   labelText,
+  noResultsText,
 }) => (
   <AlgoliaSearch
     indexName={ADDRESS_INDEX_NAME}
@@ -239,6 +260,7 @@ export const AddressSearch: React.FC<SearchProps> = ({
     toURL={(hit) => `/buildings?bbl=${hit.bbl}`}
     placeholder={placeholder}
     labelText={labelText}
+    noResultsText={noResultsText}
     hitsPerPage={5}
   />
 );

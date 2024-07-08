@@ -10,7 +10,10 @@ export const NoLandlord: React.FC = () => {
   return (
     <>
       <PageTitle>Landlords</PageTitle>
-      <LandlordSearch labelText="Search for landlord by name" />
+      <LandlordSearch
+        labelText="Search for landlord by name"
+        noResultsText="No landlords in the Signature portfolio match your search."
+      />
       <div className="find-links">
         <p>Don't know the landlord's name?</p>
         <Link href={"/buildings"}>Search by building address</Link>

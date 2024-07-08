@@ -20,7 +20,10 @@ export const NoBBL: React.FC = () => {
         </div>
       </div>
 
-      <AddressSearch labelText="Find a building in the Signature portfolio by entering the address" />
+      <AddressSearch
+        labelText="Find a building in the Signature portfolio by entering the address"
+        noResultsText="No buildings in the Signature portfolio match your search."
+      />
       <div className="find-links">
         <p>How else can I find a building?</p>
         <Link href={"/buildings"}>Search by landlord</Link>
