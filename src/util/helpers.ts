@@ -109,11 +109,65 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   bbl: {
     name: "BBL",
   },
+  address: {
+    name: "Address",
+    description:
+      "The address on record with DOF for the property. Note that some properties have multiple valid addresses, and a single property (unit of ownership) can include multiple adjacent buildings.",
+  },
+  zip: {
+    name: "Zip code",
+  },
+  borough: {
+    name: "Borough",
+  },
+  units_res: {
+    name: "Residential Units",
+    format: "comma",
+  },
+  units_nonres: {
+    name: "Non-Residential Units",
+    description:
+      "Presence of any non-residential units. May include one or more types of units (offices, retail stores, etc.)",
+    format: "boolean",
+  },
+  year_built: {
+    name: "Year Built",
+  },
   rs_units: {
     name: "Rent Stabilized Units",
     description:
       "The number of rent stabilized units most recently registered with DHCR. All properties in the Signature portfolio have rent stabilized units, so any zero values are most likely a reporting error.",
     format: "comma",
+  },
+  bip: {
+    name: "Building Indicator Project (BIP) score",
+    short_name: "BIP score",
+    description:
+      "The BIP score takes into account violation and overdue charge data to come up with an indicator of likely physical or financial distress: a building with a score of 500 or more is likely to be in physical or financial distress, while a building with a score of 800 or more is highly likely to be in physical or financial distress. (Note that the BIP score is a conservative indicator, and scores below 500 do not necessarily indicate that is a building is financially and physically stable.)",
+    format: "comma",
+  },
+  landlord: {
+    name: "Landlord",
+  },
+  landlord_name: {
+    name: "Landlord",
+  },
+  lender: {
+    name: "Lender",
+  },
+  lender_name: {
+    name: "Lender",
+  },
+  buildings: {
+    name: "Buildings",
+    description: "The number of Signature properties in the portfolio.",
+    format: "comma",
+  },
+  bip_500_pct: {
+    name: "Percent of buildings with BIP score over 500",
+    description:
+      "The number of buildings within a landlord portfolio that are likely to be in physical or financial distress, according to the Building Indicator Project (BIP) Database.",
+    format: "percent",
   },
   hpd_viol_bc_open: {
     name: "Open HPD violations (B & C)",
@@ -211,18 +265,6 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       "The percent of all apartments in the building that have submitted any HPD complaints in the last 12 months. Read more on HPD Complaints.",
     format: "percent",
   },
-  debt_per_unit: {
-    name: "Signature debt per unit",
-    description:
-      "The total debt originated divided by the number of residential units. Debt per unit can be used as a proxy to understand how a property was valued by the lender and investor, and (depending on the geography, type of building, and year of mortgage origination) whether the mortgage is likely to be speculative in nature.",
-    format: "money",
-  },
-  debt_total: {
-    name: "Signature debt",
-    description:
-      'The total mortgage amount at origination. For "portfolio loans", or mortgages on multiple properties, amounts are assigned as a proportion of the residential units in the individual building to the total residential units in the portfolio of buildings.',
-    format: "money",
-  },
   evictions_filed: {
     name: "Eviction cases filed, last 12 mo.",
     description:
@@ -254,81 +296,27 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       "The Underlying Conditions Program allows HPD to issue an administrative order to landlords to correct underlying conditions that have caused, or are causing, a violation. HPD selects approximately 50-100 buildings for participation in the program each year based on the number of apartments affected and the number and severity of the violations. Read more on the Underlying Conditions Program",
     format: "boolean",
   },
+  debt_per_unit: {
+    name: "Signature debt per unit",
+    description:
+      "The total debt originated divided by the number of residential units. Debt per unit can be used as a proxy to understand how a property was valued by the lender and investor, and (depending on the geography, type of building, and year of mortgage origination) whether the mortgage is likely to be speculative in nature.",
+    format: "money",
+  },
+  debt_total: {
+    name: "Signature debt",
+    description:
+      'The total mortgage amount at origination. For "portfolio loans", or mortgages on multiple properties, amounts are assigned as a proportion of the residential units in the individual building to the total residential units in the portfolio of buildings.',
+    format: "money",
+  },
   origination_date: {
     name: "Signature loan origination date",
     description:
       "The date that the mortgage was originated, according to ACRIS property records.",
   },
-  units_res: {
-    name: "Residential Units",
-    format: "comma",
-  },
-  year_built: {
-    name: "Year Built",
-  },
-  units_nonres: {
-    name: "Non-Residential Units",
-    description:
-      "Presence of any non-residential units. May include one or more types of units (offices, retail stores, etc.)",
-    format: "boolean",
-  },
-  landlord: {
-    name: "Landlord",
-  },
-  lender: {
-    name: "Lender",
-  },
-  zip: {
-    name: "Zip code",
-  },
-  address: {
-    name: "Address",
-    description:
-      "The address on record with DOF for the property. Note that some properties have multiple valid addresses, and a single property (unit of ownership) can include multiple adjacent buildings.",
-  },
-  borough: {
-    name: "Borough",
-  },
-  assem_dist: {
-    name: "State Assembly",
-  },
-  cong_dist: {
-    name: "Congressional",
-  },
-  coun_dist: {
-    name: "City Council",
-  },
-  stsen_dist: {
-    name: "State Senate",
-  },
   last_sale_date: {
     name: "Last sale date",
     description:
       "The date of the most recent sale of the property (deed transfer), according to ACRIS property records..",
-  },
-  lat: {
-    name: "lat",
-  },
-  lng: {
-    name: "lng",
-  },
-  buildings: {
-    name: "Buildings",
-    description: "The number of Signature properties in the portfolio.",
-    format: "comma",
-  },
-  bip: {
-    name: "Building Indicator Project (BIP) score",
-    short_name: "BIP score",
-    description:
-      "The BIP score takes into account violation and overdue charge data to come up with an indicator of likely physical or financial distress: a building with a score of 500 or more is likely to be in physical or financial distress, while a building with a score of 800 or more is highly likely to be in physical or financial distress. (Note that the BIP score is a conservative indicator, and scores below 500 do not necessarily indicate that is a building is financially and physically stable.)",
-    format: "comma",
-  },
-  bip_500_pct: {
-    name: "Percent of buildings with BIP score over 500",
-    description:
-      "The number of buildings within a landlord portfolio that are likely to be in physical or financial distress, according to the Building Indicator Project (BIP) Database.",
-    format: "percent",
   },
   hp_active: {
     name: "Active HPD litigation cases",
@@ -425,11 +413,23 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Active Vacate Order",
     description: "(include links to each agency page to learn more)",
   },
-  landlord_name: {
-    name: "Landlord",
+  assem_dist: {
+    name: "State Assembly",
   },
-  lender_name: {
-    name: "Lender",
+  cong_dist: {
+    name: "Congressional",
+  },
+  coun_dist: {
+    name: "City Council",
+  },
+  stsen_dist: {
+    name: "State Senate",
+  },
+  lat: {
+    name: "lat",
+  },
+  lng: {
+    name: "lng",
   },
 };
 
