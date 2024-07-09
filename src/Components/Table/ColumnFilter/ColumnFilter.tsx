@@ -45,7 +45,6 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
     table.getAllLeafColumns().length - table.getVisibleLeafColumns().length;
   const hasHiddenColumns = numHiddenColumn > 0;
   const buttonClassNames = classNames("filter-button", {
-    "filter-button--active": showMenu,
     "filter-button--has-hidden": numHiddenColumn > 0,
   });
 
