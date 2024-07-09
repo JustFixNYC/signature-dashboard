@@ -1,4 +1,4 @@
-import { Button, Checkbox, Icon } from "@justfixnyc/component-library";
+import { Button, Checkbox } from "@justfixnyc/component-library";
 import { Table } from "@tanstack/react-table";
 import "./style.scss";
 import { INDICATOR_STRINGS, apiKeys } from "../../../util/helpers";
