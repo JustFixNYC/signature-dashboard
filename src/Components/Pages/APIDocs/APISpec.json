@@ -295,6 +295,11 @@
             "example": 44.23,
             "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months, per unit"
           },
+          "hpd_active_vacate": {
+            "type": "string",
+            "example": "Entire Building (Jan 5, 2024)",
+            "description": "Most recent active HPD vacate order, for 'Partial' (one or more units) or 'Entire Building' and the ate it was issued."
+          },
           "last_rodent_date": {
             "type": "string",
             "example": "2024-01-06",
