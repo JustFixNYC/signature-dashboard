@@ -1,7 +1,6 @@
 import { Icon } from "@justfixnyc/component-library";
 import { useState } from "react";
 import {
-  INDICATOR_STRINGS,
   apiKeys,
   formatMoney,
   formatNumber,
@@ -9,6 +8,7 @@ import {
   formatPercent,
   showYesNo,
 } from "../../util/helpers";
+import { INDICATOR_STRINGS } from "../../util/indicators";
 
 type DetailTableRowProps = {
   apiKey: apiKeys;
