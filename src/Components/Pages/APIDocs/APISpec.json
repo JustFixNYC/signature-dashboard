@@ -60,6 +60,16 @@
             "example": "santander",
             "description": "Lender name in slug format. Same as 'collection_slug' for collection page"
           },
+          "loan_status": {
+            "type": "string",
+            "example": "active",
+            "description": "Current status of the Signature loan ('active' or 'satisfied'), provided by UNHP"
+          },
+          "loan_action": {
+            "type": "string",
+            "example": "refinanced",
+            "description": "Action taken on the Signature loan ('refinanced', 'new landlord', 'debt write down', or null), provided by UNHP"
+          },
           "link_hpd": {
             "type": "string",
             "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
