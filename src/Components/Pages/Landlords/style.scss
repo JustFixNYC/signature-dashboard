@@ -1,0 +1,16 @@
+.find-links {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 113px;
+  p,
+  a {
+    font-size: 1.2rem; // 19.2px (same as body)
+    font-weight: 400;
+    &:first-of-type {
+      margin-bottom: 0.5rem;
+    }
+  }
+  a {
+    width: fit-content;
+  }
+}

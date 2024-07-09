@@ -1,25 +1,14 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
 import "./style.scss";
-import { AddressSearch, SelectOption } from "../../AddressSearch/AddressSearch";
-
-import selectOptions from "../Buildings/buildings_options.json";
-import { useNavigate } from "react-router-dom";
 import { PageTitle } from "../../PageTitle/PageTitle";
 import JFCLLinkInternal from "../../JFCLLinkInternal";
 import { useGetPortfolios } from "../../../api/hooks";
 import { formatNumber } from "../../../util/helpers";
+import { AddressSearch } from "../../AlgoliaSearch/AlgoliaSearch";
 
 export const Home: React.FC = () => {
-  const navigate = useNavigate();
-
   const { data } = useGetPortfolios();
-
-  const onSelection = (newValue: SelectOption | null) => {
-    if (newValue) {
-      navigate(`/buildings?bbl=${newValue.value}`);
-    }
-  };
 
   const entirePortfolio = data?.find((obj) => obj.collection_slug === "all");
 
@@ -35,10 +24,10 @@ export const Home: React.FC = () => {
 
         <div style={{ width: "fit-content" }}>
           <h3 className="homepage-section-header">Search building</h3>
-          <p className="homepage-copy">
-            Find a building in the Signature portfolio by entering the address
-          </p>
-          <AddressSearch options={selectOptions} onSelection={onSelection} />
+          <AddressSearch
+            labelText="Find a building in the Signature portfolio by entering the address"
+            noResultsText="No buildings in the Signature portfolio match your search."
+          />
           <h3 className="homepage-section-header">
             Learn about the entire Signature Portfolio
           </h3>
