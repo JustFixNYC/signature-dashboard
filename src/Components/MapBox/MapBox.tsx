@@ -137,6 +137,7 @@ export const MapBox: React.FC<MapBoxProps> = ({ data }) => {
           onClick={onClick}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
+          minZoom={10}
         >
           <NavigationControl showCompass={false} visualizePitch={false} />
           <Source id="my-data" type="geojson" data={geojson}>
