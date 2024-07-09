@@ -3,7 +3,7 @@ import { apiKeys } from "./helpers";
 type indicatorObj = {
   name: string;
   short_name?: string;
-  description?: JSX.Element;
+  description?: React.ReactNode;
   format?: "money" | "round" | "percent" | "boolean" | "comma";
 };
 
@@ -33,12 +33,8 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   units_nonres: {
     name: "Non-Residential Units",
-    description: (
-      <>
-        Presence of any non-residential units. May include one or more types of
-        units (offices, retail stores, etc.)
-      </>
-    ),
+    description:
+      "Presence of any non-residential units. May include one or more types of units (offices, retail stores, etc.)",
     format: "boolean",
   },
   year_built: {
@@ -46,30 +42,15 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   rs_units: {
     name: "Rent Stabilized Units",
-    description: (
-      <>
-        The number of rent stabilized units most recently registered with DHCR.
-        All properties in the Signature portfolio have rent stabilized units, so
-        any zero values are most likely a reporting error.
-      </>
-    ),
+    description:
+      "The number of rent stabilized units most recently registered with DHCR. All properties in the Signature portfolio have rent stabilized units, so any zero values are most likely a reporting error.",
     format: "comma",
   },
   bip: {
     name: "Building Indicator Project (BIP) score",
     short_name: "BIP score",
-    description: (
-      <>
-        The BIP score takes into account violation and overdue charge data to
-        come up with an indicator of likely physical or financial distress: a
-        building with a score of 500 or more is likely to be in physical or
-        financial distress, while a building with a score of 800 or more is
-        highly likely to be in physical or financial distress. (Note that the
-        BIP score is a conservative indicator, and scores below 500 do not
-        necessarily indicate that is a building is financially and physically
-        stable.)
-      </>
-    ),
+    description:
+      "The BIP score takes into account violation and overdue charge data to come up with an indicator of likely physical or financial distress: a building with a score of 500 or more is likely to be in physical or financial distress, while a building with a score of 800 or more is highly likely to be in physical or financial distress. (Note that the BIP score is a conservative indicator, and scores below 500 do not necessarily indicate that is a building is financially and physically stable.)",
     format: "comma",
   },
   landlord: {
@@ -86,18 +67,13 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   buildings: {
     name: "Buildings",
-    description: <>The number of Signature properties in the portfolio.</>,
+    description: "The number of Signature properties in the portfolio.",
     format: "comma",
   },
   bip_500_pct: {
     name: "Percent of buildings with BIP score over 500",
-    description: (
-      <>
-        The number of buildings within a landlord portfolio that are likely to
-        be in physical or financial distress, according to the Building
-        Indicator Project (BIP) Database.
-      </>
-    ),
+    description:
+      "The number of buildings within a landlord portfolio that are likely to be in physical or financial distress, according to the Building Indicator Project (BIP) Database.",
     format: "percent",
   },
   hpd_viol_bc_open: {
@@ -355,25 +331,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   evictions_filed: {
     name: "Eviction cases filed, last 12 mo.",
-    description: (
-      <>
-        Eviction cases filed by the landlord in housing court. This is the first
-        step in the court process, and the case may later get dismissed, settled
-        in or out of court, or eventually result in a executed eviction warrant.
-        Values cannot be reported for buildings with fewer than 11 units.
-      </>
-    ),
+    description:
+      "Eviction cases filed by the landlord in housing court. This is the first step in the court process, and the case may later get dismissed, settled in or out of court, or eventually result in a executed eviction warrant. Values cannot be reported for buildings with fewer than 11 units.",
     format: "comma",
   },
   evictions_executed: {
     name: "Eviction warrants executed, last 12 mo.",
-    description: (
-      <>
-        Warrants for eviction against a tenant that are executed by the city
-        marshals. This is the final outcome in cases where there is a possessory
-        judgement against the tenant.
-      </>
-    ),
+    description:
+      "Warrants for eviction against a tenant that are executed by the city marshals. This is the final outcome in cases where there is a possessory judgement against the tenant.",
     format: "comma",
   },
   in_aep: {
