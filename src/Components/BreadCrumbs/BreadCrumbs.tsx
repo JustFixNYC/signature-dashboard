@@ -13,7 +13,7 @@ export const BreadCrumbs: React.FC<BreadCrumbs> = ({ crumbs }) => {
           {crumb.name}
         </Link>,
         <span key={index + "caret"} className="breadCrumbs__caret">
-          <Icon icon="caretRight" className="" />
+          <Icon icon="caretRight" />
         </span>,
       ];
     }

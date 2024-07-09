@@ -84,12 +84,12 @@ export const DownloadCSV: React.FC<DownloadProps> = ({
       }}
       data={csvData}
     >
-      <Icon icon="download" className="" />
+      <Icon icon="download" />
       {labelText}
     </CSVDownloader>
   ) : (
     <Link className="disabled">
-      <Icon icon="download" className="" />
+      <Icon icon="download" />
       {labelText}
     </Link>
   );
