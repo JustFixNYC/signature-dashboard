@@ -1,4 +1,4 @@
-import { Checkbox, Icon } from "@justfixnyc/component-library";
+import { Button, Checkbox, Icon } from "@justfixnyc/component-library";
 import { Table } from "@tanstack/react-table";
 import "./style.scss";
 import { INDICATOR_STRINGS, apiKeys } from "../../../util/helpers";
@@ -49,12 +49,20 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
     "filter-button--has-hidden": numHiddenColumn > 0,
   });
 
+  const clearnButtonLabel = `${hasHiddenColumns ? `(${numHiddenColumn})` : ""} Hide Columns`;
+
   return (
     <div className="popover-filter-menu">
-      <button ref={buttonRef} className={buttonClassNames} onClick={onClick}>
-        {hasHiddenColumns && <>({numHiddenColumn}) </>}Hide Columns{" "}
-        <Icon icon="chevronDown" className="" />
-      </button>
+      <Button
+        ref={buttonRef}
+        className={buttonClassNames}
+        onClick={onClick}
+        labelText={clearnButtonLabel}
+        variant="secondary"
+        size="small"
+        iconOnRight={true}
+        labelIcon="chevronDown"
+      />
       <div
         className={`popover-menu ${showMenu ? "popover-menu--show" : ""}`}
         style={{ top: `${btnHeight + 12}px` }}
