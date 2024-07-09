@@ -62,3 +62,12 @@
   position: sticky;
   top: calc($headerH + 1.5rem);
 }
+
+.has-chart-note {
+  margin-bottom: 0;
+}
+
+.chart-note {
+  font-size: 1rem;
+  margin-bottom: 1.33rem;
+}
