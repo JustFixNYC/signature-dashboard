@@ -107,7 +107,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       <>
         Number of HPD violations of class B (hazardous) and C (immediately
         hazardous) issued in the last 5 years that have not yet been corrected.
-        Read more on HPD Violations.
+        Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Violations
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -119,7 +126,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       <>
         Number of HPD violations of class B (hazardous) and C (immediately
         hazardous) issued in the last 5 years that have not yet been corrected,
-        divided by the number of units. Read more on HPD Violations.
+        divided by the number of units. Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Violations
+        </a>
+        .
       </>
     ),
     format: "round",
@@ -130,7 +144,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Number of HPD violations of class B (hazardous) and C (immediately
-        hazardous) issued in the last 12 months. Read more on HPD Violations.
+        hazardous) issued in the last 12 months. Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Violations
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -142,7 +163,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       <>
         Number of HPD violations of class B (hazardous) and C (immediately
         hazardous) issued in the last 12 months, divided by the number of units.
-        Read more on HPD Violations.
+        Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Violations
+        </a>
+        .
       </>
     ),
     format: "round",
@@ -153,7 +181,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Number of HPD violations related to lack of heat or hot water issued in
-        the last 12 months. Read more on HPD Violations.
+        the last 12 months. Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Violations
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -164,7 +199,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Number of HPD violations related to pests issued in the last 12 months.
-        Read more on HPD Violations.
+        Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Violations
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -175,7 +217,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Number of HPD violations related to leaks or mold issued in the last 12
-        months. Read more on HPD Violations.
+        months. Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Violations
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -186,7 +235,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Number of HPD complaints of emergency class received in the last 12
-        months. Read more on HPD Complaints.
+        months. Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Complaints
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -197,7 +253,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Number of HPD complaints of emergency class received in the last 12
-        months, divided by the number of units. Read more on HPD Complaints.
+        months, divided by the number of units. Read more on
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Complaints
+        </a>
+        .
       </>
     ),
     format: "round",
@@ -208,7 +271,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Number of HPD complaints related to lack of heat or hot water received
-        in the last 12 months. Read more on HPD Complaints.
+        in the last 12 months. Read more on
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Complaints
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -219,7 +289,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Number of HPD complaints related to lack of pests received in the last
-        12 months. Read more on HPD Complaints.
+        12 months. Read more on
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Complaints
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -230,7 +307,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Number of HPD complaints related to leaks or mold received in the last
-        12 months. Read more on HPD Complaints.
+        12 months. Read more on
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Complaints
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -240,7 +324,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         List of all apartments in the building that have submitted any HPD
-        complaints in the last 12 months. Read more on HPD Complaints.
+        complaints in the last 12 months. Read more on
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Complaints
+        </a>
+        .
       </>
     ),
   },
@@ -250,7 +341,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         The percent of all apartments in the building that have submitted any
-        HPD complaints in the last 12 months. Read more on HPD Complaints.
+        HPD complaints in the last 12 months. Read more on
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/report-a-maintenance-issue.page"
+          target="_blank"
+        >
+          HPD Complaints
+        </a>
+        .
       </>
     ),
     format: "percent",
@@ -287,7 +385,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
         frequent inspections to monitor correction of violations, and issue
         Orders to Correct if the landlord fails to act. The program also allows
         HPD to make repairs and replace building systems if necessary. Read more
-        on AEP.
+        on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/alternative-enforcement-program-aep.page"
+          target="_blank"
+        >
+          AEP
+        </a>
+        .
       </>
     ),
     format: "boolean",
@@ -303,7 +408,13 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
         to change the use or occupancy of a building or to demolish a building
         or any part thereof. HPD selected a set of buildings that are subject to
         other enforcement programs or have serious with existing conditions to
-        be included in a pilot program for CONH. REad more on CONH
+        be included in a pilot program for CONH. Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/certification-of-no-harassment-conh.page"
+          target="_blank"
+        >
+          CONH
+        </a>
       </>
     ),
     format: "boolean",
@@ -317,7 +428,13 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
         are causing, a violation. HPD selects approximately 50-100 buildings for
         participation in the program each year based on the number of apartments
         affected and the number and severity of the violations. Read more on the
-        Underlying Conditions Program
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/underlying-conditions-program-ll6.page"
+          target="_blank"
+        >
+          Underlying Conditions Program
+        </a>
+        .
       </>
     ),
     format: "boolean",
@@ -370,7 +487,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Ongoing cases in housing court against landlords for conditions and/or
-        harassment, initiated by tenants or HPD. Read more on HPD Litigation.
+        harassment, initiated by tenants or HPD. Read more on{" "}
+        <a
+          href="https://data.cityofnewyork.us/Housing-Development/Housing-Litigations/59kj-x8nc/about_data"
+          target="_blank"
+        >
+          HPD Litigation
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -381,7 +505,13 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       <>
         All cases in housing court against landlords for conditions and/or
         harassment, initiated by tenants or HPD, since August 2006. Read more on
-        HPD Litigation.
+        <a
+          href="https://data.cityofnewyork.us/Housing-Development/Housing-Litigations/59kj-x8nc/about_data"
+          target="_blank"
+        >
+          HPD Litigation
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -392,7 +522,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       <>
         Total penalties from HPD litigation cases against a landlord for
         conditions and/or harassment where there is an outstanding judgement.
-        Read more on HPD Litigation.
+        Read more on
+        <a
+          href="https://data.cityofnewyork.us/Housing-Development/Housing-Litigations/59kj-x8nc/about_data"
+          target="_blank"
+        >
+          HPD Litigation
+        </a>
+        .
       </>
     ),
     format: "money",
@@ -402,7 +539,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Number of HPD litigation cases against a landlord where there was a
-        finding of harassment, since August 2006. Read more on HPD Litigation.
+        finding of harassment, since August 2006. Read more on
+        <a
+          href="https://data.cityofnewyork.us/Housing-Development/Housing-Litigations/59kj-x8nc/about_data"
+          target="_blank"
+        >
+          HPD Litigation
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -413,7 +557,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       <>
         Number of HPD litigation cases against a landlord for conditions and/or
         harassment with an outstanding judgement, since August 2006. Read more
-        on HPD Litigation.
+        on
+        <a
+          href="https://data.cityofnewyork.us/Housing-Development/Housing-Litigations/59kj-x8nc/about_data"
+          target="_blank"
+        >
+          HPD Litigation
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -440,7 +591,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
         elevators or boilers), the structural integrity of a property, or
         illegal construction. ECB (Environment Control Board) are a specific
         violation of NYC Construction Codes or Zoning Resolution, and come with
-        additional penalties. Read more on DOB/ECB Violations
+        additional penalties. Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/buildings/safety/dob-violations.page"
+          target="_blank"
+        >
+          DOB/ECB Violations
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -456,7 +614,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
         structural integrity of a property, or illegal construction. ECB
         (Environment Control Board) are a specific violation of NYC Construction
         Codes or Zoning Resolution, and come with additional penalties. Read
-        more on DOB/ECB Violations
+        more on{" "}
+        <a
+          href="https://www.nyc.gov/site/buildings/safety/dob-violations.page"
+          target="_blank"
+        >
+          DOB/ECB Violations
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -485,8 +650,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       <>
         Total cost charged to the landlord for work orders completed as part of
         HPD programs (Emergency Repairs, Alternative Enforcement, etc.) in the
-        last 12 months, divided by the total number of units. Read more on HPD
-        Emergency Repairs
+        last 12 months, divided by the total number of units. Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/emergency-repair-program-erp.page"
+          target="_blank"
+        >
+          HPD Emergency Repairs
+        </a>
+        .
       </>
     ),
     format: "money",
@@ -497,7 +668,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       <>
         Total cost charged to the landlord for work orders completed as part of
         HPD programs (Emergency Repairs, Alternative Enforcement, etc.) in the
-        last 12 months
+        last 12 months. Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/emergency-repair-program-erp.page"
+          target="_blank"
+        >
+          HPD Emergency Repairs
+        </a>
+        .
       </>
     ),
     format: "money",
@@ -508,8 +686,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Number of work orders as part of HPD programs (Emergency Repairs,
-        Alternative Enforcement, etc.) in the last 12 months. Read more on HPD
-        Emergency Repairs
+        Alternative Enforcement, etc.) in the last 12 months. Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/emergency-repair-program-erp.page"
+          target="_blank"
+        >
+          HPD Emergency Repairs
+        </a>
+        .
       </>
     ),
     format: "comma",
@@ -521,7 +705,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       <>
         Number of work orders as part of HPD programs (Emergency Repairs,
         Alternative Enforcement, etc.) in the last 12 months, divided by the
-        number of units. Read more on HPD Emergency Repairs
+        number of units. Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/emergency-repair-program-erp.page"
+          target="_blank"
+        >
+          HPD Emergency Repairs
+        </a>
+        .
       </>
     ),
     format: "round",
@@ -531,7 +722,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         Date of the most recent inspection for rodents by the Health Department
-        (DOHMH). Read more on rodent inspections.
+        (DOHMH). Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/doh/health/health-topics/rats.page"
+          target="_blank"
+        >
+          rodent inspections
+        </a>
+        .
       </>
     ),
   },
@@ -540,7 +738,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description: (
       <>
         The result (pass or fail) of the most recent inspection for rodents by
-        the Health Department (DOHMH). Read more on rodent inspections.
+        the Health Department (DOHMH). Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/doh/health/health-topics/rats.page"
+          target="_blank"
+        >
+          rodent inspections
+        </a>
+        .
       </>
     ),
   },
