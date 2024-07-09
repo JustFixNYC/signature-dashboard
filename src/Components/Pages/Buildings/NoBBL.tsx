@@ -37,8 +37,8 @@ export const NoBBL: React.FC = () => {
       {data && (
         <>
           <p>
-            There are {formatNumber(data.bldg_data.length)} buildings in the
-            Signature Portfolio Dashboard.
+            There are <>{formatNumber(data.bldg_data.length)}</> buildings in
+            the Signature Portfolio Dashboard.
           </p>
           <BuildingTable
             data={data.bldg_data}
