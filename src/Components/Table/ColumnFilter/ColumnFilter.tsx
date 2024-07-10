@@ -49,7 +49,7 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
     "filter-button--has-hidden": numHiddenColumn > 0,
   });
 
-  const clearnButtonLabel = `${hasHiddenColumns ? `(${numHiddenColumn})` : ""} Hide Columns`;
+  const clearnButtonLabel = `${hasHiddenColumns ? numHiddenColumn : ""} Hide Columns`;
 
   return (
     <div className="popover-filter-menu">
