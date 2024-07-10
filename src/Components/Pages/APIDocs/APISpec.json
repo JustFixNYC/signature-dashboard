@@ -453,107 +453,107 @@
             "example": "cpc",
             "description": "Lender name slug, used for API and URL. Available for Landlord records only"
           },
-          "buildings": {
+          "buildings_agg": {
             "type": "integer",
             "example": 26,
             "description": "Number of properties (BBLs) in the collection"
           },
-          "units_res": {
+          "units_res_agg": {
             "type": "integer",
             "example": 1800,
             "description": "Total number of residential units in the collection"
           },
-          "rs_units": {
+          "rs_units_agg": {
             "type": "integer",
             "example": 45,
             "description": "Total number of registered rent stabilized units in the collection. Most recent non-zero value 2019-2022."
           },
-          "evictions_filed": {
+          "evictions_filed_agg": {
             "type": "integer",
             "example": 216,
             "description": "Total number of eviction cases filed in the last 12 months in the collection."
           },
-          "hp_active": {
+          "hp_active_agg": {
             "type": "integer",
             "example": 6,
             "description": "Total number of active HP cases against the landlord in the collection."
           },
-          "bip_500_pct": {
+          "bip_500_pct_agg": {
             "type": "float",
             "example": 44,
             "description": "Percent of buildings in the collection with a BIP score of 500 or greater."
           },
-          "hpd_viol_bc_open": {
+          "hpd_viol_bc_open_agg": {
             "type": "integer",
             "example": 15291,
             "description": "Total number of open B & C class HPD violations in the collection, issued in the last 5 years"
           },
-          "hpd_viol_bc_open_per_unit": {
+          "hpd_viol_bc_open_per_unit_agg": {
             "type": "number",
             "example": 8.495,
             "description": "The average number of open B & C class HPD violations per unit in the collection, issued in the last 5 years"
           },
-          "hpd_viol_bc_total": {
+          "hpd_viol_bc_total_agg": {
             "type": "integer",
             "example": 15291,
             "description": "Total number of B & C class HPD violations issued in the last 12 months in the collection"
           },
-          "hpd_viol_bc_total_per_unit": {
+          "hpd_viol_bc_total_per_unit_agg": {
             "type": "number",
             "example": 8.495,
             "description": "The average number of B & C class HPD violations per unit issued in the last 12 months in the collection"
           },
-          "hpd_comp_emerg_total": {
+          "hpd_comp_emerg_total_agg": {
             "type": "integer",
             "example": 19800,
             "description": "Total number of Emergency HPD complaints in the last 12 months in the collection"
           },
-          "hpd_comp_emerg_total_per_unit": {
+          "hpd_comp_emerg_total_per_unit_agg": {
             "type": "number",
             "example": 11,
             "description": "The average number of Emergency HPD complaints per unit in the last 12 months in the collection"
           },
-          "hpd_erp_orders": {
+          "hpd_erp_orders_agg": {
             "type": "integer",
             "example": 134,
             "description": "Total number of HPD Emergency Repair Program work orders in the last 12 months in the collection"
           },
-          "hpd_erp_orders_per_unit": {
+          "hpd_erp_orders_per_unit_agg": {
             "type": "number",
             "example": 454.75,
             "description": "Total number of HPD Emergency Repair Program work orders in the last 12 months per unit in the collection"
           },
-          "hpd_erp_charges": {
+          "hpd_erp_charges_agg": {
             "type": "number",
             "example": 1544.23,
             "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months in the collection"
           },
-          "hpd_erp_charges_per_unit": {
+          "hpd_erp_charges_per_unit_agg": {
             "type": "number",
             "example": 24.2,
             "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months per unit in the collection"
           },
-          "dob_ecb_viol_open_per_unit": {
+          "dob_ecb_viol_open_per_unit_agg": {
             "type": "number",
             "example": 24.2,
             "description": "Number of active DOB/ECB violations per unit in the collection (since 2010)"
           },
-          "water_charges": {
+          "water_charges_agg": {
             "type": "number",
             "example": 5500.0,
             "description": "Total outstanding water charges due to the city for all buildings in the collection"
           },
-          "debt_total": {
+          "debt_total_agg": {
             "type": "number",
             "example": 140888559.23999998,
             "description": "The total Signature debt of the collection"
           },
-          "debt_per_building": {
+          "debt_per_building_agg": {
             "type": "number",
             "example": 5418790.739999999,
             "description": "The average Signature debt per building in the collection"
           },
-          "debt_per_unit": {
+          "debt_per_unit_agg": {
             "type": "number",
             "example": 78271.42179999998,
             "description": "The average Signature debt per unit in the collection"
@@ -890,35 +890,6 @@
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/Portfolio"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request."
-          }
-        }
-      }
-    },
-    "/signature/bbls": {
-      "get": {
-        "summary": "Returns a list of all BBLs in the Signature portfolio, to limit results from GeoSearch Autocomplete API for address search function",
-        "responses": {
-          "200": {
-            "description": "List of all BBLs in the Signature portfolio",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "3071980006"
                       }
                     }
                   }
