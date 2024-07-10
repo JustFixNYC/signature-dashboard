@@ -84,7 +84,6 @@ const LAYER_STYLE: CircleLayer = {
   },
 };
 
-
 type MapBoxProps = {
   data: MapData[];
   initialSelectedBBL?: string;
@@ -96,6 +95,8 @@ export const MapBox: React.FC<MapBoxProps> = ({
   initialSelectedBBL,
   setSearchParams,
 }) => {
+  setSearchParams && setSearchParams(undefined, { replace: true });
+
   const [cursor, setCursor] = useState("");
 
   const initialSelected =
@@ -122,13 +123,11 @@ export const MapBox: React.FC<MapBoxProps> = ({
   };
 
   const onClick = (event: mapboxgl.MapLayerMouseEvent) => {
-    if (event.features?.length) {
-      const mapPoint = event.features[0].properties as MapData;
-      setSelectedAddr(mapPoint);
-      setSearchParams && setSearchParams({ bbl: mapPoint?.bbl });
-    } else {
-      setSelectedAddr(null);
-    }
+    if (!event.features) return;
+
+    const mapPoint = event.features[0].properties as MapData;
+    setSelectedAddr(mapPoint);
+    setSearchParams && setSearchParams({ bbl: mapPoint?.bbl });
   };
 
   // Type error on "features" because bldg.lng and bldg.lat might be null
@@ -157,7 +156,9 @@ export const MapBox: React.FC<MapBoxProps> = ({
       <div className="map-container">
         <Map
           mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
-          initialViewState={selectedInitialViewState || DEFAULT_INITIAL_VIEW_STATE}
+          initialViewState={
+            selectedInitialViewState || DEFAULT_INITIAL_VIEW_STATE
+          }
           mapStyle={STYLE_SIGNATURE_LIGHT}
           cursor={cursor}
           interactiveLayerIds={["bbl"]}
