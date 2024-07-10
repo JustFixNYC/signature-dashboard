@@ -31,6 +31,11 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Residential Units",
     format: "comma",
   },
+  units_res_agg: {
+    name: "Residential Units",
+    description: "Total number of residential units across all of the Signature buildings in this portfolio",
+    format: "comma",
+  },
   units_nonres: {
     name: "Non-Residential Units",
     description:
@@ -44,6 +49,12 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Rent Stabilized Units",
     description:
       "The number of rent stabilized units most recently registered with DHCR. All properties in the Signature portfolio have rent stabilized units, so any zero values are most likely a reporting error.",
+    format: "comma",
+  },
+  rs_units_agg: {
+    name: "Rent Stabilized Units",
+    description:
+      "Total number of rent stabilized units most recently registered with DHCR across all Signature properties in the portfolio. While all properties in the Signature portfolio have rent stabilized units, some have not registered with DHCR so this number will be an under count.",
     format: "comma",
   },
   bip: {
@@ -65,7 +76,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   lender_name: {
     name: "Lender",
   },
-  buildings: {
+  buildings_agg: {
     name: "Buildings",
     description: "The number of Signature properties in the portfolio.",
     format: "comma",
@@ -333,6 +344,12 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Eviction cases filed, last 12 mo.",
     description:
       "Eviction cases filed by the landlord in housing court. This is the first step in the court process, and the case may later get dismissed, settled in or out of court, or eventually result in a executed eviction warrant. Values cannot be reported for buildings with fewer than 11 units.",
+    format: "comma",
+  },
+  evictions_filed_agg: {
+    name: "Eviction cases filed, last 12 mo.",
+    description:
+      "Number of eviction cases filed by the landlord in housing court across all Signature buildings in this portfolio that have at least 11 residential units.  This is the first step in the court process, and the case may later get dismissed, settled in or out of court, or eventually result in a executed eviction warrant.",
     format: "comma",
   },
   evictions_executed: {
