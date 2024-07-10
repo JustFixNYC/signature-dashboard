@@ -94,7 +94,8 @@ export const AllLandlordsTable: React.FC = () => {
             data={data}
             columns={columns}
             pagination
-            initialSorting={{ sorting: [{ id: "units_res", desc: true }] }}
+            initialSorting={[{ id: "units_res", desc: true }]}
+            qsPrefix="ll" // NOTE: changing this value will break bookmarked urls
           />
         </>
       )}

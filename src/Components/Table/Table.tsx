@@ -21,7 +21,11 @@ import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
 import { Button, Icon } from "@justfixnyc/component-library";
 import { useSearchParams } from "react-router-dom";
-import LZString from "lz-string";
+import {
+  encodeForURI,
+  getHiddenColumns,
+  getObjFromEncodedParam,
+} from "../../util/helpers";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
 export type PageSizeOptions = (typeof pageSizeOptions)[number];
@@ -34,6 +38,7 @@ export interface TableProps<T extends object> {
   pageSize?: PageSizeOptions;
   initialState?: InitialTableState;
   initialSorting?: ColumnSort[];
+  qsPrefix: string;
 }
 
 declare module "@tanstack/react-table" {
@@ -75,6 +80,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     columns,
     initialState,
     initialSorting,
+    qsPrefix,
     pagination: hasPagination,
     pageSize = 50,
   } = props;
@@ -85,61 +91,69 @@ export const Table = <T extends object>(props: TableProps<T>) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [columnVisibility, setColumnVisibility] = useState({});
+  const FILTERS_PARAM_KEY = `${qsPrefix}_f`;
+  const SORTING_PARAM_KEY = `${qsPrefix}_s`;
+  const VISIBILITY_PARAM_KEY = `${qsPrefix}_h`;
 
-  const filterParams = searchParams.get("filters");
-  const initialColumnFilters = filterParams
-    ? JSON.parse(LZString.decompressFromEncodedURIComponent(filterParams))
-    : [];
+  // Get table setting from query string
+  const columnVisibilityParams = getObjFromEncodedParam(
+    searchParams,
+    VISIBILITY_PARAM_KEY
+  );
+  const columnFiltersParams = getObjFromEncodedParam(
+    searchParams,
+    FILTERS_PARAM_KEY
+  );
+  const sortingParams = getObjFromEncodedParam(searchParams, SORTING_PARAM_KEY);
 
-  const [columnFilters, setColumnFilters] =
-    useState<ColumnFiltersState>(initialColumnFilters);
-
-  const sortParams = searchParams.get("sort");
-  const initialTableSorting = sortParams
-    ? JSON.parse(LZString.decompressFromEncodedURIComponent(sortParams))
-    : initialSorting ? initialSorting : [];
-
-  const [tableSorting, setTableSorting] =
-    useState<ColumnSort[]>(initialTableSorting);
+  // Setup tables settings in state
+  const [sorting, setsorting] = useState<ColumnSort[]>(
+    sortingParams ? sortingParams : initialSorting ? initialSorting : []
+  );
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
+    columnFiltersParams ?? []
+  );
+  const [columnVisibility, setColumnVisibility] = useState(
+    columnVisibilityParams ?? {}
+  );
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Update query params everytime column filters change
+  // Update query params for table sorting, filtering, and column visibility
   useEffect(() => {
     setSearchParams(
       (params) => {
-        if (!columnFilters.length) {
-          params.delete("filters");
+        // SORT
+        if (!sorting.length) {
+          params.delete(SORTING_PARAM_KEY);
         } else {
-          const columnFiltersString = JSON.stringify(columnFilters);
-          const encodedColumnFilters =
-            LZString.compressToEncodedURIComponent(columnFiltersString);
-          params.set("filters", encodedColumnFilters);
+          const encodedsorting = encodeForURI(sorting);
+          params.set(SORTING_PARAM_KEY, encodedsorting);
         }
-        return params;
-      },
-      { replace: true }
-    );
-  }, [columnFilters, setSearchParams]);
 
-  // Update query params everytime table sorting changes
-  useEffect(() => {
-    setSearchParams(
-      (params) => {
-        if (!tableSorting.length) {
-          params.delete("sort");
+        // FILTERS
+        if (!columnFilters.length) {
+          params.delete(FILTERS_PARAM_KEY);
         } else {
-          const tableSortingString = JSON.stringify(tableSorting);
-          const encodedTableSorting =
-            LZString.compressToEncodedURIComponent(tableSortingString);
-          params.set("sort", encodedTableSorting);
+          const encodedColumnFilters = encodeForURI(columnFilters);
+          params.set(FILTERS_PARAM_KEY, encodedColumnFilters);
         }
+
+        // HIDDEN COLUMNS
+        const hiddenColumns = getHiddenColumns(columnVisibility);
+        if (!Object.keys(hiddenColumns).length) {
+          params.delete(VISIBILITY_PARAM_KEY);
+        } else {
+          const encodedColumnVisibility = encodeForURI(hiddenColumns);
+          params.set(VISIBILITY_PARAM_KEY, encodedColumnVisibility);
+        }
+
         return params;
       },
       { replace: true }
     );
-  }, [tableSorting, setSearchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sorting, columnFilters, columnVisibility, setSearchParams]);
 
   const options: TableOptions<T> = {
     data,
@@ -149,11 +163,11 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     state: {
       columnVisibility,
       columnFilters,
-      sorting: tableSorting,
+      sorting: sorting,
     },
     onColumnVisibilityChange: setColumnVisibility,
     onColumnFiltersChange: setColumnFilters,
-    onSortingChange: setTableSorting,
+    onSortingChange: setsorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(), //client side filtering
