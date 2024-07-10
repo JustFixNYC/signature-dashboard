@@ -16,9 +16,11 @@ import {
 } from "@tanstack/react-table";
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
-import { CSSProperties, useMemo, useRef, useState } from "react";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
 import { Button, Icon } from "@justfixnyc/component-library";
+import { useSearchParams } from "react-router-dom";
+import LZString from "lz-string";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
 export type PageSizeOptions = (typeof pageSizeOptions)[number];
@@ -77,11 +79,38 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     pageIndex: 0,
     pageSize: pageSize,
   });
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [columnVisibility, setColumnVisibility] = useState({});
 
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const filterParams = searchParams.get("filters");
+  const initialColumnFilters = filterParams
+    ? JSON.parse(LZString.decompressFromEncodedURIComponent(filterParams))
+    : [];
+
+  const [columnFilters, setColumnFilters] =
+    useState<ColumnFiltersState>(initialColumnFilters);
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Update query params everytime column filters change
+  useEffect(() => {
+    setSearchParams(
+      (params) => {
+        if (!columnFilters.length) {
+          params.delete("filters");
+        } else {
+          const columnFiltersString = JSON.stringify(columnFilters);
+          const encodedColumnFilters =
+            LZString.compressToEncodedURIComponent(columnFiltersString);
+          params.set("filters", encodedColumnFilters);
+        }
+        return params;
+      },
+      { replace: true }
+    );
+  }, [columnFilters, setSearchParams]);
 
   const options: TableOptions<T> = {
     data,
