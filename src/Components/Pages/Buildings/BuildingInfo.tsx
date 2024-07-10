@@ -20,6 +20,7 @@ import { BuildingHPDRepairsTable } from "./Tables/BuildingHPDRepairsTable";
 import { BuildingInformationTable } from "./Tables/BuildingInformationTable";
 import { BuildingBIPTable } from "./Tables/BuildingBIPTable";
 import { Link } from "react-router-dom";
+import JFCLLinkInternal from "../../JFCLLinkInternal";
 import { InternalLinks } from "../../LinksBox/InternalLinks";
 import { ExternalLinks } from "../../LinksBox/ExternalLinks";
 import { PageTitle } from "../../PageTitle/PageTitle";
@@ -63,6 +64,9 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
             data={buildingInfo}
             labelText="Download building data"
           />
+          <JFCLLinkInternal href={`/map?bbl=${buildingInfo?.bbl}`}>
+            View on map
+          </JFCLLinkInternal>
         </div>
       </div>
       {buildingInfoIsLoading && <div>loading...</div>}

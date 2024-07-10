@@ -12,6 +12,10 @@
   &.no-breadcrumbs {
     justify-content: end;
   }
+  .top-bar-actions {
+    display: flex;
+    gap: 3.5rem;
+  }
 }
 
 .building-address {
