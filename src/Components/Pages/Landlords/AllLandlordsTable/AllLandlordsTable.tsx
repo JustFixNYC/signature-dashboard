@@ -29,6 +29,7 @@ export const columns = [
     filterFn: "includesString",
   }),
   columnHelper.accessor(row => getColumnAccessor(row.lender_name), {
+    id: "lender_name",
     header: getColumnHeader("lender_name"),
     sortUndefined: "last",
     cell: (info) => info.getValue(),
@@ -38,6 +39,7 @@ export const columns = [
     },
   }),
   columnHelper.accessor(row => getColumnAccessor(row.buildings), {
+    id: "buildings",
     header: getColumnHeader("buildings"),
     sortUndefined: "last",
     cell: (info) => info.getValue(),
@@ -47,8 +49,8 @@ export const columns = [
     },
   }),
   columnHelper.accessor(row => getColumnAccessor(row.units_res), {
+    id: "units_res",
     header: getColumnHeader("units_res"),
-    id: 'unit_res',
     sortUndefined: "last",
     cell: (info) => formatNumber(info.getValue()),
     filterFn: "inNumberRange",
@@ -57,6 +59,7 @@ export const columns = [
     },
   }),
   columnHelper.accessor(row => getColumnAccessor(row.hpd_viol_bc_open_per_unit), {
+    id: "hpd_viol_bc_open_per_unit",
     header: getColumnHeader("hpd_viol_bc_open_per_unit"),
     sortUndefined: "last",
     cell: (info) => round(info.getValue()),
@@ -66,6 +69,7 @@ export const columns = [
     },
   }),
   columnHelper.accessor(row => getColumnAccessor(row.debt_per_unit), {
+    id: "debt_per_unit",
     header: getColumnHeader("debt_per_unit"),
     sortUndefined: "last",
     cell: (info) => formatMoney(info.getValue()),
