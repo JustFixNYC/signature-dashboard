@@ -2,6 +2,7 @@ import {
   Column,
   ColumnDef,
   ColumnFiltersState,
+  ColumnSort,
   InitialTableState,
   PaginationState,
   RowData,
@@ -32,6 +33,7 @@ export interface TableProps<T extends object> {
   pagination?: boolean;
   pageSize?: PageSizeOptions;
   initialState?: InitialTableState;
+  initialSorting?: ColumnSort[];
 }
 
 declare module "@tanstack/react-table" {
@@ -72,6 +74,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     data,
     columns,
     initialState,
+    initialSorting,
     pagination: hasPagination,
     pageSize = 50,
   } = props;
@@ -91,6 +94,14 @@ export const Table = <T extends object>(props: TableProps<T>) => {
 
   const [columnFilters, setColumnFilters] =
     useState<ColumnFiltersState>(initialColumnFilters);
+
+  const sortParams = searchParams.get("sort");
+  const initialTableSorting = sortParams
+    ? JSON.parse(LZString.decompressFromEncodedURIComponent(sortParams))
+    : initialSorting ? initialSorting : [];
+
+  const [tableSorting, setTableSorting] =
+    useState<ColumnSort[]>(initialTableSorting);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -112,6 +123,24 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     );
   }, [columnFilters, setSearchParams]);
 
+  // Update query params everytime table sorting changes
+  useEffect(() => {
+    setSearchParams(
+      (params) => {
+        if (!tableSorting.length) {
+          params.delete("sort");
+        } else {
+          const tableSortingString = JSON.stringify(tableSorting);
+          const encodedTableSorting =
+            LZString.compressToEncodedURIComponent(tableSortingString);
+          params.set("sort", encodedTableSorting);
+        }
+        return params;
+      },
+      { replace: true }
+    );
+  }, [tableSorting, setSearchParams]);
+
   const options: TableOptions<T> = {
     data,
     columns,
@@ -120,9 +149,11 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     state: {
       columnVisibility,
       columnFilters,
+      sorting: tableSorting,
     },
     onColumnVisibilityChange: setColumnVisibility,
     onColumnFiltersChange: setColumnFilters,
+    onSortingChange: setTableSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(), //client side filtering
