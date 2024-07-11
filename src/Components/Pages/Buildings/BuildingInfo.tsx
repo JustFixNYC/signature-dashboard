@@ -239,7 +239,11 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                 lastSaleDate={buildingInfo.last_sale_date}
               />
 
-              <h4 className="has-chart-note">Evictions</h4>
+              <h4
+                className={buildingInfo.units_res < 11 ? `has-chart-note` : ""}
+              >
+                Evictions
+              </h4>
               {buildingInfo.units_res < 11 && (
                 <div className="chart-note">
                   Note: Eviction filings not available because the building has
