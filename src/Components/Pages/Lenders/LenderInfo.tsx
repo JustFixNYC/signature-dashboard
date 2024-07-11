@@ -4,7 +4,10 @@ import "./style.scss";
 import { Collection } from "../../Collection/Collection";
 import { BreadCrumbs } from "../../BreadCrumbs/BreadCrumbs";
 import { PageTitle } from "../../PageTitle/PageTitle";
-import { useGetCollectionInfo } from "../../../api/hooks";
+import {
+  useGetCollectionInfo,
+  useGetDatasetLastUpdated,
+} from "../../../api/hooks";
 import { CollectionSummaryTable } from "../../Collection/CollectionSummaryTable/CollectionSummaryTable";
 import { InternalLinks } from "../../LinksBox/InternalLinks";
 import { DownloadMultiBuildingCSV } from "../../CSVDownload/CSVDownload";
@@ -15,11 +18,19 @@ interface LenderInfoProps {
 
 export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
   const { data, error, isLoading } = useGetCollectionInfo(lender);
+  const {
+    data: lastUpdatedData,
+    error: lastUpdatedError,
+    isLoading: lastUpdatedIsLoading,
+  } = useGetDatasetLastUpdated();
   return (
     <>
-      {isLoading && <div>loading...</div>}
+      {isLoading && lastUpdatedIsLoading && <div>loading...</div>}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-      {data && (
+      {lastUpdatedError && (
+        <pre>{JSON.stringify(lastUpdatedError, null, 2)}</pre>
+      )}
+      {data && lastUpdatedData && (
         <>
           <div className="top-bar">
             <BreadCrumbs
@@ -40,7 +51,10 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
               <PageTitle>{data.collection_name}</PageTitle>
 
               <h3>Key Indicators</h3>
-              <CollectionSummaryTable data={data} />
+              <CollectionSummaryTable
+                data={data}
+                lastUpdatedData={lastUpdatedData}
+              />
             </div>
             <div>
               <aside className="related-links-container">

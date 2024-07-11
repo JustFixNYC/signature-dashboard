@@ -46,6 +46,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description:
       "The number of rent stabilized units most recently registered with DHCR. All properties in the Signature portfolio have rent stabilized units, so any zero values are most likely a reporting error.",
     format: "comma",
+    dataset:"dof_tax_lien_sale_list"
   },
   bip: {
     name: "Building Indicator Project (BIP) score",
