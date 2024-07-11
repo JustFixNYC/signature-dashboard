@@ -23,19 +23,6 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
 
   return (
     <div style={{ minHeight: "1500px" }}>
-      <h3>Building Table</h3>
-      <p>
-        {data.bldg_data.length} buildings owned by {data.collection_name}
-      </p>
-      <BuildingTable
-        data={data.bldg_data}
-        {...((data.collection_type === "lender" ||
-          data.collection_type === "all") && {
-          pagination: true,
-          pageSize: 100,
-        })}
-      />
-
       {chartIsLoading && <div>loading...</div>}
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
       {chartData && data && (
@@ -53,6 +40,19 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
           <EvictionsChart data={chartData} />
         </div>
       )}
+
+      <h3>Building Table</h3>
+      <p>
+        {data.bldg_data.length} buildings owned by {data.collection_name}
+      </p>
+      <BuildingTable
+        data={data.bldg_data}
+        {...((data.collection_type === "lender" ||
+          data.collection_type === "all") && {
+          pagination: true,
+          pageSize: 100,
+        })}
+      />
     </div>
   );
 };
