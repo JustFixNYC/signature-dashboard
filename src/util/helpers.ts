@@ -58,6 +58,18 @@ export const formatDate = (value: string) => {
   });
 };
 
+export const formatLastUpdatedDate = (value: string) => {
+  const today = new Date();
+  const yesterday = ((d) => new Date(d.setDate(d.getDate() - 1)))(new Date());
+  if (new Date(value).toDateString() === today.toDateString()) {
+    return "today";
+  } else if (new Date(value).toDateString() === yesterday.toDateString()) {
+    return "yesterday";
+  } else {
+    return formatDate(value);
+  }
+};
+
 export type yearlyChartData = {
   [x in keyof Omit<APIChartData, "month">]: number;
 } & {
@@ -108,14 +120,12 @@ export const getColumnHeader = (apiKey: apiKeys) => {
   }
 };
 
-
 // Fall back to undefined for null values
 // This helps with sorting
 // react-table uses sortUndefined to define how to sort undefined values, but there's
 // no way to tell it how to properly sort null values
 export const getColumnAccessor = (val: string | number | null) =>
   val !== null ? val : undefined;
-
 
 export const round = (value: unknown) => {
   if (typeof value !== "number") {

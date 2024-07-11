@@ -70,17 +70,14 @@ export interface Indicators {
   units_res: number;
   year_built: number;
   zip: number;
+  hpd_active_vacate: string;
 }
 
 export type BuildingInfo = {
   landlord_slug: string;
   lender_slug: string;
-  water_charges: string;
   lat: string;
   lng: string;
-  placeholder_vacate_order: number;
-  placeholder_dob_permit_applications: number;
-  placeholder_outstanding_water: number;
 } & Pick<
   Indicators,
   | "bbl"
@@ -140,6 +137,8 @@ export type BuildingInfo = {
   | "dob_jobs"
   | "dob_ecb_viol_total"
   | "dob_ecb_viol_open"
+  | "water_charges"
+  | "hpd_active_vacate"
 >;
 
 export type CollectionInfo = {
@@ -220,4 +219,9 @@ export interface APIPortfolioData {
   collection_slug: "cpc" | "santander" | "all";
   buildings: number;
   landlords: number;
+}
+
+export interface DatasetLastUpdatedData {
+  dataset: string;
+  last_updated: string;
 }
