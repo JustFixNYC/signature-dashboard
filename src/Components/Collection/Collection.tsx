@@ -8,6 +8,7 @@ import { EvictionsChart } from "../BarChart/Evictions";
 import { BuildingTable } from "../BuildingTable/BuildingTable";
 import { CollectionInfo } from "../../types/APIDataTypes";
 import "./style.scss";
+import { SectionHeader } from "../SectionHeader/SectionHeader";
 
 type CollectionProps = {
   collection: string;
@@ -27,7 +28,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
       {chartData && data && (
         <div className="collection-charts">
-          <h3>Trend Charts</h3>
+          <SectionHeader id="trend-charts">Trend Charts</SectionHeader>
           <h4>HPD Violations</h4>
           <HPDViolationsChart data={chartData} />
           <h4>HPD Complaints</h4>
@@ -41,7 +42,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
         </div>
       )}
 
-      <h3>Building Table</h3>
+      <SectionHeader id="buildings-table">Building Table</SectionHeader>
       <p>
         {data.bldg_data.length} buildings owned by {data.collection_name}
       </p>
