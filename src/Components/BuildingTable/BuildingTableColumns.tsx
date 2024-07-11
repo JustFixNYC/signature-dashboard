@@ -15,6 +15,7 @@ const columnHelper = createColumnHelper<BuildingInfo>();
 
 export const columns = [
   columnHelper.accessor((row) => getColumnAccessor(row.address), {
+    id: "address",
     header: getColumnHeader("address"),
     cell: (info) => (
       <div className="cell__address">
