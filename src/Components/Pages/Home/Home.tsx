@@ -12,7 +12,7 @@ export const Home: React.FC = () => {
 
   const entirePortfolio = data?.find((obj) => obj.collection_slug === "all");
   const cpcPortfolio = data?.find((obj) => obj.collection_slug === "cpc");
-  const santanderPortfolio = data?.find((obj) => obj.collection_slug === "cpc");
+  const santanderPortfolio = data?.find((obj) => obj.collection_slug === "santander");
 
   return (
     <>
