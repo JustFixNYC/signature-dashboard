@@ -17,10 +17,17 @@ import {
 } from "@tanstack/react-table";
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
-import { CSSProperties, useMemo, useRef, useState } from "react";
+import { CSSProperties, Fragment, useMemo, useRef, useState } from "react";
 import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
 import { Button } from "@justfixnyc/component-library";
-import ReactSelect, { MultiValue } from "react-select";
+import ReactSelect, {
+  components,
+  ContainerProps,
+  GroupBase,
+  MenuProps,
+  MultiValue,
+  Props,
+} from "react-select";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
 export type PageSizeOptions = (typeof pageSizeOptions)[number];
@@ -404,6 +411,7 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
           column.setFilterValue(selections.map((option) => option.value));
         }}
         isMulti
+        components={{ Menu }}
       />
     </div>
   ) : (
@@ -423,5 +431,72 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
       />
       <div className="h-1" />
     </>
+  );
+}
+
+const Menu = (
+  props: MenuProps<{ value: MultiValue<string>; label: MultiValue<string> }>
+) => {
+  console.log(props);
+  return (
+    <Fragment>
+      <components.Menu {...props}>
+        <>
+          <SelectedValuesContainer
+            isDisabled={props.selectProps.isDisabled}
+            isFocused={false}
+            {...props}
+          />
+          {props.children}
+        </>
+      </components.Menu>
+    </Fragment>
+  );
+};
+
+function SelectedValuesContainer<
+  Option,
+  IsMulti extends boolean = true,
+  GroupType extends GroupBase<Option> = GroupBase<Option>,
+>({
+  isDisabled,
+  getValue,
+  ...props
+}: ContainerProps<Option, IsMulti, GroupType>) {
+  const { getOptionValue, classNamePrefix } = props.selectProps as Props<
+    Option,
+    IsMulti,
+    GroupType
+  >;
+console.log(props)
+  const getKey = (opt: Option, index: number) =>
+    `${getOptionValue ? getOptionValue(opt) : "option"}-${index}`;
+
+  const toMultiValue = (opt: Option, index: number) => {
+    return (
+      <components.MultiValue
+        getValue={getValue}
+        {...props}
+        components={{
+          Container: components.MultiValueContainer,
+          Label: components.MultiValueLabel,
+          Remove: components.MultiValueRemove,
+        }}
+        isDisabled={isDisabled}
+        key={getKey(opt, index)}
+        index={index}
+        removeProps={{ ...props.innerProps }}
+        data={opt}
+      >
+        {/* @ts-expect-error (value isn't recognizing the available properties of Option type) */}
+        {opt.label}
+      </components.MultiValue>
+    );
+  };
+
+  return (
+    <div className={`${classNamePrefix}__selected-value-container`}>
+      {getValue().map(toMultiValue)}
+    </div>
   );
 }
