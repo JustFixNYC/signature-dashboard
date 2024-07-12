@@ -5,6 +5,9 @@ export type Borough =
   | "Queens"
   | "Staten Island";
 
+export type LoanStatus = "active" | "satisfied";
+export type LoanAction = "refinanced" | "new landlord" | "debt write down";
+
 export const indicatorsTimeSpans = ["month", "quarter", "year"] as const;
 export type IndicatorsTimeSpan = (typeof indicatorsTimeSpans)[number];
 
@@ -75,6 +78,8 @@ export interface Indicators {
 export type BuildingInfo = {
   landlord_slug: string;
   lender_slug: string;
+  loan_status: LoanStatus;
+  loan_action: LoanAction;
   water_charges: string;
   lat: string;
   lng: string;
