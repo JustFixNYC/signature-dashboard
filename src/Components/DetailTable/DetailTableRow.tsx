@@ -1,7 +1,6 @@
 import { Icon } from "@justfixnyc/component-library";
 import { useState } from "react";
 import {
-  INDICATOR_STRINGS,
   apiKeys,
   formatMoney,
   formatNumber,
@@ -9,6 +8,7 @@ import {
   formatPercent,
   showYesNo,
 } from "../../util/helpers";
+import { INDICATOR_STRINGS } from "../../util/indicators";
 
 type DetailTableRowProps = {
   apiKey: apiKeys;
@@ -29,7 +29,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
 
   const name = indicator ? indicator.name : apiKey;
   const description = indicator?.description;
-  let displayValue = value;
+  let displayValue: unknown = value;
 
   if (indicator?.format === "round" && typeof value === "number") {
     displayValue = value.toFixed(2);
@@ -70,7 +70,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
             <Icon icon="circleInfo" className="detail-table__name_icon" />
           )}
         </dt>
-        <dd className="detail-table__value">{displayValue}</dd>
+        <dd className="detail-table__value"><>{displayValue}</></dd>
       </div>
       <dd
         className={

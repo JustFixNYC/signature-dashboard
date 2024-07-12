@@ -8,6 +8,13 @@ import { useGetCollectionInfo } from "../../../api/hooks";
 import { CollectionSummaryTable } from "../../Collection/CollectionSummaryTable/CollectionSummaryTable";
 import { InternalLinks } from "../../LinksBox/InternalLinks";
 import { DownloadMultiBuildingCSV } from "../../CSVDownload/CSVDownload";
+import { SectionHeader } from "../../SectionHeader/SectionHeader";
+import {
+  TableOfContents,
+  TOCHeader,
+  TOCList,
+  TOCItem,
+} from "../../TableOfContents/TableOfContents";
 
 interface LenderInfoProps {
   lender: string;
@@ -29,19 +36,25 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
               ]}
             />
             <div className="top-bar-actions">
-              {!!data && (
-                <DownloadMultiBuildingCSV
-                  data={data}
-                  labelText="Download building data"
-                />
-              )}
+              <DownloadMultiBuildingCSV
+                data={data}
+                labelText={`Download ${data.collection_name} data`}
+              />
             </div>
           </div>
+          <PageTitle>{data.collection_name}</PageTitle>
+
           <div className="layout-two-col">
             <div>
-              <PageTitle>{data.collection_name}</PageTitle>
-
-              <h3>Key Indicators</h3>
+              <TableOfContents>
+                <TOCHeader>On this page</TOCHeader>
+                <TOCList>
+                  <TOCItem href="#summary-stats">Summary stats</TOCItem>
+                  <TOCItem href="#trend-charts">Trend charts</TOCItem>
+                  <TOCItem href="#buildings-table">Buildings table</TOCItem>
+                </TOCList>
+              </TableOfContents>
+              <SectionHeader id="summary-stats">Summary stats</SectionHeader>
               <CollectionSummaryTable data={data} />
             </div>
             <div>

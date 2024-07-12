@@ -1,50 +1,51 @@
-// import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { AddressSearch, SelectOption } from "../../AddressSearch/AddressSearch";
-import selectOptions from "./buildings_options.json";
-import "./style.scss";
 import { PageTitle } from "../../PageTitle/PageTitle";
 import { BuildingTable } from "../../BuildingTable/BuildingTable";
 import { DownloadMultiBuildingCSV } from "../../CSVDownload/CSVDownload";
 import { useGetCollectionInfo } from "../../../api/hooks";
+import { AddressSearch } from "../../AlgoliaSearch/AlgoliaSearch";
+import "./style.scss";
+import { formatNumber } from "../../../util/helpers";
+import { Link } from "@justfixnyc/component-library";
 
 export const NoBBL: React.FC = () => {
-  const navigate = useNavigate();
-
   const { data, error, isLoading } = useGetCollectionInfo("all");
-
-  const onSelection = (newValue: SelectOption | null) => {
-    if (newValue) {
-      navigate(`/buildings?bbl=${newValue.value}`);
-    }
-  };
 
   return (
     <>
-      <div className="top-bar no-breadcrumbs">
+      <div className="top-bar">
+        <PageTitle>Buildings</PageTitle>
         <div className="top-bar-actions">
-          {!!data && (
-            <DownloadMultiBuildingCSV
-              data={data}
-              labelText="Download all data"
-            />
-          )}
+          <DownloadMultiBuildingCSV data={data} labelText="Download all" />
         </div>
       </div>
-      <PageTitle>Buildings</PageTitle>
 
-      <div style={{ width: "fit-content" }}>
-        Find a building in the Signature portfolio by entering the address
-        <br />
-        <br />
-        <AddressSearch options={selectOptions} onSelection={onSelection} />
-        <br />
+      <AddressSearch
+        labelText="Find a building in the Signature portfolio by entering the address"
+        noResultsText="No buildings in the Signature portfolio match your search."
+      />
+      <div className="find-links">
+        <p>How else can I find a building?</p>
+        <Link href={"/buildings"}>Search by landlord</Link>
+        <Link href={"/map"}>View all buildings on map</Link>
       </div>
+
       {isLoading && <div>loading...</div>}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
+
+      <h3>Building Table</h3>
       {data && (
-        <BuildingTable data={data.bldg_data} pagination={true} pageSize={100} />
+        <>
+          <p>
+            There are <>{formatNumber(data.bldg_data.length)}</> buildings in
+            the Signature Portfolio Dashboard.
+          </p>
+          <BuildingTable
+            data={data.bldg_data}
+            pagination={true}
+            pageSize={100}
+          />
+        </>
       )}
     </>
   );

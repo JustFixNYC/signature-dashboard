@@ -173,11 +173,15 @@ type GetPortfoliiosSWRResponse = {
 };
 
 export function useGetPortfolios(): GetPortfoliiosSWRResponse {
-  const { data, error, isLoading } = useSWR(`/signature/portfolios`, apiFetcher, {
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
+  const { data, error, isLoading } = useSWR(
+    `/signature/portfolios`,
+    apiFetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
 
   return {
     data: data?.result,

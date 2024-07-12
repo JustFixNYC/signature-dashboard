@@ -60,6 +60,16 @@
             "example": "santander",
             "description": "Lender name in slug format. Same as 'collection_slug' for collection page"
           },
+          "loan_status": {
+            "type": "string",
+            "example": "active",
+            "description": "Current status of the Signature loan ('active' or 'satisfied'), provided by UNHP"
+          },
+          "loan_action": {
+            "type": "string",
+            "example": "refinanced",
+            "description": "Action taken on the Signature loan ('refinanced', 'new landlord', 'debt write down', or null), provided by UNHP"
+          },
           "link_hpd": {
             "type": "string",
             "example": "https://hpdonline.nyc.gov/hpdonline/building/197161/overview",
@@ -285,6 +295,11 @@
             "example": 44.23,
             "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the last 12 months, per unit"
           },
+          "hpd_active_vacate": {
+            "type": "string",
+            "example": "Entire Building (Jan 5, 2024)",
+            "description": "Most recent active HPD vacate order, for 'Partial' (one or more units) or 'Entire Building' and the ate it was issued."
+          },
           "last_rodent_date": {
             "type": "string",
             "example": "2024-01-06",
@@ -406,7 +421,7 @@
           },
           "hpderp_charges": {
             "type": "number",
-            "example": 10.50,
+            "example": 10.5,
             "description": "Total dollar amount of charges from HPD Emergency Repair Program work orders in the given month."
           }
         }

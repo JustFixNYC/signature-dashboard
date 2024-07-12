@@ -19,7 +19,7 @@ import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
 import { CSSProperties, useMemo, useRef, useState } from "react";
 import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
-import { Button, Icon } from "@justfixnyc/component-library";
+import { Button } from "@justfixnyc/component-library";
 import ReactSelect, { MultiValue } from "react-select";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
@@ -164,6 +164,12 @@ export const Table = <T extends object>(props: TableProps<T>) => {
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const sortIcon =
+                    header.column.getIsSorted() === "asc"
+                      ? "arrowUp"
+                      : header.column.getIsSorted() === "desc"
+                        ? "arrowDown"
+                        : "arrowUpArrowDown";
                   return (
                     <th
                       key={header.column.id}
@@ -175,46 +181,24 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                     >
                       {header.isPlaceholder ? null : (
                         <div className="column-header">
-                          <div
-                            {...{
-                              className: header.column.getCanSort()
-                                ? "column-header__label column-header__sort-area"
-                                : "column-header__label",
-                              onClick: header.column.getToggleSortingHandler(),
-                            }}
-                          >
-                            <div className="column-header__label_sort">
-                              {flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                              {header.column.getCanSort() && (
-                                <span className="column-header__sort-icons">
-                                  {header.column.getIsSorted() === "asc" ? (
-                                    <Icon
-                                      icon="arrowUp"
-                                      className="column-header__sort-icon"
-                                    />
-                                  ) : header.column.getIsSorted() === "desc" ? (
-                                    <Icon
-                                      icon="arrowDown"
-                                      className="column-header__sort-icon"
-                                    />
-                                  ) : (
-                                    <>
-                                      <Icon
-                                        icon="arrowUp"
-                                        className="column-header__sort-icon"
-                                      />
-                                      <Icon
-                                        icon="arrowDown"
-                                        className="column-header__sort-icon"
-                                      />
-                                    </>
-                                  )}
-                                </span>
-                              )}
-                            </div>
+                          <div className="column-header__label">
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                            {header.column.getCanSort() && (
+                              <span className="column-header__sort-icons">
+                                <Button
+                                  iconOnly
+                                  labelText=""
+                                  labelIcon={sortIcon}
+                                  size="small"
+                                  variant="tertiary"
+                                  className="column-header__sort-icon"
+                                  onClick={header.column.getToggleSortingHandler()}
+                                />
+                              </span>
+                            )}
                           </div>
                           {header.column.getCanFilter() ? (
                             <div className="column-header__filter">
@@ -232,14 +216,23 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           <tbody>
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    style={{ ...getCommonPinningStyles(cell.column) }}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+                {row.getVisibleCells().map((cell) => {
+                  const valueExists =
+                    cell.getValue() !== null && cell.getValue() !== undefined;
+                  return (
+                    <td
+                      key={cell.id}
+                      style={{ ...getCommonPinningStyles(cell.column) }}
+                    >
+                      {valueExists
+                        ? flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )
+                        : "N/A"}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>
@@ -369,7 +362,11 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
           column.setFilterValue(null);
         }
       }}
-      value={columnFilterValue ? columnFilterValue.toString() : ""}
+      value={
+        columnFilterValue === true || columnFilterValue === false
+          ? columnFilterValue.toString()
+          : ""
+      }
     >
       <option value="">All</option>
       <option value="true">yes</option>

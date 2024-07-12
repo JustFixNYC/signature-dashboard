@@ -1,25 +1,23 @@
 import React from "react";
-import { Icon } from "@justfixnyc/component-library";
+import { Icon, Link } from "@justfixnyc/component-library";
 import "./styles.scss";
 import { BuildingInfo, CollectionInfo } from "../../types/APIDataTypes";
-import { INDICATOR_STRINGS, apiKeys, slugify } from "../../util/helpers";
+import { apiKeys, slugify } from "../../util/helpers";
+import { INDICATOR_STRINGS } from "../../util/indicators";
 import { useCSVDownloader } from "react-papaparse";
 
 export const generateBuildingCSV = (data: BuildingInfo) => {
   const api_keys = Object.keys(data);
   const values = Object.values(data);
   const indicator_names = api_keys.map(
-    (x) => INDICATOR_STRINGS[x as apiKeys]?.name || ""
-  );
-  const descriptions = api_keys.map(
-    (x) => INDICATOR_STRINGS[x as apiKeys]?.description || ""
+    (x) => INDICATOR_STRINGS[x as apiKeys]?.name || "",
   );
 
   const csvData = [];
-  csvData.push(["name", "key", "description", "value"]);
+  csvData.push(["name", "key", "value"]);
   [...Array(values.length).keys()].forEach((i) => {
     if (["lender_slug", "landlord_slug"].includes(api_keys[i])) return;
-    csvData.push([api_keys[i], indicator_names[i], descriptions[i], values[i]]);
+    csvData.push([api_keys[i], indicator_names[i], values[i]]);
   });
 
   const base_url = window.location.host;
@@ -43,7 +41,7 @@ export const generateMultiBuildingCSV = (data: CollectionInfo) => {
   const bldgData = data.bldg_data;
   // get all the building data var names in order of the helper object to reorder csv columns
   const api_keys = Object.keys(INDICATOR_STRINGS).filter((x) =>
-    Object.keys(bldgData[0]).includes(x)
+    Object.keys(bldgData[0]).includes(x),
   ) as Array<keyof BuildingInfo>;
   const indicator_names = api_keys.map((x) => INDICATOR_STRINGS[x]?.name || "");
 
@@ -59,7 +57,7 @@ export const generateMultiBuildingCSV = (data: CollectionInfo) => {
 };
 
 type DownloadProps = {
-  csvData: string[][];
+  csvData: string[][] | undefined;
   nameForFile: string;
   labelText: string;
 };
@@ -73,7 +71,7 @@ export const DownloadCSV: React.FC<DownloadProps> = ({
 
   const today = new Date(Date.now()).toISOString().slice(0, 10);
 
-  return (
+  return csvData ? (
     <CSVDownloader
       type={Type.Link}
       className="jfcl-link"
@@ -84,30 +82,35 @@ export const DownloadCSV: React.FC<DownloadProps> = ({
       }}
       data={csvData}
     >
-      <Icon icon="download" className="" />
+      <Icon icon="download" />
       {labelText}
     </CSVDownloader>
+  ) : (
+    <Link className="disabled">
+      <Icon icon="download" />
+      {labelText}
+    </Link>
   );
 };
 
 export const DownloadBuildingCSV: React.FC<{
-  data: BuildingInfo;
+  data: BuildingInfo | undefined;
   labelText: string;
 }> = ({ data, labelText }) => (
   <DownloadCSV
-    nameForFile={slugify(data.address)}
-    csvData={generateBuildingCSV(data)}
+    nameForFile={data ? slugify(data.address) : ""}
+    csvData={data && generateBuildingCSV(data)}
     labelText={labelText}
   />
 );
 
 export const DownloadMultiBuildingCSV: React.FC<{
-  data: CollectionInfo;
+  data: CollectionInfo | undefined;
   labelText: string;
 }> = ({ data, labelText }) => (
   <DownloadCSV
-    nameForFile={data.collection_slug}
-    csvData={generateMultiBuildingCSV(data)}
+    nameForFile={data ? data.collection_slug : ""}
+    csvData={data && generateMultiBuildingCSV(data)}
     labelText={labelText}
   />
 );
