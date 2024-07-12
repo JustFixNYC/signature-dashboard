@@ -1,3 +1,5 @@
+@import "../../../colors.scss";
+
 .homepage-section-header {
   font-size: 1.2rem; // 19.2px (same as body)
   line-height: 120%;
@@ -6,4 +8,27 @@
 
 .homepage-copy {
   margin: 0 0 1rem;
+}
+
+.cards-container {
+  display: flex;
+}
+
+.card {
+  width: 18rem;
+  border: 1px solid $GREY_400;
+  border-radius: 4px;
+  padding: 24px;
+  box-sizing: border-box;
+  margin-right: 57px;
+
+  .card__title {
+    font-weight: 600;
+  }
+
+  .card__link {
+    display: block;
+    margin-top: 48px;
+    text-wrap: nowrap;
+  }
 }
