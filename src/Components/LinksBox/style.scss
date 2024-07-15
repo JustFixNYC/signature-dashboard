@@ -20,6 +20,9 @@
     line-height: 130%;
     margin: 0;
     margin-bottom: 10px;
+    &:not(:first-of-type) {
+      margin-top: 6px;
+    }
   }
 
   .related-link {
