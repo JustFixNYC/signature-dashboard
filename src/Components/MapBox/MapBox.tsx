@@ -5,7 +5,7 @@ import "mapbox-gl/src/css/mapbox-gl.css";
 import React, { useState } from "react";
 import { MapData } from "../../types/APIDataTypes";
 import mapboxgl from "mapbox-gl";
-import { Link, SetURLSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { Icon } from "@justfixnyc/component-library";
 
 const STYLE_SIGNATURE_LIGHT =
@@ -87,14 +87,9 @@ const LAYER_STYLE: CircleLayer = {
 type MapBoxProps = {
   data: MapData[];
   initialSelectedBBL?: string;
-  setSearchParams?: SetURLSearchParams;
 };
 
-export const MapBox: React.FC<MapBoxProps> = ({
-  data,
-  initialSelectedBBL,
-  setSearchParams,
-}) => {
+export const MapBox: React.FC<MapBoxProps> = ({ data, initialSelectedBBL }) => {
   const [cursor, setCursor] = useState("");
 
   const initialSelected =
@@ -109,10 +104,6 @@ export const MapBox: React.FC<MapBoxProps> = ({
     longitude: initialSelected.lng,
     zoom: 13,
   };
-
-  React.useEffect(() => {
-    setSearchParams && setSearchParams(undefined, { replace: true });
-  }, [setSearchParams]);
 
   const onMouseEnter = (event: mapboxgl.MapLayerMouseEvent) => {
     if (event.features?.length) {
@@ -129,7 +120,6 @@ export const MapBox: React.FC<MapBoxProps> = ({
 
     const mapPoint = event.features[0].properties as MapData;
     setSelectedAddr(mapPoint);
-    setSearchParams && setSearchParams({ bbl: mapPoint?.bbl });
   };
 
   // Type error on "features" because bldg.lng and bldg.lat might be null
