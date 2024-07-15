@@ -8,6 +8,7 @@ import { EvictionsChart } from "../BarChart/Evictions";
 import { BuildingTable } from "../BuildingTable/BuildingTable";
 import { CollectionInfo } from "../../types/APIDataTypes";
 import "./style.scss";
+import { SectionHeader } from "../SectionHeader/SectionHeader";
 
 type CollectionProps = {
   collection: string;
@@ -23,24 +24,11 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
 
   return (
     <div style={{ minHeight: "1500px" }}>
-      <h3>Building Table</h3>
-      <p>
-        {data.bldg_data.length} buildings owned by {data.collection_name}
-      </p>
-      <BuildingTable
-        data={data.bldg_data}
-        {...((data.collection_type === "lender" ||
-          data.collection_type === "all") && {
-          pagination: true,
-          pageSize: 100,
-        })}
-      />
-
       {chartIsLoading && <div>loading...</div>}
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
       {chartData && data && (
         <div className="collection-charts">
-          <h3>Trend Charts</h3>
+          <SectionHeader id="trend-charts">Trend Charts</SectionHeader>
           <h4>HPD Violations</h4>
           <HPDViolationsChart data={chartData} />
           <h4>HPD Complaints</h4>
@@ -53,6 +41,19 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
           <EvictionsChart data={chartData} />
         </div>
       )}
+
+      <SectionHeader id="buildings-table">Building Table</SectionHeader>
+      <p>
+        {data.bldg_data.length} buildings owned by {data.collection_name}
+      </p>
+      <BuildingTable
+        data={data.bldg_data}
+        {...((data.collection_type === "lender" ||
+          data.collection_type === "all") && {
+          pagination: true,
+          pageSize: 100,
+        })}
+      />
     </div>
   );
 };

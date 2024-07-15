@@ -208,6 +208,12 @@ export const Table = <T extends object>(props: TableProps<T>) => {
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const sortIcon =
+                    header.column.getIsSorted() === "asc"
+                      ? "arrowUp"
+                      : header.column.getIsSorted() === "desc"
+                        ? "arrowDown"
+                        : "arrowUpArrowDown";
                   return (
                     <th
                       key={header.column.id}
@@ -219,46 +225,24 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                     >
                       {header.isPlaceholder ? null : (
                         <div className="column-header">
-                          <div
-                            {...{
-                              className: header.column.getCanSort()
-                                ? "column-header__label column-header__sort-area"
-                                : "column-header__label",
-                              onClick: header.column.getToggleSortingHandler(),
-                            }}
-                          >
-                            <div className="column-header__label_sort">
-                              {flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                              {header.column.getCanSort() && (
-                                <span className="column-header__sort-icons">
-                                  {header.column.getIsSorted() === "asc" ? (
-                                    <Icon
-                                      icon="arrowUp"
-                                      className="column-header__sort-icon"
-                                    />
-                                  ) : header.column.getIsSorted() === "desc" ? (
-                                    <Icon
-                                      icon="arrowDown"
-                                      className="column-header__sort-icon"
-                                    />
-                                  ) : (
-                                    <>
-                                      <Icon
-                                        icon="arrowUp"
-                                        className="column-header__sort-icon"
-                                      />
-                                      <Icon
-                                        icon="arrowDown"
-                                        className="column-header__sort-icon"
-                                      />
-                                    </>
-                                  )}
-                                </span>
-                              )}
-                            </div>
+                          <div className="column-header__label">
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                            {header.column.getCanSort() && (
+                              <span className="column-header__sort-icons">
+                                <Button
+                                  iconOnly
+                                  labelText=""
+                                  labelIcon={sortIcon}
+                                  size="small"
+                                  variant="tertiary"
+                                  className="column-header__sort-icon"
+                                  onClick={header.column.getToggleSortingHandler()}
+                                />
+                              </span>
+                            )}
                           </div>
                           {header.column.getCanFilter() ? (
                             <div className="column-header__filter">

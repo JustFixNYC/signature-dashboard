@@ -34,7 +34,15 @@ export const Login: React.FC = () => {
       <p>You must log in to view the dashboard</p>
       <form onSubmit={handleSubmit}>
         <label>
-          Password: <input name="password" type="text" />
+          Password:{" "}
+          <input
+            name="password"
+            type="text"
+            spellCheck="false"
+            autoComplete="off"
+            autoCapitalize="off"
+            autoCorrect="off"
+          />
         </label>{" "}
         <button type="submit">Login</button>
         <div style={{ marginTop: ".5rem", fontSize: ".9rem" }}>
