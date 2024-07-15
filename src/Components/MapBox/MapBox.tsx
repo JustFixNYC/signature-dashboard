@@ -1,12 +1,14 @@
+import React, { useState } from "react";
 import Map, { Source, Layer, NavigationControl } from "react-map-gl";
 import type { CircleLayer, LngLatBoundsLike } from "react-map-gl";
 import type { FeatureCollection } from "geojson";
-import "mapbox-gl/src/css/mapbox-gl.css";
-import React, { useState } from "react";
-import { MapData } from "../../types/APIDataTypes";
+import classNames from "classnames";
 import mapboxgl from "mapbox-gl";
 import { Link } from "react-router-dom";
+import "mapbox-gl/src/css/mapbox-gl.css";
+import { MapData } from "../../types/APIDataTypes";
 import { Button } from "@justfixnyc/component-library";
+import "./style.scss";
 
 const STYLE_SIGNATURE_LIGHT =
   "mapbox://styles/justfix/clxummt2k047a01qj3ra1gjf6";
@@ -87,9 +89,14 @@ const LAYER_STYLE: CircleLayer = {
 type MapBoxProps = {
   data: MapData[];
   initialSelectedBBL?: string;
+  className?: string;
 };
 
-export const MapBox: React.FC<MapBoxProps> = ({ data, initialSelectedBBL }) => {
+export const MapBox: React.FC<MapBoxProps> = ({
+  data,
+  initialSelectedBBL,
+  className,
+}) => {
   const [cursor, setCursor] = useState("");
 
   const initialSelected =
@@ -145,7 +152,7 @@ export const MapBox: React.FC<MapBoxProps> = ({ data, initialSelectedBBL }) => {
 
   return (
     <>
-      <div className="map-container">
+      <div className={classNames("map-container", className)}>
         <Map
           mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
           initialViewState={

@@ -10,6 +10,8 @@ import { CollectionInfo } from "../../types/APIDataTypes";
 import "./style.scss";
 import { SectionHeader } from "../SectionHeader/SectionHeader";
 import { SectionSubtitle } from "../SectionSubtitle/SectionSubtitle";
+import { MapBox } from "../MapBox/MapBox";
+import { buildingToMapData } from "../../util/helpers";
 
 type CollectionProps = {
   collection: string;
@@ -67,6 +69,13 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
           pagination: true,
           pageSize: 100,
         })}
+      />
+
+      <SectionHeader id="map">Map</SectionHeader>
+
+      <MapBox
+        data={buildingToMapData(data.bldg_data)}
+        className="collection-map"
       />
     </div>
   );
