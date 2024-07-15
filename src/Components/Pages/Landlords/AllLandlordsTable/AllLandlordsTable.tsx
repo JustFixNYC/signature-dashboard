@@ -48,7 +48,7 @@ export const columns = [
   }),
   columnHelper.accessor(row => getColumnAccessor(row.units_res), {
     header: getColumnHeader("units_res"),
-    id: 'unit_res',
+    id: 'units_res',
     sortUndefined: "last",
     cell: (info) => formatNumber(info.getValue()),
     filterFn: "inNumberRange",

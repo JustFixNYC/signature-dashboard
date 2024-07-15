@@ -2,6 +2,7 @@ import {
   Column,
   ColumnDef,
   ColumnFiltersState,
+  FilterFn,
   InitialTableState,
   PaginationState,
   RowData,
@@ -16,12 +17,48 @@ import {
 } from "@tanstack/react-table";
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
-import { CSSProperties, useMemo, useRef, useState } from "react";
+import { CSSProperties, Fragment, useMemo, useRef, useState } from "react";
 import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
 import { Button } from "@justfixnyc/component-library";
+import ReactSelect, {
+  components,
+  ContainerProps,
+  GroupBase,
+  MenuProps,
+  MultiValue,
+  Props,
+} from "react-select";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
 export type PageSizeOptions = (typeof pageSizeOptions)[number];
+
+const includesMultiple: FilterFn<unknown> = (
+  row,
+  columnId: string,
+  filterValues: string[]
+) => {
+  // If no filter values, return all rows
+  if (!filterValues || !filterValues.length) {
+    return true;
+  }
+
+  const rowValue = row.getValue<string | null>(columnId)?.toLowerCase();
+
+  // if rowValue is null or undefined do NOT return it in the results
+  if (rowValue === null || rowValue === undefined) {
+    return false;
+  }
+
+  // check if the row value is in the array of filter values
+  return filterValues.includes(rowValue);
+};
+
+// remove the filter value from filter state if it is falsy (empty string in this case)
+includesMultiple.autoRemove = (val: string[]) => !val.length;
+
+// transform/sanitize/format the filter value before it is passed to the filter function
+includesMultiple.resolveFilterValue = (val: string) =>
+  val.toString().toLowerCase().trim();
 
 export interface TableProps<T extends object> {
   data: T[];
@@ -36,7 +73,7 @@ declare module "@tanstack/react-table" {
   // allows us to define custom properties for our columns (copied from WoW)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ColumnMeta<TData extends RowData, TValue> {
-    filterVariant?: "range" | "boolean" | "select" | "text";
+    filterVariant?: "range" | "boolean" | "select" | "multiselect" | "text";
     inputWidth?: string;
   }
 }
@@ -61,7 +98,7 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
     backgroundColor: isPinned ? "white" : "initial",
     position: isPinned ? "sticky" : "relative",
     width: column.getSize(),
-    zIndex: isPinned ? 1 : 0,
+    ...(isPinned && { zIndex: 10 }),
   };
 };
 
@@ -86,7 +123,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   const options: TableOptions<T> = {
     data,
     columns,
-    filterFns: {},
+    filterFns: { includesMultiple },
     initialState: { ...initialState },
     state: {
       columnVisibility,
@@ -285,15 +322,21 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
 
   const uniqeValues = column.getFacetedUniqueValues();
 
-  const sortedUniqueValues = useMemo(
-    () =>
-      filterVariant === "range" || filterVariant === "boolean"
-        ? []
-        : Array.from(uniqeValues.keys())
-            .filter((v) => v !== undefined)
-            .sort(),
-    [uniqeValues, filterVariant]
-  );
+  const sortedUniqueValues = useMemo(() => {
+    if (filterVariant === "range" || filterVariant === "boolean") {
+      return [];
+    } else if (filterVariant === "multiselect") {
+      return Array.from(uniqeValues.keys())
+        .filter((v) => v !== undefined)
+        .sort()
+        .map((value) => {
+          return { value: value, label: value };
+        });
+    } else
+      return Array.from(uniqeValues.keys())
+        .filter((v) => v !== undefined)
+        .sort();
+  }, [uniqeValues, filterVariant]);
   return filterVariant === "range" ? (
     <div>
       <div className="filter__input_range">
@@ -350,6 +393,27 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
         );
       })}
     </select>
+  ) : filterVariant === "multiselect" ? (
+    <div>
+      <ReactSelect
+        options={sortedUniqueValues}
+        classNamePrefix="react-select"
+        value={
+          columnFilterValue
+            ? (columnFilterValue as MultiValue<string>[]).map(
+                (val: MultiValue<string>) => {
+                  return { value: val, label: val };
+                }
+              )
+            : null
+        }
+        onChange={(selections) => {
+          column.setFilterValue(selections.map((option) => option.value));
+        }}
+        isMulti
+        components={{ Menu }}
+      />
+    </div>
   ) : (
     <>
       <datalist id={column.id + "list"}>
@@ -367,5 +431,72 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
       />
       <div className="h-1" />
     </>
+  );
+}
+
+const Menu = (
+  props: MenuProps<{ value: MultiValue<string>; label: MultiValue<string> }>
+) => {
+  console.log(props);
+  return (
+    <Fragment>
+      <components.Menu {...props}>
+        <>
+          <SelectedValuesContainer
+            isDisabled={props.selectProps.isDisabled}
+            isFocused={false}
+            {...props}
+          />
+          {props.children}
+        </>
+      </components.Menu>
+    </Fragment>
+  );
+};
+
+function SelectedValuesContainer<
+  Option,
+  IsMulti extends boolean = true,
+  GroupType extends GroupBase<Option> = GroupBase<Option>,
+>({
+  isDisabled,
+  getValue,
+  ...props
+}: ContainerProps<Option, IsMulti, GroupType>) {
+  const { getOptionValue, classNamePrefix } = props.selectProps as Props<
+    Option,
+    IsMulti,
+    GroupType
+  >;
+console.log(props)
+  const getKey = (opt: Option, index: number) =>
+    `${getOptionValue ? getOptionValue(opt) : "option"}-${index}`;
+
+  const toMultiValue = (opt: Option, index: number) => {
+    return (
+      <components.MultiValue
+        getValue={getValue}
+        {...props}
+        components={{
+          Container: components.MultiValueContainer,
+          Label: components.MultiValueLabel,
+          Remove: components.MultiValueRemove,
+        }}
+        isDisabled={isDisabled}
+        key={getKey(opt, index)}
+        index={index}
+        removeProps={{ ...props.innerProps }}
+        data={opt}
+      >
+        {/* @ts-expect-error (value isn't recognizing the available properties of Option type) */}
+        {opt.label}
+      </components.MultiValue>
+    );
+  };
+
+  return (
+    <div className={`${classNamePrefix}__selected-value-container`}>
+      {getValue().map(toMultiValue)}
+    </div>
   );
 }
