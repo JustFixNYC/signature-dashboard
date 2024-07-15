@@ -23,6 +23,7 @@ import { Button } from "@justfixnyc/component-library";
 import { useSearchParams } from "react-router-dom";
 import {
   encodeForURI,
+  formatNumber,
   getHiddenColumns,
   getObjFromEncodedParam,
 } from "../../util/helpers";
@@ -190,6 +191,8 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   const clearFilters = () => {
     table.resetColumnFilters();
   };
+  const filteredRecordCount = table.getRowCount();
+  const unFilteredRecordCount = table.getPreFilteredRowModel().rows.length;
 
   return (
     <>
@@ -203,8 +206,8 @@ export const Table = <T extends object>(props: TableProps<T>) => {
         />
       )}
       <div>
-        Showing {table.getRowCount().toLocaleString()} of{" "}
-        {table.getPreFilteredRowModel().rows.length.toLocaleString()} Rows
+        Showing {filteredRecordCount === unFilteredRecordCount ? "all " : `${formatNumber(filteredRecordCount)} of `}
+        <>{formatNumber(table.getPreFilteredRowModel().rows.length)}</> records
       </div>
       <div className="table-container" ref={containerRef}>
         <table className="collection-building-table">
