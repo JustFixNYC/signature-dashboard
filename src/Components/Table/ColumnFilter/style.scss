@@ -2,10 +2,11 @@
 
 .popover-filter-menu {
   position: relative;
+  margin-right: 16px;
 }
 
 .jfcl-button.filter-button {
-  margin-bottom: 16px;
+  margin: 0;
 
   &.filter-button--has-hidden {
     background: $BLUE_100;

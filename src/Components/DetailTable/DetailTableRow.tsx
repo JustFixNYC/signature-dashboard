@@ -29,7 +29,6 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   const handleRowClick = () => {
     setShowDesc(!showDesc);
   };
-  console.log(lastUpdatedData);
 
   const indicator = INDICATOR_STRINGS[apiKey];
 

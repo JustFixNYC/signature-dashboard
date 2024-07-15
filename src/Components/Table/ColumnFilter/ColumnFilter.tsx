@@ -56,54 +56,57 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
     : "Hide Columns";
 
   return (
-    <div className="popover-filter-menu">
-      <Button
-        ref={buttonRef}
-        className={buttonClassNames}
-        onClick={onClick}
-        labelText={clearnButtonLabel}
-        variant="secondary"
-        size="small"
-        iconOnRight={true}
-        labelIcon="chevronDown"
-      />
-      <div
-        className={`popover-menu ${showMenu ? "popover-menu--show" : ""}`}
-        style={{ top: `${btnHeight + 12}px` }}
-        ref={popupRef}
-      >
-        <div className="popover-menu__scroll-area">
-          <div className="popover-menu__header">
-            <Checkbox
-              labelText="All columns"
-              id="all"
-              value="all"
-              checked={table.getIsAllColumnsVisible()}
-              onChange={table.getToggleAllColumnsVisibilityHandler()}
-            />
-          </div>
-          <div className="popover-menu__body">
-            {table
-              .getAllLeafColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                const indicatorID = column.id as apiKeys;
-                const indicatorObj = INDICATOR_STRINGS[indicatorID];
-                const labelText = indicatorObj?.name ?? column.id;
+    <>
+      <div className="popover-filter-menu">
+        <Button
+          ref={buttonRef}
+          className={buttonClassNames}
+          onClick={onClick}
+          labelText={clearnButtonLabel}
+          variant="secondary"
+          size="small"
+          iconOnRight={true}
+          labelIcon="chevronDown"
+        />
+        <div
+          className={`popover-menu ${showMenu ? "popover-menu--show" : ""}`}
+          style={{ top: `${btnHeight + 12}px` }}
+          ref={popupRef}
+        >
+          <div className="popover-menu__scroll-area">
+            <div className="popover-menu__header">
+              <Checkbox
+                labelText="All columns"
+                id="all"
+                value="all"
+                checked={table.getIsAllColumnsVisible()}
+                onChange={table.getToggleAllColumnsVisibilityHandler()}
+              />
+            </div>
+            <div className="popover-menu__body">
+              {table
+                .getAllLeafColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  const indicatorID = column.id as apiKeys;
+                  const indicatorObj = INDICATOR_STRINGS[indicatorID];
+                  const labelText = indicatorObj?.name ?? column.id;
 
-                return (
-                  <Checkbox
-                    key={column.id}
-                    labelText={labelText}
-                    id={column.id}
-                    checked={column.getIsVisible()}
-                    onChange={column.getToggleVisibilityHandler()}
-                  />
-                );
-              })}
+                  return (
+                    <Checkbox
+                      key={column.id}
+                      labelText={labelText}
+                      id={column.id}
+                      checked={column.getIsVisible()}
+                      onChange={column.getToggleVisibilityHandler()}
+                    />
+                  );
+                })}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+    </>
   );
 };

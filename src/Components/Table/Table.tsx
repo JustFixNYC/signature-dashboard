@@ -24,9 +24,11 @@ import { useSearchParams } from "react-router-dom";
 import {
   encodeForURI,
   formatNumber,
+  getColumnHeader,
   getHiddenColumns,
   getObjFromEncodedParam,
 } from "../../util/helpers";
+import { FilterChip } from "../FilterChip/FilterChip";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
 export type PageSizeOptions = (typeof pageSizeOptions)[number];
@@ -195,7 +197,31 @@ export const Table = <T extends object>(props: TableProps<T>) => {
 
   return (
     <>
-      <ColumnFilter table={table} />
+      <div className="table-buttons-container">
+      <ColumnFilter table={table}/>
+
+      {columnFilters.map((filter) => {
+        return (
+          <FilterChip
+            key={filter.id}
+            labelText={getColumnHeader(filter.id)}
+            selected={true}
+            removable={true}
+            onClick={() => {
+              console.log('~~~ click filter', filter.id)
+              table.setColumnFilters((filters) => {
+                console.log('~~~', filters.length)
+                filters.filter(f => {
+                  console.log('~~~', f.id, filter.id)
+                  return f.id === "zip"});
+                console.log('~~~', filters.length)
+                return []
+              })
+            }}
+          />
+        );
+      })}
+      </div>
       {!!columnFilters.length && (
         <Button
           labelText="Clear all filters"
@@ -204,6 +230,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           className="clear-all"
         />
       )}
+
       <div className="collection-building-table__record-count">
         Showing{" "}
         {filteredRecordCount === unFilteredRecordCount
