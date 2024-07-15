@@ -49,11 +49,12 @@
       font-weight: 300;
 
       &.detail-table__description_open {
-        display: block;
+        display: flex;
+        flex-direction: column;
       }
 
       .last-updated {
-       font-style: italic; 
+       padding-top: 0.5rem;
       }
     }
   }

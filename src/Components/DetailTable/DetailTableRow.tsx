@@ -29,7 +29,6 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   const handleRowClick = () => {
     setShowDesc(!showDesc);
   };
-  console.log(lastUpdatedData);
 
   const indicator = INDICATOR_STRINGS[apiKey];
 
@@ -69,7 +68,6 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
     displayValue = formatNumberNoComma(value);
   }
 
-
   return (
     <div className="detail-table_row">
       <div
@@ -95,15 +93,12 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
           (showDesc ? " detail-table__description_open" : "")
         }
       >
-        {description}
+        <span>{description}</span>
 
         {lastUpdated && (
-          <>
-            <br />
-            <span className="last-updated">
-              Last updated {formatLastUpdatedDate(lastUpdated)}.
-            </span>
-          </>
+          <span className="last-updated">
+            Last updated {formatLastUpdatedDate(lastUpdated)}
+          </span>
         )}
       </dd>
     </div>
