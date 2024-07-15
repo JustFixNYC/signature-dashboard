@@ -116,9 +116,9 @@ export const MapBox: React.FC<MapBoxProps> = ({ data, initialSelectedBBL }) => {
   };
 
   const onClick = (event: mapboxgl.MapLayerMouseEvent) => {
-    if (!event || !event.features) return;
+    if (!event.features) return;
 
-    const mapPoint = event.features[0].properties as MapData;
+    const mapPoint = event.features[0]?.properties as MapData;
     setSelectedAddr(mapPoint);
   };
 
