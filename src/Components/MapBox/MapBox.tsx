@@ -2,11 +2,11 @@ import Map, { Source, Layer, NavigationControl } from "react-map-gl";
 import type { CircleLayer, LngLatBoundsLike } from "react-map-gl";
 import type { FeatureCollection } from "geojson";
 import "mapbox-gl/src/css/mapbox-gl.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import { MapData } from "../../types/APIDataTypes";
 import mapboxgl from "mapbox-gl";
-import { Link, SetURLSearchParams } from "react-router-dom";
-// import { Icon } from "@justfixnyc/component-library";
+import { Link } from "react-router-dom";
+import { Button } from "@justfixnyc/component-library";
 
 const STYLE_SIGNATURE_LIGHT =
   "mapbox://styles/justfix/clxummt2k047a01qj3ra1gjf6";
@@ -87,23 +87,16 @@ const LAYER_STYLE: CircleLayer = {
 type MapBoxProps = {
   data: MapData[];
   initialSelectedBBL?: string;
-  setSearchParams?: SetURLSearchParams;
 };
 
-export const MapBox: React.FC<MapBoxProps> = ({
-  data,
-  initialSelectedBBL,
-  setSearchParams,
-}) => {
-  setSearchParams && setSearchParams(undefined, { replace: true });
-
+export const MapBox: React.FC<MapBoxProps> = ({ data, initialSelectedBBL }) => {
   const [cursor, setCursor] = useState("");
 
   const initialSelected =
     data.find((x) => x.bbl === initialSelectedBBL) || null;
 
   const [selectedAddr, setSelectedAddr] = useState<MapData | null>(
-    initialSelected,
+    initialSelected
   );
 
   const selectedInitialViewState = initialSelected && {
@@ -125,9 +118,8 @@ export const MapBox: React.FC<MapBoxProps> = ({
   const onClick = (event: mapboxgl.MapLayerMouseEvent) => {
     if (!event.features) return;
 
-    const mapPoint = event.features[0].properties as MapData;
+    const mapPoint = event.features[0]?.properties as MapData;
     setSelectedAddr(mapPoint);
-    setSearchParams && setSearchParams({ bbl: mapPoint?.bbl });
   };
 
   // Type error on "features" because bldg.lng and bldg.lat might be null
@@ -178,9 +170,14 @@ export const MapBox: React.FC<MapBoxProps> = ({
               <Link to={`/buildings?bbl=${selectedAddr.bbl}`}>
                 {`${selectedAddr.address}, ${selectedAddr.borough.toUpperCase()}`}
               </Link>
-              <button onClick={() => setSelectedAddr(null)}>
-                ✕{/* <Icon icon="xmark" /> */}
-              </button>
+              <Button
+                iconOnly
+                labelText="Clsoe"
+                labelIcon="xmark"
+                variant="tertiary"
+                size="small"
+                onClick={() => setSelectedAddr(null)}
+              />
             </div>
 
             <div>
