@@ -210,9 +210,9 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                 {headerGroup.headers.map((header) => {
                   const sortIcon =
                     header.column.getIsSorted() === "asc"
-                      ? "arrowUp"
+                      ? "arrowUpShortWide"
                       : header.column.getIsSorted() === "desc"
-                        ? "arrowDown"
+                        ? "arrowDownWideShort"
                         : "arrowUpArrowDown";
                   return (
                     <th
