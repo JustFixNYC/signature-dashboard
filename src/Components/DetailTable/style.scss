@@ -51,6 +51,10 @@
       &.detail-table__description_open {
         display: block;
       }
+
+      .last-updated {
+       font-style: italic; 
+      }
     }
   }
 }

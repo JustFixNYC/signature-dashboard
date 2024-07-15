@@ -3,7 +3,10 @@ import React from "react";
 import { Collection } from "../../Collection/Collection";
 import { BreadCrumbs } from "../../BreadCrumbs/BreadCrumbs";
 import { PageTitle } from "../../PageTitle/PageTitle";
-import { useGetCollectionInfo } from "../../../api/hooks";
+import {
+  useGetCollectionInfo,
+  useGetDatasetLastUpdated,
+} from "../../../api/hooks";
 import { CollectionSummaryTable } from "../../Collection/CollectionSummaryTable/CollectionSummaryTable";
 import { InternalLinks } from "../../LinksBox/InternalLinks";
 import { DownloadMultiBuildingCSV } from "../../CSVDownload/CSVDownload";
@@ -22,11 +25,21 @@ interface LandlordInfoProps {
 
 export const LandlordInfo: React.FC<LandlordInfoProps> = ({ landlord }) => {
   const { data, error, isLoading } = useGetCollectionInfo(landlord);
+
+  const {
+    data: lastUpdatedData,
+    error: lastUpdatedError,
+    isLoading: lastUpdatedIsLoading,
+  } = useGetDatasetLastUpdated();
+
   return (
     <>
-      {isLoading && <div>loading...</div>}
+      {isLoading && lastUpdatedIsLoading && <div>loading...</div>}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-      {data && (
+      {lastUpdatedError && (
+        <pre>{JSON.stringify(lastUpdatedError, null, 2)}</pre>
+      )}
+      {data && lastUpdatedData && (
         <>
           <div className="top-bar">
             <BreadCrumbs
@@ -54,7 +67,10 @@ export const LandlordInfo: React.FC<LandlordInfoProps> = ({ landlord }) => {
                 </TOCList>
               </TableOfContents>
               <SectionHeader id="summary-stats">Summary stats</SectionHeader>
-              <CollectionSummaryTable data={data} />
+              <CollectionSummaryTable
+                data={data}
+                lastUpdatedData={lastUpdatedData}
+              />
             </div>
 
             <div>

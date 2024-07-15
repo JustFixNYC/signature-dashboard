@@ -2,6 +2,8 @@ import { Icon } from "@justfixnyc/component-library";
 import { useState } from "react";
 import {
   apiKeys,
+  formatDate,
+  formatLastUpdatedDate,
   formatMoney,
   formatNumber,
   formatNumberNoComma,
@@ -9,26 +11,34 @@ import {
   showYesNo,
 } from "../../util/helpers";
 import { INDICATOR_STRINGS } from "../../util/indicators";
+import { DatasetLastUpdatedData } from "../../types/APIDataTypes";
 
 type DetailTableRowProps = {
   apiKey: apiKeys;
   value: string | number | boolean;
+  lastUpdatedData?: DatasetLastUpdatedData[];
 };
 
 export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   apiKey,
   value,
+  lastUpdatedData,
 }) => {
   const [showDesc, setShowDesc] = useState(false);
 
   const handleRowClick = () => {
     setShowDesc(!showDesc);
   };
+  console.log(lastUpdatedData);
 
   const indicator = INDICATOR_STRINGS[apiKey];
 
   const name = indicator ? indicator.name : apiKey;
   const description = indicator?.description;
+  const lastUpdated = lastUpdatedData?.find(
+    (x) => x.dataset === indicator?.dataset
+  )?.last_updated;
+
   let displayValue: unknown = value;
 
   if (indicator?.format === "round" && typeof value === "number") {
@@ -51,9 +61,14 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
     displayValue = formatNumber(value) as string;
   }
 
+  if (indicator?.format === "date" && typeof value === "string") {
+    displayValue = formatDate(value) as string;
+  }
+
   if (typeof indicator?.format === "undefined" && typeof value === "number") {
     displayValue = formatNumberNoComma(value);
   }
+
 
   return (
     <div className="detail-table_row">
@@ -81,6 +96,15 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
         }
       >
         {description}
+
+        {lastUpdated && (
+          <>
+            <br />
+            <span className="last-updated">
+              Last updated {formatLastUpdatedDate(lastUpdated)}.
+            </span>
+          </>
+        )}
       </dd>
     </div>
   );

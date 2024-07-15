@@ -60,6 +60,18 @@ export const formatDate = (value: string) => {
   });
 };
 
+export const formatLastUpdatedDate = (value: string) => {
+  const today = new Date();
+  const yesterday = ((d) => new Date(d.setDate(d.getDate() - 1)))(new Date());
+  if (new Date(value).toDateString() === today.toDateString()) {
+    return "today";
+  } else if (new Date(value).toDateString() === yesterday.toDateString()) {
+    return "yesterday";
+  } else {
+    return formatDate(value);
+  }
+};
+
 export type yearlyChartData = {
   [x in keyof Omit<APIChartData, "month">]: number;
 } & {

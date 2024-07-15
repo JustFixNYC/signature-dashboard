@@ -1,11 +1,15 @@
 import React from "react";
-import { CollectionInfo } from "../../../types/APIDataTypes";
+import {
+  CollectionInfo,
+  DatasetLastUpdatedData,
+} from "../../../types/APIDataTypes";
 import { DetailTable } from "../../DetailTable/DetailTable";
 import { DetailTableRow } from "../../DetailTable/DetailTableRow";
 import "./style.scss";
 
 type CollectionSummaryTableProps = {
   data: CollectionInfo;
+  lastUpdatedData: DatasetLastUpdatedData[];
 };
 
 const keys: Partial<keyof Omit<CollectionInfo, "bldg_data">>[] = [
@@ -28,9 +32,17 @@ const keys: Partial<keyof Omit<CollectionInfo, "bldg_data">>[] = [
 
 export const CollectionSummaryTable: React.FC<CollectionSummaryTableProps> = ({
   data,
+  lastUpdatedData,
 }) => {
   const rows = keys.map((key) => {
-    return <DetailTableRow key={key} apiKey={key} value={data[key]} />;
+    return (
+      <DetailTableRow
+        key={key}
+        apiKey={key}
+        value={data[key]}
+        lastUpdatedData={lastUpdatedData}
+      />
+    );
   });
 
   return <DetailTable className="collection-summary-table">{rows}</DetailTable>;

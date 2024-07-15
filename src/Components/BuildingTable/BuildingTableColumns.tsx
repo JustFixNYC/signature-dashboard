@@ -343,10 +343,10 @@ export const columns = [
     header: () => "Vacate Orders",
     columns: [
       columnHelper.accessor(
-        (row) => getColumnAccessor(row.placeholder_vacate_order),
+        (row) => getColumnAccessor(row.hpd_active_vacate),
         {
-          id: "placeholder_vacate_order",
-          header: getColumnHeader("placeholder_vacate_order"),
+          id: "hpd_active_vacate",
+          header: getColumnHeader("hpd_active_vacate"),
           sortUndefined: "last",
           filterFn: "includesString",
         },
