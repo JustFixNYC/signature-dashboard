@@ -6,6 +6,8 @@ import {
   IndicatorsTimeSpan,
   LandlordInfo,
 } from "../types/APIDataTypes";
+import LZString from "lz-string";
+import { VisibilityState } from "@tanstack/react-table";
 import { INDICATOR_STRINGS } from "./indicators";
 
 export function splitBBL(bbl: string) {
@@ -79,7 +81,7 @@ export type yearlyChartData = {
 export const groupData = (
   dataArray: APIChartData[],
   apiKey: keyof Omit<APIChartData, "month">,
-  timeSpan: IndicatorsTimeSpan
+  timeSpan: IndicatorsTimeSpan,
 ) => {
   // if (dataArray && timeSpan === "quarter") {
   // const dataByQuarter = [];
@@ -154,4 +156,35 @@ export const slugify = (text: string) => {
     .replace(/_/g, "-") // Replace _ with -
     .replace(/--+/g, "-") // Replace multiple - with single -
     .replace(/-$/g, ""); // Remove trailing -
+};
+
+// given a VisibilityState from a react-table, return a VisibilityState with just the hidden columns
+export const getHiddenColumns = (columnVisibility: VisibilityState) => {
+  return Object.keys(columnVisibility).reduce((hiddenCols, currentCol) => {
+    // if the value of the currentCol is true, leave it off the returned object
+    if (columnVisibility[currentCol]) {
+      return hiddenCols;
+    }
+    hiddenCols[currentCol] = false;
+    return hiddenCols;
+  }, {} as VisibilityState);
+};
+
+// given an object, return a compressed, encoded string for adding to the URI
+export const encodeForURI = (obj: object) => {
+  return LZString.compressToEncodedURIComponent(JSON.stringify(obj));
+};
+
+// given an encoded string from the URI, decode it and return the original object
+export const decodeFromURI = (str: string) => {
+  return JSON.parse(LZString.decompressFromEncodedURIComponent(str));
+};
+
+// given a URLSearchParams object and a key, return the original object
+export const getObjFromEncodedParam = (
+  params: URLSearchParams,
+  key: string,
+) => {
+  const encodedStr = params.get(key);
+  return encodedStr ? decodeFromURI(encodedStr) : null;
 };
