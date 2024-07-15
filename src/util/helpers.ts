@@ -5,6 +5,7 @@ import {
   Indicators,
   IndicatorsTimeSpan,
   LandlordInfo,
+  MapData,
 } from "../types/APIDataTypes";
 import LZString from "lz-string";
 import { VisibilityState } from "@tanstack/react-table";
@@ -81,7 +82,7 @@ export type yearlyChartData = {
 export const groupData = (
   dataArray: APIChartData[],
   apiKey: keyof Omit<APIChartData, "month">,
-  timeSpan: IndicatorsTimeSpan,
+  timeSpan: IndicatorsTimeSpan
 ) => {
   // if (dataArray && timeSpan === "quarter") {
   // const dataByQuarter = [];
@@ -183,8 +184,25 @@ export const decodeFromURI = (str: string) => {
 // given a URLSearchParams object and a key, return the original object
 export const getObjFromEncodedParam = (
   params: URLSearchParams,
-  key: string,
+  key: string
 ) => {
   const encodedStr = params.get(key);
   return encodedStr ? decodeFromURI(encodedStr) : null;
+};
+
+export const buildingToMapData = (buildingData: BuildingInfo[]): MapData[] => {
+  const mapData = buildingData.map((building) => {
+    return {
+      bbl: building.bbl,
+      address: building.address,
+      borough: building.borough,
+      zip: building.zip,
+      landlord: building.landlord,
+      landlord_slug: building.landlord_slug,
+      lender_slug: building.lender_slug,
+      lat: building.lat,
+      lng: building.lng,
+    } as MapData;
+  });
+  return mapData;
 };
