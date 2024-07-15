@@ -26,6 +26,7 @@ export const columns = [
     ),
     sortUndefined: "last",
     filterFn: "includesString",
+    enableHiding: false,
   }),
   columnHelper.group({
     id: "location",

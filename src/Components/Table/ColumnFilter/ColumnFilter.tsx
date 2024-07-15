@@ -85,7 +85,7 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
           <div className="popover-menu__body">
             {table
               .getAllLeafColumns()
-              .filter((column) => column.id !== "address")
+              .filter((column) => column.getCanHide())
               .map((column) => {
                 const indicatorID = column.id as apiKeys;
                 const indicatorObj = INDICATOR_STRINGS[indicatorID];
