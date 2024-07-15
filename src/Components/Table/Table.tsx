@@ -19,7 +19,7 @@ import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
 import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
-import { Button, Icon } from "@justfixnyc/component-library";
+import { Button } from "@justfixnyc/component-library";
 import { useSearchParams } from "react-router-dom";
 import {
   encodeForURI,
