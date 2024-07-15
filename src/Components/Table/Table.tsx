@@ -202,6 +202,10 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           className="clear-all"
         />
       )}
+      <div>
+        Showing {table.getRowCount().toLocaleString()} of{" "}
+        {table.getPreFilteredRowModel().rows.length.toLocaleString()} Rows
+      </div>
       <div className="table-container" ref={containerRef}>
         <table className="collection-building-table">
           <thead>
@@ -346,10 +350,6 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                   </option>
                 ))}
               </select>
-            </div>
-            <div>
-              Showing {table.getRowModel().rows.length.toLocaleString()} of{" "}
-              {table.getRowCount().toLocaleString()} Rows
             </div>
             {/* <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre> */}
           </div>
