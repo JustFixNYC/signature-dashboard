@@ -50,7 +50,9 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
   });
 
   const clearnButtonLabel = hasHiddenColumns
-    ? numHiddenColumn === 1 ? `1 Hidden Column` : `${numHiddenColumn} Hidden Columns`
+    ? numHiddenColumn === 1
+      ? `1 Hidden Column`
+      : `${numHiddenColumn} Hidden Columns`
     : "Hide Columns";
 
   return (

@@ -2,6 +2,7 @@ import {
   Column,
   ColumnDef,
   ColumnFiltersState,
+  ColumnSort,
   InitialTableState,
   PaginationState,
   RowData,
@@ -16,9 +17,15 @@ import {
 } from "@tanstack/react-table";
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
-import { CSSProperties, useMemo, useRef, useState } from "react";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
 import { Button } from "@justfixnyc/component-library";
+import { useSearchParams } from "react-router-dom";
+import {
+  encodeForURI,
+  getHiddenColumns,
+  getObjFromEncodedParam,
+} from "../../util/helpers";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
 export type PageSizeOptions = (typeof pageSizeOptions)[number];
@@ -30,6 +37,8 @@ export interface TableProps<T extends object> {
   pagination?: boolean;
   pageSize?: PageSizeOptions;
   initialState?: InitialTableState;
+  initialSorting?: ColumnSort[];
+  qsPrefix: string;
 }
 
 declare module "@tanstack/react-table" {
@@ -70,6 +79,8 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     data,
     columns,
     initialState,
+    initialSorting,
+    qsPrefix,
     pagination: hasPagination,
     pageSize = 50,
   } = props;
@@ -77,11 +88,72 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     pageIndex: 0,
     pageSize: pageSize,
   });
-  const [columnVisibility, setColumnVisibility] = useState({});
 
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const FILTERS_PARAM_KEY = `${qsPrefix}_f`;
+  const SORTING_PARAM_KEY = `${qsPrefix}_s`;
+  const VISIBILITY_PARAM_KEY = `${qsPrefix}_h`;
+
+  // Get table setting from query string
+  const columnVisibilityParams = getObjFromEncodedParam(
+    searchParams,
+    VISIBILITY_PARAM_KEY,
+  );
+  const columnFiltersParams = getObjFromEncodedParam(
+    searchParams,
+    FILTERS_PARAM_KEY,
+  );
+  const sortingParams = getObjFromEncodedParam(searchParams, SORTING_PARAM_KEY);
+
+  // Setup tables settings in state
+  const [sorting, setsorting] = useState<ColumnSort[]>(
+    sortingParams ? sortingParams : initialSorting ? initialSorting : [],
+  );
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
+    columnFiltersParams ?? [],
+  );
+  const [columnVisibility, setColumnVisibility] = useState(
+    columnVisibilityParams ?? {},
+  );
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Update query params for table sorting, filtering, and column visibility
+  useEffect(() => {
+    setSearchParams(
+      (params) => {
+        // SORT
+        if (!sorting.length) {
+          params.delete(SORTING_PARAM_KEY);
+        } else {
+          const encodedsorting = encodeForURI(sorting);
+          params.set(SORTING_PARAM_KEY, encodedsorting);
+        }
+
+        // FILTERS
+        if (!columnFilters.length) {
+          params.delete(FILTERS_PARAM_KEY);
+        } else {
+          const encodedColumnFilters = encodeForURI(columnFilters);
+          params.set(FILTERS_PARAM_KEY, encodedColumnFilters);
+        }
+
+        // HIDDEN COLUMNS
+        const hiddenColumns = getHiddenColumns(columnVisibility);
+        if (!Object.keys(hiddenColumns).length) {
+          params.delete(VISIBILITY_PARAM_KEY);
+        } else {
+          const encodedColumnVisibility = encodeForURI(hiddenColumns);
+          params.set(VISIBILITY_PARAM_KEY, encodedColumnVisibility);
+        }
+
+        return params;
+      },
+      { replace: true },
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sorting, columnFilters, columnVisibility, setSearchParams]);
 
   const options: TableOptions<T> = {
     data,
@@ -91,9 +163,11 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     state: {
       columnVisibility,
       columnFilters,
+      sorting: sorting,
     },
     onColumnVisibilityChange: setColumnVisibility,
     onColumnFiltersChange: setColumnFilters,
+    onSortingChange: setsorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(), //client side filtering
@@ -150,11 +224,17 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                       }}
                     >
                       {header.isPlaceholder ? null : (
-                        <div className="column-header">
+                        <div
+                          className={
+                            headerGroup.depth === 0
+                              ? "column-header column-header--group"
+                              : "column-header"
+                          }
+                        >
                           <div className="column-header__label">
                             {flexRender(
                               header.column.columnDef.header,
-                              header.getContext()
+                              header.getContext(),
                             )}
                             {header.column.getCanSort() && (
                               <span className="column-header__sort-icons">
@@ -197,7 +277,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                       {valueExists
                         ? flexRender(
                             cell.column.columnDef.cell,
-                            cell.getContext()
+                            cell.getContext(),
                           )
                         : "N/A"}
                     </td>
@@ -292,7 +372,7 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
         : Array.from(uniqeValues.keys())
             .filter((v) => v !== undefined)
             .sort(),
-    [uniqeValues, filterVariant]
+    [uniqeValues, filterVariant],
   );
   return filterVariant === "range" ? (
     <div>

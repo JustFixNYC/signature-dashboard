@@ -19,9 +19,10 @@ export const BuildingTable: React.FC<BuildingTableProps> = ({
       data={data}
       columns={buildingColumns}
       initialState={{
-        sorting: [{ id: "units_res", desc: true }],
         columnPinning: { left: ["address"] },
       }}
+      initialSorting={[{ id: "units_res", desc: true }]}
+      qsPrefix="b" // NOTE: changing this value will break bookmarked urls
       {...props}
     />
   );
