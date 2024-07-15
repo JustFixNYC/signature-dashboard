@@ -224,7 +224,13 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                       }}
                     >
                       {header.isPlaceholder ? null : (
-                        <div className="column-header">
+                        <div
+                          className={
+                            headerGroup.depth === 0
+                              ? "column-header column-header--group"
+                              : "column-header"
+                          }
+                        >
                           <div className="column-header__label">
                             {flexRender(
                               header.column.columnDef.header,

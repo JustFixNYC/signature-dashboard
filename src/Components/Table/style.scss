@@ -30,6 +30,12 @@ table.collection-building-table tbody tr {
   flex-direction: column;
   height: 150px;
 
+  &.column-header--group {
+    text-wrap: nowrap;
+    height: initial;
+    padding: 8px;
+  }
+
   .column-header__label {
     flex-grow: 1;
     display: flex;
