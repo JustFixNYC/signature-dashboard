@@ -70,7 +70,9 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
             <Icon icon="circleInfo" className="detail-table__name_icon" />
           )}
         </dt>
-        <dd className="detail-table__value"><>{displayValue}</></dd>
+        <dd className="detail-table__value">
+          <>{displayValue}</>
+        </dd>
       </div>
       <dd
         className={
