@@ -1,4 +1,7 @@
-import { BuildingInfo, DatasetLastUpdatedData } from "../../../../types/APIDataTypes";
+import {
+  BuildingInfo,
+  DatasetLastUpdatedData,
+} from "../../../../types/APIDataTypes";
 import React, { HTMLAttributes } from "react";
 import { DetailTable } from "../../../DetailTable/DetailTable";
 import { DetailTableRow } from "../../../DetailTable/DetailTableRow";
@@ -36,7 +39,14 @@ export const BuildingSummaryTable: React.FC<BuildingSummaryTableProps> = ({
   ...props
 }) => {
   const rows = keys.map((key) => {
-    return <DetailTableRow key={key} apiKey={key} value={data[key]} lastUpdatedData={lastUpdatedData} />;
+    return (
+      <DetailTableRow
+        key={key}
+        apiKey={key}
+        value={data[key]}
+        lastUpdatedData={lastUpdatedData}
+      />
+    );
   });
 
   return <DetailTable {...props}>{rows}</DetailTable>;

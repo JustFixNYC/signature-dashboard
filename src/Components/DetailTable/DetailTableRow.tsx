@@ -36,7 +36,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   const name = indicator ? indicator.name : apiKey;
   const description = indicator?.description;
   const lastUpdated = lastUpdatedData?.find(
-    (x) => x.dataset === indicator?.dataset
+    (x) => x.dataset === indicator?.dataset,
   )?.last_updated;
 
   let displayValue: unknown = value;
@@ -68,7 +68,6 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   if (typeof indicator?.format === "undefined" && typeof value === "number") {
     displayValue = formatNumberNoComma(value);
   }
-
 
   return (
     <div className="detail-table_row">

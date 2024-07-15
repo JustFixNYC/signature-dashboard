@@ -9,6 +9,7 @@ import { BuildingTable } from "../BuildingTable/BuildingTable";
 import { CollectionInfo } from "../../types/APIDataTypes";
 import "./style.scss";
 import { SectionHeader } from "../SectionHeader/SectionHeader";
+import { SectionSubtitle } from "../SectionSubtitle/SectionSubtitle";
 
 type CollectionProps = {
   collection: string;
@@ -42,10 +43,23 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
         </div>
       )}
 
-      <SectionHeader id="buildings-table">Building Table</SectionHeader>
-      <p>
-        {data.bldg_data.length} buildings owned by {data.collection_name}
-      </p>
+      {data.collection_type === "lender" && (
+        <SectionHeader id="buildings-table">
+          Buildings in {data.collection_name} portfolio
+        </SectionHeader>
+      )}
+      {data.collection_type === "landlord" && (
+        <>
+          <SectionHeader id="buildings-table">
+            Buildings owned by {data.collection_name}
+          </SectionHeader>
+          <SectionSubtitle>
+            Rent-regulated properties associated with this landlord that were
+            financed by Signature Bank.
+          </SectionSubtitle>
+        </>
+      )}
+
       <BuildingTable
         data={data.bldg_data}
         {...((data.collection_type === "lender" ||

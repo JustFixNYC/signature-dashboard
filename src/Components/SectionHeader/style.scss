@@ -9,4 +9,8 @@
     padding-top: $headerH;
     margin-top: -$headerH;
   }
+
+  &:has(+ .section-subtitle) {
+    margin-bottom: 0;
+  }
 }

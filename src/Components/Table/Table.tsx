@@ -65,8 +65,7 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
       : isFirstRightPinnedColumn
         ? "4px 0 4px -4px gray inset"
         : undefined,
-    left:
-      isPinned === "left" ? `${column.getStart("left")}px` : undefined,
+    left: isPinned === "left" ? `${column.getStart("left")}px` : undefined,
     right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
     backgroundColor: isPinned ? "white" : "initial",
     position: isPinned ? "sticky" : "relative",
@@ -205,8 +204,11 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           className="clear-all"
         />
       )}
-      <div>
-        Showing {filteredRecordCount === unFilteredRecordCount ? "all " : `${formatNumber(filteredRecordCount)} of `}
+      <div className="collection-building-table__record-count">
+        Showing{" "}
+        {filteredRecordCount === unFilteredRecordCount
+          ? "all "
+          : `${formatNumber(filteredRecordCount)} of `}
         <>{formatNumber(table.getPreFilteredRowModel().rows.length)}</> records
       </div>
       <div className="table-container" ref={containerRef}>
