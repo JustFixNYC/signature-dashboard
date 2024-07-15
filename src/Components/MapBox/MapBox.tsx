@@ -103,7 +103,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
     data.find((x) => x.bbl === initialSelectedBBL) || null;
 
   const [selectedAddr, setSelectedAddr] = useState<MapData | null>(
-    initialSelected
+    initialSelected,
   );
 
   const selectedInitialViewState = initialSelected && {

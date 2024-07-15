@@ -163,7 +163,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        }
+        },
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_bc_total), {
         id: "hpd_viol_bc_total",
@@ -229,7 +229,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        }
+        },
       ),
     ],
   }),
@@ -247,7 +247,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        }
+        },
       ),
       columnHelper.accessor(
         (row) => getColumnAccessor(row.hpd_comp_emerg_total_per_unit),
@@ -260,7 +260,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        }
+        },
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_heat), {
         id: "hpd_comp_heat",
@@ -348,7 +348,7 @@ export const columns = [
           header: getColumnHeader("placeholder_vacate_order"),
           sortUndefined: "last",
           filterFn: "includesString",
-        }
+        },
       ),
     ],
   }),
@@ -376,7 +376,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        }
+        },
       ),
       columnHelper.accessor(
         (row) => getColumnAccessor(row.hp_open_judgements),
@@ -388,7 +388,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        }
+        },
       ),
     ],
   }),
@@ -415,7 +415,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        }
+        },
       ),
     ],
   }),
@@ -448,7 +448,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        }
+        },
       ),
     ],
   }),
@@ -477,7 +477,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        }
+        },
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.water_charges), {
         id: "water_charges",

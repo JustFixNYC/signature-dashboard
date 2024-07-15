@@ -15,7 +15,7 @@ import "./style.scss";
 const columnHelper = createColumnHelper<LandlordInfo>();
 
 export const columns = [
-  columnHelper.accessor(row => getColumnAccessor(row.landlord_name), {
+  columnHelper.accessor((row) => getColumnAccessor(row.landlord_name), {
     id: "landlord_name",
     header: getColumnHeader("landlord_name"),
     sortUndefined: "last",
@@ -28,7 +28,7 @@ export const columns = [
     ),
     filterFn: "includesString",
   }),
-  columnHelper.accessor(row => getColumnAccessor(row.lender_name), {
+  columnHelper.accessor((row) => getColumnAccessor(row.lender_name), {
     id: "lender_name",
     header: getColumnHeader("lender_name"),
     sortUndefined: "last",
@@ -38,7 +38,7 @@ export const columns = [
       filterVariant: "select",
     },
   }),
-  columnHelper.accessor(row => getColumnAccessor(row.buildings), {
+  columnHelper.accessor((row) => getColumnAccessor(row.buildings), {
     id: "buildings",
     header: getColumnHeader("buildings"),
     sortUndefined: "last",
@@ -48,7 +48,7 @@ export const columns = [
       filterVariant: "range",
     },
   }),
-  columnHelper.accessor(row => getColumnAccessor(row.units_res), {
+  columnHelper.accessor((row) => getColumnAccessor(row.units_res), {
     id: "units_res",
     header: getColumnHeader("units_res"),
     sortUndefined: "last",
@@ -58,17 +58,20 @@ export const columns = [
       filterVariant: "range",
     },
   }),
-  columnHelper.accessor(row => getColumnAccessor(row.hpd_viol_bc_open_per_unit), {
-    id: "hpd_viol_bc_open_per_unit",
-    header: getColumnHeader("hpd_viol_bc_open_per_unit"),
-    sortUndefined: "last",
-    cell: (info) => round(info.getValue()),
-    filterFn: "inNumberRange",
-    meta: {
-      filterVariant: "range",
+  columnHelper.accessor(
+    (row) => getColumnAccessor(row.hpd_viol_bc_open_per_unit),
+    {
+      id: "hpd_viol_bc_open_per_unit",
+      header: getColumnHeader("hpd_viol_bc_open_per_unit"),
+      sortUndefined: "last",
+      cell: (info) => round(info.getValue()),
+      filterFn: "inNumberRange",
+      meta: {
+        filterVariant: "range",
+      },
     },
-  }),
-  columnHelper.accessor(row => getColumnAccessor(row.debt_per_unit), {
+  ),
+  columnHelper.accessor((row) => getColumnAccessor(row.debt_per_unit), {
     id: "debt_per_unit",
     header: getColumnHeader("debt_per_unit"),
     sortUndefined: "last",
