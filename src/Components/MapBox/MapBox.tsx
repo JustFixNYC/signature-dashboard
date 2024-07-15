@@ -2,7 +2,7 @@ import Map, { Source, Layer, NavigationControl } from "react-map-gl";
 import type { CircleLayer, LngLatBoundsLike } from "react-map-gl";
 import type { FeatureCollection } from "geojson";
 import "mapbox-gl/src/css/mapbox-gl.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import { MapData } from "../../types/APIDataTypes";
 import mapboxgl from "mapbox-gl";
 import { Link, SetURLSearchParams } from "react-router-dom";
@@ -95,15 +95,13 @@ export const MapBox: React.FC<MapBoxProps> = ({
   initialSelectedBBL,
   setSearchParams,
 }) => {
-  setSearchParams && setSearchParams(undefined, { replace: true });
-
   const [cursor, setCursor] = useState("");
 
   const initialSelected =
     data.find((x) => x.bbl === initialSelectedBBL) || null;
 
   const [selectedAddr, setSelectedAddr] = useState<MapData | null>(
-    initialSelected,
+    initialSelected
   );
 
   const selectedInitialViewState = initialSelected && {
@@ -111,6 +109,10 @@ export const MapBox: React.FC<MapBoxProps> = ({
     longitude: initialSelected.lng,
     zoom: 13,
   };
+
+  React.useEffect(() => {
+    setSearchParams && setSearchParams(undefined, { replace: true });
+  }, [setSearchParams]);
 
   const onMouseEnter = (event: mapboxgl.MapLayerMouseEvent) => {
     if (event.features?.length) {
@@ -123,7 +125,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
   };
 
   const onClick = (event: mapboxgl.MapLayerMouseEvent) => {
-    if (!event.features) return;
+    if (!event || !event.features) return;
 
     const mapPoint = event.features[0].properties as MapData;
     setSelectedAddr(mapPoint);
