@@ -45,6 +45,28 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
         </div>
       )}
 
+      {data.collection_type !== "all" && (
+        <>
+          {data.collection_type === "lender" && (
+            <SectionHeader id="map">
+              Map of buildings in {data.collection_name} portfolio
+            </SectionHeader>
+          )}
+          {data.collection_type === "landlord" && (
+            <>
+              <SectionHeader id="map">
+                Map of buildings owned by {data.collection_name}
+              </SectionHeader>
+            </>
+          )}
+          <MapBox
+            data={buildingToMapData(data.bldg_data)}
+            scrollZoom={false}
+            className="collection-map"
+          />
+        </>
+      )}
+
       {data.collection_type === "lender" && (
         <SectionHeader id="buildings-table">
           Buildings in {data.collection_name} portfolio
@@ -61,7 +83,6 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
           </SectionSubtitle>
         </>
       )}
-
       {data.collection_type === "all" && (
         <SectionHeader id="buildings-table">
           Buildings in Signature portfolio
@@ -75,13 +96,6 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
           pagination: true,
           pageSize: 100,
         })}
-      />
-
-      <SectionHeader id="map">Map</SectionHeader>
-
-      <MapBox
-        data={buildingToMapData(data.bldg_data)}
-        className="collection-map"
       />
     </div>
   );

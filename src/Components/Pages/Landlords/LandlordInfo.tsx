@@ -63,8 +63,8 @@ export const LandlordInfo: React.FC<LandlordInfoProps> = ({ landlord }) => {
                 <TOCList>
                   <TOCItem href="#summary-stats">Summary stats</TOCItem>
                   <TOCItem href="#trend-charts">Trend charts</TOCItem>
-                  <TOCItem href="#buildings-table">Buildings table</TOCItem>
                   <TOCItem href="#map">Map</TOCItem>
+                  <TOCItem href="#buildings-table">Buildings table</TOCItem>
                 </TOCList>
               </TableOfContents>
               <SectionHeader id="summary-stats">Summary stats</SectionHeader>

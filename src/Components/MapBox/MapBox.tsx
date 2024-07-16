@@ -89,12 +89,14 @@ const LAYER_STYLE: CircleLayer = {
 type MapBoxProps = {
   data: MapData[];
   initialSelectedBBL?: string;
+  scrollZoom?: boolean;
   className?: string;
 };
 
 export const MapBox: React.FC<MapBoxProps> = ({
   data,
   initialSelectedBBL,
+  scrollZoom = true,
   className,
 }) => {
   const [cursor, setCursor] = useState("");
@@ -165,6 +167,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           minZoom={10}
+          scrollZoom={scrollZoom}
         >
           <NavigationControl showCompass={false} visualizePitch={false} />
           <Source id="my-data" type="geojson" data={geojson}>
