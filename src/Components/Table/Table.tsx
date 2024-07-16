@@ -17,7 +17,7 @@ import {
 } from "@tanstack/react-table";
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
-import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
+import React, { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
 import { Button } from "@justfixnyc/component-library";
 import { useSearchParams } from "react-router-dom";
@@ -28,11 +28,9 @@ import {
   getObjFromEncodedParam,
 } from "../../util/helpers";
 import { FilterChips } from "../FilterChips/FilterChips";
+import { PageSizeOptions, Pagination } from "./Pagination";
 
-const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
-export type PageSizeOptions = (typeof pageSizeOptions)[number];
-
-export interface TableProps<T extends object> {
+export interface TableProps<T> {
   data: T[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<T, any>[];
@@ -75,7 +73,7 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
   };
 };
 
-export const Table = <T extends object>(props: TableProps<T>) => {
+export const Table: React.FC<TableProps<unknown>> = (props) => {
   const {
     data,
     columns,
@@ -156,7 +154,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting, columnFilters, columnVisibility, setSearchParams]);
 
-  const options: TableOptions<T> = {
+  const options: TableOptions<unknown> = {
     data,
     columns,
     filterFns: {},
@@ -310,66 +308,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
         {/* ------------------------------------------------------- */}
         {/* -------------- Pagination Footer ---------------------- */}
         {/* ------------------------------------------------------- */}
-        {hasPagination && (
-          <div className="pagination-container">
-            <div className="pagination-controls">
-              <button
-                onClick={() => table.firstPage()}
-                disabled={!table.getCanPreviousPage()}
-              >
-                {"<<"}
-              </button>
-              <button
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-              >
-                {"<"}
-              </button>
-              <button
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-              >
-                {">"}
-              </button>
-              <button
-                onClick={() => table.lastPage()}
-                disabled={!table.getCanNextPage()}
-              >
-                {">>"}
-              </button>
-              <span className="pagination-controls__pages">
-                Page {table.getState().pagination.pageIndex + 1} of{" "}
-                {table.getPageCount().toLocaleString()}
-              </span>
-              <span>
-                | Go to page:
-                <input
-                  type="number"
-                  defaultValue={table.getState().pagination.pageIndex + 1}
-                  onChange={(e) => {
-                    const page = e.target.value
-                      ? Number(e.target.value) - 1
-                      : 0;
-                    table.setPageIndex(page);
-                  }}
-                />
-              </span>
-              <select
-                value={table.getState().pagination.pageSize}
-                onChange={(e) => {
-                  table.setPageSize(Number(e.target.value));
-                }}
-              >
-                {pageSizeOptions.map((pageSize) => (
-                  <option key={pageSize} value={pageSize}>
-                    Show {pageSize}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {/* <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre> */}
-          </div>
-        )}
+        {hasPagination && <Pagination table={table} />}
       </div>
     </>
   );
