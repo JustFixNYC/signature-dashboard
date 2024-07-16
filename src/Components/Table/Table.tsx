@@ -17,7 +17,7 @@ import {
 } from "@tanstack/react-table";
 import "./style.scss";
 import DebouncedInput from "../DebouncedInput";
-import React, { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { ColumnFilter } from "./ColumnFilter/ColumnFilter";
 import { Button } from "@justfixnyc/component-library";
 import { useSearchParams } from "react-router-dom";
@@ -30,7 +30,7 @@ import {
 import { FilterChips } from "../FilterChips/FilterChips";
 import { PageSizeOptions, Pagination } from "./Pagination";
 
-export interface TableProps<T> {
+export interface TableProps<T extends object> {
   data: T[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<T, any>[];
@@ -73,7 +73,7 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
   };
 };
 
-export const Table: React.FC<TableProps<unknown>> = (props) => {
+export const Table = <T extends object>(props: TableProps<T>) => {
   const {
     data,
     columns,
@@ -154,7 +154,7 @@ export const Table: React.FC<TableProps<unknown>> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting, columnFilters, columnVisibility, setSearchParams]);
 
-  const options: TableOptions<unknown> = {
+  const options: TableOptions<T> = {
     data,
     columns,
     filterFns: {},

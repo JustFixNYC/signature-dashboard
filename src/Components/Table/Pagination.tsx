@@ -1,13 +1,14 @@
 import { Table } from "@tanstack/react-table";
 
-type PaginationProps<T> = {
-  table: Table<T>;
+type PaginationProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  table: Table<any>;
 };
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
 export type PageSizeOptions = (typeof pageSizeOptions)[number];
 
-export const Pagination: React.FC<PaginationProps<unknown>> = ({ table }) => {
+export const Pagination: React.FC<PaginationProps> = ({ table }) => {
   return (
     <div className="pagination-container">
       <div className="pagination-controls">
