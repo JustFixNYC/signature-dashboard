@@ -1,8 +1,16 @@
 @import "../../colors.scss";
+
+.table-container-wrapper {
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid $GREY_400;
+}
+
 .table-container {
-  border: 1px solid lightgray;
+  background-color: $WHITE;
   overflow-x: scroll;
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
   position: relative;
 }
 
@@ -10,10 +18,37 @@ table.collection-building-table,
 table.collection-building-table td,
 table.collection-building-table th {
   background-color: $WHITE;
-  border: 1px solid;
+  border: 1px solid $GREY_NEW;
   border-collapse: collapse;
   text-align: center;
   padding: 2px 4px;
+}
+
+table.collection-building-table {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  font-size: 1rem;
+
+  tr:first-of-type th {
+    border-top: 0;
+  }
+
+  td:first-of-type,
+  th:first-of-type {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  td:nth-of-type(2),
+  th:nth-of-type(2) {
+    border-left: 0;
+  }
+
+  td:last-of-type,
+  th:last-of-type {
+    border-right: 0;
+  }
 }
 
 table.collection-building-table tbody tr {
@@ -21,7 +56,7 @@ table.collection-building-table tbody tr {
     background-color: $GREY_50;
   }
   td {
-    font-weight: 500;
+    font-weight: 400;
   }
 }
 
@@ -69,10 +104,16 @@ table.collection-building-table tbody tr {
   border-width: 1px;
 }
 
+.pagination-container {
+  position: sticky;
+  left: 0;
+}
+
 .pagination-controls {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 16px 0;
 
   .pagination-controls__pages {
     display: flex;

@@ -28,9 +28,7 @@ import {
   getObjFromEncodedParam,
 } from "../../util/helpers";
 import { FilterChips } from "../FilterChips/FilterChips";
-
-const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
-export type PageSizeOptions = (typeof pageSizeOptions)[number];
+import { PageSizeOptions, Pagination } from "./Pagination";
 
 export interface TableProps<T extends object> {
   data: T[];
@@ -57,15 +55,11 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
   const isPinned = column.getIsPinned();
   const isLastLeftPinnedColumn =
     isPinned === "left" && column.getIsLastColumn("left");
-  const isFirstRightPinnedColumn =
-    isPinned === "right" && column.getIsFirstColumn("right");
 
   return {
     boxShadow: isLastLeftPinnedColumn
-      ? "-4px 0 4px -4px gray inset"
-      : isFirstRightPinnedColumn
-        ? "4px 0 4px -4px gray inset"
-        : undefined,
+      ? "-2px 0 0px 0px #c5ccd1 inset"
+      : undefined,
     left: isPinned === "left" ? `${column.getStart("left")}px` : undefined,
     right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
     backgroundColor: isPinned ? "white" : "initial",
@@ -83,7 +77,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     initialSorting,
     qsPrefix,
     pagination: hasPagination,
-    pageSize = 50,
+    pageSize = 10,
   } = props;
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
@@ -222,154 +216,97 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           : `${formatNumber(filteredRecordCount)} of `}
         <>{formatNumber(table.getPreFilteredRowModel().rows.length)}</> records
       </div>
-      <div className="table-container" ref={containerRef}>
-        <table className="collection-building-table">
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  const sortIcon =
-                    header.column.getIsSorted() === "asc"
-                      ? "arrowUpShortWide"
-                      : header.column.getIsSorted() === "desc"
-                        ? "arrowDownWideShort"
-                        : "arrowUpArrowDown";
-                  return (
-                    <th
-                      key={header.column.id}
-                      colSpan={header.colSpan}
-                      style={{
-                        minWidth: header.getSize() || undefined,
-                        ...getCommonPinningStyles(header.column),
-                      }}
-                    >
-                      {header.isPlaceholder ? null : (
-                        <div
-                          className={
-                            headerGroup.depth === 0
-                              ? "column-header column-header--group"
-                              : "column-header"
-                          }
-                        >
-                          <div className="column-header__label">
-                            {flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                            {header.column.getCanSort() && (
-                              <span className="column-header__sort-icons">
-                                <Button
-                                  iconOnly
-                                  labelText=""
-                                  labelIcon={sortIcon}
-                                  size="small"
-                                  variant="tertiary"
-                                  className="column-header__sort-icon"
-                                  onClick={header.column.getToggleSortingHandler()}
-                                />
-                              </span>
-                            )}
-                          </div>
-                          {header.column.getCanFilter() ? (
-                            <div className="column-header__filter">
-                              <Filter column={header.column} />
+      <div className="table-container-wrapper">
+        <div className="table-container" ref={containerRef}>
+          <table className="collection-building-table">
+            <thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    const sortIcon =
+                      header.column.getIsSorted() === "asc"
+                        ? "arrowUpShortWide"
+                        : header.column.getIsSorted() === "desc"
+                          ? "arrowDownWideShort"
+                          : "arrowUpArrowDown";
+                    return (
+                      <th
+                        key={header.column.id}
+                        colSpan={header.colSpan}
+                        style={{
+                          minWidth: header.getSize() || undefined,
+                          ...getCommonPinningStyles(header.column),
+                        }}
+                      >
+                        {header.isPlaceholder ? null : (
+                          <div
+                            className={
+                              headerGroup.depth === 0
+                                ? "column-header column-header--group"
+                                : "column-header"
+                            }
+                          >
+                            <div className="column-header__label">
+                              {flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                              {header.column.getCanSort() && (
+                                <span className="column-header__sort-icons">
+                                  <Button
+                                    iconOnly
+                                    labelText=""
+                                    labelIcon={sortIcon}
+                                    size="small"
+                                    variant="tertiary"
+                                    className="column-header__sort-icon"
+                                    onClick={header.column.getToggleSortingHandler()}
+                                  />
+                                </span>
+                              )}
                             </div>
-                          ) : null}
-                        </div>
-                      )}
-                    </th>
-                  );
-                })}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
-                  const valueExists =
-                    cell.getValue() !== null && cell.getValue() !== undefined;
-                  return (
-                    <td
-                      key={cell.id}
-                      style={{ ...getCommonPinningStyles(cell.column) }}
-                    >
-                      {valueExists
-                        ? flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )
-                        : "N/A"}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {/* ------------------------------------------------------- */}
-        {/* -------------- Pagination Footer ---------------------- */}
-        {/* ------------------------------------------------------- */}
-        {hasPagination && (
-          <div className="pagination-container">
-            <div className="pagination-controls">
-              <button
-                onClick={() => table.firstPage()}
-                disabled={!table.getCanPreviousPage()}
-              >
-                {"<<"}
-              </button>
-              <button
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-              >
-                {"<"}
-              </button>
-              <button
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-              >
-                {">"}
-              </button>
-              <button
-                onClick={() => table.lastPage()}
-                disabled={!table.getCanNextPage()}
-              >
-                {">>"}
-              </button>
-              <span className="pagination-controls__pages">
-                Page {table.getState().pagination.pageIndex + 1} of{" "}
-                {table.getPageCount().toLocaleString()}
-              </span>
-              <span>
-                | Go to page:
-                <input
-                  type="number"
-                  defaultValue={table.getState().pagination.pageIndex + 1}
-                  onChange={(e) => {
-                    const page = e.target.value
-                      ? Number(e.target.value) - 1
-                      : 0;
-                    table.setPageIndex(page);
-                  }}
-                />
-              </span>
-              <select
-                value={table.getState().pagination.pageSize}
-                onChange={(e) => {
-                  table.setPageSize(Number(e.target.value));
-                }}
-              >
-                {pageSizeOptions.map((pageSize) => (
-                  <option key={pageSize} value={pageSize}>
-                    Show {pageSize}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {/* <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre> */}
-          </div>
-        )}
+                            {header.column.getCanFilter() ? (
+                              <div className="column-header__filter">
+                                <Filter column={header.column} />
+                              </div>
+                            ) : null}
+                          </div>
+                        )}
+                      </th>
+                    );
+                  })}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {table.getRowModel().rows.map((row) => (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    const valueExists =
+                      cell.getValue() !== null && cell.getValue() !== undefined;
+                    return (
+                      <td
+                        key={cell.id}
+                        style={{ ...getCommonPinningStyles(cell.column) }}
+                      >
+                        {valueExists
+                          ? flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )
+                          : "N/A"}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* ------------------------------------------------------- */}
+          {/* -------------- Pagination Footer ---------------------- */}
+          {/* ------------------------------------------------------- */}
+          {hasPagination && <Pagination table={table} />}
+        </div>
       </div>
     </>
   );

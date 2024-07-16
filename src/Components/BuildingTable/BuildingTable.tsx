@@ -1,8 +1,9 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
 import { columns as buildingColumns } from "./BuildingTableColumns";
-import { PageSizeOptions, Table } from "../Table/Table";
+import { Table } from "../Table/Table";
 import { BuildingInfo } from "../../types/APIDataTypes";
+import { PageSizeOptions } from "../Table/Pagination";
 
 type BuildingTableProps = {
   data: BuildingInfo[];
