@@ -32,7 +32,7 @@ export function formatMoney(amount: unknown) {
   return formatmoney.format(amount);
 }
 
-export const formatPercent = (value: number) => {
+export const formatPercent = (value: unknown) => {
   if (typeof value !== "number") {
     return value;
   }
