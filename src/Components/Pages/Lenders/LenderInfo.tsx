@@ -62,6 +62,7 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
                 <TOCList>
                   <TOCItem href="#summary-stats">Summary stats</TOCItem>
                   <TOCItem href="#trend-charts">Trend charts</TOCItem>
+                  <TOCItem href="#map">Map</TOCItem>
                   <TOCItem href="#buildings-table">Buildings table</TOCItem>
                 </TOCList>
               </TableOfContents>

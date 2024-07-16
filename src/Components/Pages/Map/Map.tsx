@@ -29,7 +29,9 @@ export const Map: React.FC = () => {
       {mapDataIsLoading && <div>loading...</div>}
       {mapDataError && <pre>{JSON.stringify(mapDataError, null, 2)}</pre>}
 
-      {!!mapData && <MapBox data={mapData} initialSelectedBBL={bbl} />}
+      {!!mapData && (
+        <MapBox data={mapData} initialSelectedBBL={bbl} className="all-map" />
+      )}
     </>
   );
 };
