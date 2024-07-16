@@ -89,10 +89,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
 
       <BuildingTable
         data={data.bldg_data}
-        {...((data.collection_type === "lender" ||
-          data.collection_type === "all") && {
-          pagination: true
-        })}
+        pagination
       />
     </div>
   );
