@@ -53,11 +53,9 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
             </SectionHeader>
           )}
           {data.collection_type === "landlord" && (
-            <>
               <SectionHeader id="map">
                 Map of buildings owned by {data.collection_name}
               </SectionHeader>
-            </>
           )}
           <MapBox
             data={buildingToMapData(data.bldg_data)}
