@@ -77,7 +77,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     initialSorting,
     qsPrefix,
     pagination: hasPagination,
-    pageSize = 20,
+    pageSize = 10,
   } = props;
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
