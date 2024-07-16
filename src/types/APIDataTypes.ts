@@ -206,6 +206,7 @@ export interface LandlordInfo {
   units_res: number;
   hpd_viol_bc_open_per_unit: number;
   debt_per_unit: number;
+  bip_500_pct: number;
 }
 
 export interface MapData {

@@ -7,6 +7,7 @@ import {
   formatMoney,
   formatNumber,
   getColumnAccessor,
+  formatPercent,
 } from "../../../../util/helpers";
 import { useGetAllLandlords } from "../../../../api/hooks";
 import { Table } from "../../../Table/Table";
@@ -69,13 +70,23 @@ export const columns = [
       meta: {
         filterVariant: "range",
       },
-    },
+    }
   ),
   columnHelper.accessor((row) => getColumnAccessor(row.debt_per_unit), {
     id: "debt_per_unit",
     header: getColumnHeader("debt_per_unit"),
     sortUndefined: "last",
     cell: (info) => formatMoney(info.getValue()),
+    filterFn: "inNumberRange",
+    meta: {
+      filterVariant: "range",
+    },
+  }),
+  columnHelper.accessor((row) => getColumnAccessor(row.bip_500_pct), {
+    id: "bip_500_pct",
+    header: getColumnHeader("bip_500_pct"),
+    sortUndefined: "last",
+    cell: (info) => formatPercent(info.getValue()),
     filterFn: "inNumberRange",
     meta: {
       filterVariant: "range",

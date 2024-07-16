@@ -608,6 +608,11 @@
             "type": "number",
             "example": 78271.42179999998,
             "description": "The average Signature debt per unit in the collection"
+          },
+          "bip_500_pct": {
+            "type": "float",
+            "example": 44,
+            "description": "Percent of buildings in the collection with a BIP score of 500 or greater."
           }
         }
       },
