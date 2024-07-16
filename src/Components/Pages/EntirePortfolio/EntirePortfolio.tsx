@@ -7,6 +7,8 @@ import {
   useGetDatasetLastUpdated,
 } from "../../../api/hooks";
 import { CollectionSummaryTable } from "../../Collection/CollectionSummaryTable/CollectionSummaryTable";
+import { TableOfContents, TOCHeader, TOCList, TOCItem } from "../../TableOfContents/TableOfContents";
+import { SectionHeader } from "../../SectionHeader/SectionHeader";
 
 export const EntirePortfolio: React.FC = () => {
   const { data, error, isLoading } = useGetCollectionInfo("all");
@@ -28,7 +30,16 @@ export const EntirePortfolio: React.FC = () => {
             <div>
               <PageTitle>Entire Signature Portfolio</PageTitle>
 
-              <h3>Key Indicators</h3>
+              <TableOfContents>
+                <TOCHeader>On this page</TOCHeader>
+                <TOCList>
+                  <TOCItem href="#summary-stats">Summary stats</TOCItem>
+                  <TOCItem href="#trend-charts">Trend charts</TOCItem>
+                  <TOCItem href="#buildings-table">Buildings table</TOCItem>
+                </TOCList>
+              </TableOfContents>
+
+              <SectionHeader id="summary-stats">Summary stats</SectionHeader>
               <CollectionSummaryTable
                 data={data}
                 lastUpdatedData={lastUpdatedData}
