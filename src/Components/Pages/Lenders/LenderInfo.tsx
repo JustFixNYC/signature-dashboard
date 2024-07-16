@@ -9,7 +9,6 @@ import {
   useGetDatasetLastUpdated,
 } from "../../../api/hooks";
 import { CollectionSummaryTable } from "../../Collection/CollectionSummaryTable/CollectionSummaryTable";
-import { InternalLinks } from "../../LinksBox/InternalLinks";
 import { DownloadMultiBuildingCSV } from "../../CSVDownload/CSVDownload";
 import { SectionHeader } from "../../SectionHeader/SectionHeader";
 import {
@@ -71,11 +70,6 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
                 data={data}
                 lastUpdatedData={lastUpdatedData}
               />
-            </div>
-            <div>
-              <aside className="related-links-container">
-                <InternalLinks collectionInfo={data} />
-              </aside>
             </div>
           </div>
 
