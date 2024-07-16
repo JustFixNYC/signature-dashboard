@@ -1,7 +1,12 @@
 @import "../../colors.scss";
-.table-container {
-  border: 1px solid $GREY_400;
+
+.table-container-wrapper {
+  overflow: hidden;
   border-radius: 4px;
+  border: 1px solid $GREY_400;
+}
+
+.table-container {
   background-color: $WHITE;
   overflow-x: scroll;
   width: fit-content;

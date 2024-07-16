@@ -216,95 +216,97 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           : `${formatNumber(filteredRecordCount)} of `}
         <>{formatNumber(table.getPreFilteredRowModel().rows.length)}</> records
       </div>
-      <div className="table-container" ref={containerRef}>
-        <table className="collection-building-table">
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  const sortIcon =
-                    header.column.getIsSorted() === "asc"
-                      ? "arrowUpShortWide"
-                      : header.column.getIsSorted() === "desc"
-                        ? "arrowDownWideShort"
-                        : "arrowUpArrowDown";
-                  return (
-                    <th
-                      key={header.column.id}
-                      colSpan={header.colSpan}
-                      style={{
-                        minWidth: header.getSize() || undefined,
-                        ...getCommonPinningStyles(header.column),
-                      }}
-                    >
-                      {header.isPlaceholder ? null : (
-                        <div
-                          className={
-                            headerGroup.depth === 0
-                              ? "column-header column-header--group"
-                              : "column-header"
-                          }
-                        >
-                          <div className="column-header__label">
-                            {flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                            {header.column.getCanSort() && (
-                              <span className="column-header__sort-icons">
-                                <Button
-                                  iconOnly
-                                  labelText=""
-                                  labelIcon={sortIcon}
-                                  size="small"
-                                  variant="tertiary"
-                                  className="column-header__sort-icon"
-                                  onClick={header.column.getToggleSortingHandler()}
-                                />
-                              </span>
-                            )}
-                          </div>
-                          {header.column.getCanFilter() ? (
-                            <div className="column-header__filter">
-                              <Filter column={header.column} />
+      <div className="table-container-wrapper">
+        <div className="table-container" ref={containerRef}>
+          <table className="collection-building-table">
+            <thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    const sortIcon =
+                      header.column.getIsSorted() === "asc"
+                        ? "arrowUpShortWide"
+                        : header.column.getIsSorted() === "desc"
+                          ? "arrowDownWideShort"
+                          : "arrowUpArrowDown";
+                    return (
+                      <th
+                        key={header.column.id}
+                        colSpan={header.colSpan}
+                        style={{
+                          minWidth: header.getSize() || undefined,
+                          ...getCommonPinningStyles(header.column),
+                        }}
+                      >
+                        {header.isPlaceholder ? null : (
+                          <div
+                            className={
+                              headerGroup.depth === 0
+                                ? "column-header column-header--group"
+                                : "column-header"
+                            }
+                          >
+                            <div className="column-header__label">
+                              {flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                              {header.column.getCanSort() && (
+                                <span className="column-header__sort-icons">
+                                  <Button
+                                    iconOnly
+                                    labelText=""
+                                    labelIcon={sortIcon}
+                                    size="small"
+                                    variant="tertiary"
+                                    className="column-header__sort-icon"
+                                    onClick={header.column.getToggleSortingHandler()}
+                                  />
+                                </span>
+                              )}
                             </div>
-                          ) : null}
-                        </div>
-                      )}
-                    </th>
-                  );
-                })}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
-                  const valueExists =
-                    cell.getValue() !== null && cell.getValue() !== undefined;
-                  return (
-                    <td
-                      key={cell.id}
-                      style={{ ...getCommonPinningStyles(cell.column) }}
-                    >
-                      {valueExists
-                        ? flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )
-                        : "N/A"}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {/* ------------------------------------------------------- */}
-        {/* -------------- Pagination Footer ---------------------- */}
-        {/* ------------------------------------------------------- */}
-        {hasPagination && <Pagination table={table} />}
+                            {header.column.getCanFilter() ? (
+                              <div className="column-header__filter">
+                                <Filter column={header.column} />
+                              </div>
+                            ) : null}
+                          </div>
+                        )}
+                      </th>
+                    );
+                  })}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {table.getRowModel().rows.map((row) => (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    const valueExists =
+                      cell.getValue() !== null && cell.getValue() !== undefined;
+                    return (
+                      <td
+                        key={cell.id}
+                        style={{ ...getCommonPinningStyles(cell.column) }}
+                      >
+                        {valueExists
+                          ? flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )
+                          : "N/A"}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* ------------------------------------------------------- */}
+          {/* -------------- Pagination Footer ---------------------- */}
+          {/* ------------------------------------------------------- */}
+          {hasPagination && <Pagination table={table} />}
+        </div>
       </div>
     </>
   );
