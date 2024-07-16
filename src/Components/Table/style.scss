@@ -1,8 +1,11 @@
 @import "../../colors.scss";
 .table-container {
-  border: 1px solid lightgray;
+  border: 2px solid $GREY_400;
+  border-radius: 4px;
+  background-color: $WHITE;
   overflow-x: scroll;
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
   position: relative;
 }
 
@@ -10,10 +13,30 @@ table.collection-building-table,
 table.collection-building-table td,
 table.collection-building-table th {
   background-color: $WHITE;
-  border: 1px solid;
+  border: 1px solid $GREY_400;
   border-collapse: collapse;
   text-align: center;
   padding: 2px 4px;
+}
+
+table.collection-building-table {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+
+  tr:first-of-type th {
+    border-top: 0;
+  }
+
+  td:first-of-type,
+  th:first-of-type {
+    border-left: 0;
+  }
+
+  td:last-of-type,
+  th:last-of-type {
+    border-right: 0;
+  }
 }
 
 table.collection-building-table tbody tr {

@@ -43,7 +43,6 @@ export const NoBBL: React.FC = () => {
           <BuildingTable
             data={data.bldg_data}
             pagination={true}
-            pageSize={100}
           />
         </>
       )}

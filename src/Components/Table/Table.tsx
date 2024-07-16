@@ -81,7 +81,7 @@ export const Table: React.FC<TableProps<unknown>> = (props) => {
     initialSorting,
     qsPrefix,
     pagination: hasPagination,
-    pageSize = 50,
+    pageSize = 20,
   } = props;
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
