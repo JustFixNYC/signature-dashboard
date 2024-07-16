@@ -31,6 +31,12 @@ table.collection-building-table {
   td:first-of-type,
   th:first-of-type {
     border-left: 0;
+    border-right: 0;
+  }
+
+  td:nth-of-type(2),
+  th:nth-of-type(2) {
+    border-left: 0;
   }
 
   td:last-of-type,
