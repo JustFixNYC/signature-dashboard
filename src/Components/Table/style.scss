@@ -86,3 +86,9 @@ table.collection-building-table tbody tr {
 .collection-building-table__record-count {
   margin-bottom: 16px;
 }
+
+.table-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}

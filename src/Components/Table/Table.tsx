@@ -27,6 +27,7 @@ import {
   getHiddenColumns,
   getObjFromEncodedParam,
 } from "../../util/helpers";
+import { FilterChips } from "../FilterChips/FilterChips";
 
 const pageSizeOptions = [10, 20, 30, 40, 50, 100] as const;
 export type PageSizeOptions = (typeof pageSizeOptions)[number];
@@ -195,7 +196,17 @@ export const Table = <T extends object>(props: TableProps<T>) => {
 
   return (
     <>
-      <ColumnFilter table={table} />
+      <div className="table-buttons-container">
+        <ColumnFilter table={table} />
+        <FilterChips
+          removeFn={(id: string) => {
+            table.setColumnFilters((filters) => {
+              return filters.filter((f) => f.id !== id);
+            });
+          }}
+          columnFilters={columnFilters}
+        />
+      </div>
       {!!columnFilters.length && (
         <Button
           labelText="Clear all filters"
@@ -243,7 +254,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                           <div className="column-header__label">
                             {flexRender(
                               header.column.columnDef.header,
-                              header.getContext(),
+                              header.getContext()
                             )}
                             {header.column.getCanSort() && (
                               <span className="column-header__sort-icons">
@@ -286,7 +297,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                       {valueExists
                         ? flexRender(
                             cell.column.columnDef.cell,
-                            cell.getContext(),
+                            cell.getContext()
                           )
                         : "N/A"}
                     </td>
