@@ -89,14 +89,14 @@ const LAYER_STYLE: CircleLayer = {
 type MapBoxProps = {
   data: MapData[];
   initialSelectedBBL?: string;
-  scrollZoom?: boolean;
+  preventScrollZoom?: boolean;
   className?: string;
 };
 
 export const MapBox: React.FC<MapBoxProps> = ({
   data,
   initialSelectedBBL,
-  scrollZoom = true,
+  preventScrollZoom = false,
   className,
 }) => {
   const [cursor, setCursor] = useState("");
@@ -167,7 +167,8 @@ export const MapBox: React.FC<MapBoxProps> = ({
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           minZoom={10}
-          scrollZoom={scrollZoom}
+          // prevent scroll zoom, allows cmd+scroll and pinch zoom
+          cooperativeGestures={preventScrollZoom}
         >
           <NavigationControl showCompass={false} visualizePitch={false} />
           <Source id="my-data" type="geojson" data={geojson}>

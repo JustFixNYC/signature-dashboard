@@ -59,7 +59,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
           )}
           <MapBox
             data={buildingToMapData(data.bldg_data)}
-            scrollZoom={false}
+            preventScrollZoom={true}
             className="collection-map"
           />
         </>
