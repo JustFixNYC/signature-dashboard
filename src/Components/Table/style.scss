@@ -104,6 +104,11 @@ table.collection-building-table tbody tr {
   border-width: 1px;
 }
 
+.pagination-container {
+  position: sticky;
+  left: 0;
+}
+
 .pagination-controls {
   display: flex;
   align-items: center;
