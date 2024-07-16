@@ -1,3 +1,4 @@
+import { Button } from "@justfixnyc/component-library";
 import { apiKeys, getColumnHeader } from "../../util/helpers";
 import { FilterChip } from "./FilterChip/FilterChip";
 import { ColumnFiltersState } from "@tanstack/react-table";
@@ -34,11 +35,11 @@ export const FilterChips: React.FC<FilterChipsProps> = ({
     <>
       {filterChipsToShow}
       {columnFilters.length > defaultFilterCount && (
-        <FilterChip
+        <Button
           key="show-more-less"
           labelText={showAll ? "Show Less" : "Show More"}
-          selected={true}
-          removable={true}
+          variant="secondary"
+          size="small"
           onClick={() => {
             setShowAll(!showAll);
           }}
