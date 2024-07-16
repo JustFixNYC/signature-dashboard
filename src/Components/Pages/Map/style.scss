@@ -12,3 +12,10 @@
     height: calc(100vh - 10rem);
   }
 }
+
+.map-style-toggle-container {
+  display: flex;
+  .map-style-toggle {
+    margin-left: auto;
+  }
+}

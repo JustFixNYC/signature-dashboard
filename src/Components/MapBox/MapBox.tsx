@@ -12,6 +12,8 @@ import "./style.scss";
 
 const STYLE_SIGNATURE_LIGHT =
   "mapbox://styles/justfix/clxummt2k047a01qj3ra1gjf6";
+const STYLE_STABILIZING_NYC =
+  "mapbox://styles/justfix/clxopp04602yz01qmg0w5dg6i";
 
 const DEFAULT_COLOR = "#43B19F";
 const SELECTED_COLOR = "#AF59A0";
@@ -100,6 +102,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
   className,
 }) => {
   const [cursor, setCursor] = useState("");
+  const [mapStyle, setMapStyle] = useState(STYLE_SIGNATURE_LIGHT);
 
   const initialSelected =
     data.find((x) => x.bbl === initialSelectedBBL) || null;
@@ -131,6 +134,14 @@ export const MapBox: React.FC<MapBoxProps> = ({
     setSelectedAddr(mapPoint);
   };
 
+  const toggleMapStyle = () => {
+    setMapStyle((prev) =>
+      prev === STYLE_SIGNATURE_LIGHT
+        ? STYLE_STABILIZING_NYC
+        : STYLE_SIGNATURE_LIGHT
+    );
+  };
+
   // Type error on "features" because bldg.lng and bldg.lat might be null
   const geojson: FeatureCollection = {
     type: "FeatureCollection",
@@ -154,13 +165,30 @@ export const MapBox: React.FC<MapBoxProps> = ({
 
   return (
     <>
+      <div className="map-style-toggle-container">
+        <div className="map-style-toggle">
+          Map Style:{" "}
+          <button
+            onClick={toggleMapStyle}
+            disabled={mapStyle == STYLE_SIGNATURE_LIGHT}
+          >
+            Default
+          </button>
+          <button
+            onClick={toggleMapStyle}
+            disabled={mapStyle == STYLE_STABILIZING_NYC}
+          >
+            Stabilizing NYC
+          </button>
+        </div>
+      </div>
       <div className={classNames("map-container", className)}>
         <Map
           mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
           initialViewState={
             selectedInitialViewState || DEFAULT_INITIAL_VIEW_STATE
           }
-          mapStyle={STYLE_SIGNATURE_LIGHT}
+          mapStyle={mapStyle}
           cursor={cursor}
           interactiveLayerIds={["bbl"]}
           onClick={onClick}
