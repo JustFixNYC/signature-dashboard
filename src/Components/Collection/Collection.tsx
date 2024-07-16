@@ -62,6 +62,12 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
         </>
       )}
 
+      {data.collection_type === "all" && (
+        <SectionHeader id="buildings-table">
+          Buildings in Signature portfolio
+        </SectionHeader>
+      )}
+
       <BuildingTable
         data={data.bldg_data}
         {...((data.collection_type === "lender" ||

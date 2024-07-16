@@ -26,7 +26,7 @@ export const NoBBL: React.FC = () => {
       />
       <div className="find-links">
         <p>How else can I find a building?</p>
-        <Link href={"/buildings"}>Search by landlord</Link>
+        <Link href={"/landlords"}>Search by landlord</Link>
         <Link href={"/map"}>View all buildings on map</Link>
       </div>
 
