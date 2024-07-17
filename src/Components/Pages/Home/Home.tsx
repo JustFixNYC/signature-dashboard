@@ -19,7 +19,7 @@ export const Home: React.FC = () => {
   return (
     <>
       <PageTitle>Signature Portfolio Dashboard</PageTitle>
-      <div style={{ width: "568px" }}>
+      <div className="home-content" style={{ width: "568px" }}>
         <p>
           This project is a collaboration between JustFix and UNHP to track
           available public data on the rent-regulated portion of the former
@@ -27,11 +27,13 @@ export const Home: React.FC = () => {
         </p>
 
         <div style={{ width: "fit-content" }}>
-          <h3 className="homepage-section-header">Search building</h3>
+          <h3 className="homepage-section-header">
+            Search for a building by address
+          </h3>
           <AddressSearch
-            labelText="Find a building in the Signature portfolio by entering the address"
-            noResultsText="No buildings in the Signature portfolio match your search."
-            noSearchText="Search for an address of a building in the Signature portfolio."
+            labelText="Search for a building by address"
+            noResultsText="No buildings in the Signature portfolio match your search"
+            noSearchText="Enter the address of a building in the Signature portfolio"
           />
 
           <div className="cards-container">

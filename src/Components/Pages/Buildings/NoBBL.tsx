@@ -21,9 +21,9 @@ export const NoBBL: React.FC = () => {
       </div>
 
       <AddressSearch
-        labelText="Find a building in the Signature portfolio by entering the address"
-        noResultsText="No buildings in the Signature portfolio match your search."
-        noSearchText="Search for an address of a building in the Signature portfolio."
+        labelText="Search for a building by address"
+        noResultsText="No buildings in the Signature portfolio match your search"
+        noSearchText="Enter the address of a building in the Signature portfolio"
       />
       <div className="find-links">
         <p>How else can I find a building?</p>
