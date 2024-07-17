@@ -1,9 +1,14 @@
 @import "../../../colors.scss";
+@import "../../../util.scss";
 
 .homepage-section-header {
   font-size: 1.2rem; // 19.2px (same as body)
   line-height: 120%;
-  margin: 48px 0 4px 0;
+  margin: 48px 0 1rem 0;
+}
+
+.home-content .jfcl-input-header__label {
+  @include visually-hidden;
 }
 
 .homepage-copy {
@@ -12,6 +17,10 @@
 
 input[name="password"] {
   font-size: 1rem;
+}
+
+.algolia-search {
+  width: 50%;
 }
 
 .cards-container {

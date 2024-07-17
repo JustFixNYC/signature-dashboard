@@ -13,6 +13,7 @@ export const NoLandlord: React.FC = () => {
       <LandlordSearch
         labelText="Search for landlord by name"
         noResultsText="No landlords in the Signature portfolio match your search."
+        noSearchText="Enter the name of a landlord in the Signature portfolio"
       />
       <div className="find-links">
         <p>Don't know the landlord's name?</p>
