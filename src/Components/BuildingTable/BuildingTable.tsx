@@ -1,8 +1,9 @@
 // import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
 import { columns as buildingColumns } from "./BuildingTableColumns";
-import { PageSizeOptions, Table } from "../Table/Table";
+import { Table } from "../Table/Table";
 import { BuildingInfo } from "../../types/APIDataTypes";
+import { PageSizeOptions } from "../Table/Pagination";
 
 type BuildingTableProps = {
   data: BuildingInfo[];
@@ -19,9 +20,10 @@ export const BuildingTable: React.FC<BuildingTableProps> = ({
       data={data}
       columns={buildingColumns}
       initialState={{
-        sorting: [{ id: "units_res", desc: true }],
         columnPinning: { left: ["address"] },
       }}
+      initialSorting={[{ id: "units_res", desc: true }]}
+      qsPrefix="b" // NOTE: changing this value will break bookmarked urls
       {...props}
     />
   );

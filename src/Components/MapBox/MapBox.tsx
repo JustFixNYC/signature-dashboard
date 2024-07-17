@@ -1,12 +1,14 @@
+import React, { useState } from "react";
 import Map, { Source, Layer, NavigationControl } from "react-map-gl";
 import type { CircleLayer, LngLatBoundsLike } from "react-map-gl";
 import type { FeatureCollection } from "geojson";
-import "mapbox-gl/src/css/mapbox-gl.css";
-import { useState } from "react";
-import { MapData } from "../../types/APIDataTypes";
+import classNames from "classnames";
 import mapboxgl from "mapbox-gl";
-import { Link, SetURLSearchParams } from "react-router-dom";
-// import { Icon } from "@justfixnyc/component-library";
+import { Link } from "react-router-dom";
+import "mapbox-gl/src/css/mapbox-gl.css";
+import { MapData } from "../../types/APIDataTypes";
+import { Button } from "@justfixnyc/component-library";
+import "./style.scss";
 
 const STYLE_SIGNATURE_LIGHT =
   "mapbox://styles/justfix/clxummt2k047a01qj3ra1gjf6";
@@ -87,16 +89,16 @@ const LAYER_STYLE: CircleLayer = {
 type MapBoxProps = {
   data: MapData[];
   initialSelectedBBL?: string;
-  setSearchParams?: SetURLSearchParams;
+  preventScrollZoom?: boolean;
+  className?: string;
 };
 
 export const MapBox: React.FC<MapBoxProps> = ({
   data,
   initialSelectedBBL,
-  setSearchParams,
+  preventScrollZoom = false,
+  className,
 }) => {
-  setSearchParams && setSearchParams(undefined, { replace: true });
-
   const [cursor, setCursor] = useState("");
 
   const initialSelected =
@@ -125,9 +127,8 @@ export const MapBox: React.FC<MapBoxProps> = ({
   const onClick = (event: mapboxgl.MapLayerMouseEvent) => {
     if (!event.features) return;
 
-    const mapPoint = event.features[0].properties as MapData;
+    const mapPoint = event.features[0]?.properties as MapData;
     setSelectedAddr(mapPoint);
-    setSearchParams && setSearchParams({ bbl: mapPoint?.bbl });
   };
 
   // Type error on "features" because bldg.lng and bldg.lat might be null
@@ -153,7 +154,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
 
   return (
     <>
-      <div className="map-container">
+      <div className={classNames("map-container", className)}>
         <Map
           mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
           initialViewState={
@@ -166,6 +167,8 @@ export const MapBox: React.FC<MapBoxProps> = ({
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           minZoom={10}
+          // prevent scroll zoom, allows cmd+scroll and pinch zoom
+          cooperativeGestures={preventScrollZoom}
         >
           <NavigationControl showCompass={false} visualizePitch={false} />
           <Source id="my-data" type="geojson" data={geojson}>
@@ -178,9 +181,14 @@ export const MapBox: React.FC<MapBoxProps> = ({
               <Link to={`/buildings?bbl=${selectedAddr.bbl}`}>
                 {`${selectedAddr.address}, ${selectedAddr.borough.toUpperCase()}`}
               </Link>
-              <button onClick={() => setSelectedAddr(null)}>
-                ✕{/* <Icon icon="xmark" /> */}
-              </button>
+              <Button
+                iconOnly
+                labelText="Clsoe"
+                labelIcon="xmark"
+                variant="tertiary"
+                size="small"
+                onClick={() => setSelectedAddr(null)}
+              />
             </div>
 
             <div>

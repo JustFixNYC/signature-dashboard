@@ -4,7 +4,8 @@ type indicatorObj = {
   name: string;
   short_name?: string;
   description?: React.ReactNode;
-  format?: "money" | "round" | "percent" | "boolean" | "comma";
+  format?: "money" | "round" | "percent" | "boolean" | "comma" | "date";
+  dataset?: string;
 };
 
 export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
@@ -105,6 +106,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_violations",
   },
   hpd_viol_bc_open_per_unit: {
     name: "Open HPD violations (B & C) per unit",
@@ -124,6 +126,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "round",
+    dataset: "hpd_violations",
   },
   hpd_viol_bc_total: {
     name: "HPD violations (B & C), last 12 mo.",
@@ -142,6 +145,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_violations",
   },
   hpd_viol_bc_total_per_unit: {
     name: "HPD violations (B & C) per unit, last 12 mo.",
@@ -161,6 +165,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "round",
+    dataset: "hpd_violations",
   },
   hpd_viol_heat: {
     name: "HPD violations for heat/hot water, last 12 mo.",
@@ -179,6 +184,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_violations",
   },
   hpd_viol_pests: {
     name: "HPD violations for pests, last 12 mo.",
@@ -197,6 +203,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_violations",
   },
   hpd_viol_water: {
     name: "HPD violations for leak/mold, last 12 mo.",
@@ -215,6 +222,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_violations",
   },
   hpd_comp_emerg_total: {
     name: "HPD complaints (emergency), last 12 mo.",
@@ -233,6 +241,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_complaints",
   },
   hpd_comp_emerg_total_per_unit: {
     name: "HPD complaints (emergency) per unit, last 12 mo.",
@@ -251,6 +260,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "round",
+    dataset: "hpd_complaints",
   },
   hpd_comp_heat: {
     name: "HPD complaints for heat/hot water, last 12 mo.",
@@ -269,6 +279,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_complaints",
   },
   hpd_comp_pests: {
     name: "HPD complaints for pests, last 12 mo.",
@@ -287,6 +298,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_complaints",
   },
   hpd_comp_water: {
     name: "HPD complaints for leak/mold, last 12 mo.",
@@ -305,6 +317,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_complaints",
   },
   hpd_comp_apts: {
     name: "Units with HPD complaints, last 12 mo.",
@@ -321,6 +334,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
         .
       </>
     ),
+    dataset: "hpd_complaints",
   },
   hpd_comp_apts_pct: {
     name: "Percent of units with HPD complaints, last 12 mo.",
@@ -339,12 +353,14 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "percent",
+    dataset: "hpd_complaints",
   },
   evictions_filed: {
     name: "Eviction cases filed, last 12 mo.",
     description:
       "Eviction cases filed by the landlord in housing court. This is the first step in the court process, and the case may later get dismissed, settled in or out of court, or eventually result in a executed eviction warrant. Values cannot be reported for buildings with fewer than 11 units.",
     format: "comma",
+    dataset: "oca_address",
   },
   evictions_filed_agg: {
     name: "Eviction cases filed, last 12 mo.",
@@ -357,6 +373,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     description:
       "Warrants for eviction against a tenant that are executed by the city marshals. This is the final outcome in cases where there is a possessory judgement against the tenant.",
     format: "comma",
+    dataset: "marshal_evictions",
   },
   in_aep: {
     name: "Alternative Enforcement Program",
@@ -378,6 +395,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "boolean",
+    dataset: "hpd_aep",
   },
   in_conh: {
     name: "Certificate of No Harassment (CONH) pilot program",
@@ -400,6 +418,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "boolean",
+    dataset: "hpd_conh",
   },
   in_ucp: {
     name: "Underlying Conditions Program",
@@ -420,6 +439,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "boolean",
+    dataset: "hpd_underlying_conditions",
   },
   debt_per_unit: {
     name: "Signature debt per unit",
@@ -454,6 +474,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
         records.
       </>
     ),
+    format: "date",
   },
   last_sale_date: {
     name: "Last sale date",
@@ -463,6 +484,8 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
         according to ACRIS property records..
       </>
     ),
+    dataset: "acris",
+    format: "date",
   },
   hp_active: {
     name: "Active HPD litigation cases",
@@ -480,6 +503,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_litigations",
   },
   hp_total: {
     name: "Total HPD litigation cases",
@@ -497,6 +521,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_litigations",
   },
   hp_penalies: {
     name: "Civil penalties from HPD litigation cases",
@@ -515,6 +540,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "money",
+    dataset: "hpd_litigations",
   },
   hp_find_harassment: {
     name: "HPD litigation cases with harassment finding",
@@ -532,6 +558,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_litigations",
   },
   hp_open_judgements: {
     name: "HPD litigation cases with outstanding judgement",
@@ -550,6 +577,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_litigations",
   },
   water_charges: {
     name: "Overdue water charges",
@@ -584,6 +612,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "dob_violations",
   },
   dob_ecb_viol_total: {
     name: "DOB/ECB violations, last 12 mo.",
@@ -625,6 +654,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "dobjobs",
   },
   hpd_erp_charges_per_unit: {
     name: "HPD emergency repair charges per unit, last 12 mo.",
@@ -643,6 +673,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "money",
+    dataset: "hpd_charges",
   },
   hpd_erp_charges: {
     name: "HPD emergency repair charges, last 12 mo.",
@@ -661,6 +692,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "money",
+    dataset: "hpd_charges",
   },
   hpd_erp_orders: {
     name: "HPD emergency repair work orders, last 12 mo.",
@@ -679,6 +711,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "hpd_charges",
   },
   hpd_erp_orders_per_unit: {
     name: "HPD emergency repair work orders per unit, last 12 mo.",
@@ -698,6 +731,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "round",
+    dataset: "hpd_charges",
   },
   last_rodent_date: {
     name: "Date of last rodent inspection",
@@ -714,6 +748,8 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
         .
       </>
     ),
+    format: "date",
+    dataset: "dohmh_rodent_inspections",
   },
   last_rodent_result: {
     name: "Rodent inspection result",
@@ -730,10 +766,25 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
         .
       </>
     ),
+    dataset: "dohmh_rodent_inspections",
   },
-  placeholder_vacate_order: {
-    name: "Active Vacate Order",
-    description: <>(include links to each agency page to learn more)</>,
+  hpd_active_vacate: {
+    name: "Active HPD Vacate Order",
+    description: (
+      <>
+        Issue date of HPD vacate order for the building that has not yet been
+        rescinded. Vacate orders can apply to the entire building or one or more
+        individual units (partial). Read more on{" "}
+        <a
+          href="https://www.nyc.gov/site/hpd/services-and-information/orders.page"
+          target="_blank"
+        >
+          HPD Vacate Orders
+        </a>
+        .
+      </>
+    ),
+    dataset: "hpd_vacateorders",
   },
   assem_dist: {
     name: "State Assembly",

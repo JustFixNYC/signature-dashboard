@@ -5,18 +5,21 @@ export type Borough =
   | "Queens"
   | "Staten Island";
 
+export type LoanStatus = "active" | "satisfied";
+export type LoanAction = "refinanced" | "new landlord" | "debt write down";
+
 export const indicatorsTimeSpans = ["month", "quarter", "year"] as const;
 export type IndicatorsTimeSpan = (typeof indicatorsTimeSpans)[number];
 
 export interface Indicators {
   bbl: string;
   address: string;
-  assem_dist: number;
+  assem_dist: string;
   bip: number;
   bip_500_pct: number;
-  borough: number;
-  cong_dist: number;
-  coun_dist: number;
+  borough: string;
+  cong_dist: string;
+  coun_dist: string;
   debt_per_unit: number;
   debt_total: number;
   dob_ecb_viol_open: number;
@@ -52,11 +55,11 @@ export interface Indicators {
   in_aep: number;
   in_conh: number;
   in_ucp: number;
-  landlord: number;
+  landlord: string;
   last_rodent_date: number;
   last_rodent_result: number;
   last_sale_date: string;
-  lender: number;
+  lender: string;
   link_acris: string;
   link_dap: string;
   link_dob: string;
@@ -65,22 +68,21 @@ export interface Indicators {
   link_political: string;
   origination_date: string;
   rs_units: number;
-  stsen_dist: number;
+  stsen_dist: string;
   units_nonres: number;
   units_res: number;
   year_built: number;
-  zip: number;
+  zip: string;
+  hpd_active_vacate: string;
 }
 
 export type BuildingInfo = {
   landlord_slug: string;
   lender_slug: string;
-  water_charges: string;
-  lat: string;
-  lng: string;
-  placeholder_vacate_order: number;
-  placeholder_dob_permit_applications: number;
-  placeholder_outstanding_water: number;
+  loan_status: LoanStatus;
+  loan_action: LoanAction;
+  lat: number;
+  lng: number;
 } & Pick<
   Indicators,
   | "bbl"
@@ -140,6 +142,8 @@ export type BuildingInfo = {
   | "dob_jobs"
   | "dob_ecb_viol_total"
   | "dob_ecb_viol_open"
+  | "water_charges"
+  | "hpd_active_vacate"
 >;
 
 export type CollectionInfo = {
@@ -217,4 +221,9 @@ export interface APIPortfolioData {
   collection_slug: "cpc" | "santander" | "all";
   buildings: number;
   landlords: number;
+}
+
+export interface DatasetLastUpdatedData {
+  dataset: string;
+  last_updated: string;
 }

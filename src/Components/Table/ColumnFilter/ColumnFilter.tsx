@@ -49,7 +49,11 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
     "filter-button--has-hidden": numHiddenColumn > 0,
   });
 
-  const clearnButtonLabel = `${hasHiddenColumns ? numHiddenColumn : ""} Hide Columns`;
+  const clearnButtonLabel = hasHiddenColumns
+    ? numHiddenColumn === 1
+      ? `1 Hidden Column`
+      : `${numHiddenColumn} Hidden Columns`
+    : "Hide Columns";
 
   return (
     <div className="popover-filter-menu">
@@ -81,7 +85,7 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
           <div className="popover-menu__body">
             {table
               .getAllLeafColumns()
-              .filter((column) => column.id !== "address")
+              .filter((column) => column.getCanHide())
               .map((column) => {
                 const indicatorID = column.id as apiKeys;
                 const indicatorObj = INDICATOR_STRINGS[indicatorID];

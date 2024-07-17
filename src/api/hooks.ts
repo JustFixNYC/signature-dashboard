@@ -6,6 +6,7 @@ import {
   LandlordInfo,
   MapData,
   APIPortfolioData,
+  DatasetLastUpdatedData,
 } from "../types/APIDataTypes";
 import { apiFetcher } from "./helpers";
 
@@ -166,15 +167,39 @@ export function useGetMapData(): MapDataSWRResponse {
   };
 }
 
-type GetPortfoliiosSWRResponse = {
+type GetPortfoliosSWRResponse = {
   data: APIPortfolioData[] | undefined;
   isLoading: boolean;
   error: Error | undefined;
 };
 
-export function useGetPortfolios(): GetPortfoliiosSWRResponse {
+export function useGetPortfolios(): GetPortfoliosSWRResponse {
   const { data, error, isLoading } = useSWR(
     `/signature/portfolios`,
+    apiFetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
+
+  return {
+    data: data?.result,
+    isLoading,
+    error: error,
+  };
+}
+
+type GetDatasetLastUpdatedSWRResponse = {
+  data: DatasetLastUpdatedData[] | undefined;
+  isLoading: boolean;
+  error: Error | undefined;
+};
+
+export function useGetDatasetLastUpdated(): GetDatasetLastUpdatedSWRResponse {
+  const { data, error, isLoading } = useSWR(
+    `/dataset/last_updated`,
     apiFetcher,
     {
       revalidateIfStale: false,

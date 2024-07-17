@@ -1,10 +1,14 @@
-import { BuildingInfo } from "../../../../types/APIDataTypes";
+import {
+  BuildingInfo,
+  DatasetLastUpdatedData,
+} from "../../../../types/APIDataTypes";
 import React, { HTMLAttributes } from "react";
 import { DetailTable } from "../../../DetailTable/DetailTable";
 import { DetailTableRow } from "../../../DetailTable/DetailTableRow";
 
 interface BuildingSummaryTableProps extends HTMLAttributes<HTMLDListElement> {
   data: BuildingInfo;
+  lastUpdatedData: DatasetLastUpdatedData[];
 }
 
 const keys: Partial<keyof BuildingInfo>[] = [
@@ -31,10 +35,18 @@ const keys: Partial<keyof BuildingInfo>[] = [
 
 export const BuildingSummaryTable: React.FC<BuildingSummaryTableProps> = ({
   data,
+  lastUpdatedData,
   ...props
 }) => {
   const rows = keys.map((key) => {
-    return <DetailTableRow key={key} apiKey={key} value={data[key]} />;
+    return (
+      <DetailTableRow
+        key={key}
+        apiKey={key}
+        value={data[key]}
+        lastUpdatedData={lastUpdatedData}
+      />
+    );
   });
 
   return <DetailTable {...props}>{rows}</DetailTable>;

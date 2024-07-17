@@ -5,7 +5,10 @@ import {
   Indicators,
   IndicatorsTimeSpan,
   LandlordInfo,
+  MapData,
 } from "../types/APIDataTypes";
+import LZString from "lz-string";
+import { VisibilityState } from "@tanstack/react-table";
 import { INDICATOR_STRINGS } from "./indicators";
 
 export function splitBBL(bbl: string) {
@@ -58,6 +61,18 @@ export const formatDate = (value: string) => {
   });
 };
 
+export const formatLastUpdatedDate = (value: string) => {
+  const today = new Date();
+  const yesterday = ((d) => new Date(d.setDate(d.getDate() - 1)))(new Date());
+  if (new Date(value).toDateString() === today.toDateString()) {
+    return "today";
+  } else if (new Date(value).toDateString() === yesterday.toDateString()) {
+    return "yesterday";
+  } else {
+    return formatDate(value);
+  }
+};
+
 export type yearlyChartData = {
   [x in keyof Omit<APIChartData, "month">]: number;
 } & {
@@ -108,14 +123,12 @@ export const getColumnHeader = (apiKey: apiKeys) => {
   }
 };
 
-
 // Fall back to undefined for null values
 // This helps with sorting
 // react-table uses sortUndefined to define how to sort undefined values, but there's
 // no way to tell it how to properly sort null values
 export const getColumnAccessor = (val: string | number | null) =>
   val !== null ? val : undefined;
-
 
 export const round = (value: unknown) => {
   if (typeof value !== "number") {
@@ -144,4 +157,52 @@ export const slugify = (text: string) => {
     .replace(/_/g, "-") // Replace _ with -
     .replace(/--+/g, "-") // Replace multiple - with single -
     .replace(/-$/g, ""); // Remove trailing -
+};
+
+// given a VisibilityState from a react-table, return a VisibilityState with just the hidden columns
+export const getHiddenColumns = (columnVisibility: VisibilityState) => {
+  return Object.keys(columnVisibility).reduce((hiddenCols, currentCol) => {
+    // if the value of the currentCol is true, leave it off the returned object
+    if (columnVisibility[currentCol]) {
+      return hiddenCols;
+    }
+    hiddenCols[currentCol] = false;
+    return hiddenCols;
+  }, {} as VisibilityState);
+};
+
+// given an object, return a compressed, encoded string for adding to the URI
+export const encodeForURI = (obj: object) => {
+  return LZString.compressToEncodedURIComponent(JSON.stringify(obj));
+};
+
+// given an encoded string from the URI, decode it and return the original object
+export const decodeFromURI = (str: string) => {
+  return JSON.parse(LZString.decompressFromEncodedURIComponent(str));
+};
+
+// given a URLSearchParams object and a key, return the original object
+export const getObjFromEncodedParam = (
+  params: URLSearchParams,
+  key: string
+) => {
+  const encodedStr = params.get(key);
+  return encodedStr ? decodeFromURI(encodedStr) : null;
+};
+
+export const buildingToMapData = (buildingData: BuildingInfo[]): MapData[] => {
+  const mapData = buildingData.map((building) => {
+    return {
+      bbl: building.bbl,
+      address: building.address,
+      borough: building.borough,
+      zip: building.zip,
+      landlord: building.landlord,
+      landlord_slug: building.landlord_slug,
+      lender_slug: building.lender_slug,
+      lat: building.lat,
+      lng: building.lng,
+    } as MapData;
+  });
+  return mapData;
 };

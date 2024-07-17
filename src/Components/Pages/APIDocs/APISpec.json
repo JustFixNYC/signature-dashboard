@@ -678,6 +678,20 @@
             "description": "Longitude (lot centroid)"
           }
         }
+      },
+      "DatasetLastUpdated": {
+        "properties": {
+          "dataset": {
+            "type": "string",
+            "example": "hpd_violations",
+            "description": "Dataset name (nycdb dataset identifier)"
+          },
+          "last_updated": {
+            "type": "string",
+            "example": "2024-07-10T22:49:07.205",
+            "description": "Timestamp for when the dataset was last updated in JustFix's database"
+          }
+        }
       }
     }
   },
@@ -918,6 +932,46 @@
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/MapBuilding"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          }
+        }
+      }
+    },
+    "/dataset/last_updated": {
+      "get": {
+        "summary": "Returns all of the datasets and when they were last updated in JustFix's database",
+        "parameters": [
+          {
+            "name": "dataset",
+            "in": "query",
+            "description": "Name of the dataset (nycdb identifer, or one of the custom datasets: 'signature', 'wow', 'oca_address'",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "hpd_violations"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dataset name and last updated timestamp if specific dataset requested. If no dataset parameter provided it returns them all",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DatasetLastUpdated"
                       }
                     }
                   }
