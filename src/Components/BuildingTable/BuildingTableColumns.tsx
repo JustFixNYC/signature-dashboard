@@ -368,7 +368,7 @@ export const columns = [
 
   columnHelper.group({
     id: "hp_cases",
-    header: () => "HP Cases",
+    header: () => "HPD Litigation",
     columns: [
       columnHelper.accessor((row) => getColumnAccessor(row.hp_active), {
         id: "hp_active",
