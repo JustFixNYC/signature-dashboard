@@ -29,6 +29,7 @@ import {
 } from "../../util/helpers";
 import { FilterChips } from "../FilterChips/FilterChips";
 import { PageSizeOptions, Pagination } from "./Pagination";
+import classNames from "classnames";
 
 export interface TableProps<T extends object> {
   data: T[];
@@ -69,7 +70,9 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
   };
 };
 
-export const Table = <T extends object>(props: TableProps<T>) => {
+export const Table = <T extends object>(
+  props: TableProps<T> & { className?: string }
+) => {
   const {
     data,
     columns,
@@ -78,6 +81,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     qsPrefix,
     pagination: hasPagination,
     pageSize = 10,
+    className,
   } = props;
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
@@ -93,23 +97,23 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   // Get table setting from query string
   const columnVisibilityParams = getObjFromEncodedParam(
     searchParams,
-    VISIBILITY_PARAM_KEY,
+    VISIBILITY_PARAM_KEY
   );
   const columnFiltersParams = getObjFromEncodedParam(
     searchParams,
-    FILTERS_PARAM_KEY,
+    FILTERS_PARAM_KEY
   );
   const sortingParams = getObjFromEncodedParam(searchParams, SORTING_PARAM_KEY);
 
   // Setup tables settings in state
   const [sorting, setsorting] = useState<ColumnSort[]>(
-    sortingParams ? sortingParams : initialSorting ? initialSorting : [],
+    sortingParams ? sortingParams : initialSorting ? initialSorting : []
   );
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
-    columnFiltersParams ?? [],
+    columnFiltersParams ?? []
   );
   const [columnVisibility, setColumnVisibility] = useState(
-    columnVisibilityParams ?? {},
+    columnVisibilityParams ?? {}
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -145,7 +149,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
 
         return params;
       },
-      { replace: true },
+      { replace: true }
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting, columnFilters, columnVisibility, setSearchParams]);
@@ -218,7 +222,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
       </div>
       <div className="table-container-wrapper">
         <div className="table-container" ref={containerRef}>
-          <table className="collection-building-table">
+          <table className={classNames("collection-building-table", className)}>
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
@@ -325,7 +329,7 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
         : Array.from(uniqeValues.keys())
             .filter((v) => v !== undefined)
             .sort(),
-    [uniqeValues, filterVariant],
+    [uniqeValues, filterVariant]
   );
   return filterVariant === "range" ? (
     <div>

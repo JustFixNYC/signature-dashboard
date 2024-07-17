@@ -481,6 +481,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hp_active: {
     name: "Active HPD litigation cases",
+    short_name: "Active cases",
     description: (
       <>
         Ongoing cases in housing court against landlords for conditions and/or
@@ -499,6 +500,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hp_total: {
     name: "Total HPD litigation cases",
+    short_name: "Total cases",
     description: (
       <>
         All cases in housing court against landlords for conditions and/or
@@ -517,6 +519,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hp_penalies: {
     name: "Civil penalties from HPD litigation cases",
+    short_name: "Civil penalties from cases",
     description: (
       <>
         Total penalties from HPD litigation cases against a landlord for
@@ -536,6 +539,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hp_find_harassment: {
     name: "HPD litigation cases with harassment finding",
+    short_name: "Cases with harassment finding",
     description: (
       <>
         Number of HPD litigation cases against a landlord where there was a
@@ -554,6 +558,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hp_open_judgements: {
     name: "HPD litigation cases with outstanding judgement",
+    short_name: "Cases with outstanding judgement",
     description: (
       <>
         Number of HPD litigation cases against a landlord for conditions and/or
