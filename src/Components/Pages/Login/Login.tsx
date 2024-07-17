@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../auth";
+import { Button, TextInput } from "@justfixnyc/component-library";
+import "./styles.scss";
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -33,21 +35,15 @@ export const Login: React.FC = () => {
     <div className="container">
       <p>You must log in to view the dashboard</p>
       <form onSubmit={handleSubmit}>
-        <label>
-          Password:{" "}
-          <input
-            name="password"
-            type="text"
-            spellCheck="false"
-            autoComplete="off"
-            autoCapitalize="off"
-            autoCorrect="off"
-          />
-        </label>{" "}
-        <button type="submit">Login</button>
-        <div style={{ marginTop: ".5rem", fontSize: ".9rem" }}>
-          (hint: try "organizer" or "tenantsunion")
-        </div>
+        <TextInput
+          id="password-input"
+          labelText="Enter password"
+          spellCheck="false"
+          autoComplete="off"
+          autoCapitalize="off"
+          autoCorrect="off"
+        />
+        <Button labelText="Login" type="submit" size="small" />
       </form>
     </div>
   );
