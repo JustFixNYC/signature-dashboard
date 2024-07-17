@@ -13,7 +13,7 @@ export const Home: React.FC = () => {
   const entirePortfolio = data?.find((obj) => obj.collection_slug === "all");
   const cpcPortfolio = data?.find((obj) => obj.collection_slug === "cpc");
   const santanderPortfolio = data?.find(
-    (obj) => obj.collection_slug === "santander",
+    (obj) => obj.collection_slug === "santander"
   );
 
   return (
@@ -31,6 +31,7 @@ export const Home: React.FC = () => {
           <AddressSearch
             labelText="Find a building in the Signature portfolio by entering the address"
             noResultsText="No buildings in the Signature portfolio match your search."
+            noSearchText="Search for an address of a building in the Signature portfolio."
           />
 
           <div className="cards-container">

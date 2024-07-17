@@ -1,4 +1,3 @@
-// import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { NoLender } from "./NoLender";
