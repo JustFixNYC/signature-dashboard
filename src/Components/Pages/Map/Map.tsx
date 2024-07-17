@@ -5,8 +5,10 @@ import { PageTitle } from "../../PageTitle/PageTitle";
 import { useGetMapData } from "../../../api/hooks";
 import { MapBox } from "../../MapBox/MapBox";
 import { useSearchParams } from "react-router-dom";
+import { useAuth } from "../../../auth";
 
 export const Map: React.FC = () => {
+  const {user} = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const [bbl, setBBL] = React.useState("");
   const {
@@ -33,7 +35,7 @@ export const Map: React.FC = () => {
         <MapBox
           data={mapData}
           initialSelectedBBL={bbl}
-          showStabilizingToggle={true}
+          showStabilizingToggle={user === "user-stabilizingnyc"}
           className="all-map"
         />
       )}
