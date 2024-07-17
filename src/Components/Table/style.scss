@@ -30,24 +30,26 @@ table.collection-building-table {
   border-right: 0;
   font-size: 1rem;
 
-  tr:first-of-type th {
-    border-top: 0;
-  }
+  &:not(.landlords-table) {
+    tr:first-of-type th {
+      border-top: 0;
+    }
 
-  td:first-of-type,
-  th:first-of-type {
-    border-left: 0;
-    border-right: 0;
-  }
+    td:first-of-type,
+    th:first-of-type {
+      border-left: 0;
+      border-right: 0;
+    }
 
-  td:nth-of-type(2),
-  th:nth-of-type(2) {
-    border-left: 0;
-  }
+    td:nth-of-type(2),
+    th:nth-of-type(2) {
+      border-left: 0;
+    }
 
-  td:last-of-type,
-  th:last-of-type {
-    border-right: 0;
+    td:last-of-type,
+    th:last-of-type {
+      border-right: 0;
+    }
   }
 }
 
@@ -57,6 +59,7 @@ table.collection-building-table tbody tr {
   }
   td {
     font-weight: 400;
+    padding: 2px 8px;
   }
 }
 

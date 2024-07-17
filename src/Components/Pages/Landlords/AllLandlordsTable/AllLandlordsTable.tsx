@@ -103,6 +103,7 @@ export const AllLandlordsTable: React.FC = () => {
             pagination
             initialSorting={[{ id: "units_res", desc: true }]}
             qsPrefix="ll" // NOTE: changing this value will break bookmarked urls
+            className="landlords-table"
           />
         </>
       )}
