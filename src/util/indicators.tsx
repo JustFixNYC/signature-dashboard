@@ -50,8 +50,17 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   bip: {
     name: "Building Indicator Project (BIP) score",
     short_name: "BIP score",
-    description:
-      "The BIP score takes into account violation and overdue charge data to come up with an indicator of likely physical or financial distress: a building with a score of 500 or more is likely to be in physical or financial distress, while a building with a score of 800 or more is highly likely to be in physical or financial distress. (Note that the BIP score is a conservative indicator, and scores below 500 do not necessarily indicate that is a building is financially and physically stable.)",
+    description: (
+      <>
+        0-500 = Scores in this range do not necessary mean that the building is
+        stable, since BIP score is a conservative indicator
+        <br />
+        500+ = More likely to be in physical/financial distress <br />
+        800+ = Highly likely to be in physical/financial distress <br />
+        <br />
+        The BIP score takes into account violation and overdue charge data.
+      </>
+    ),
     format: "comma",
   },
   landlord: {
