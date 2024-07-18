@@ -12,6 +12,7 @@ import {
 } from "../../util/helpers";
 import { INDICATOR_STRINGS } from "../../util/indicators";
 import { DatasetLastUpdatedData } from "../../types/APIDataTypes";
+import { Pill } from "../Pill/Pill";
 
 interface DetailTableRowProps extends HTMLAttributes<HTMLDivElement> {
   apiKey: apiKeys;
@@ -85,7 +86,15 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
           )}
         </dt>
         <dd className="detail-table__value">
-          <>{displayValue}</>
+          {apiKey === "bip" && typeof value === "number" ? (
+            <Pill
+              color={value < 500 ? "grey" : value < 800 ? "yellow" : "orange"}
+            >
+              <>{displayValue}</>
+            </Pill>
+          ) : (
+            <>{displayValue}</>
+          )}
         </dd>
       </div>
       <dd
