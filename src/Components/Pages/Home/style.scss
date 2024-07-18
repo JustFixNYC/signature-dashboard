@@ -1,58 +1,70 @@
 @import "../../../colors.scss";
 @import "../../../util.scss";
 
-.homepage-section-header {
-  font-size: 1.2rem; // 19.2px (same as body)
-  line-height: 120%;
-  margin: 48px 0 1rem 0;
-}
-
-.layout-two-col.home-content {
-  padding: 1rem 5rem 2rem 2rem;
-  justify-content: space-between;
+.home-content {
   height: 100%;
 
-  .col-1 {
-    display: flex;
-    flex-direction: column;
-    width: 500px;
-    margin-right: auto;
-    .algolia-search {
-      width: 100%;
-      margin-bottom: auto;
+  p {
+    margin: 0;
+  }
+
+  .layout-two-col {
+    padding: 1rem 2rem;
+    justify-content: space-between;
+
+    h2 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
     }
-  }
 
-  .jfcl-input-header__label {
-    @include visually-hidden;
-  }
-}
+    .col-1 {
+      display: flex;
+      flex-direction: column;
+      max-width: 640px;
+      margin-right: auto;
 
-.homepage-copy {
-  margin: 0 0 1rem;
-}
+      .homepage-section-header {
+        font-size: 1.2rem; // 19.2px (same as body)
+        line-height: 120%;
+        margin: 3rem 0 1rem 0;
+      }
+      .jfcl-input-header__label {
+        @include visually-hidden;
+      }
+      .algolia-search {
+        width: 100%;
+        margin-bottom: auto;
+      }
+    }
 
-.cards-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
+    .col-2 {
+      margin: 0 auto;
 
-.card {
-  width: 18rem;
-  border: 1px solid $GREY_400;
-  border-radius: 4px;
-  padding: 24px;
-  box-sizing: border-box;
-  background-color: #FFF;
+      .cards-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
 
-  .card__title {
-    font-weight: 600;
-  }
+      .card {
+        width: 18rem;
+        border: 1px solid $GREY_400;
+        border-radius: 4px;
+        padding: 24px;
+        box-sizing: border-box;
+        background-color: #fff;
 
-  .card__link {
-    display: block;
-    margin-top: 48px;
-    text-wrap: nowrap;
+        .card__title {
+          font-weight: 600;
+        }
+
+        .card__link {
+          display: block;
+          margin-top: 48px;
+          text-wrap: nowrap;
+        }
+      }
+    }
   }
 }
