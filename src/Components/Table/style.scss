@@ -59,15 +59,18 @@ table.collection-building-table {
     border-right: 0;
   }
 
-  td:nth-of-type(2),
-  th:nth-of-type(2) {
-    border-left: 0;
-  }
-
   td:last-of-type,
   th:last-of-type {
     border-right: 0;
   }
+
+  &:not(.landlords-table) {
+    td:nth-of-type(2),
+    th:nth-of-type(2) {
+      border-left: 0;
+    }
+  }
+
 }
 
 table.collection-building-table tbody tr {
