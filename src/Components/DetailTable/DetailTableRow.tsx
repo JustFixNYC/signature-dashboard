@@ -8,11 +8,11 @@ import {
   formatNumber,
   formatNumberNoComma,
   formatPercent,
-  showYesNo,
 } from "../../util/helpers";
 import { INDICATOR_STRINGS } from "../../util/indicators";
 import { DatasetLastUpdatedData } from "../../types/APIDataTypes";
-import { Pill } from "../Pill/Pill";
+import { BIPPill } from "../Pill/BIPPill";
+import { YesNoPill } from "../Pill/YesNoPill";
 
 interface DetailTableRowProps extends HTMLAttributes<HTMLDivElement> {
   apiKey: apiKeys;
@@ -55,20 +55,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   }
 
   if (indicator?.format === "boolean" && typeof value === "boolean") {
-    if (value)
-      displayValue = (
-        <Pill color="grey">
-          <Icon icon="check" className="pill__icon_check" />
-          {showYesNo(value)}
-        </Pill>
-      );
-    else
-      displayValue = (
-        <Pill color="grey">
-          <Icon icon="ban" className="pill__icon_ban" />
-          {showYesNo(value)}
-        </Pill>
-      );
+    displayValue = <YesNoPill value={value} />;
   }
 
   if (indicator?.format === "comma" && typeof value === "number") {
@@ -84,11 +71,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   }
 
   if (apiKey === "bip" && typeof value === "number") {
-    displayValue = (
-      <Pill color={value < 500 ? "grey" : value < 800 ? "yellow" : "orange"}>
-        <>{displayValue}</>
-      </Pill>
-    );
+    displayValue = <BIPPill value={value} />;
   }
 
   return (

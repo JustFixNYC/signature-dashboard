@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import "./style.scss";
 
-type PillColors = "yellow" | "orange" | "grey";
+export type PillColors = "yellow" | "orange" | "grey";
 
 type PillProps = {
   children: ReactNode;

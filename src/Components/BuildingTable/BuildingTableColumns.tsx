@@ -6,10 +6,11 @@ import {
   getColumnAccessor,
   getColumnHeader,
   round,
-  showYesNo,
 } from "../../util/helpers";
 import { BuildingInfo } from "../../types/APIDataTypes";
 import { Link } from "react-router-dom";
+import { BIPPill } from "../Pill/BIPPill";
+import { YesNoPill } from "../Pill/YesNoPill";
 
 const columnHelper = createColumnHelper<BuildingInfo>();
 
@@ -106,7 +107,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.units_nonres), {
         id: "units_nonres",
         header: getColumnHeader("units_nonres"),
-        cell: (info) => showYesNo(info.getValue()),
+        cell: (info) => <YesNoPill value={info.getValue()} />,
         sortUndefined: "last",
         filterFn: "equals",
         meta: {
@@ -131,7 +132,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.bip), {
         id: "bip",
         header: getColumnHeader("bip"),
-        cell: (info) => formatNumber(info.getValue()),
+        cell: (info) => <BIPPill value={info.getValue()} />,
         sortUndefined: "last",
         filterFn: "inNumberRange",
         meta: {
@@ -323,7 +324,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.in_aep), {
         id: "in_aep",
         header: getColumnHeader("in_aep"),
-        cell: (info) => showYesNo(info.getValue()),
+        cell: (info) => <YesNoPill value={info.getValue()} />,
         sortUndefined: "last",
         filterFn: "equals",
         meta: {
@@ -333,7 +334,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.in_conh), {
         id: "in_conh",
         header: getColumnHeader("in_conh"),
-        cell: (info) => showYesNo(info.getValue()),
+        cell: (info) => <YesNoPill value={info.getValue()} />,
         sortUndefined: "last",
         filterFn: "equals",
         meta: {
@@ -344,7 +345,7 @@ export const columns = [
       columnHelper.accessor((row) => getColumnAccessor(row.in_ucp), {
         id: "in_ucp",
         header: getColumnHeader("in_ucp"),
-        cell: (info) => showYesNo(info.getValue()),
+        cell: (info) => <YesNoPill value={info.getValue()} />,
         sortUndefined: "last",
         filterFn: "equals",
         meta: {
