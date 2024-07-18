@@ -12,7 +12,7 @@ body {
   font-weight: 400;
   font-size: 1.2rem;
   letter-spacing: 0.54px;
-  background-color: rgba($OFF_WHITE_100, 0.5);
+  background-color: $OFF_WHITE_100;
   margin: 0;
   position: relative;
   height: 100%;
@@ -89,7 +89,7 @@ body {
   color: $OFF_BLACK;
   font-size: 1rem; // 16px
   font-weight: 600;
-  letter-spacing: 0.14px;
+  letter-spacing: 0.5px;
 
   .nav-link {
     display: flex;
@@ -121,6 +121,7 @@ body {
       width: 1.5rem;
       height: 1.5rem;
       margin-right: 10px;
+      font-size: 0.875rem; // 14px
     }
 
     .nav-link__icon-caret {
