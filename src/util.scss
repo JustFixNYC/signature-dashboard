@@ -8,3 +8,9 @@
   white-space: nowrap;
   width: 1px;
 }
+
+@mixin for-phone-only {
+  @media (max-width: 599px) {
+    @content;
+  }
+}

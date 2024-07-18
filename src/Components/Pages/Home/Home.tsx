@@ -82,7 +82,7 @@ export const Home: React.FC = () => {
           </div>
         </div>
 
-        <p>
+        <p className="org-credit">
           This project is a collaboration between{" "}
           <Link href="https://www.justfix.org/" target="_blank">
             JustFix
