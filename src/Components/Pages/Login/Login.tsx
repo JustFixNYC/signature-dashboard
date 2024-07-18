@@ -37,6 +37,7 @@ export const Login: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <TextInput
           id="password-input"
+          name="password"
           labelText="Enter password"
           spellCheck="false"
           autoComplete="off"
