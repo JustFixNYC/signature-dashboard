@@ -143,10 +143,7 @@ function Layout() {
                   <span className="nav-link__icon">
                     <Icon icon="buildingColumns" />
                   </span>
-                  Lenders{" "}
-                  <span className="nav-link__icon-caret">
-                    <Icon icon="caretDown" />
-                  </span>
+                  Lenders
                 </NavLink>
                 <ul className="sublinks">
                   <li>
