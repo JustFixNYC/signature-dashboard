@@ -33,6 +33,7 @@ import {
   TOCList,
 } from "../../TableOfContents/TableOfContents";
 import classNames from "classnames";
+import { Loading } from "../../Loading/Loading";
 
 export interface BuildingInfoProps {
   bbl: string;
@@ -77,7 +78,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
         </div>
       </div>
 
-      {buildingInfoIsLoading && lastUpdatedIsLoading && <div>loading...</div>}
+      {buildingInfoIsLoading && lastUpdatedIsLoading && <Loading />}
       {buildingInfoError && (
         <pre>{JSON.stringify(buildingInfoError, null, 2)}</pre>
       )}
@@ -281,7 +282,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                 ]}
               />
 
-              {chartIsLoading && <div>loading...</div>}
+              {chartIsLoading && <Loading />}
               {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
               {chartData && buildingInfo && (
                 <>

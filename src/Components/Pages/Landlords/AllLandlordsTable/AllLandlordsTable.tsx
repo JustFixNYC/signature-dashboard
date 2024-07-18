@@ -11,6 +11,7 @@ import {
 import { useGetAllLandlords } from "../../../../api/hooks";
 import { Table } from "../../../Table/Table";
 import "./style.scss";
+import { Loading } from "../../../Loading/Loading";
 
 const columnHelper = createColumnHelper<LandlordInfo>();
 
@@ -88,7 +89,7 @@ export const AllLandlordsTable: React.FC = () => {
 
   return (
     <>
-      {isLoading && <div>loading...</div>}
+      {isLoading && <Loading />}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
         <>

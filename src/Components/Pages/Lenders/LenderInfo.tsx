@@ -17,6 +17,7 @@ import {
   TOCList,
   TOCItem,
 } from "../../TableOfContents/TableOfContents";
+import { Loading } from "../../Loading/Loading";
 
 interface LenderInfoProps {
   lender: string;
@@ -31,7 +32,7 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
   } = useGetDatasetLastUpdated();
   return (
     <>
-      {isLoading && lastUpdatedIsLoading && <div>loading...</div>}
+      {isLoading && lastUpdatedIsLoading && <Loading />}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {lastUpdatedError && (
         <pre>{JSON.stringify(lastUpdatedError, null, 2)}</pre>

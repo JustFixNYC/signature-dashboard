@@ -9,6 +9,7 @@ import {
 import { CollectionSummaryTable } from "../../Collection/CollectionSummaryTable/CollectionSummaryTable";
 import { TableOfContents, TOCHeader, TOCList, TOCItem } from "../../TableOfContents/TableOfContents";
 import { SectionHeader } from "../../SectionHeader/SectionHeader";
+import { Loading } from "../../Loading/Loading";
 
 export const EntirePortfolio: React.FC = () => {
   const { data, error, isLoading } = useGetCollectionInfo("all");
@@ -19,7 +20,7 @@ export const EntirePortfolio: React.FC = () => {
   } = useGetDatasetLastUpdated();
   return (
     <>
-      {isLoading && lastUpdatedIsLoading && <div>loading...</div>}
+      {isLoading && lastUpdatedIsLoading && <Loading />}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {lastUpdatedError && (
         <pre>{JSON.stringify(lastUpdatedError, null, 2)}</pre>

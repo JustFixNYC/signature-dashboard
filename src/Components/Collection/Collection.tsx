@@ -16,6 +16,7 @@ import { SectionSubtitle } from "../SectionSubtitle/SectionSubtitle";
 import { MapBox } from "../MapBox/MapBox";
 import { buildingToMapData } from "../../util/helpers";
 import classNames from "classnames";
+import { Loading } from "../Loading/Loading";
 
 type CollectionProps = {
   collection: string;
@@ -31,7 +32,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
 
   return (
     <div style={{ minHeight: "1500px" }}>
-      {chartIsLoading && <div>loading...</div>}
+      {chartIsLoading && <Loading />}
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
       {chartData && data && (
         <div className="collection-charts">

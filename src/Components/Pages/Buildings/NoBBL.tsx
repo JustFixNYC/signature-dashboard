@@ -7,6 +7,7 @@ import { AddressSearch } from "../../AlgoliaSearch/AlgoliaSearch";
 import "./style.scss";
 import { formatNumber } from "../../../util/helpers";
 import { Link } from "@justfixnyc/component-library";
+import { Loading } from "../../Loading/Loading";
 
 export const NoBBL: React.FC = () => {
   const { data, error, isLoading } = useGetCollectionInfo("all");
@@ -31,7 +32,7 @@ export const NoBBL: React.FC = () => {
         <Link href={"/map"}>View all buildings on map</Link>
       </div>
 
-      {isLoading && <div>loading...</div>}
+      {isLoading && <Loading />}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
 
       <h3>Building Table</h3>
