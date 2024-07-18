@@ -81,17 +81,16 @@ export const Home: React.FC = () => {
             </div>
           </div>
         </div>
-
-        <p className="org-credit">
-          This project is a collaboration between{" "}
-          <Link href="https://www.justfix.org/" target="_blank">
-            JustFix
-          </Link>{" "}
-          and{" "}
-          <Link href="https://unhp.org/" target="_blank">
-            UNHP
-          </Link>{" "}
-        </p>
+          <p className="org-credit">
+            This project is a collaboration between{" "}
+            <Link href="https://www.justfix.org/" target="_blank">
+              JustFix
+            </Link>{" "}
+            and{" "}
+            <Link href="https://unhp.org/" target="_blank">
+              UNHP
+            </Link>{" "}
+          </p>
       </div>
     </>
   );

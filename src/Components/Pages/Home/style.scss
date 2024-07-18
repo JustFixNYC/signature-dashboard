@@ -2,19 +2,24 @@
 @import "../../../util.scss";
 
 .home-content {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  padding: 0 2rem;
 
   p {
     margin: 0;
   }
 
   .org-credit {
-    margin-left: 2rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    @include for-phone-only {
+      padding-bottom: 1rem;
+    }
   }
 
   .layout-two-col {
-    padding: 1rem 2rem;
-    justify-content: space-between;
     @include for-phone-only {
       flex-direction: column;
     }
