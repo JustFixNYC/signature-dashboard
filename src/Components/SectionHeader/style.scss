@@ -1,6 +1,8 @@
 @import "../../App.scss";
 
 .section-header {
+  margin-top: 4rem;
+
   &::before {
     content: "";
     // Hack so that on hash link scrolling, the header appears below the fixed page header
