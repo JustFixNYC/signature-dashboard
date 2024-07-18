@@ -1,4 +1,11 @@
-import { Routes, Route, Outlet, NavLink, Link } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Outlet,
+  NavLink,
+  Link,
+  useSearchParams,
+} from "react-router-dom";
 import { Buildings } from "./Components/Pages/Buildings/Buildings";
 import { useRollbar } from "@rollbar/react";
 import { SWRConfig } from "swr";
@@ -6,13 +13,14 @@ import { NetworkError } from "./api/error-reporting";
 import { APIDocs } from "./Components/Pages/APIDocs/APIDocs";
 import { Login } from "./Components/Pages/Login/Login";
 import { PrivateRoutes } from "./auth";
-import "./App.scss";
 import { Landlords } from "./Components/Pages/Landlords/Landlords";
 import { Lenders } from "./Components/Pages/Lenders/Lenders";
 import { Home } from "./Components/Pages/Home/Home";
 import { About } from "./Components/Pages/About/About";
 import { Map } from "./Components/Pages/Map/Map";
 import { EntirePortfolio } from "./Components/Pages/EntirePortfolio/EntirePortfolio";
+import "./App.scss";
+import { Icon } from "@justfixnyc/component-library";
 
 function App() {
   const rollbar = useRollbar();
@@ -47,6 +55,8 @@ function App() {
 }
 
 function Layout() {
+  const [searchParams] = useSearchParams();
+  const lender = searchParams.get("lender");
   return (
     <>
       <header id="header">
@@ -63,55 +73,12 @@ function Layout() {
                     isActive ? "nav-link nav-link-active" : "nav-link"
                   }
                 >
+                  <span className="nav-link__icon">
+                    <Icon icon="house" />
+                  </span>
                   Home
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/buildings"
-                  className={({ isActive }) =>
-                    isActive ? "nav-link nav-link-active" : "nav-link"
-                  }
-                >
-                  Buildings
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/landlords"
-                  className={({ isActive }) =>
-                    isActive ? "nav-link nav-link-active" : "nav-link"
-                  }
-                >
-                  Landlords
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/lenders"
-                  className={({ isActive }) =>
-                    isActive ? "nav-link nav-link-active" : "nav-link"
-                  }
-                >
-                  Lenders
-                </NavLink>
-                <ul className="sublinks">
-                  <li>
-                    <NavLink to="/lenders?lender=cpc" className="nav-link">
-                      CPC
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/lenders?lender=santander"
-                      className="nav-link"
-                    >
-                      Santander
-                    </NavLink>
-                  </li>
-                </ul>
-              </li>
-
               <li>
                 <NavLink
                   to="/about"
@@ -119,6 +86,9 @@ function Layout() {
                     isActive ? "nav-link nav-link-active" : "nav-link"
                   }
                 >
+                  <span className="nav-link__icon">
+                    <Icon icon="memoPad" />
+                  </span>
                   About
                 </NavLink>
               </li>
@@ -129,9 +99,83 @@ function Layout() {
                     isActive ? "nav-link nav-link-active" : "nav-link"
                   }
                 >
+                  <span className="nav-link__icon">
+                    <Icon icon="mapLocationDot" />
+                  </span>
                   Map
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/buildings"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link nav-link-active" : "nav-link"
+                  }
+                >
+                  <span className="nav-link__icon">
+                    <Icon icon="building" />
+                  </span>
+                  Buildings
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/landlords"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link nav-link-active" : "nav-link"
+                  }
+                >
+                  <span className="nav-link__icon">
+                    <Icon icon="addressCard" />
+                  </span>
+                  Landlords
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/lenders"
+                  className={({ isActive }) =>
+                    isActive && !lender
+                      ? "nav-link nav-link-active"
+                      : "nav-link"
+                  }
+                >
+                  <span className="nav-link__icon">
+                    <Icon icon="buildingColumns" />
+                  </span>
+                  Lenders{" "}
+                  <span className="nav-link__icon-caret">
+                    <Icon icon="caretDown" />
+                  </span>
+                </NavLink>
+                <ul className="sublinks">
+                  <li>
+                    <NavLink
+                      to="/lenders?lender=cpc"
+                      className={({ isActive }) =>
+                        isActive && lender === "cpc"
+                          ? "nav-link nav-link-active"
+                          : "nav-link"
+                      }
+                    >
+                      <span className="nav-link__icon"></span>CPC
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/lenders?lender=santander"
+                      className={({ isActive }) =>
+                        isActive && lender === "santander"
+                          ? "nav-link nav-link-active"
+                          : "nav-link"
+                      }
+                    >
+                      <span className="nav-link__icon"></span> Santander
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+
               {/* <li>
                 <NavLink to="/building?bbl=3071980006">
                   Building Page for 3071980006

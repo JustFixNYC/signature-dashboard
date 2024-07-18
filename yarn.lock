@@ -613,10 +613,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@justfixnyc/component-library@0.44.0":
-  version "0.44.0"
-  resolved "https://registry.yarnpkg.com/@justfixnyc/component-library/-/component-library-0.44.0.tgz#05932dc1f22c4b7a70d351e48a68ee6a3d8b5c15"
-  integrity sha512-LWgC/6tK/If8f4hv3lsQn6CKnsogAUz3WVJ6SIKhXs/SjASVJoyfVBNvHxpgE5OdD5JzNV73OjH7UDMIfpTzRQ==
+"@justfixnyc/component-library@0.45.0":
+  version "0.45.0"
+  resolved "https://registry.yarnpkg.com/@justfixnyc/component-library/-/component-library-0.45.0.tgz#49a24a16014a80af671530aecb24858d58824182"
+  integrity sha512-uygY68awtzQv/ngXzr6PKfpeeWyNosU1NM29hOBcu5SWPaL9k+yxyHeeYmbki40NQO0jshUvGEX/D8vA8O+udg==
   dependencies:
     "@awesome.me/kit-dd32553919" "^1.0.13"
     "@babel/runtime" "^7.12.5"
