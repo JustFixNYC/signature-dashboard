@@ -9,8 +9,8 @@
   width: 1px;
 }
 
-@mixin for-phone-only {
-  @media (max-width: 599px) {
+@mixin for-small-screen {
+  @media (max-width: 799px) {
     @content;
   }
 }
