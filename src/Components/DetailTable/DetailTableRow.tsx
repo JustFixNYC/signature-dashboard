@@ -35,7 +35,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   const name = indicator ? indicator.name : apiKey;
   const description = indicator?.description;
   const lastUpdated = lastUpdatedData?.find(
-    (x) => x.dataset === indicator?.dataset,
+    (x) => x.dataset === indicator?.dataset
   )?.last_updated;
 
   let displayValue: unknown = value;
@@ -93,15 +93,12 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
           (showDesc ? " detail-table__description_open" : "")
         }
       >
-        {description}
+        <div className="detail-table__description_content">{description}</div>
 
         {lastUpdated && (
-          <>
-            <br />
-            <span className="last-updated">
-              Last updated {formatLastUpdatedDate(lastUpdated)}.
-            </span>
-          </>
+          <span className="last-updated">
+            Last updated {formatLastUpdatedDate(lastUpdated)}
+          </span>
         )}
       </dd>
     </div>
