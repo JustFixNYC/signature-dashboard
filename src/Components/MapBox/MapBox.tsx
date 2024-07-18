@@ -13,7 +13,7 @@ import "./style.scss";
 const STYLE_SIGNATURE_LIGHT =
   "mapbox://styles/justfix/clxummt2k047a01qj3ra1gjf6";
 const STYLE_STABILIZING_NYC =
-  "mapbox://styles/justfix/clxopp04602yz01qmg0w5dg6i";
+  "mapbox://styles/justfix/clyrhqh8802he01qjb8jn66mw";
 
 const COLOR_UNSELECTED_DEFAULT = "#43B19F";
 const COLOR_SELECTED_DEFAULT = "#AF59A0";
