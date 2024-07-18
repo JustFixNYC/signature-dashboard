@@ -81,9 +81,9 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     format: "comma",
   },
   bip_500_pct: {
-    name: "Percent of buildings with BIP score over 500",
+    name: "Percent of buildings with BIP score 500+",
     description:
-      "The number of buildings within a landlord portfolio that are likely to be in physical or financial distress, according to the Building Indicator Project (BIP) Database.",
+      "The percent of buildings within a portfolio that are likely to be in physical or financial distress, according to the Building Indicator Project (BIP) Database.",
     format: "percent",
   },
   hpd_viol_bc_open: {
