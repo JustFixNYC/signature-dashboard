@@ -38,7 +38,9 @@
     }
 
     .col-2 {
-      margin: 0 auto;
+      @include for-big-screen {
+        margin: 0 auto;
+      }
 
       .cards-container {
         display: flex;
@@ -48,11 +50,6 @@
 
       .card {
         width: 18rem;
-        border: 1px solid $GREY_400;
-        border-radius: 4px;
-        padding: 24px;
-        box-sizing: border-box;
-        background-color: #fff;
 
         .card__title {
           font-weight: 600;
@@ -62,6 +59,9 @@
           display: block;
           margin-top: 48px;
           text-wrap: nowrap;
+          &:visited {
+            color: $OFF_BLACK;
+          }
         }
       }
     }

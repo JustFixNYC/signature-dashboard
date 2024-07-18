@@ -14,3 +14,8 @@
     @content;
   }
 }
+@mixin for-big-screen {
+  @media (min-width: 800px) {
+    @content;
+  }
+}

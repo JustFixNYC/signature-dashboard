@@ -150,3 +150,11 @@ h4 {
   font-size: 1.25rem; // 20pt
   font-weight: 500;
 }
+
+.card {
+  border: 1px solid $GREY_400;
+  border-radius: 4px;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
