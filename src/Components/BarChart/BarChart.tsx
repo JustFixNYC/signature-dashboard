@@ -36,6 +36,7 @@ twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
 
 type BuildingBAndCChartProps = {
   datasets: ChartDataset<"bar", { x?: string; y?: number }[]>[];
+  title: React.ReactNode;
   originationDate?: string;
   lastSaleDate?: string;
   yAxisTitle: string;
@@ -69,6 +70,7 @@ const getXTickLabel = (value: number, timeUnit: IndicatorsTimeSpan) => {
 
 export const BarChart: React.FC<BuildingBAndCChartProps> = ({
   datasets,
+  title,
   originationDate,
   lastSaleDate,
   stacked,
@@ -202,7 +204,8 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
   const classes = classNames("chart-container", className);
 
   return (
-    <>
+    <div className="chart__card card">
+      {title}
       <div className="chart__timespan_filter">
         <RadioButton
           name={`b-and-c-timespan-${radioID}`}
@@ -224,6 +227,6 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
       <div className={classes} style={{ position: "relative" }}>
         <Bar options={options} data={{ datasets }} height={300}></Bar>
       </div>
-    </>
+    </div>
   );
 };

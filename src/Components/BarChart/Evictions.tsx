@@ -4,6 +4,7 @@ import { BarChart } from "./BarChart";
 
 type EvictionsChartProps = {
   data: APIChartData[];
+  title: React.ReactNode;
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -11,6 +12,7 @@ type EvictionsChartProps = {
 
 export const EvictionsChart: React.FC<EvictionsChartProps> = ({
   data,
+  title,
   originationDate,
   lastSaleDate,
   className,
@@ -46,6 +48,7 @@ export const EvictionsChart: React.FC<EvictionsChartProps> = ({
   return (
     <BarChart
       datasets={datasets}
+      title={title}
       yAxisTitle="Evictions"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}

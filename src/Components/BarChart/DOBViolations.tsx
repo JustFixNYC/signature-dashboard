@@ -3,6 +3,7 @@ import { BarChart } from "./BarChart";
 
 type DOBViolationsChartProps = {
   data: APIChartData[];
+  title: React.ReactNode;
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -10,6 +11,7 @@ type DOBViolationsChartProps = {
 
 export const DOBViolationsChart: React.FC<DOBViolationsChartProps> = ({
   data,
+  title,
   originationDate,
   lastSaleDate,
   className,
@@ -36,6 +38,7 @@ export const DOBViolationsChart: React.FC<DOBViolationsChartProps> = ({
   return (
     <BarChart
       datasets={datasets}
+      title={title}
       yAxisTitle="Violations Issued"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}

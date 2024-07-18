@@ -3,6 +3,7 @@ import { BarChart } from "./BarChart";
 
 type DOBPermitsChartProps = {
   data: APIChartData[];
+  title: React.ReactNode;
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -10,6 +11,7 @@ type DOBPermitsChartProps = {
 
 export const DOBPermitsChart: React.FC<DOBPermitsChartProps> = ({
   data,
+  title,
   originationDate,
   lastSaleDate,
   className,
@@ -28,6 +30,7 @@ export const DOBPermitsChart: React.FC<DOBPermitsChartProps> = ({
   return (
     <BarChart
       datasets={datasets}
+      title={title}
       yAxisTitle="DOB Job Applications"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}

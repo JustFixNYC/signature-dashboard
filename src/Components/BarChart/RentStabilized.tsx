@@ -4,6 +4,7 @@ import { BarChart } from "./BarChart";
 
 type RentStabilizedUnitsChartProps = {
   data: APIChartData[];
+  title: React.ReactNode;
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -11,7 +12,7 @@ type RentStabilizedUnitsChartProps = {
 
 export const RentStabilizedUnitsChart: React.FC<
   RentStabilizedUnitsChartProps
-> = ({ data, originationDate, lastSaleDate, className }) => {
+> = ({ data, title, originationDate, lastSaleDate, className }) => {
   const yearlyData: yearlyChartData[] = groupData(
     data,
     "rentstab_units",
@@ -31,6 +32,7 @@ export const RentStabilizedUnitsChart: React.FC<
   return (
     <BarChart
       datasets={datasets}
+      title={title}
       yAxisTitle="Rent Stabilized Units"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}

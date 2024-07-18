@@ -1,9 +1,8 @@
 @import "../../App.scss";
 
-.section-header {
-  margin-top: 4rem;
-
-  &::before {
+.section-header,
+.subsection-header {
+  &:not(.chart__title)::before {
     content: "";
     // Hack so that on hash link scrolling, the header appears below the fixed page header
     // https://stackoverflow.com/questions/10732690/offsetting-an-html-anchor-to-adjust-for-fixed-header/11842865#11842865
@@ -11,8 +10,16 @@
     padding-top: $headerH;
     margin-top: -$headerH;
   }
-
+}
+.section-header {
+  margin-top: 4rem;
   &:has(+ .section-subtitle) {
     margin-bottom: 8px;
+  }
+}
+.subsection-header {
+  margin-bottom: 1rem;
+  &.chart__title {
+    margin: 0 0 2rem 0;
   }
 }

@@ -22,7 +22,10 @@ import { DOBPermitsChart } from "../../BarChart/DOBPermits";
 import { HPDERPChargesChart } from "../../BarChart/HPDERPCharges";
 import { RentStabilizedUnitsChart } from "../../BarChart/RentStabilized";
 import { BuildingDetailTable } from "./Tables/BuildingDetailTable";
-import { SectionHeader } from "../../SectionHeader/SectionHeader";
+import {
+  SectionHeader,
+  SubSectionHeader,
+} from "../../SectionHeader/SectionHeader";
 import {
   TableOfContents,
   TOCHeader,
@@ -130,7 +133,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
               />
 
               <SectionHeader id="all-data">All data</SectionHeader>
-              <h4>Building Info</h4>
+              <SubSectionHeader>Building Info</SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
@@ -142,14 +145,16 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                 ]}
               />
 
-              <h4>Building Indicators Project (BIP)</h4>
+              <SubSectionHeader>
+                Building Indicators Project (BIP)
+              </SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
                 indicators={["bip"]}
               />
 
-              <h4>Financials</h4>
+              <SubSectionHeader>Financials</SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
@@ -161,7 +166,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                 ]}
               />
 
-              <h4>HPD Violations</h4>
+              <SubSectionHeader>HPD Violations</SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
@@ -174,7 +179,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                 ]}
               />
 
-              <h4>HPD Complaints</h4>
+              <SubSectionHeader>HPD Complaints</SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
@@ -189,35 +194,39 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                 ]}
               />
 
-              <h4>HPD Emergency Repairs</h4>
+              <SubSectionHeader>HPD Emergency Repairs</SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
                 indicators={["hpd_erp_orders", "hpd_erp_orders_per_unit"]}
               />
 
-              <h4>Vacate Orders</h4>
+              <SubSectionHeader>Vacate Orders</SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
                 indicators={["hpd_active_vacate"]}
               />
 
-              <h4>Department of Health Inspections</h4>
+              <SubSectionHeader>
+                Department of Health Inspections
+              </SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
                 indicators={["last_rodent_date", "last_rodent_result"]}
               />
 
-              <h4>Evictions</h4>
+              <SubSectionHeader>Evictions</SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
                 indicators={["evictions_filed", "evictions_executed"]}
               />
 
-              <h4>HPD Litigation Against Landlords</h4>
+              <SubSectionHeader>
+                HPD Litigation Against Landlords
+              </SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
@@ -230,7 +239,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                 ]}
               />
 
-              <h4>DOB Permits & Violations</h4>
+              <SubSectionHeader>DOB Permits & Violations</SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
@@ -241,14 +250,14 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                 ]}
               />
 
-              <h4>HPD Programs</h4>
+              <SubSectionHeader>HPD Programs</SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
                 indicators={["in_aep", "in_conh", "in_ucp"]}
               />
 
-              <h4>Fines, Fees & Charges</h4>
+              <SubSectionHeader>Fines, Fees & Charges</SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
@@ -259,7 +268,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                 ]}
               />
 
-              <h4>Political Districts</h4>
+              <SubSectionHeader>Political Districts</SubSectionHeader>
               <BuildingDetailTable
                 data={buildingInfo}
                 lastUpdatedData={lastUpdatedData}
@@ -276,54 +285,74 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
               {chartData && buildingInfo && (
                 <>
                   <SectionHeader id="trend-charts">Trend charts</SectionHeader>
-                  <h4>HPD Violations</h4>
                   <HPDViolationsChart
+                    title={
+                      <SubSectionHeader className="chart__title">
+                        HPD Violations
+                      </SubSectionHeader>
+                    }
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
                   />
-                  <h4>HPD Complaints</h4>
                   <HPDComplaintsChart
+                    title={
+                      <SubSectionHeader className="chart__title">
+                        HPD Complaints
+                      </SubSectionHeader>
+                    }
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
                   />
-
-                  <h4>DOB/ECB Violations</h4>
                   <DOBViolationsChart
+                    title={
+                      <SubSectionHeader className="chart__title">
+                        DOB/ECB Violations
+                      </SubSectionHeader>
+                    }
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
                   />
-
-                  <h4>DOB Permits</h4>
                   <DOBPermitsChart
+                    title={
+                      <SubSectionHeader className="chart__title">
+                        DOB Permits
+                      </SubSectionHeader>
+                    }
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
                   />
-
-                  <h4>HPD Emergency Repair Program Charges</h4>
                   <HPDERPChargesChart
+                    title={
+                      <SubSectionHeader className="chart__title">
+                        HPD Emergency Repair Program Charges
+                      </SubSectionHeader>
+                    }
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
                   />
-
-                  <h4>Rent Stabilized Units</h4>
                   <RentStabilizedUnitsChart
+                    title={
+                      <SubSectionHeader className="chart__title">
+                        Rent Stabilized Units
+                      </SubSectionHeader>
+                    }
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
                   />
 
-                  <h4
+                  <SubSectionHeader
                     className={
                       buildingInfo.units_res < 11 ? `has-chart-note` : ""
                     }
                   >
                     Evictions
-                  </h4>
+                  </SubSectionHeader>
                   {buildingInfo.units_res < 11 && (
                     <div className="chart-note">
                       Note: Eviction filings not available because the building

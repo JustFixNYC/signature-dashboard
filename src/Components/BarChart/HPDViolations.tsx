@@ -3,6 +3,7 @@ import { BarChart } from "./BarChart";
 
 type HPDViolationsChartProps = {
   data: APIChartData[];
+  title: React.ReactNode;
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -10,6 +11,7 @@ type HPDViolationsChartProps = {
 
 export const HPDViolationsChart: React.FC<HPDViolationsChartProps> = ({
   data,
+  title,
   originationDate,
   lastSaleDate,
   className,
@@ -51,6 +53,7 @@ export const HPDViolationsChart: React.FC<HPDViolationsChartProps> = ({
   return (
     <BarChart
       datasets={datasets}
+      title={title}
       yAxisTitle="Violations Issued"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}

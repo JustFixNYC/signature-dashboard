@@ -3,6 +3,7 @@ import { BarChart } from "./BarChart";
 
 type HPDComplaintsChartProps = {
   data: APIChartData[];
+  title: React.ReactNode;
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -10,6 +11,7 @@ type HPDComplaintsChartProps = {
 
 export const HPDComplaintsChart: React.FC<HPDComplaintsChartProps> = ({
   data,
+  title,
   originationDate,
   lastSaleDate,
   className,
@@ -36,6 +38,7 @@ export const HPDComplaintsChart: React.FC<HPDComplaintsChartProps> = ({
   return (
     <BarChart
       datasets={datasets}
+      title={title}
       yAxisTitle="Complaints Received"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}

@@ -3,6 +3,7 @@ import { BarChart } from "./BarChart";
 
 type HPDERPChargesChartProps = {
   data: APIChartData[];
+  title: React.ReactNode;
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -10,6 +11,7 @@ type HPDERPChargesChartProps = {
 
 export const HPDERPChargesChart: React.FC<HPDERPChargesChartProps> = ({
   data,
+  title,
   originationDate,
   lastSaleDate,
   className,
@@ -28,6 +30,7 @@ export const HPDERPChargesChart: React.FC<HPDERPChargesChartProps> = ({
   return (
     <BarChart
       datasets={datasets}
+      title={title}
       yAxisTitle="ERP Charges"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}
