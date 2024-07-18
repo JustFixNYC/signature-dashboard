@@ -1,5 +1,5 @@
 import { Icon } from "@justfixnyc/component-library";
-import { useState } from "react";
+import { HTMLAttributes, useState } from "react";
 import {
   apiKeys,
   formatDate,
@@ -13,16 +13,17 @@ import {
 import { INDICATOR_STRINGS } from "../../util/indicators";
 import { DatasetLastUpdatedData } from "../../types/APIDataTypes";
 
-type DetailTableRowProps = {
+interface DetailTableRowProps extends HTMLAttributes<HTMLDivElement> {
   apiKey: apiKeys;
   value: string | number | boolean;
   lastUpdatedData?: DatasetLastUpdatedData[];
-};
+}
 
 export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   apiKey,
   value,
   lastUpdatedData,
+  ...props
 }) => {
   const [showDesc, setShowDesc] = useState(false);
 
@@ -69,7 +70,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   }
 
   return (
-    <div className="detail-table_row">
+    <div className="detail-table_row" {...props}>
       <div
         className={
           "detail-table_row_name-value-wrapper" +
