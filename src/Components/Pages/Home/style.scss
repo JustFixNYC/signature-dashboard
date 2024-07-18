@@ -1,48 +1,81 @@
 @import "../../../colors.scss";
 @import "../../../util.scss";
 
-.homepage-section-header {
-  font-size: 1.2rem; // 19.2px (same as body)
-  line-height: 120%;
-  margin: 48px 0 1rem 0;
-}
-
-.home-content .jfcl-input-header__label {
-  @include visually-hidden;
-}
-
-.homepage-copy {
-  margin: 0 0 1rem;
-}
-
-input[name="password"] {
-  font-size: 1rem;
-}
-
-.algolia-search {
-  width: 50%;
-}
-
-.cards-container {
+.home-content {
   display: flex;
-  margin-top: 48px;
-}
+  flex-direction: column;
+  height: 100%;
 
-.card {
-  width: 18rem;
-  border: 1px solid $GREY_400;
-  border-radius: 4px;
-  padding: 24px;
-  box-sizing: border-box;
-  margin-right: 57px;
-
-  .card__title {
-    font-weight: 600;
+  p {
+    margin: 0;
   }
 
-  .card__link {
-    display: block;
-    margin-top: 48px;
-    text-wrap: nowrap;
+  .org-credit {
+    margin-top: auto;
+    padding-top: 1rem;
+    @include for-small-screen {
+      padding-bottom: 1rem;
+    }
+  }
+
+  .layout-two-col {
+    @include for-small-screen {
+      flex-direction: column;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .col-1 {
+      display: flex;
+      flex-direction: column;
+      max-width: 640px;
+      margin-right: auto;
+
+      .homepage-section-header {
+        font-size: 1.2rem; // 19.2px (same as body)
+        line-height: 120%;
+        margin: 3rem 0 1rem 0;
+      }
+      .jfcl-input-header__label {
+        @include visually-hidden;
+      }
+      .algolia-search {
+        width: 100%;
+        margin-bottom: auto;
+      }
+    }
+
+    .col-2 {
+      margin: 0 auto;
+
+      .cards-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .card {
+        width: 18rem;
+        border: 1px solid $GREY_400;
+        border-radius: 4px;
+        padding: 24px;
+        box-sizing: border-box;
+        background-color: #fff;
+
+        .card__title {
+          font-weight: 600;
+        }
+
+        .card__link {
+          display: block;
+          margin-top: 48px;
+          text-wrap: nowrap;
+        }
+      }
+    }
   }
 }
