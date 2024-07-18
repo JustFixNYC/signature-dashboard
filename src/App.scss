@@ -123,3 +123,35 @@ body {
     }
   }
 }
+
+a {
+  color: $OFF_BLACK;
+  font-weight: 500;
+  &:visited {
+    color: #410476;
+  }
+  &:hover {
+    color: #676565;
+  }
+}
+
+h2,
+.page-title {
+  font-size: 2.25rem; // 36pt
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 1.75rem; // 28pt
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.5rem; // 24pt
+  font-weight: 500;
+}
+
+h5 {
+  font-size: 1.25rem; // 20pt
+  font-weight: 500;
+}

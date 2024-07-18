@@ -12,7 +12,7 @@ export const ExternalLinks: React.FC<RelatedLinksProps> = ({
   const googleMapURL =
     "https://www.google.com/maps/place/" +
     encodeURIComponent(
-      `${buildingInfo.address}, ${buildingInfo.borough}, NY ${buildingInfo.zip}`,
+      `${buildingInfo.address}, ${buildingInfo.borough}, NY ${buildingInfo.zip}`
     );
   return (
     <>
