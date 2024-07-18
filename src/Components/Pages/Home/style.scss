@@ -7,25 +7,35 @@
   margin: 48px 0 1rem 0;
 }
 
-.home-content .jfcl-input-header__label {
-  @include visually-hidden;
+.layout-two-col.home-content {
+  padding: 1rem 5rem 2rem 2rem;
+  justify-content: space-between;
+  height: 100%;
+
+  .col-1 {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin-right: auto;
+    .algolia-search {
+      width: 100%;
+      margin-bottom: auto;
+    }
+  }
+
+  .jfcl-input-header__label {
+    @include visually-hidden;
+  }
 }
 
 .homepage-copy {
   margin: 0 0 1rem;
 }
 
-input[name="password"] {
-  font-size: 1rem;
-}
-
-.algolia-search {
-  width: 50%;
-}
-
 .cards-container {
   display: flex;
-  margin-top: 48px;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .card {
@@ -34,7 +44,7 @@ input[name="password"] {
   border-radius: 4px;
   padding: 24px;
   box-sizing: border-box;
-  margin-right: 57px;
+  background-color: #FFF;
 
   .card__title {
     font-weight: 600;

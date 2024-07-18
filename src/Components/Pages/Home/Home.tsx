@@ -6,6 +6,7 @@ import JFCLLinkInternal from "../../JFCLLinkInternal";
 import { useGetPortfolios } from "../../../api/hooks";
 import { formatNumber } from "../../../util/helpers";
 import { AddressSearch } from "../../AlgoliaSearch/AlgoliaSearch";
+import { Link } from "@justfixnyc/component-library";
 
 export const Home: React.FC = () => {
   const { data } = useGetPortfolios();
@@ -18,15 +19,18 @@ export const Home: React.FC = () => {
 
   return (
     <>
-      <PageTitle>Signature Portfolio Dashboard</PageTitle>
-      <div className="home-content" style={{ width: "568px" }}>
-        <p>
-          This project is a collaboration between JustFix and UNHP to track
-          available public data on the rent-regulated portion of the former
-          Signature Bank multifamily loan portfolio.
-        </p>
-
-        <div style={{ width: "fit-content" }}>
+      <div className="layout-two-col home-content">
+        <div className="col-1">
+          <PageTitle>
+            Find data on the rent-regulated portion of the former Signature Bank
+            portfolio
+          </PageTitle>
+          <p>
+            View, filter, and download data on every building that was financed
+            by Signature at the time of the crash. Track key indicators of
+            physical and financial distress. See aggregate stats by landlord or
+            lender.
+          </p>
           <h3 className="homepage-section-header">
             Search for a building by address
           </h3>
@@ -35,7 +39,18 @@ export const Home: React.FC = () => {
             noResultsText="No buildings in the Signature portfolio match your search"
             noSearchText="Enter the address of a building in the Signature portfolio"
           />
-
+          <p>
+            This project is a collaboration between{" "}
+            <Link href="https://www.justfix.org/" target="_blank">
+              JustFix
+            </Link>{" "}
+            and{" "}
+            <Link href="https://unhp.org/" target="_blank">
+              UNHP
+            </Link>{" "}
+          </p>
+        </div>
+        <div className="col-2">
           <div className="cards-container">
             <div className="card">
               <div className="card__title">Signature Portfolio</div>
