@@ -4,20 +4,24 @@
   overflow: hidden;
   border-radius: 4px;
   border: 1px solid $GREY_400;
+  width: fit-content;
+  max-width: 100%;
 
-  &::before {
-    content: "";
-    display: block;
-    pointer-events: none;
-    position: absolute;
-    right: 0;
-    height: 100%;
-    width: 50px;
-    z-index: 2;
-    background: linear-gradient(90deg, rgba(250, 248, 244, 0) 0, #faf8f4);
-    visibility: visible;
-    opacity: 1;
-    transition: opacity .5s linear;
+  &:not(:has(.landlords-table)) {
+    &::before {
+      content: "";
+      display: block;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      height: 100%;
+      width: 50px;
+      z-index: 2;
+      background: linear-gradient(90deg, rgba(250, 248, 244, 0) 0, #faf8f4);
+      visibility: visible;
+      opacity: 1;
+      transition: opacity .5s linear;
+    }
   }
 }
 
@@ -45,26 +49,24 @@ table.collection-building-table {
   border-right: 0;
   font-size: 1rem;
 
-  &:not(.landlords-table) {
-    tr:first-of-type th {
-      border-top: 0;
-    }
+  tr:first-of-type th {
+    border-top: 0;
+  }
 
-    td:first-of-type,
-    th:first-of-type {
-      border-left: 0;
-      border-right: 0;
-    }
+  td:first-of-type,
+  th:first-of-type {
+    border-left: 0;
+    border-right: 0;
+  }
 
-    td:nth-of-type(2),
-    th:nth-of-type(2) {
-      border-left: 0;
-    }
+  td:nth-of-type(2),
+  th:nth-of-type(2) {
+    border-left: 0;
+  }
 
-    td:last-of-type,
-    th:last-of-type {
-      border-right: 0;
-    }
+  td:last-of-type,
+  th:last-of-type {
+    border-right: 0;
   }
 }
 
