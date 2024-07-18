@@ -32,6 +32,17 @@ export const Home: React.FC = () => {
               indicators of physical and financial distress. See aggregate stats
               by landlord or lender.
             </p>
+            <p className="org-credit">
+              This project is a collaboration between{" "}
+              <Link href="https://www.justfix.org/" target="_blank">
+                JustFix
+              </Link>{" "}
+              and{" "}
+              <Link href="https://unhp.org/" target="_blank">
+                UNHP
+              </Link>
+              .
+            </p>
             <h3 className="homepage-section-header">
               Search for a building by address
             </h3>
@@ -81,16 +92,6 @@ export const Home: React.FC = () => {
             </div>
           </div>
         </div>
-          <p className="org-credit">
-            This project is a collaboration between{" "}
-            <Link href="https://www.justfix.org/" target="_blank">
-              JustFix
-            </Link>{" "}
-            and{" "}
-            <Link href="https://unhp.org/" target="_blank">
-              UNHP
-            </Link>{" "}
-          </p>
       </div>
     </>
   );
