@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import Map, { Source, Layer, NavigationControl } from "react-map-gl";
 import type { CircleLayer, LngLatBoundsLike } from "react-map-gl";
 import type { FeatureCollection } from "geojson";
@@ -7,14 +7,16 @@ import mapboxgl from "mapbox-gl";
 import { Link } from "react-router-dom";
 import "mapbox-gl/src/css/mapbox-gl.css";
 import { MapData } from "../../types/APIDataTypes";
-import { Button } from "@justfixnyc/component-library";
+import { Button, RadioButton } from "@justfixnyc/component-library";
 import "./style.scss";
 
 const STYLE_SIGNATURE_LIGHT =
   "mapbox://styles/justfix/clxummt2k047a01qj3ra1gjf6";
+const STYLE_STABILIZING_NYC =
+  "mapbox://styles/justfix/clxopp04602yz01qmg0w5dg6i";
 
-const DEFAULT_COLOR = "#43B19F";
-const SELECTED_COLOR = "#AF59A0";
+const COLOR_UNSELECTED_DEFAULT = "#43B19F";
+const COLOR_SELECTED_DEFAULT = "#AF59A0";
 
 const DEFAULT_BOUNDS: LngLatBoundsLike = [
   [-74.43542435256518, 40.56005960547242],
@@ -29,7 +31,7 @@ const DEFAULT_INITIAL_VIEW_STATE = {
   },
 };
 
-const LAYER_STYLE: CircleLayer = {
+const LAYER_STYLE_DEFAULT: CircleLayer = {
   id: "bbl",
   type: "circle",
   paint: {
@@ -50,10 +52,10 @@ const LAYER_STYLE: CircleLayer = {
     "circle-color": {
       property: "selected",
       type: "categorical",
-      default: DEFAULT_COLOR,
+      default: COLOR_UNSELECTED_DEFAULT,
       stops: [
-        [true, SELECTED_COLOR],
-        [false, DEFAULT_COLOR],
+        [true, COLOR_SELECTED_DEFAULT],
+        [false, COLOR_UNSELECTED_DEFAULT],
       ],
     },
     "circle-opacity": {
@@ -68,10 +70,10 @@ const LAYER_STYLE: CircleLayer = {
     "circle-stroke-color": {
       property: "selected",
       type: "categorical",
-      default: DEFAULT_COLOR,
+      default: COLOR_UNSELECTED_DEFAULT,
       stops: [
-        [true, SELECTED_COLOR],
-        [false, DEFAULT_COLOR],
+        [true, COLOR_SELECTED_DEFAULT],
+        [false, COLOR_UNSELECTED_DEFAULT],
       ],
     },
     "circle-stroke-opacity": {
@@ -86,10 +88,19 @@ const LAYER_STYLE: CircleLayer = {
   },
 };
 
+const LAYER_STYLE_STABILIZING: CircleLayer = {
+  ...LAYER_STYLE_DEFAULT,
+  paint: {
+    ...LAYER_STYLE_DEFAULT.paint,
+    "circle-stroke-color": "#FFF",
+  },
+};
+
 type MapBoxProps = {
   data: MapData[];
   initialSelectedBBL?: string;
   preventScrollZoom?: boolean;
+  showStabilizingToggle?: boolean;
   className?: string;
 };
 
@@ -97,9 +108,13 @@ export const MapBox: React.FC<MapBoxProps> = ({
   data,
   initialSelectedBBL,
   preventScrollZoom = false,
+  showStabilizingToggle = false,
   className,
 }) => {
   const [cursor, setCursor] = useState("");
+  const [mapStyle, setMapStyle] = useState("default");
+  const layerStyle =
+    mapStyle === "stabilizing" ? LAYER_STYLE_STABILIZING : LAYER_STYLE_DEFAULT;
 
   const initialSelected =
     data.find((x) => x.bbl === initialSelectedBBL) || null;
@@ -107,6 +122,8 @@ export const MapBox: React.FC<MapBoxProps> = ({
   const [selectedAddr, setSelectedAddr] = useState<MapData | null>(
     initialSelected
   );
+
+  const radioID = useId();
 
   const selectedInitialViewState = initialSelected && {
     latitude: initialSelected.lat,
@@ -154,13 +171,46 @@ export const MapBox: React.FC<MapBoxProps> = ({
 
   return (
     <>
-      <div className={classNames("map-container", className)}>
+      <div
+        className={classNames(
+          "map-style-radios",
+          !showStabilizingToggle && "map-type-radios-hidden"
+        )}
+      >
+        <RadioButton
+          name={`default-style-${radioID}`}
+          labelText="Default"
+          id={`radio-default-${radioID}`}
+          value="default"
+          checked={mapStyle === "default"}
+          onChange={() => setMapStyle("default")}
+        />
+        <RadioButton
+          name={`stabilzing-style-${radioID}`}
+          labelText="Stabilizing NYC"
+          id={`radio-stabilizing-${radioID}`}
+          value="stabilizing"
+          checked={mapStyle === "stabilizing"}
+          onChange={() => setMapStyle("stabilizing")}
+        />
+      </div>
+      <div
+        className={classNames(
+          "map-container",
+          !showStabilizingToggle && "map-type-radios-hidden",
+          className
+        )}
+      >
         <Map
           mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
           initialViewState={
             selectedInitialViewState || DEFAULT_INITIAL_VIEW_STATE
           }
-          mapStyle={STYLE_SIGNATURE_LIGHT}
+          mapStyle={
+            mapStyle === "stabilizing"
+              ? STYLE_STABILIZING_NYC
+              : STYLE_SIGNATURE_LIGHT
+          }
           cursor={cursor}
           interactiveLayerIds={["bbl"]}
           onClick={onClick}
@@ -172,7 +222,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
         >
           <NavigationControl showCompass={false} visualizePitch={false} />
           <Source id="my-data" type="geojson" data={geojson}>
-            <Layer {...LAYER_STYLE} />
+            <Layer {...layerStyle} />
           </Source>
         </Map>
         {!!selectedAddr && (
