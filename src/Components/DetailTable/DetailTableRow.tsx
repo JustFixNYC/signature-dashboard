@@ -40,14 +40,14 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
     (x) => x.dataset === indicator?.dataset
   )?.last_updated;
 
-  let displayValue: unknown = value;
+  let displayValue: React.ReactNode = value;
 
   if (indicator?.format === "round" && typeof value === "number") {
     displayValue = value.toFixed(2);
   }
 
   if (indicator?.format === "money" && typeof value === "number") {
-    displayValue = formatMoney(value);
+    displayValue = <>{formatMoney(value)}</>;
   }
 
   if (indicator?.format === "percent" && typeof value === "number") {
@@ -55,7 +55,20 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   }
 
   if (indicator?.format === "boolean" && typeof value === "boolean") {
-    displayValue = showYesNo(value) as string;
+    if (value)
+      displayValue = (
+        <Pill color="grey">
+          <Icon icon="check" className="pill__icon_check" />
+          {showYesNo(value)}
+        </Pill>
+      );
+    else
+      displayValue = (
+        <Pill color="grey">
+          <Icon icon="ban" className="pill__icon_ban" />
+          {showYesNo(value)}
+        </Pill>
+      );
   }
 
   if (indicator?.format === "comma" && typeof value === "number") {
@@ -68,6 +81,14 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
 
   if (typeof indicator?.format === "undefined" && typeof value === "number") {
     displayValue = formatNumberNoComma(value);
+  }
+
+  if (apiKey === "bip" && typeof value === "number") {
+    displayValue = (
+      <Pill color={value < 500 ? "grey" : value < 800 ? "yellow" : "orange"}>
+        <>{displayValue}</>
+      </Pill>
+    );
   }
 
   return (
@@ -86,15 +107,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
           )}
         </dt>
         <dd className="detail-table__value">
-          {apiKey === "bip" && typeof value === "number" ? (
-            <Pill
-              color={value < 500 ? "grey" : value < 800 ? "yellow" : "orange"}
-            >
-              <>{displayValue}</>
-            </Pill>
-          ) : (
-            <>{displayValue}</>
-          )}
+          <>{displayValue}</>
         </dd>
       </div>
       <dd

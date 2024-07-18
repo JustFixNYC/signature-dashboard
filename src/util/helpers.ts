@@ -139,9 +139,9 @@ export const round = (value: unknown) => {
 
 export const showYesNo = (value: boolean) => {
   if (value === true) {
-    return "yes";
+    return "Yes";
   } else if (value === false) {
-    return "no";
+    return "No";
   }
 };
 

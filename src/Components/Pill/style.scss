@@ -1,0 +1,35 @@
+@import "../../colors.scss";
+
+.pill {
+  padding: 6px 0;
+  border-radius: 12px;
+
+  width: 4.5rem; // 72px
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 1.12px;
+  box-sizing: border-box;
+
+  &.pill-yellow{
+    background-color: $YELLOW;
+  }
+
+  &.pill-orange{
+    background-color: $ORANGE;
+  }
+
+  &.pill-grey{
+    background-color: $GREY_50;
+  }
+
+  .pill__icon_check {
+    color: $GREEN;
+    margin-right: 10px;
+  }
+
+  .pill__icon_ban {
+    color: $RED;
+    margin-right: 10px;
+  }
+}
