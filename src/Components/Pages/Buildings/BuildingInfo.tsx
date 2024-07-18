@@ -32,6 +32,7 @@ import {
   TOCItem,
   TOCList,
 } from "../../TableOfContents/TableOfContents";
+import classNames from "classnames";
 
 export interface BuildingInfoProps {
   bbl: string;
@@ -345,22 +346,26 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
                   />
-
-                  <SubSectionHeader
-                    className={
-                      buildingInfo.units_res < 11 ? `has-chart-note` : ""
-                    }
-                  >
-                    Evictions
-                  </SubSectionHeader>
-                  {buildingInfo.units_res < 11 && (
-                    <div className="chart-note">
-                      Note: Eviction filings not available because the building
-                      has less than 11 units. Data on evictions executed
-                      (Marshall evictions) is still shown below.
-                    </div>
-                  )}
                   <EvictionsChart
+                    title={
+                      <>
+                        <SubSectionHeader
+                          className={classNames(
+                            "chart__title",
+                            buildingInfo.units_res < 11 ? `has-chart-note` : ""
+                          )}
+                        >
+                          Evictions
+                        </SubSectionHeader>
+                        {buildingInfo.units_res < 11 && (
+                          <div className="chart-note">
+                            Note: Eviction filings not available because the
+                            building has less than 11 units. Data on evictions
+                            executed (Marshall evictions) is still shown below.
+                          </div>
+                        )}
+                      </>
+                    }
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}

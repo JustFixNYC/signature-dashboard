@@ -15,6 +15,7 @@ import {
 import { SectionSubtitle } from "../SectionSubtitle/SectionSubtitle";
 import { MapBox } from "../MapBox/MapBox";
 import { buildingToMapData } from "../../util/helpers";
+import classNames from "classnames";
 
 type CollectionProps = {
   collection: string;
@@ -62,9 +63,23 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
 
           <EvictionsChart
             title={
-              <SubSectionHeader className="chart__title">
-                Evictions
-              </SubSectionHeader>
+              <>
+                <SubSectionHeader
+                  className={classNames(
+                    "chart__title",
+                    data.units_res < 11 ? `has-chart-note` : ""
+                  )}
+                >
+                  Evictions
+                </SubSectionHeader>
+                {data.units_res < 11 && (
+                  <div className="chart-note">
+                    Note: Eviction filings not available because the portfolio
+                    has less than 11 units. Data on evictions executed (Marshall
+                    evictions) is still shown below.
+                  </div>
+                )}
+              </>
             }
             data={chartData}
           />
