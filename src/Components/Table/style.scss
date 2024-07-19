@@ -30,6 +30,15 @@
   width: fit-content;
   max-width: 100%;
   position: relative;
+
+  a {
+    &:visited {
+      color: #410476;
+    }
+    &:hover {
+      color: #676565;
+    }  
+  }
 }
 
 table.collection-building-table,
