@@ -37,6 +37,7 @@ body {
   a {
     text-decoration: none;
     color: $OFF_BLACK;
+    font-weight: 600;
 
     &:visited,
     &:active,
@@ -174,8 +175,7 @@ h4 {
 }
 
 .card {
-  border: 1px solid $GREY_400;
-  border-radius: 4px;
+  border: 1px solid $GREY_600;
   padding: 24px;
   box-sizing: border-box;
   background-color: #fff;
