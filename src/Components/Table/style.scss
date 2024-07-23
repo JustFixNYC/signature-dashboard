@@ -119,6 +119,10 @@ table.collection-building-table tbody tr {
     display: flex;
     margin-left: 5px;
     font-size: 0.7rem; // 11.2px
+
+    .jfcl-button.unsorted {
+      color: $GREY_400;
+    }
   }
 
   .column-header__filter {
