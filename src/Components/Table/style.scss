@@ -19,7 +19,7 @@
       background: linear-gradient(90deg, rgba(250, 248, 244, 0) 0, #faf8f4);
       visibility: visible;
       opacity: 1;
-      transition: opacity .5s linear;
+      transition: opacity 0.5s linear;
     }
   }
 }
@@ -37,7 +37,7 @@
     }
     &:hover {
       color: #676565;
-    }  
+    }
   }
 }
 
@@ -78,7 +78,6 @@ table.collection-building-table {
       border-left: 0;
     }
   }
-
 }
 
 table.collection-building-table tbody tr {
@@ -166,12 +165,14 @@ table.collection-building-table tbody tr {
   }
 }
 
-.clear-all {
-  margin-bottom: 1.5rem;
-}
-
-.collection-building-table__record-count {
+.collection-building-table__record-count-container {
   margin-bottom: 16px;
+  .clear-all {
+    text-decoration: underline;
+    background: none;
+    border: none;
+    margin-left: 0.625rem;
+  }
 }
 
 .table-buttons-container {

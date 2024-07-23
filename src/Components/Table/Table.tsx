@@ -205,20 +205,20 @@ export const Table = <T extends object>(
           columnFilters={columnFilters}
         />
       </div>
-      {!!columnFilters.length && (
-        <Button
-          labelText="Clear all filters"
-          onClick={clearFilters}
-          size="small"
-          className="clear-all"
-        />
-      )}
-      <div className="collection-building-table__record-count">
+      <div className="collection-building-table__record-count-container">
         Showing{" "}
         {filteredRecordCount === unFilteredRecordCount
           ? "all "
           : `${formatNumber(filteredRecordCount)} of `}
         <>{formatNumber(table.getPreFilteredRowModel().rows.length)}</> records
+        {!!columnFilters.length && (
+          <button
+            onClick={clearFilters}
+            className="clear-all jfcl-link"
+          >
+            Clear all filters
+          </button>
+        )}
       </div>
       <div className="table-container-wrapper">
         <div className="table-container" ref={containerRef}>
@@ -263,7 +263,11 @@ export const Table = <T extends object>(
                                     labelIcon={sortIcon}
                                     size="small"
                                     variant="tertiary"
-                                    className={classNames("column-header__sort-icon", (sortIcon === "arrowUpArrowDown") && "unsorted")}
+                                    className={classNames(
+                                      "column-header__sort-icon",
+                                      sortIcon === "arrowUpArrowDown" &&
+                                        "unsorted"
+                                    )}
                                     onClick={header.column.getToggleSortingHandler()}
                                   />
                                 </span>
