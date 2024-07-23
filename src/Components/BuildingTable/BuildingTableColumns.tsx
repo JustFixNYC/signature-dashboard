@@ -65,9 +65,15 @@ export const columns = [
         header: getColumnHeader("landlord"),
         cell: (info) => (
           <div className="cell__landlord">
-            <Link to={`/landlords?landlord=${info.row.original.landlord_slug}`}>
-              {info.getValue()}
-            </Link>
+            {info.row.original.landlord_slug ? (
+              <Link
+                to={`/landlords?landlord=${info.row.original.landlord_slug}`}
+              >
+                {info.getValue()}
+              </Link>
+            ) : (
+              <span className="not-available">Not available</span>
+            )}
           </div>
         ),
         sortUndefined: "last",
