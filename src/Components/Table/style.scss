@@ -87,6 +87,10 @@ table.collection-building-table tbody tr {
   td {
     font-weight: 400;
     padding: 2px 8px;
+    .pill {
+      margin: 3px auto;
+      padding: 4px 0;
+    }
   }
 }
 

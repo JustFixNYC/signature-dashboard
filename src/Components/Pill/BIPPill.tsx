@@ -7,7 +7,9 @@ type BIPPillProps = {
 
 export const BIPPill: React.FC<BIPPillProps> = ({ value }) => {
   const color = value < 500 ? "grey" : value < 800 ? "yellow" : "orange";
-  return (
+  return value < 500 ? (
+    <>{formatNumber(value)}</>
+  ) : (
     <Pill color={color}>
       <>{formatNumber(value)}</>
     </Pill>
