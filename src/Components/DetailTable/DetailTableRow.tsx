@@ -103,7 +103,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
 
         {lastUpdated && (
           <span className="last-updated">
-            Last updated {formatLastUpdatedDate(lastUpdated)}
+            Data last updated {formatLastUpdatedDate(lastUpdated)}
           </span>
         )}
       </dd>
