@@ -33,7 +33,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     format: "comma",
   },
   units_nonres: {
-    name: "Non-Residential Units",
+    name: "Has Non-Residential Units",
     description:
       "Presence of any non-residential units. May include one or more types of units (offices, retail stores, etc.)",
     format: "boolean",
@@ -368,7 +368,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     dataset: "marshal_evictions",
   },
   in_aep: {
-    name: "Alternative Enforcement Program",
+    name: "In Alternative Enforcement Program",
     description: (
       <>
         The Alternative Enforcement Program (AEP) is an HPD program for
@@ -390,8 +390,8 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     dataset: "hpd_aep",
   },
   in_conh: {
-    name: "Certificate of No Harassment (CONH) pilot program",
-    short_name: "Certificate of No Harassment pilot program",
+    name: "In Certificate of No Harassment (CONH) pilot program",
+    short_name: "In Certificate of No Harassment pilot program",
     description: (
       <>
         A local law that applies to some residential buildings requires the
@@ -413,7 +413,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     dataset: "hpd_conh",
   },
   in_ucp: {
-    name: "Underlying Conditions Program",
+    name: "In Underlying Conditions Program",
     description: (
       <>
         The Underlying Conditions Program allows HPD to issue an administrative

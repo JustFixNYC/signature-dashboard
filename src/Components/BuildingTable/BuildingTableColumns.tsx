@@ -336,6 +336,7 @@ export const columns = [
         meta: {
           filterVariant: "boolean",
         },
+        size: 200,
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.in_conh), {
         id: "in_conh",
@@ -357,6 +358,7 @@ export const columns = [
         meta: {
           filterVariant: "boolean",
         },
+        size: 200,
       }),
     ],
   }),
