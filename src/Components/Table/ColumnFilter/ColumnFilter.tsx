@@ -64,8 +64,8 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
         labelText={clearnButtonLabel}
         variant="secondary"
         size="small"
-        iconOnRight={true}
-        labelIcon="chevronDown"
+        iconOnRight={false}
+        labelIcon="eyeSlash"
       />
       <div
         className={`popover-menu ${showMenu ? "popover-menu--show" : ""}`}

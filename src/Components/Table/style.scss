@@ -2,8 +2,7 @@
 
 .table-container-wrapper {
   overflow: hidden;
-  border-radius: 4px;
-  border: 1px solid $GREY_400;
+  border: 1px solid $GREY_600;
   width: fit-content;
   max-width: 100%;
 
@@ -31,6 +30,15 @@
   width: fit-content;
   max-width: 100%;
   position: relative;
+
+  a {
+    &:visited {
+      color: #410476;
+    }
+    &:hover {
+      color: #676565;
+    }  
+  }
 }
 
 table.collection-building-table,
@@ -111,6 +119,10 @@ table.collection-building-table tbody tr {
     display: flex;
     margin-left: 5px;
     font-size: 0.7rem; // 11.2px
+
+    .jfcl-button.unsorted {
+      color: $GREY_400;
+    }
   }
 
   .column-header__filter {

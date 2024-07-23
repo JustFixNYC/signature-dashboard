@@ -263,7 +263,7 @@ export const Table = <T extends object>(
                                     labelIcon={sortIcon}
                                     size="small"
                                     variant="tertiary"
-                                    className="column-header__sort-icon"
+                                    className={classNames("column-header__sort-icon", (sortIcon === "arrowUpArrowDown") && "unsorted")}
                                     onClick={header.column.getToggleSortingHandler()}
                                   />
                                 </span>

@@ -2,11 +2,33 @@
 import React from "react";
 import "./style.scss";
 import { PageTitle } from "../../PageTitle/PageTitle";
+import JFCLLinkExternal from "../../JFCLLinkExternal";
 
 export const About: React.FC = () => {
   return (
     <>
-      <PageTitle>About the dashboard</PageTitle>
+      <PageTitle>About</PageTitle>
+
+      <h3>Support</h3>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <JFCLLinkExternal
+          href={"mailto:support@justfix.org"}
+          className="related-link"
+        >
+          Contact us
+        </JFCLLinkExternal>
+        <p style={{ marginTop: "6px" }}>
+          support@justfix.org
+        </p>
+        <JFCLLinkExternal
+          href={"https://form.typeform.com/to/xWz7AK8h"}
+          className="related-link"
+        >
+          Feedback form
+        </JFCLLinkExternal>
+      </div>
+      
+      <h3>About the dashboard</h3>
       <div style={{ width: "600px" }}>
         <p>
           This project is a collaboration between JustFix and UNHP to track
@@ -26,7 +48,7 @@ export const About: React.FC = () => {
           serve as a shared foundation to measure the progress of this program.
         </p>
       </div>
-      <h2>Signature Bank collapse and the FDIC</h2>
+      <h3>Signature Bank collapse and the FDIC</h3>
       <div style={{ width: "600px" }}>
         <p>
           Before its collapse in March 2023, Signature Bank was one of the most
