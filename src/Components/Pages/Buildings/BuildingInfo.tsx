@@ -347,6 +347,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                         Rent Stabilized Units
                       </SubSectionHeader>
                     }
+                    dataUnitName="building"
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
