@@ -605,3 +605,5 @@ export const columns = [
     ],
   }),
 ];
+
+export const LAST_COLUMN_ID = "cong_dist";

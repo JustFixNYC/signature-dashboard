@@ -14,12 +14,19 @@
       position: absolute;
       right: 0;
       height: 100%;
-      width: 50px;
+      width: 100px;
       z-index: 2;
       background: linear-gradient(90deg, rgba(250, 248, 244, 0) 0, #faf8f4);
       visibility: visible;
       opacity: 1;
       transition: opacity 0.5s linear;
+    }
+    &.hide-scroll-fade::before {
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        visibility 0s 0.3s,
+        opacity 0.3s linear;
     }
   }
 }
