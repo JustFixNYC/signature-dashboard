@@ -32,7 +32,6 @@ import {
   TOCItem,
   TOCList,
 } from "../../TableOfContents/TableOfContents";
-import classNames from "classnames";
 import { Loading } from "../../Loading/Loading";
 
 export interface BuildingInfoProps {
@@ -293,6 +292,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                         HPD Violations
                       </SubSectionHeader>
                     }
+                    dataUnitName="building"
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
@@ -303,6 +303,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                         HPD Complaints
                       </SubSectionHeader>
                     }
+                    dataUnitName="building"
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
@@ -313,6 +314,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                         DOB/ECB Violations
                       </SubSectionHeader>
                     }
+                    dataUnitName="building"
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
@@ -323,6 +325,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                         DOB Permits
                       </SubSectionHeader>
                     }
+                    dataUnitName="building"
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
@@ -333,6 +336,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                         HPD Emergency Repair Program Charges
                       </SubSectionHeader>
                     }
+                    dataUnitName="building"
                     data={chartData}
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
@@ -349,25 +353,13 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                   />
                   <EvictionsChart
                     title={
-                      <>
-                        <SubSectionHeader
-                          className={classNames(
-                            "chart__title",
-                            buildingInfo.units_res < 11 ? `has-chart-note` : ""
-                          )}
-                        >
-                          Evictions
-                        </SubSectionHeader>
-                        {buildingInfo.units_res < 11 && (
-                          <div className="chart-note">
-                            Note: Eviction filings not available because the
-                            building has less than 11 units. Data on evictions
-                            executed (Marshall evictions) is still shown below.
-                          </div>
-                        )}
-                      </>
+                      <SubSectionHeader className="chart__title">
+                        Evictions
+                      </SubSectionHeader>
                     }
                     data={chartData}
+                    units_res={buildingInfo.units_res}
+                    dataUnitName="building"
                     originationDate={buildingInfo.origination_date}
                     lastSaleDate={buildingInfo.last_sale_date}
                   />

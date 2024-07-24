@@ -53,6 +53,7 @@
 
 .chart__timespan_filter {
   display: flex;
+  margin-top: 1rem;
 
   .jfcl-radio-button:first-child {
     margin-right: 10px;
@@ -77,12 +78,13 @@
   margin-bottom: 1rem;
 }
 
-.subsection-header.chart__title.has-chart-note {
-  margin-bottom: 1rem;
+.subsection-header.chart__title {
+  margin-bottom: 0;
 }
 
 .chart-note {
   font-size: 1rem;
+  margin-top: 1rem;
   margin-bottom: 1.33rem;
 }
 

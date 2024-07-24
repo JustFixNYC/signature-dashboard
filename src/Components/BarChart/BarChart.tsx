@@ -28,15 +28,17 @@ ChartJS.register(
   Tooltip,
   Legend,
   TimeScale,
-  annotationPlugin,
+  annotationPlugin
 );
 
 const twoYearsAgo = new Date();
 twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
 
-type BuildingBAndCChartProps = {
-  datasets: ChartDataset<"bar", { x?: string; y?: number }[]>[];
+export type BarChartDataset = ChartDataset<"bar", { x?: string; y?: number }[]>;
+export type BarChartProps = {
+  datasets: BarChartDataset[];
   title: React.ReactNode;
+  note: React.ReactNode;
   originationDate?: string;
   lastSaleDate?: string;
   yAxisTitle: string;
@@ -68,9 +70,10 @@ const getXTickLabel = (value: number, timeUnit: IndicatorsTimeSpan) => {
   }
 };
 
-export const BarChart: React.FC<BuildingBAndCChartProps> = ({
+export const BarChart: React.FC<BarChartProps> = ({
   datasets,
   title,
+  note,
   originationDate,
   lastSaleDate,
   stacked,
@@ -79,7 +82,7 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
   className,
 }) => {
   const [timespan, setTimespan] = useState<"two-years" | "all-time">(
-    timeUnit !== "year" ? "two-years" : "all-time",
+    timeUnit !== "year" ? "two-years" : "all-time"
   );
   const radioID = useId();
 
@@ -206,6 +209,7 @@ export const BarChart: React.FC<BuildingBAndCChartProps> = ({
   return (
     <div className="chart__card card">
       {title}
+      {note}
       <div className="chart__timespan_filter">
         <RadioButton
           name={`b-and-c-timespan-${radioID}`}

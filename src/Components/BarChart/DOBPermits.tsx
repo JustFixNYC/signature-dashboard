@@ -4,6 +4,7 @@ import { BarChart } from "./BarChart";
 type DOBPermitsChartProps = {
   data: APIChartData[];
   title: React.ReactNode;
+  dataUnitName: "building" | "portfolio";
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -12,6 +13,7 @@ type DOBPermitsChartProps = {
 export const DOBPermitsChart: React.FC<DOBPermitsChartProps> = ({
   data,
   title,
+  dataUnitName,
   originationDate,
   lastSaleDate,
   className,
@@ -27,10 +29,19 @@ export const DOBPermitsChart: React.FC<DOBPermitsChartProps> = ({
     },
   ];
 
+  const dataSum = data.reduce((acc, row) => acc + row.dobpermits_jobs, 0) || 0;
+
+  const dataNote = dataSum === 0 && (
+    <p className="chart-note">
+      Note: There are no DOB job applications in this {dataUnitName}.
+    </p>
+  );
+
   return (
     <BarChart
       datasets={datasets}
       title={title}
+      note={dataNote}
       yAxisTitle="DOB Job Applications"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}

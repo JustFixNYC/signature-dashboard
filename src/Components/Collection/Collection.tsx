@@ -15,7 +15,6 @@ import {
 import { SectionSubtitle } from "../SectionSubtitle/SectionSubtitle";
 import { MapBox } from "../MapBox/MapBox";
 import { buildingToMapData } from "../../util/helpers";
-import classNames from "classnames";
 import { Loading } from "../Loading/Loading";
 
 type CollectionProps = {
@@ -44,6 +43,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
               </SubSectionHeader>
             }
             data={chartData}
+            dataUnitName="portfolio"
           />
           <HPDComplaintsChart
             title={
@@ -52,6 +52,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
               </SubSectionHeader>
             }
             data={chartData}
+            dataUnitName="portfolio"
           />
           <DOBViolationsChart
             title={
@@ -60,29 +61,18 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
               </SubSectionHeader>
             }
             data={chartData}
+            dataUnitName="portfolio"
           />
 
           <EvictionsChart
             title={
-              <>
-                <SubSectionHeader
-                  className={classNames(
-                    "chart__title",
-                    data.units_res < 11 ? `has-chart-note` : ""
-                  )}
-                >
-                  Evictions
-                </SubSectionHeader>
-                {data.units_res < 11 && (
-                  <div className="chart-note">
-                    Note: Eviction filings not available because the portfolio
-                    has less than 11 units. Data on evictions executed (Marshall
-                    evictions) is still shown below.
-                  </div>
-                )}
-              </>
+              <SubSectionHeader className="chart__title">
+                Evictions
+              </SubSectionHeader>
             }
             data={chartData}
+            units_res={data.units_res}
+            dataUnitName="portfolio"
           />
         </div>
       )}
