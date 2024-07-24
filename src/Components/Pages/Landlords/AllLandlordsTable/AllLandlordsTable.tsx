@@ -70,7 +70,7 @@ export const columns = [
       meta: {
         filterVariant: "range",
       },
-    },
+    }
   ),
   columnHelper.accessor((row) => getColumnAccessor(row.debt_per_unit), {
     id: "debt_per_unit",
@@ -93,7 +93,7 @@ export const AllLandlordsTable: React.FC = () => {
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {data && (
         <>
-          <p>
+          <p className="landing-page-table-context">
             {data.length} landlords with rent-regulated properties financed by
             Signature Bank. Each one will have their portfolios entirely in
             either the CPC or Santander joint ventures.

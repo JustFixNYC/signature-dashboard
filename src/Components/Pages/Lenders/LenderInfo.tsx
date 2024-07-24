@@ -1,5 +1,5 @@
-// import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
+import { Link } from "@justfixnyc/component-library";
 import "./style.scss";
 import { Collection } from "../../Collection/Collection";
 import { BreadCrumbs } from "../../BreadCrumbs/BreadCrumbs";
@@ -18,6 +18,7 @@ import {
   TOCItem,
 } from "../../TableOfContents/TableOfContents";
 import { Loading } from "../../Loading/Loading";
+import { formatNumber } from "../../../util/helpers";
 
 interface LenderInfoProps {
   lender: string;
@@ -53,7 +54,15 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
               />
             </div>
           </div>
-          <PageTitle>{data.collection_name}</PageTitle>
+          <PageTitle className="lender-page__page-title">
+            {data.collection_name}
+          </PageTitle>
+          <p className="lender-context">
+            {data.collection_name} manages the loans for{" "}
+            {formatNumber(data.buildings) as string} rent regulated buildings in
+            the Signature Portfolio.{" "}
+            <Link href="/lenders">About the lender program</Link>
+          </p>
 
           <div className="layout-two-col">
             <div>

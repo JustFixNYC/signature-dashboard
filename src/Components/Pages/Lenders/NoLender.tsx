@@ -1,24 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
-import JFCLLinkInternal from "../../JFCLLinkInternal";
 import { PageTitle } from "../../PageTitle/PageTitle";
+import { PortfolioCards } from "../../PortfolioCards/PortfolioCards";
+import { SectionHeader } from "../../SectionHeader/SectionHeader";
 
 export const NoLender: React.FC = () => {
   return (
     <>
       <PageTitle>Lenders</PageTitle>
-      <p>
-        <JFCLLinkInternal href="lenders?lender=cpc">
-          CPC Portfolio
-        </JFCLLinkInternal>
-      </p>
-      <p>
-        <JFCLLinkInternal href="lenders?lender=santander">
-          Santander Portfolio
-        </JFCLLinkInternal>
-      </p>
-      <h3>About lender portfolios</h3>
+      <PortfolioCards
+        portfolios={["cpc", "santander"]}
+      />
+      <SectionHeader className="lenders-page__section-header">About lender portfolios</SectionHeader>
       <div style={{ width: "600px" }}>
         <p>
           Rent-regulated buildings in the former Signature Bank multifamily loan

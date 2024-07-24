@@ -8,6 +8,7 @@ import "./style.scss";
 import { formatNumber } from "../../../util/helpers";
 import { Link } from "@justfixnyc/component-library";
 import { Loading } from "../../Loading/Loading";
+import { SectionHeader } from "../../SectionHeader/SectionHeader";
 
 export const NoBBL: React.FC = () => {
   const { data, error, isLoading } = useGetCollectionInfo("all");
@@ -35,10 +36,12 @@ export const NoBBL: React.FC = () => {
       {isLoading && <Loading />}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
 
-      <h3>Building Table</h3>
+      <SectionHeader className="landing-page-table-header">
+        Building Table
+      </SectionHeader>
       {data && (
         <>
-          <p>
+          <p className="landing-page-table-context">
             There are <>{formatNumber(data.bldg_data.length)}</> buildings in
             the Signature Portfolio Dashboard.
           </p>

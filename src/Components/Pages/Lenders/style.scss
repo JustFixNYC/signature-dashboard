@@ -1,0 +1,13 @@
+h2.lender-page__page-title {
+    margin-bottom: 0.5rem;
+}
+h3.section-header.lenders-page__section-header {
+  &::before {
+    display: none;
+  }
+}
+
+.lender-context {
+    width: 600px;
+    margin: 0 0 3rem 0;
+}

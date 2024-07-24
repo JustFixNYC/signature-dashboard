@@ -5,6 +5,7 @@ import { LandlordSearch } from "../../AlgoliaSearch/AlgoliaSearch";
 import { AllLandlordsTable } from "./AllLandlordsTable/AllLandlordsTable";
 import { Link } from "@justfixnyc/component-library";
 import "./style.scss";
+import { SectionHeader } from "../../SectionHeader/SectionHeader";
 
 export const NoLandlord: React.FC = () => {
   return (
@@ -20,7 +21,9 @@ export const NoLandlord: React.FC = () => {
         <Link href={"/buildings"}>Search by building address</Link>
       </div>
 
-      <h3>Landlord Table</h3>
+      <SectionHeader className="landing-page-table-header">
+        Landlord Table
+      </SectionHeader>
       <AllLandlordsTable />
     </>
   );

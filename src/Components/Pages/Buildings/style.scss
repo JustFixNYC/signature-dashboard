@@ -32,7 +32,7 @@
 .find-links {
   display: flex;
   flex-direction: column;
-  margin-bottom: 113px;
+  margin-bottom: 3rem;
   p,
   a {
     font-size: 1.2rem; // 19.2px (same as body)
@@ -44,6 +44,17 @@
   a {
     width: fit-content;
   }
+}
+
+h3.section-header.landing-page-table-header {
+  margin: 0 0 1rem 0;
+  &::before {
+    display: none;
+  }
+}
+
+p.landing-page-table-context {
+  margin-bottom: 2rem;
 }
 
 .not-available {

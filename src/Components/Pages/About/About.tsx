@@ -3,13 +3,14 @@ import React from "react";
 import "./style.scss";
 import { PageTitle } from "../../PageTitle/PageTitle";
 import JFCLLinkExternal from "../../JFCLLinkExternal";
+import { SectionHeader } from "../../SectionHeader/SectionHeader";
 
 export const About: React.FC = () => {
   return (
     <>
       <PageTitle>About</PageTitle>
 
-      <h3>Support</h3>
+      <SectionHeader className="about__section-header">Support</SectionHeader>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <JFCLLinkExternal
           href={"mailto:support@justfix.org"}
@@ -28,8 +29,8 @@ export const About: React.FC = () => {
         </JFCLLinkExternal>
       </div>
       
-      <h3>About the dashboard</h3>
-      <div style={{ width: "600px" }}>
+      <SectionHeader className="about__section-header">About the dashboard</SectionHeader>
+      <div className="about__about-content" style={{ width: "600px" }}>
         <p>
           This project is a collaboration between JustFix and UNHP to track
           available public data on the rent-regulated portion of the former
@@ -48,8 +49,8 @@ export const About: React.FC = () => {
           serve as a shared foundation to measure the progress of this program.
         </p>
       </div>
-      <h3>Signature Bank collapse and the FDIC</h3>
-      <div style={{ width: "600px" }}>
+      <SectionHeader className="about__section-header">Signature Bank collapse and the FDIC</SectionHeader>
+      <div className="about__signature-content" style={{ width: "600px" }}>
         <p>
           Before its collapse in March 2023, Signature Bank was one of the most
           significant lenders to multifamily rental housing in New York City,
