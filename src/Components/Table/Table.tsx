@@ -26,9 +26,12 @@ import {
   formatNumber,
   getHiddenColumns,
   getObjFromEncodedParam,
+  useOnScreen,
 } from "../../util/helpers";
 import { FilterChips } from "../FilterChips/FilterChips";
 import { PageSizeOptions, Pagination } from "./Pagination";
+import classNames from "classnames";
+import { LAST_COLUMN_ID } from "../BuildingTable/BuildingTableColumns";
 
 export interface TableProps<T extends object> {
   data: T[];
@@ -69,7 +72,9 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
   };
 };
 
-export const Table = <T extends object>(props: TableProps<T>) => {
+export const Table = <T extends object>(
+  props: TableProps<T> & { className?: string }
+) => {
   const {
     data,
     columns,
@@ -78,6 +83,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
     qsPrefix,
     pagination: hasPagination,
     pageSize = 10,
+    className,
   } = props;
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
@@ -93,23 +99,23 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   // Get table setting from query string
   const columnVisibilityParams = getObjFromEncodedParam(
     searchParams,
-    VISIBILITY_PARAM_KEY,
+    VISIBILITY_PARAM_KEY
   );
   const columnFiltersParams = getObjFromEncodedParam(
     searchParams,
-    FILTERS_PARAM_KEY,
+    FILTERS_PARAM_KEY
   );
   const sortingParams = getObjFromEncodedParam(searchParams, SORTING_PARAM_KEY);
 
   // Setup tables settings in state
   const [sorting, setsorting] = useState<ColumnSort[]>(
-    sortingParams ? sortingParams : initialSorting ? initialSorting : [],
+    sortingParams ? sortingParams : initialSorting ? initialSorting : []
   );
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
-    columnFiltersParams ?? [],
+    columnFiltersParams ?? []
   );
   const [columnVisibility, setColumnVisibility] = useState(
-    columnVisibilityParams ?? {},
+    columnVisibilityParams ?? {}
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -145,7 +151,7 @@ export const Table = <T extends object>(props: TableProps<T>) => {
 
         return params;
       },
-      { replace: true },
+      { replace: true }
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting, columnFilters, columnVisibility, setSearchParams]);
@@ -188,6 +194,20 @@ export const Table = <T extends object>(props: TableProps<T>) => {
   const filteredRecordCount = table.getRowCount();
   const unFilteredRecordCount = table.getPreFilteredRowModel().rows.length;
 
+  const lastColumnRef = useRef<HTMLTableCellElement>(null);
+  const isLastColumnVisible = useOnScreen(lastColumnRef);
+  /**
+   * For older browsers that do not support the `useOnScreen` hook,
+   * let's hide the dynamic scroll fade by default.
+   */
+  const isOlderBrowser = typeof IntersectionObserver === "undefined";
+  /**
+   * Let's hide the fade out on the right edge of the table if:
+   * - We've scrolled to the last column OR
+   * - We're using an older browser that cannot detect where we've scrolled
+   */
+  const hideScrollFade = isOlderBrowser || isLastColumnVisible;
+
   return (
     <>
       <div className="table-buttons-container">
@@ -201,24 +221,26 @@ export const Table = <T extends object>(props: TableProps<T>) => {
           columnFilters={columnFilters}
         />
       </div>
-      {!!columnFilters.length && (
-        <Button
-          labelText="Clear all filters"
-          onClick={clearFilters}
-          size="small"
-          className="clear-all"
-        />
-      )}
-      <div className="collection-building-table__record-count">
+      <div className="collection-building-table__record-count-container">
         Showing{" "}
         {filteredRecordCount === unFilteredRecordCount
           ? "all "
           : `${formatNumber(filteredRecordCount)} of `}
         <>{formatNumber(table.getPreFilteredRowModel().rows.length)}</> records
+        {!!columnFilters.length && (
+          <button onClick={clearFilters} className="clear-all jfcl-link">
+            Clear all filters
+          </button>
+        )}
       </div>
-      <div className="table-container-wrapper">
+      <div
+        className={classNames(
+          "table-container-wrapper",
+          hideScrollFade && "hide-scroll-fade"
+        )}
+      >
         <div className="table-container" ref={containerRef}>
-          <table className="collection-building-table">
+          <table className={classNames("collection-building-table", className)}>
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
@@ -259,7 +281,11 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                                     labelIcon={sortIcon}
                                     size="small"
                                     variant="tertiary"
-                                    className="column-header__sort-icon"
+                                    className={classNames(
+                                      "column-header__sort-icon",
+                                      sortIcon === "arrowUpArrowDown" &&
+                                        "unsorted"
+                                    )}
                                     onClick={header.column.getToggleSortingHandler()}
                                   />
                                 </span>
@@ -288,6 +314,11 @@ export const Table = <T extends object>(props: TableProps<T>) => {
                       <td
                         key={cell.id}
                         style={{ ...getCommonPinningStyles(cell.column) }}
+                        ref={
+                          cell.column.id === LAST_COLUMN_ID
+                            ? lastColumnRef
+                            : undefined
+                        }
                       >
                         {valueExists
                           ? flexRender(
@@ -325,7 +356,7 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
         : Array.from(uniqeValues.keys())
             .filter((v) => v !== undefined)
             .sort(),
-    [uniqeValues, filterVariant],
+    [uniqeValues, filterVariant]
   );
   return filterVariant === "range" ? (
     <div>

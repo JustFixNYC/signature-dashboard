@@ -5,6 +5,7 @@ import { LandlordSearch } from "../../AlgoliaSearch/AlgoliaSearch";
 import { AllLandlordsTable } from "./AllLandlordsTable/AllLandlordsTable";
 import { Link } from "@justfixnyc/component-library";
 import "./style.scss";
+import { SectionHeader } from "../../SectionHeader/SectionHeader";
 
 export const NoLandlord: React.FC = () => {
   return (
@@ -13,13 +14,16 @@ export const NoLandlord: React.FC = () => {
       <LandlordSearch
         labelText="Search for landlord by name"
         noResultsText="No landlords in the Signature portfolio match your search."
+        noSearchText="Enter the name of a landlord in the Signature portfolio"
       />
       <div className="find-links">
         <p>Don't know the landlord's name?</p>
         <Link href={"/buildings"}>Search by building address</Link>
       </div>
 
-      <h3>Landlord Table</h3>
+      <SectionHeader className="landing-page-table-header">
+        Landlord Table
+      </SectionHeader>
       <AllLandlordsTable />
     </>
   );

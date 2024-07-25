@@ -3,6 +3,8 @@ import { BarChart } from "./BarChart";
 
 type DOBViolationsChartProps = {
   data: APIChartData[];
+  title: React.ReactNode;
+  dataUnitName: "building" | "portfolio";
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -10,6 +12,8 @@ type DOBViolationsChartProps = {
 
 export const DOBViolationsChart: React.FC<DOBViolationsChartProps> = ({
   data,
+  title,
+  dataUnitName,
   originationDate,
   lastSaleDate,
   className,
@@ -33,9 +37,23 @@ export const DOBViolationsChart: React.FC<DOBViolationsChartProps> = ({
     },
   ];
 
+  const dataSum =
+    data.reduce(
+      (acc, row) => acc + row.dobviolations_regular + row.dobviolations_ecb,
+      0
+    ) || 0;
+
+  const dataNote = dataSum === 0 && (
+    <p className="chart-note">
+      Note: There are no DOB/ECB violations recorded in this {dataUnitName}.
+    </p>
+  );
+
   return (
     <BarChart
       datasets={datasets}
+      title={title}
+      note={dataNote}
       yAxisTitle="Violations Issued"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}

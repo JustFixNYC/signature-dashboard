@@ -3,6 +3,8 @@ import { BarChart } from "./BarChart";
 
 type HPDComplaintsChartProps = {
   data: APIChartData[];
+  title: React.ReactNode;
+  dataUnitName: "building" | "portfolio";
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -10,6 +12,8 @@ type HPDComplaintsChartProps = {
 
 export const HPDComplaintsChart: React.FC<HPDComplaintsChartProps> = ({
   data,
+  title,
+  dataUnitName,
   originationDate,
   lastSaleDate,
   className,
@@ -33,9 +37,24 @@ export const HPDComplaintsChart: React.FC<HPDComplaintsChartProps> = ({
     },
   ];
 
+  const dataSum =
+    data.reduce(
+      (acc, row) =>
+        acc + row.hpdcomplaints_emergency + row.hpdcomplaints_nonemergency,
+      0
+    ) || 0;
+
+  const dataNote = dataSum === 0 && (
+    <p className="chart-note">
+      Note: There are no HPD complaints recorded in this {dataUnitName}.
+    </p>
+  );
+
   return (
     <BarChart
       datasets={datasets}
+      title={title}
+      note={dataNote}
       yAxisTitle="Complaints Received"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}

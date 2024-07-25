@@ -1,39 +1,50 @@
 @import "../../../colors.scss";
+@import "../../../util.scss";
 
-.homepage-section-header {
-  font-size: 1.2rem; // 19.2px (same as body)
-  line-height: 120%;
-  margin: 48px 0 4px 0;
-}
+.home-content {
+  padding-bottom: 1rem;
 
-.homepage-copy {
-  margin: 0 0 1rem;
-}
+  .layout-two-col {
+    @include for-small-screen {
+      flex-direction: column;
+    }
 
-input[name="password"] {
-  font-size: 1rem;
-}
+    h2 {
+      margin-bottom: 1rem;
+    }
 
-.cards-container {
-  display: flex;
-  margin-top: 48px;
-}
+    p {
+      margin: 0 0 1rem 0;
+    }
 
-.card {
-  width: 18rem;
-  border: 1px solid $GREY_400;
-  border-radius: 4px;
-  padding: 24px;
-  box-sizing: border-box;
-  margin-right: 57px;
+    .col-1 {
+      display: flex;
+      flex-direction: column;
+      max-width: 640px;
+      margin-right: auto;
 
-  .card__title {
-    font-weight: 600;
-  }
+      .homepage-section-header {
+        font-size: 1.2rem; // 19.2px (same as body)
+        line-height: 120%;
+        margin: 2rem 0 1rem 0;
+      }
+      .jfcl-input-header__label {
+        @include visually-hidden;
+      }
+      .algolia-search {
+        width: 100%;
+        margin-bottom: auto;
+      }
+    }
 
-  .card__link {
-    display: block;
-    margin-top: 48px;
-    text-wrap: nowrap;
+    .col-2 {
+      @include for-big-screen {
+        margin: 0 auto;
+      }
+
+      .home-page__cards-container {
+        flex-direction: column;
+      }
+    }
   }
 }

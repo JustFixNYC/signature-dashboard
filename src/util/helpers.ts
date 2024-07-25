@@ -10,6 +10,7 @@ import {
 import LZString from "lz-string";
 import { VisibilityState } from "@tanstack/react-table";
 import { INDICATOR_STRINGS } from "./indicators";
+import { useEffect, useState } from "react";
 
 export function splitBBL(bbl: string) {
   const bblArr = bbl.split("");
@@ -139,9 +140,9 @@ export const round = (value: unknown) => {
 
 export const showYesNo = (value: boolean) => {
   if (value === true) {
-    return "yes";
+    return "Yes";
   } else if (value === false) {
-    return "no";
+    return "No";
   }
 };
 
@@ -205,4 +206,36 @@ export const buildingToMapData = (buildingData: BuildingInfo[]): MapData[] => {
     } as MapData;
   });
   return mapData;
+};
+
+/**
+ * Detects whether a given DOM element is visible on screen.
+ *
+ * Note: for older browsers that do not support IntersectionObserver, this
+ * hook will always return FALSE by default.
+ *
+ * Borrowed from https://stackoverflow.com/questions/45514676/react-check-if-element-is-visible-in-dom
+ */
+export const useOnScreen = (ref: React.RefObject<unknown>) => {
+  const isIntersectionObserverSupported =
+    typeof IntersectionObserver !== "undefined";
+
+  const [isIntersecting, setIntersecting] = useState(false);
+  const observer =
+    isIntersectionObserverSupported &&
+    new IntersectionObserver(([entry]) =>
+      setIntersecting(entry.isIntersecting)
+    );
+
+  useEffect(() => {
+    if (observer && ref.current) {
+      observer.observe(ref.current as Element);
+      // Remove the observer as soon as the component is unmounted
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return isIntersecting;
 };

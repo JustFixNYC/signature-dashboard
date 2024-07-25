@@ -8,10 +8,14 @@ import { EvictionsChart } from "../BarChart/Evictions";
 import { BuildingTable } from "../BuildingTable/BuildingTable";
 import { CollectionInfo } from "../../types/APIDataTypes";
 import "./style.scss";
-import { SectionHeader } from "../SectionHeader/SectionHeader";
+import {
+  SectionHeader,
+  SubSectionHeader,
+} from "../SectionHeader/SectionHeader";
 import { SectionSubtitle } from "../SectionSubtitle/SectionSubtitle";
 import { MapBox } from "../MapBox/MapBox";
 import { buildingToMapData } from "../../util/helpers";
+import { Loading } from "../Loading/Loading";
 
 type CollectionProps = {
   collection: string;
@@ -27,21 +31,49 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
 
   return (
     <div style={{ minHeight: "1500px" }}>
-      {chartIsLoading && <div>loading...</div>}
+      {chartIsLoading && <Loading />}
       {chartError && <pre>{JSON.stringify(chartError, null, 2)}</pre>}
       {chartData && data && (
         <div className="collection-charts">
           <SectionHeader id="trend-charts">Trend Charts</SectionHeader>
-          <h4>HPD Violations</h4>
-          <HPDViolationsChart data={chartData} />
-          <h4>HPD Complaints</h4>
-          <HPDComplaintsChart data={chartData} />
+          <HPDViolationsChart
+            title={
+              <SubSectionHeader className="chart__title">
+                HPD Violations
+              </SubSectionHeader>
+            }
+            data={chartData}
+            dataUnitName="portfolio"
+          />
+          <HPDComplaintsChart
+            title={
+              <SubSectionHeader className="chart__title">
+                HPD Complaints
+              </SubSectionHeader>
+            }
+            data={chartData}
+            dataUnitName="portfolio"
+          />
+          <DOBViolationsChart
+            title={
+              <SubSectionHeader className="chart__title">
+                DOB/ECB Violations
+              </SubSectionHeader>
+            }
+            data={chartData}
+            dataUnitName="portfolio"
+          />
 
-          <h4>DOB/ECB Violations</h4>
-          <DOBViolationsChart data={chartData} />
-
-          <h4>Evictions</h4>
-          <EvictionsChart data={chartData} />
+          <EvictionsChart
+            title={
+              <SubSectionHeader className="chart__title">
+                Evictions
+              </SubSectionHeader>
+            }
+            data={chartData}
+            units_res={data.units_res}
+            dataUnitName="portfolio"
+          />
         </div>
       )}
 
@@ -53,9 +85,9 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
             </SectionHeader>
           )}
           {data.collection_type === "landlord" && (
-              <SectionHeader id="map">
-                Map of buildings owned by {data.collection_name}
-              </SectionHeader>
+            <SectionHeader id="map">
+              Map of buildings owned by {data.collection_name}
+            </SectionHeader>
           )}
           <MapBox
             data={buildingToMapData(data.bldg_data)}
@@ -87,10 +119,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
         </SectionHeader>
       )}
 
-      <BuildingTable
-        data={data.bldg_data}
-        pagination
-      />
+      <BuildingTable data={data.bldg_data} pagination />
     </div>
   );
 };

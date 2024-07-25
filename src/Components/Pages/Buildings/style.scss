@@ -1,4 +1,9 @@
-@import "../../../App.scss";
+@import "../../../colors.scss";
+@import "../../../variables.scss";
+
+.algolia-search {
+  width: 50%;
+}
 
 .layout-two-col {
   display: flex;
@@ -27,7 +32,7 @@
 .find-links {
   display: flex;
   flex-direction: column;
-  margin-bottom: 113px;
+  margin-bottom: 3rem;
   p,
   a {
     font-size: 1.2rem; // 19.2px (same as body)
@@ -41,6 +46,17 @@
   }
 }
 
+h3.section-header.landing-page-table-header {
+  margin: 0 0 1rem 0;
+  &::before {
+    display: none;
+  }
+}
+
+p.landing-page-table-context {
+  margin-bottom: 2rem;
+}
+
 .not-available {
   color: $GREY_600;
   font-weight: 400;
@@ -48,6 +64,7 @@
 
 .chart__timespan_filter {
   display: flex;
+  margin-top: 1rem;
 
   .jfcl-radio-button:first-child {
     margin-right: 10px;
@@ -67,12 +84,18 @@
   top: calc($headerH + 1.5rem);
 }
 
-.has-chart-note {
+.chart__card {
+  width: 600px;
+  margin-bottom: 1rem;
+}
+
+.subsection-header.chart__title {
   margin-bottom: 0;
 }
 
 .chart-note {
   font-size: 1rem;
+  margin-top: 1rem;
   margin-bottom: 1.33rem;
 }
 

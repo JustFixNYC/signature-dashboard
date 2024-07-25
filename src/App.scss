@@ -1,8 +1,7 @@
 @import "@justfixnyc/component-library/dist/src/assets/index.css";
 @import "colors.scss";
+@import "variables.scss";
 
-$headerH: 3.25rem; // 52px
-$sidebarW: 8rem; // 128px
 
 html {
   height: 100%;
@@ -13,7 +12,7 @@ body {
   font-weight: 400;
   font-size: 1.2rem;
   letter-spacing: 0.54px;
-  background-color: rgba($OFF_WHITE_100, 0.5);
+  background-color: $OFF_WHITE_100;
   margin: 0;
   position: relative;
   height: 100%;
@@ -22,26 +21,28 @@ body {
 #header {
   position: fixed;
   top: 0;
-  background-color: $OFF_BLACK;
-  color: $OFF_WHITE_100;
+  background-color: $OFF_WHITE_100;
+  color: $OFF_BLACK;
   font-size: 1.25rem; // 20px
   letter-spacing: 0.8px;
   height: $headerH;
   width: 100%;
-  padding-left: 1.75rem; // 24px
+  padding-left: 1rem; // 16px
   display: flex;
   align-items: center;
   text-wrap: nowrap;
   z-index: 100;
+  border-bottom: 1px solid $OFF_BLACK;
 
   a {
     text-decoration: none;
-    color: $OFF_WHITE_100;
+    color: $OFF_BLACK;
+    font-weight: 600;
 
     &:visited,
     &:active,
     &:hover {
-      color: $OFF_WHITE_100;
+      color: $OFF_BLACK;
     }
   }
 }
@@ -52,6 +53,7 @@ body {
 
 #main {
   display: flex;
+  height: 100%;
 }
 
 #sidebar {
@@ -59,12 +61,10 @@ body {
   height: calc(100vh - $headerH);
   width: $sidebarW;
   margin-top: $headerH;
-  padding: 24px 20px;
   z-index: 90;
   box-sizing: border-box;
   background-color: $OFF_WHITE_100;
-  border-right: 1px solid #d2d2d2;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-right: 1px solid $OFF_BLACK;
 
   @media screen and (max-width: 480px) {
     position: initial;
@@ -88,21 +88,46 @@ body {
   padding: 0;
   list-style: none;
   color: $OFF_BLACK;
-  font-size: 1.25rem; // 20px
+  font-size: 1rem; // 16px
+  font-weight: 600;
+  letter-spacing: 0.5px;
 
-  li {
-    margin-bottom: 1rem;
-  }
   .nav-link {
+    display: flex;
+    align-items: center;
     text-decoration: none;
     color: $OFF_BLACK;
+    padding: 8px 12px 8px 12px;
+    text-wrap: nowrap;
+    width: 100%;
+    box-sizing: border-box;
 
-    &.nav-link-active {
-      text-decoration: underline;
+    &:hover {
+      background-color: $GREY_50;
     }
 
-    &:visited {
-      color: $OFF_BLACK;
+    &.nav-link-active {
+      background-color: $OFF_BLACK;
+      color: $OFF_WHITE_100;
+
+      &:hover {
+        background-color: $GREY_700;
+      }
+    }
+
+    .nav-link__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 10px;
+      font-size: 0.875rem; // 14px
+    }
+
+    .nav-link__icon-caret {
+      margin-left: 10px;
+      color: $GREY_600;
     }
   }
 
@@ -112,13 +137,48 @@ body {
     list-style: none;
 
     li {
-      margin-top: 6px;
       margin-bottom: 0;
     }
 
     .nav-link {
-      font-weight: 300;
-      font-size: 1.125rem; // 18px
+      font-weight: 400;
     }
   }
+}
+
+a {
+  color: $OFF_BLACK;
+  font-weight: 500;
+
+  &:hover {
+    color: #676565;
+  }
+}
+
+p {
+  margin: 1rem 0;
+}
+
+h2,
+.page-title {
+  font-size: 2.25rem; // 36pt
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.75rem; // 28pt
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 1.25rem; // 20pt
+  font-weight: 500;
+}
+
+.card {
+  border: 1px solid $GREY_600;
+  padding: 24px;
+  box-sizing: border-box;
+  background-color: #fff;
 }

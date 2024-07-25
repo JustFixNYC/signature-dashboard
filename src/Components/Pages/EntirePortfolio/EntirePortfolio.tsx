@@ -7,8 +7,15 @@ import {
   useGetDatasetLastUpdated,
 } from "../../../api/hooks";
 import { CollectionSummaryTable } from "../../Collection/CollectionSummaryTable/CollectionSummaryTable";
-import { TableOfContents, TOCHeader, TOCList, TOCItem } from "../../TableOfContents/TableOfContents";
+import {
+  TableOfContents,
+  TOCHeader,
+  TOCList,
+  TOCItem,
+} from "../../TableOfContents/TableOfContents";
 import { SectionHeader } from "../../SectionHeader/SectionHeader";
+import { Loading } from "../../Loading/Loading";
+import { formatNumber } from "../../../util/helpers";
 
 export const EntirePortfolio: React.FC = () => {
   const { data, error, isLoading } = useGetCollectionInfo("all");
@@ -19,7 +26,7 @@ export const EntirePortfolio: React.FC = () => {
   } = useGetDatasetLastUpdated();
   return (
     <>
-      {isLoading && lastUpdatedIsLoading && <div>loading...</div>}
+      {isLoading && lastUpdatedIsLoading && <Loading />}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {lastUpdatedError && (
         <pre>{JSON.stringify(lastUpdatedError, null, 2)}</pre>
@@ -30,6 +37,12 @@ export const EntirePortfolio: React.FC = () => {
             <div>
               <PageTitle>Entire Signature Portfolio</PageTitle>
 
+              <p className="signature-context">
+                There are {formatNumber(data.buildings) as string}{" "}
+                rent-regulated buildings on the Signature Portfolio Dashboard.
+                See below for aggregate stats on the entire portfolio and a list
+                of all buildings.
+              </p>
               <TableOfContents>
                 <TOCHeader>On this page</TOCHeader>
                 <TOCList>

@@ -19,3 +19,16 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
     </h3>
   );
 };
+
+export const SubSectionHeader: React.FC<SectionHeaderProps> = ({
+  children,
+  id,
+  className,
+}) => {
+  const classes = classNames("subsection-header", className);
+  return (
+    <h4 id={id} className={classes}>
+      {children}
+    </h4>
+  );
+};

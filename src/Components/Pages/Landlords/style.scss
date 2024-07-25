@@ -1,7 +1,11 @@
+.algolia-search {
+  width: 50%;
+}
+
 .find-links {
   display: flex;
   flex-direction: column;
-  margin-bottom: 113px;
+  margin-bottom: 3rem;
   p,
   a {
     font-size: 1.2rem; // 19.2px (same as body)
@@ -13,4 +17,9 @@
   a {
     width: fit-content;
   }
+}
+
+.landlord-context {
+  width: 600px;
+  margin: 0 0 3rem 0;
 }

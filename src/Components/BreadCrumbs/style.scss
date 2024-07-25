@@ -4,8 +4,12 @@
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
+  a:visited {
+    color: $OFF_BLACK;
+  }
 
   .breadCrumbs__last-crumb {
+    font-size: 1.2rem;
     font-weight: 500;
     color: $GREY_600;
   }

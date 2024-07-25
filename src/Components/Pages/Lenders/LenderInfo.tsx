@@ -1,5 +1,5 @@
-// import { AddressRecord } from "../../types/APIDataTypes";
 import React from "react";
+import { Link } from "@justfixnyc/component-library";
 import "./style.scss";
 import { Collection } from "../../Collection/Collection";
 import { BreadCrumbs } from "../../BreadCrumbs/BreadCrumbs";
@@ -17,6 +17,8 @@ import {
   TOCList,
   TOCItem,
 } from "../../TableOfContents/TableOfContents";
+import { Loading } from "../../Loading/Loading";
+import { formatNumber } from "../../../util/helpers";
 
 interface LenderInfoProps {
   lender: string;
@@ -31,7 +33,7 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
   } = useGetDatasetLastUpdated();
   return (
     <>
-      {isLoading && lastUpdatedIsLoading && <div>loading...</div>}
+      {isLoading && lastUpdatedIsLoading && <Loading />}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {lastUpdatedError && (
         <pre>{JSON.stringify(lastUpdatedError, null, 2)}</pre>
@@ -52,7 +54,17 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
               />
             </div>
           </div>
-          <PageTitle>{data.collection_name}</PageTitle>
+          <PageTitle className="lender-page__page-title">
+            {data.collection_slug === "cpc" &&
+              "Community Preservation Corporation (CPC)"}
+            {data.collection_slug === "santander" && "Santander Bank"}
+          </PageTitle>
+          <p className="lender-context">
+            {data.collection_name} manages the loans for{" "}
+            {formatNumber(data.buildings) as string} rent-regulated buildings in
+            the Signature Portfolio.{" "}
+            <Link href="/lenders">About the lender program</Link>
+          </p>
 
           <div className="layout-two-col">
             <div>
@@ -61,7 +73,7 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
                 <TOCList>
                   <TOCItem href="#summary-stats">Summary stats</TOCItem>
                   <TOCItem href="#trend-charts">Trend charts</TOCItem>
-                  <TOCItem href="#map">Map</TOCItem>
+                  <TOCItem href="#map">Portfolio Map</TOCItem>
                   <TOCItem href="#buildings-table">Buildings table</TOCItem>
                 </TOCList>
               </TableOfContents>

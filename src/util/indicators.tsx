@@ -38,7 +38,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     format: "comma",
   },
   units_nonres: {
-    name: "Non-Residential Units",
+    name: "Has Non-Residential Units",
     description:
       "Presence of any non-residential units. May include one or more types of units (offices, retail stores, etc.)",
     format: "boolean",
@@ -61,8 +61,17 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   bip: {
     name: "Building Indicator Project (BIP) score",
     short_name: "BIP score",
-    description:
-      "The BIP score takes into account violation and overdue charge data to come up with an indicator of likely physical or financial distress: a building with a score of 500 or more is likely to be in physical or financial distress, while a building with a score of 800 or more is highly likely to be in physical or financial distress. (Note that the BIP score is a conservative indicator, and scores below 500 do not necessarily indicate that is a building is financially and physically stable.)",
+    description: (
+      <>
+        0-500 = Scores in this range do not necessary mean that the building is
+        stable, since BIP score is a conservative indicator
+        <br />
+        500+ = More likely to be in physical/financial distress <br />
+        800+ = Highly likely to be in physical/financial distress <br />
+        <br />
+        The BIP score takes into account violation and overdue charge data.
+      </>
+    ),
     format: "comma",
   },
   landlord: {
@@ -83,9 +92,9 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     format: "comma",
   },
   bip_500_pct: {
-    name: "Percent of buildings with BIP score over 500",
+    name: "Percent of buildings with BIP score 500+",
     description:
-      "The number of buildings within a landlord portfolio that are likely to be in physical or financial distress, according to the Building Indicator Project (BIP) Database.",
+      "The percent of buildings within a portfolio that are likely to be in physical or financial distress, according to the Building Indicator Project (BIP) Database.",
     format: "percent",
   },
   hpd_viol_bc_open: {
@@ -376,7 +385,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     dataset: "marshal_evictions",
   },
   in_aep: {
-    name: "Alternative Enforcement Program",
+    name: "In Alternative Enforcement Program",
     description: (
       <>
         The Alternative Enforcement Program (AEP) is an HPD program for
@@ -398,8 +407,8 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     dataset: "hpd_aep",
   },
   in_conh: {
-    name: "Certificate of No Harassment (CONH) pilot program",
-    short_name: "Certificate of No Harassment pilot program",
+    name: "In Certificate of No Harassment (CONH) pilot program",
+    short_name: "In Certificate of No Harassment pilot program",
     description: (
       <>
         A local law that applies to some residential buildings requires the
@@ -421,7 +430,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     dataset: "hpd_conh",
   },
   in_ucp: {
-    name: "Underlying Conditions Program",
+    name: "In Underlying Conditions Program",
     description: (
       <>
         The Underlying Conditions Program allows HPD to issue an administrative
@@ -489,6 +498,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hp_active: {
     name: "Active HPD litigation cases",
+    short_name: "Active cases",
     description: (
       <>
         Ongoing cases in housing court against landlords for conditions and/or
@@ -507,6 +517,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hp_total: {
     name: "Total HPD litigation cases",
+    short_name: "Total cases",
     description: (
       <>
         All cases in housing court against landlords for conditions and/or
@@ -525,6 +536,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hp_penalies: {
     name: "Civil penalties from HPD litigation cases",
+    short_name: "Civil penalties from cases",
     description: (
       <>
         Total penalties from HPD litigation cases against a landlord for
@@ -544,6 +556,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hp_find_harassment: {
     name: "HPD litigation cases with harassment finding",
+    short_name: "Cases with harassment finding",
     description: (
       <>
         Number of HPD litigation cases against a landlord where there was a
@@ -562,6 +575,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   hp_open_judgements: {
     name: "HPD litigation cases with outstanding judgement",
+    short_name: "Cases with outstanding judgement",
     description: (
       <>
         Number of HPD litigation cases against a landlord for conditions and/or

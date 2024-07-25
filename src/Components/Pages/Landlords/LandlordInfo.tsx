@@ -18,6 +18,8 @@ import {
   TOCItem,
 } from "../../TableOfContents/TableOfContents";
 import { SectionHeader } from "../../SectionHeader/SectionHeader";
+import { Loading } from "../../Loading/Loading";
+import { formatNumber } from "../../../util/helpers";
 
 interface LandlordInfoProps {
   landlord: string;
@@ -34,7 +36,7 @@ export const LandlordInfo: React.FC<LandlordInfoProps> = ({ landlord }) => {
 
   return (
     <>
-      {isLoading && lastUpdatedIsLoading && <div>loading...</div>}
+      {isLoading && lastUpdatedIsLoading && <Loading />}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       {lastUpdatedError && (
         <pre>{JSON.stringify(lastUpdatedError, null, 2)}</pre>
@@ -56,6 +58,11 @@ export const LandlordInfo: React.FC<LandlordInfoProps> = ({ landlord }) => {
             </div>
           </div>
           <PageTitle>{data.collection_name}</PageTitle>
+          <p className="landlord-context">
+            {data.collection_name} has a portfolio of{" "}
+            {formatNumber(data.buildings) as string} rent-regulated buildings
+            that were financed by Signature Bank.
+          </p>
           <div className="layout-two-col">
             <div>
               <TableOfContents>
@@ -63,7 +70,7 @@ export const LandlordInfo: React.FC<LandlordInfoProps> = ({ landlord }) => {
                 <TOCList>
                   <TOCItem href="#summary-stats">Summary stats</TOCItem>
                   <TOCItem href="#trend-charts">Trend charts</TOCItem>
-                  <TOCItem href="#map">Map</TOCItem>
+                  <TOCItem href="#map">Portfolio Map</TOCItem>
                   <TOCItem href="#buildings-table">Buildings table</TOCItem>
                 </TOCList>
               </TableOfContents>

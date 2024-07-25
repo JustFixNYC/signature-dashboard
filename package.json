@@ -13,7 +13,7 @@
     "format": "prettier --write --ignore-unknown \"src/**/*\""
   },
   "dependencies": {
-    "@justfixnyc/component-library": "0.44.0",
+    "@justfixnyc/component-library": "^0.48.0",
     "@justfixnyc/geosearch-requester": "^1.0.3-alpha.0",
     "@rollbar/react": "^0.12.0-beta",
     "@tanstack/react-table": "^8.16.0",

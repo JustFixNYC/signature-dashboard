@@ -1,15 +1,14 @@
 @import "../../colors.scss";
 
 .detail-table {
-  border: 1px solid $GREY_400;
-  border-radius: 4px;
+  border: 1px solid $GREY_600;
   text-align: center;
   border-spacing: 0;
   background-color: white;
 
   .detail-table_row {
-    padding: 12px;
-    border-top: 1px solid $GREY_50;
+    padding: 1rem;
+    border-top: 1px solid $GREY_600;
 
     &:first-of-type {
       border-top: none;
@@ -36,7 +35,7 @@
       }
 
       .detail-table__value {
-        font-weight: 700;
+        font-weight: 500;
         font-size: 1.1rem;
         width: fit-content;
       }
@@ -52,8 +51,8 @@
         display: block;
       }
 
-      .last-updated {
-        font-style: italic;
+      .detail-table__description_content {
+        padding: 0.5rem 0;
       }
     }
   }

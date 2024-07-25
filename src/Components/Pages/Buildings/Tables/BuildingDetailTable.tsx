@@ -26,11 +26,12 @@ export const BuildingDetailTable: React.FC<BuildingDetailTable> = ({
       className={classNames("building-detail-table", className)}
       {...props}
     >
-      {indicators.map((indicator) => (
+      {indicators.map((indicator, i) => (
         <DetailTableRow
           apiKey={indicator}
-          value={data[indicator]}
+          value={(indicator === "rs_units" && data[indicator] === 0) ? "0*" : data[indicator]}
           lastUpdatedData={lastUpdatedData}
+          key={i}
         />
       ))}
     </DetailTable>

@@ -7,6 +7,8 @@ import { AddressSearch } from "../../AlgoliaSearch/AlgoliaSearch";
 import "./style.scss";
 import { formatNumber } from "../../../util/helpers";
 import { Link } from "@justfixnyc/component-library";
+import { Loading } from "../../Loading/Loading";
+import { SectionHeader } from "../../SectionHeader/SectionHeader";
 
 export const NoBBL: React.FC = () => {
   const { data, error, isLoading } = useGetCollectionInfo("all");
@@ -16,13 +18,14 @@ export const NoBBL: React.FC = () => {
       <div className="top-bar">
         <PageTitle>Buildings</PageTitle>
         <div className="top-bar-actions">
-          <DownloadMultiBuildingCSV data={data} labelText="Download all" />
+          <DownloadMultiBuildingCSV data={data} labelText="Download all data" />
         </div>
       </div>
 
       <AddressSearch
-        labelText="Find a building in the Signature portfolio by entering the address"
-        noResultsText="No buildings in the Signature portfolio match your search."
+        labelText="Search for a building by address"
+        noResultsText="No buildings in the Signature portfolio match your search"
+        noSearchText="Enter the address of a building in the Signature portfolio"
       />
       <div className="find-links">
         <p>How else can I find a building?</p>
@@ -30,20 +33,19 @@ export const NoBBL: React.FC = () => {
         <Link href={"/map"}>View all buildings on map</Link>
       </div>
 
-      {isLoading && <div>loading...</div>}
+      {isLoading && <Loading />}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
 
-      <h3>Building Table</h3>
+      <SectionHeader className="landing-page-table-header">
+        Building Table
+      </SectionHeader>
       {data && (
         <>
-          <p>
+          <p className="landing-page-table-context">
             There are <>{formatNumber(data.bldg_data.length)}</> buildings in
             the Signature Portfolio Dashboard.
           </p>
-          <BuildingTable
-            data={data.bldg_data}
-            pagination={true}
-          />
+          <BuildingTable data={data.bldg_data} pagination={true} />
         </>
       )}
     </>

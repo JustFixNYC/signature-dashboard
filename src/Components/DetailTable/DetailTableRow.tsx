@@ -1,5 +1,5 @@
 import { Icon } from "@justfixnyc/component-library";
-import { useState } from "react";
+import { HTMLAttributes, useState } from "react";
 import {
   apiKeys,
   formatDate,
@@ -8,21 +8,23 @@ import {
   formatNumber,
   formatNumberNoComma,
   formatPercent,
-  showYesNo,
 } from "../../util/helpers";
 import { INDICATOR_STRINGS } from "../../util/indicators";
 import { DatasetLastUpdatedData } from "../../types/APIDataTypes";
+import { BIPPill } from "../Pill/BIPPill";
+import { YesNoPill } from "../Pill/YesNoPill";
 
-type DetailTableRowProps = {
+interface DetailTableRowProps extends HTMLAttributes<HTMLDivElement> {
   apiKey: apiKeys;
   value: string | number | boolean;
   lastUpdatedData?: DatasetLastUpdatedData[];
-};
+}
 
 export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   apiKey,
   value,
   lastUpdatedData,
+  ...props
 }) => {
   const [showDesc, setShowDesc] = useState(false);
 
@@ -35,17 +37,17 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   const name = indicator ? indicator.name : apiKey;
   const description = indicator?.description;
   const lastUpdated = lastUpdatedData?.find(
-    (x) => x.dataset === indicator?.dataset,
+    (x) => x.dataset === indicator?.dataset
   )?.last_updated;
 
-  let displayValue: unknown = value;
+  let displayValue: React.ReactNode = value;
 
   if (indicator?.format === "round" && typeof value === "number") {
     displayValue = value.toFixed(2);
   }
 
   if (indicator?.format === "money" && typeof value === "number") {
-    displayValue = formatMoney(value);
+    displayValue = <>{formatMoney(value)}</>;
   }
 
   if (indicator?.format === "percent" && typeof value === "number") {
@@ -53,7 +55,7 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
   }
 
   if (indicator?.format === "boolean" && typeof value === "boolean") {
-    displayValue = showYesNo(value) as string;
+    displayValue = <YesNoPill value={value} />;
   }
 
   if (indicator?.format === "comma" && typeof value === "number") {
@@ -68,8 +70,12 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
     displayValue = formatNumberNoComma(value);
   }
 
+  if (apiKey === "bip" && typeof value === "number") {
+    displayValue = <BIPPill value={value} />;
+  }
+
   return (
-    <div className="detail-table_row">
+    <div className="detail-table_row" {...props}>
       <div
         className={
           "detail-table_row_name-value-wrapper" +
@@ -93,15 +99,12 @@ export const DetailTableRow: React.FC<DetailTableRowProps> = ({
           (showDesc ? " detail-table__description_open" : "")
         }
       >
-        {description}
+        <div className="detail-table__description_content">{description}</div>
 
         {lastUpdated && (
-          <>
-            <br />
-            <span className="last-updated">
-              Last updated {formatLastUpdatedDate(lastUpdated)}.
-            </span>
-          </>
+          <span className="last-updated">
+            Data last updated {formatLastUpdatedDate(lastUpdated)}
+          </span>
         )}
       </dd>
     </div>
