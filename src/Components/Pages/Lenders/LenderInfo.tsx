@@ -55,11 +55,13 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
             </div>
           </div>
           <PageTitle className="lender-page__page-title">
-            {data.collection_name}
+            {data.collection_slug === "cpc" &&
+              "Community Preservation Corporation (CPC)"}
+            {data.collection_slug === "santander" && "Santander Bank"}
           </PageTitle>
           <p className="lender-context">
             {data.collection_name} manages the loans for{" "}
-            {formatNumber(data.buildings) as string} rent regulated buildings in
+            {formatNumber(data.buildings) as string} rent-regulated buildings in
             the Signature Portfolio.{" "}
             <Link href="/lenders">About the lender program</Link>
           </p>
@@ -71,7 +73,7 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
                 <TOCList>
                   <TOCItem href="#summary-stats">Summary stats</TOCItem>
                   <TOCItem href="#trend-charts">Trend charts</TOCItem>
-                  <TOCItem href="#map">Map</TOCItem>
+                  <TOCItem href="#map">Portfolio Map</TOCItem>
                   <TOCItem href="#buildings-table">Buildings table</TOCItem>
                 </TOCList>
               </TableOfContents>
