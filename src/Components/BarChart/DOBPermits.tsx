@@ -33,7 +33,7 @@ export const DOBPermitsChart: React.FC<DOBPermitsChartProps> = ({
 
   const dataNote = dataSum === 0 && (
     <p className="chart-note">
-      Note: There are no DOB job applications in this {dataUnitName}.
+      Note: There are no DOB job applications recorded in this {dataUnitName}.
     </p>
   );
 

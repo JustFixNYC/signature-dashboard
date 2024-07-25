@@ -45,7 +45,7 @@ export const DOBViolationsChart: React.FC<DOBViolationsChartProps> = ({
 
   const dataNote = dataSum === 0 && (
     <p className="chart-note">
-      Note: There are no DOB/ECB violations in this {dataUnitName}.
+      Note: There are no DOB/ECB violations recorded in this {dataUnitName}.
     </p>
   );
 

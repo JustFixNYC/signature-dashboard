@@ -46,7 +46,7 @@ export const HPDComplaintsChart: React.FC<HPDComplaintsChartProps> = ({
 
   const dataNote = dataSum === 0 && (
     <p className="chart-note">
-      Note: There are no HPD complaints in this {dataUnitName}.
+      Note: There are no HPD complaints recorded in this {dataUnitName}.
     </p>
   );
 

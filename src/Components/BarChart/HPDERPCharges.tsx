@@ -33,7 +33,7 @@ export const HPDERPChargesChart: React.FC<HPDERPChargesChartProps> = ({
 
   const dataNote = dataSum === 0 && (
     <p className="chart-note">
-      Note: There are no HPD Emergency Repair Program charges in this{" "}
+      Note: There are no HPD Emergency Repair Program charges recorded in this{" "}
       {dataUnitName}.
     </p>
   );

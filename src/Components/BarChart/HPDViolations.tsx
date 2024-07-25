@@ -66,7 +66,7 @@ export const HPDViolationsChart: React.FC<HPDViolationsChartProps> = ({
 
   const dataNote = dataSum === 0 && (
     <p className="chart-note">
-      Note: There are no HPD violations in this {dataUnitName}.
+      Note: There are no HPD violations recorded in this {dataUnitName}.
     </p>
   );
 

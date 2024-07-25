@@ -66,7 +66,7 @@ export const EvictionsChart: React.FC<EvictionsChartProps> = ({
   const dataNote =
     !ocaCanReport && dataSumExecuted === 0 ? (
       <p className="chart-note" key={2}>
-        Note: There are no recorded executed evictions in this {dataUnitName}.
+        Note: There are no recorded evictions executed in this {dataUnitName}.
       </p>
     ) : (
       ocaCanReport &&
