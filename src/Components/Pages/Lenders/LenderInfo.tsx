@@ -61,8 +61,8 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
           </PageTitle>
           <p className="lender-context">
             {data.collection_name} manages the loans for{" "}
-            {formatNumber(data.buildings) as string} rent-regulated buildings in
-            the Signature Portfolio.{" "}
+            {formatNumber(data.buildings_agg) as string} rent-regulated
+            buildings in the Signature Portfolio.{" "}
             <Link href="/lenders">About the lender program</Link>
           </p>
 

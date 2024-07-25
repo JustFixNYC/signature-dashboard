@@ -16,7 +16,6 @@ export interface Indicators {
   address: string;
   assem_dist: string;
   bip: number;
-  bip_500_pct: number;
   borough: string;
   cong_dist: string;
   coun_dist: string;
@@ -150,32 +149,29 @@ export type CollectionInfo = {
   collection_name: string;
   collection_slug: string;
   collection_type: string;
-  buildings: number;
+  buildings_agg: number;
+  units_res_agg: number;
+  rs_units_agg: number;
+  evictions_filed_agg: number;
+  hp_active_agg: number;
+  bip_500_pct_agg: number;
+  hpd_viol_bc_open_agg: number;
+  hpd_viol_bc_open_per_unit_agg: number;
+  hpd_viol_bc_total_agg: number;
+  hpd_viol_bc_total_per_unit_agg: number;
+  hpd_comp_emerg_total_agg: number;
+  hpd_comp_emerg_total_per_unit_agg: number;
+  hpd_erp_orders_agg: number;
+  hpd_erp_orders_per_unit_agg: number;
+  hpd_erp_charges_agg: number;
+  hpd_erp_charges_per_unit_agg: number;
+  dob_ecb_viol_open_agg: number;
+  dob_ecb_viol_open_per_unit_agg: number;
+  water_charges_agg: number;
+  debt_total_agg: number;
+  debt_per_unit_agg: number;
   bldg_data: BuildingInfo[];
-} & Pick<
-  Indicators,
-  | "bbl"
-  | "units_res"
-  | "rs_units"
-  | "evictions_filed"
-  | "hp_active"
-  | "bip_500_pct"
-  | "hpd_viol_bc_open"
-  | "hpd_viol_bc_open_per_unit"
-  | "hpd_viol_bc_total"
-  | "hpd_viol_bc_total_per_unit"
-  | "hpd_comp_emerg_total"
-  | "hpd_comp_emerg_total_per_unit"
-  | "hpd_erp_orders"
-  | "hpd_erp_orders_per_unit"
-  | "hpd_erp_charges"
-  | "hpd_erp_charges_per_unit"
-  | "dob_ecb_viol_open"
-  | "dob_ecb_viol_open_per_unit"
-  | "water_charges"
-  | "debt_total"
-  | "debt_per_unit"
->;
+};
 
 export interface APIChartData {
   month: string;
@@ -202,10 +198,10 @@ export interface LandlordInfo {
   landlord_slug: string;
   lender_name: string;
   lender_slug: string;
-  buildings: number;
-  units_res: number;
-  hpd_viol_bc_open_per_unit: number;
-  debt_per_unit: number;
+  buildings_agg: number;
+  units_res_agg: number;
+  hpd_viol_bc_open_per_unit_agg: number;
+  debt_per_unit_agg: number;
 }
 
 export interface MapData {
@@ -222,7 +218,7 @@ export interface MapData {
 
 export interface APIPortfolioData {
   collection_slug: "cpc" | "santander" | "all";
-  buildings: number;
+  buildings_agg: number;
   landlords: number;
 }
 

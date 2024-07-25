@@ -1,4 +1,4 @@
-import { APIChartData } from "../../types/APIDataTypes";
+import { APIChartData, BuildingInfo } from "../../types/APIDataTypes";
 import { yearlyChartData, groupData } from "../../util/helpers";
 import { BarChart } from "./BarChart";
 
@@ -6,7 +6,8 @@ type EvictionsChartProps = {
   data: APIChartData[];
   title: React.ReactNode;
   dataUnitName: "building" | "portfolio";
-  units_res: number;
+  unitsRes: number;
+  bldgData?: BuildingInfo[];
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -16,7 +17,8 @@ export const EvictionsChart: React.FC<EvictionsChartProps> = ({
   data,
   title,
   dataUnitName,
-  units_res,
+  unitsRes,
+  bldgData,
   originationDate,
   lastSaleDate,
   className,
@@ -55,13 +57,29 @@ export const EvictionsChart: React.FC<EvictionsChartProps> = ({
   const dataSumFiled =
     data.reduce((acc, row) => acc + row.evictions_filed, 0) || 0;
 
-  const ocaCanReport = units_res >= 11;
-  const ocaNote = !ocaCanReport && (
-    <p className="chart-note" key={1}>
-      Note: Eviction filings data are not available because the {dataUnitName}{" "}
-      has fewer than 11 units.
-    </p>
-  );
+  let ocaCanReport: boolean = false;
+  if (dataUnitName === "building") {
+    ocaCanReport = unitsRes >= 11;
+  } else if (dataUnitName === "portfolio") {
+    const smallBldgs = bldgData!.filter((bldg) => bldg.units_res < 11);
+    ocaCanReport = smallBldgs.length === 0;
+  }
+
+  const ocaNote =
+    dataUnitName === "building" && !ocaCanReport ? (
+      <p className="chart-note" key={1}>
+        Note: Eviction filings data are not available because the building has
+        fewer than 11 units.
+      </p>
+    ) : (
+      dataUnitName === "portfolio" &&
+      !ocaCanReport && (
+        <p className="chart-note" key={1}>
+          Note: This portfolio contains buildings with fewer than 11 units, for
+          which eviction filings data is not available.
+        </p>
+      )
+    );
 
   const dataNote =
     !ocaCanReport && dataSumExecuted === 0 ? (
