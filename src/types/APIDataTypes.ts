@@ -16,7 +16,6 @@ export interface Indicators {
   address: string;
   assem_dist: string;
   bip: number;
-  bip_500_pct: number;
   borough: string;
   cong_dist: string;
   coun_dist: string;
@@ -199,10 +198,10 @@ export interface LandlordInfo {
   landlord_slug: string;
   lender_name: string;
   lender_slug: string;
-  buildings: number;
-  units_res: number;
-  hpd_viol_bc_open_per_unit: number;
-  debt_per_unit: number;
+  buildings_agg: number;
+  units_res_agg: number;
+  hpd_viol_bc_open_per_unit_agg: number;
+  debt_per_unit_agg: number;
 }
 
 export interface MapData {

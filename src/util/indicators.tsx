@@ -8,7 +8,9 @@ type indicatorObj = {
   dataset?: string;
 };
 
-export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
+const indicatorStringsBuildingOnly: Partial<{
+  [key in apiKeys]: indicatorObj;
+}> = {
   bbl: {
     name: "BBL",
   },
@@ -32,11 +34,6 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Residential Units",
     format: "comma",
   },
-  units_res_agg: {
-    name: "Residential Units",
-    description: "Total number of residential units across all of the Signature buildings in this portfolio",
-    format: "comma",
-  },
   units_nonres: {
     name: "Has Non-Residential Units",
     description:
@@ -50,12 +47,6 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     name: "Rent Stabilized Units",
     description:
       "The number of rent stabilized units most recently registered with DHCR. All properties in the Signature portfolio have rent stabilized units, so any zero values are most likely a reporting error.",
-    format: "comma",
-  },
-  rs_units_agg: {
-    name: "Rent Stabilized Units",
-    description:
-      "Total number of rent stabilized units most recently registered with DHCR across all Signature properties in the portfolio. While all properties in the Signature portfolio have rent stabilized units, some have not registered with DHCR so this number will be an under count.",
     format: "comma",
   },
   bip: {
@@ -73,6 +64,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "comma",
+    dataset: "unhp",
   },
   landlord: {
     name: "Landlord",
@@ -85,17 +77,6 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   lender_name: {
     name: "Lender",
-  },
-  buildings_agg: {
-    name: "Buildings",
-    description: "The number of Signature properties in the portfolio.",
-    format: "comma",
-  },
-  bip_500_pct: {
-    name: "Percent of buildings with BIP score 500+",
-    description:
-      "The percent of buildings within a portfolio that are likely to be in physical or financial distress, according to the Building Indicator Project (BIP) Database.",
-    format: "percent",
   },
   hpd_viol_bc_open: {
     name: "Open HPD violations (B & C)",
@@ -371,12 +352,6 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
     format: "comma",
     dataset: "oca_address",
   },
-  evictions_filed_agg: {
-    name: "Eviction cases filed, last 12 mo.",
-    description:
-      "Number of eviction cases filed by the landlord in housing court across all Signature buildings in this portfolio that have at least 11 residential units.  This is the first step in the court process, and the case may later get dismissed, settled in or out of court, or eventually result in a executed eviction warrant.",
-    format: "comma",
-  },
   evictions_executed: {
     name: "Eviction warrants executed, last 12 mo.",
     description:
@@ -462,6 +437,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "money",
+    dataset: "unhp",
   },
   debt_total: {
     name: "Signature debt",
@@ -474,6 +450,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "money",
+    dataset: "unhp",
   },
   origination_date: {
     name: "Signature loan origination date",
@@ -484,6 +461,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "date",
+    dataset: "unhp",
   },
   last_sale_date: {
     name: "Last sale date",
@@ -603,6 +581,7 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
       </>
     ),
     format: "money",
+    dataset: "unhp",
   },
   dob_ecb_viol_open: {
     name: "Open DOB/ECB violations",
@@ -817,5 +796,85 @@ export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
   },
   lng: {
     name: "Longitude",
+  },
+};
+
+export const INDICATOR_STRINGS: Partial<{ [key in apiKeys]: indicatorObj }> = {
+  ...indicatorStringsBuildingOnly,
+  buildings_agg: {
+    name: "Buildings",
+    description:
+      "The number of formerly Signature financed properties in the portfolio.",
+    format: "comma",
+  },
+  bip_500_pct_agg: {
+    name: "Percent of buildings with BIP score 500+",
+    description:
+      "The percent of buildings within the portfolio that are likely to be in physical or financial distress, according to the Building Indicator Project (BIP) Database.",
+    format: "percent",
+    dataset: "unhp",
+  },
+  units_res_agg: {
+    ...indicatorStringsBuildingOnly.units_res!,
+    description:
+      "Total number of residential units across all of the formerly Signature financed buildings in this portfolio",
+  },
+  rs_units_agg: {
+    ...indicatorStringsBuildingOnly.rs_units!,
+    description:
+      "Total number of rent stabilized units most recently registered with DHCR across all formerly Signature financed properties in the portfolio. While all properties in the Signature portfolio have rent stabilized units, some have not registered with DHCR so this number will be an under count.",
+  },
+  evictions_filed_agg: {
+    ...indicatorStringsBuildingOnly.evictions_filed!,
+    description:
+      "Number of eviction cases filed by the landlord in housing court across all formerly Signature financed buildings in this portfolio that have at least 11 residential units. This is the first step in the court process, and the case may later get dismissed, settled in or out of court, or eventually result in a executed eviction warrant.",
+  },
+  hp_active_agg: {
+    ...indicatorStringsBuildingOnly.hp_active!,
+  },
+  hpd_erp_orders_agg: {
+    ...indicatorStringsBuildingOnly.hpd_erp_orders!,
+  },
+  hpd_erp_orders_per_unit_agg: {
+    ...indicatorStringsBuildingOnly.hpd_erp_orders_per_unit!,
+  },
+  hpd_erp_charges_agg: {
+    ...indicatorStringsBuildingOnly.hpd_erp_charges!,
+  },
+  hpd_erp_charges_per_unit_agg: {
+    ...indicatorStringsBuildingOnly.hpd_erp_charges_per_unit!,
+  },
+  hpd_viol_bc_open_agg: {
+    ...indicatorStringsBuildingOnly.hpd_viol_bc_open!,
+  },
+  hpd_viol_bc_open_per_unit_agg: {
+    ...indicatorStringsBuildingOnly.hpd_viol_bc_open_per_unit!,
+  },
+  hpd_viol_bc_total_agg: {
+    ...indicatorStringsBuildingOnly.hpd_viol_bc_total!,
+  },
+  hpd_viol_bc_total_per_unit_agg: {
+    ...indicatorStringsBuildingOnly.hpd_viol_bc_total_per_unit!,
+  },
+  hpd_comp_emerg_total_agg: {
+    ...indicatorStringsBuildingOnly.hpd_comp_emerg_total!,
+  },
+  hpd_comp_emerg_total_per_unit_agg: {
+    ...indicatorStringsBuildingOnly.hpd_comp_emerg_total_per_unit!,
+  },
+  dob_ecb_viol_open_agg: {
+    ...indicatorStringsBuildingOnly.dob_ecb_viol_open!,
+  },
+  dob_ecb_viol_open_per_unit_agg: {
+    ...indicatorStringsBuildingOnly.dob_ecb_viol_open_per_unit!,
+  },
+  water_charges_agg: {
+    ...indicatorStringsBuildingOnly.water_charges!,
+  },
+  debt_total_agg: {
+    ...indicatorStringsBuildingOnly.debt_total!,
+  },
+  debt_per_unit_agg: {
+    ...indicatorStringsBuildingOnly.debt_per_unit!,
   },
 };

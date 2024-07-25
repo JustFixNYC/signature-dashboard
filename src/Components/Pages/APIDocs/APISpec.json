@@ -548,11 +548,6 @@
             "example": 140888559.23999998,
             "description": "The total Signature debt of the collection"
           },
-          "debt_per_building_agg": {
-            "type": "number",
-            "example": 5418790.739999999,
-            "description": "The average Signature debt per building in the collection"
-          },
           "debt_per_unit_agg": {
             "type": "number",
             "example": 78271.42179999998,
