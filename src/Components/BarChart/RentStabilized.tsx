@@ -5,6 +5,7 @@ import { BarChart } from "./BarChart";
 type RentStabilizedUnitsChartProps = {
   data: APIChartData[];
   title: React.ReactNode;
+  dataUnitName: "building" | "portfolio";
   className?: string;
   originationDate?: string;
   lastSaleDate?: string;
@@ -12,11 +13,18 @@ type RentStabilizedUnitsChartProps = {
 
 export const RentStabilizedUnitsChart: React.FC<
   RentStabilizedUnitsChartProps
-> = ({ data, title, originationDate, lastSaleDate, className }) => {
+> = ({
+  data,
+  title,
+  dataUnitName,
+  originationDate,
+  lastSaleDate,
+  className,
+}) => {
   const yearlyData: yearlyChartData[] = groupData(
     data,
     "rentstab_units",
-    "year",
+    "year"
   ) as yearlyChartData[];
   const datasets = [
     {
@@ -29,10 +37,21 @@ export const RentStabilizedUnitsChart: React.FC<
     },
   ];
 
+  const dataSum = data.reduce((acc, row) => acc + row.rentstab_units, 0) || 0;
+
+  const dataNote = dataSum === 0 && (
+    <p className="chart-note">
+      Note: There are no rent stabilized units registered in this {dataUnitName},
+      however all properties in the Signature portfolio have rent stabilized
+      units so this is most likely a reporting error.
+    </p>
+  );
+
   return (
     <BarChart
       datasets={datasets}
       title={title}
+      note={dataNote}
       yAxisTitle="Rent Stabilized Units"
       originationDate={originationDate}
       lastSaleDate={lastSaleDate}

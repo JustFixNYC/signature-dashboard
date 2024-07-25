@@ -14,12 +14,19 @@
       position: absolute;
       right: 0;
       height: 100%;
-      width: 50px;
+      width: 100px;
       z-index: 2;
       background: linear-gradient(90deg, rgba(250, 248, 244, 0) 0, #faf8f4);
       visibility: visible;
       opacity: 1;
-      transition: opacity .5s linear;
+      transition: opacity 0.5s linear;
+    }
+    &.hide-scroll-fade::before {
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        visibility 0s 0.3s,
+        opacity 0.3s linear;
     }
   }
 }
@@ -37,7 +44,7 @@
     }
     &:hover {
       color: #676565;
-    }  
+    }
   }
 }
 
@@ -78,7 +85,6 @@ table.collection-building-table {
       border-left: 0;
     }
   }
-
 }
 
 table.collection-building-table tbody tr {
@@ -88,6 +94,10 @@ table.collection-building-table tbody tr {
   td {
     font-weight: 400;
     padding: 2px 8px;
+    .pill {
+      margin: 3px auto;
+      padding: 4px 0;
+    }
   }
 }
 
@@ -153,25 +163,57 @@ table.collection-building-table tbody tr {
 .pagination-container {
   position: sticky;
   left: 0;
-}
-
-.pagination-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 0;
-
-  .pagination-controls__pages {
+  .pagination-controls {
     display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0.875rem 3rem;
+    border-top: 1px solid $GREY_50;
+    text-align: center;
+    margin: 0;
+
+    .pagination-controls__page-size {
+      select {
+        font-size: 1rem;
+        padding: 0.25rem 1.69rem 0.25rem 0.5rem;
+        border-radius: 3px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: #fff;
+        cursor: pointer;
+        appearance: none;
+        // custom arrow, same as chevronIcon
+        background-image: url("data:image/svg+xml,%3Csvg width='11' height='7' viewBox='0 0 11 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.5 1L5.25 5.25L1 1' stroke='%23242323' stroke-width='1'/%3E%3C/svg%3E%0A");
+        background-repeat: no-repeat;
+        background-position: right 0.56rem top 50%;
+        background-size: 1rem auto;
+        &:focus,
+        &:focus-visible {
+          outline: 1px solid $FOCUS_OUTLINE_COLOR;
+        }
+      }
+    }
+    .pagination-controls__pages {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1;
+      margin-right: 2rem;
+    }
+    button {
+      &.pagination-controls__prev-page {
+        margin-right: 0.5rem;
+      }
+    }
   }
 }
 
-.clear-all {
-  margin-bottom: 1.5rem;
-}
-
-.collection-building-table__record-count {
+.collection-building-table__record-count-container {
   margin-bottom: 16px;
+  .clear-all {
+    text-decoration: underline;
+    background: none;
+    border: none;
+    margin-left: 0.625rem;
+  }
 }
 
 .table-buttons-container {

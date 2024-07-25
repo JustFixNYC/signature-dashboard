@@ -42,27 +42,8 @@
         margin: 0 auto;
       }
 
-      .cards-container {
-        display: flex;
+      .home-page__cards-container {
         flex-direction: column;
-        gap: 2rem;
-      }
-
-      .card {
-        width: 18rem;
-
-        .card__title {
-          font-weight: 600;
-        }
-
-        .card__link {
-          display: block;
-          margin-top: 48px;
-          text-wrap: nowrap;
-          &:visited {
-            color: $OFF_BLACK;
-          }
-        }
       }
     }
   }

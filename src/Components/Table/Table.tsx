@@ -26,10 +26,12 @@ import {
   formatNumber,
   getHiddenColumns,
   getObjFromEncodedParam,
+  useOnScreen,
 } from "../../util/helpers";
 import { FilterChips } from "../FilterChips/FilterChips";
 import { PageSizeOptions, Pagination } from "./Pagination";
 import classNames from "classnames";
+import { LAST_COLUMN_ID } from "../BuildingTable/BuildingTableColumns";
 
 export interface TableProps<T extends object> {
   data: T[];
@@ -192,6 +194,20 @@ export const Table = <T extends object>(
   const filteredRecordCount = table.getRowCount();
   const unFilteredRecordCount = table.getPreFilteredRowModel().rows.length;
 
+  const lastColumnRef = useRef<HTMLTableCellElement>(null);
+  const isLastColumnVisible = useOnScreen(lastColumnRef);
+  /**
+   * For older browsers that do not support the `useOnScreen` hook,
+   * let's hide the dynamic scroll fade by default.
+   */
+  const isOlderBrowser = typeof IntersectionObserver === "undefined";
+  /**
+   * Let's hide the fade out on the right edge of the table if:
+   * - We've scrolled to the last column OR
+   * - We're using an older browser that cannot detect where we've scrolled
+   */
+  const hideScrollFade = isOlderBrowser || isLastColumnVisible;
+
   return (
     <>
       <div className="table-buttons-container">
@@ -205,22 +221,24 @@ export const Table = <T extends object>(
           columnFilters={columnFilters}
         />
       </div>
-      {!!columnFilters.length && (
-        <Button
-          labelText="Clear all filters"
-          onClick={clearFilters}
-          size="small"
-          className="clear-all"
-        />
-      )}
-      <div className="collection-building-table__record-count">
+      <div className="collection-building-table__record-count-container">
         Showing{" "}
         {filteredRecordCount === unFilteredRecordCount
           ? "all "
           : `${formatNumber(filteredRecordCount)} of `}
         <>{formatNumber(table.getPreFilteredRowModel().rows.length)}</> records
+        {!!columnFilters.length && (
+          <button onClick={clearFilters} className="clear-all jfcl-link">
+            Clear all filters
+          </button>
+        )}
       </div>
-      <div className="table-container-wrapper">
+      <div
+        className={classNames(
+          "table-container-wrapper",
+          hideScrollFade && "hide-scroll-fade"
+        )}
+      >
         <div className="table-container" ref={containerRef}>
           <table className={classNames("collection-building-table", className)}>
             <thead>
@@ -263,7 +281,11 @@ export const Table = <T extends object>(
                                     labelIcon={sortIcon}
                                     size="small"
                                     variant="tertiary"
-                                    className={classNames("column-header__sort-icon", (sortIcon === "arrowUpArrowDown") && "unsorted")}
+                                    className={classNames(
+                                      "column-header__sort-icon",
+                                      sortIcon === "arrowUpArrowDown" &&
+                                        "unsorted"
+                                    )}
                                     onClick={header.column.getToggleSortingHandler()}
                                   />
                                 </span>
@@ -292,6 +314,11 @@ export const Table = <T extends object>(
                       <td
                         key={cell.id}
                         style={{ ...getCommonPinningStyles(cell.column) }}
+                        ref={
+                          cell.column.id === LAST_COLUMN_ID
+                            ? lastColumnRef
+                            : undefined
+                        }
                       >
                         {valueExists
                           ? flexRender(

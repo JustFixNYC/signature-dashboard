@@ -2,20 +2,11 @@
 import React from "react";
 import "./style.scss";
 import { PageTitle } from "../../PageTitle/PageTitle";
-import JFCLLinkInternal from "../../JFCLLinkInternal";
-import { useGetPortfolios } from "../../../api/hooks";
-import { formatNumber } from "../../../util/helpers";
 import { AddressSearch } from "../../AlgoliaSearch/AlgoliaSearch";
 import { Link } from "@justfixnyc/component-library";
+import { PortfolioCards } from "../../PortfolioCards/PortfolioCards";
 
 export const Home: React.FC = () => {
-  const { data } = useGetPortfolios();
-
-  const entirePortfolio = data?.find((obj) => obj.collection_slug === "all");
-  const cpcPortfolio = data?.find((obj) => obj.collection_slug === "cpc");
-  const santanderPortfolio = data?.find(
-    (obj) => obj.collection_slug === "santander"
-  );
 
   return (
     <>
@@ -53,43 +44,10 @@ export const Home: React.FC = () => {
             />
           </div>
           <div className="col-2">
-            <div className="cards-container">
-              <div className="card">
-                <div className="card__title">Signature Portfolio</div>
-                <div>{`${formatNumber(entirePortfolio?.landlords)} Landlords`}</div>
-                <div>{`${formatNumber(entirePortfolio?.buildings)} Buildings`}</div>
-                <JFCLLinkInternal
-                  href="/entire-portfolio"
-                  className="card__link"
-                >
-                  Entire Signature Portfolio
-                </JFCLLinkInternal>
-              </div>
-
-              <div className="card">
-                <div className="card__title">CPC Portfolio</div>
-                <div>{`${formatNumber(cpcPortfolio?.landlords)} Landlords`}</div>
-                <div>{`${formatNumber(cpcPortfolio?.buildings)} Buildings`}</div>
-                <JFCLLinkInternal
-                  href="/lenders?lender=cpc"
-                  className="card__link"
-                >
-                  CPC Portfolio
-                </JFCLLinkInternal>
-              </div>
-
-              <div className="card">
-                <div className="card__title">Santander Portfolio</div>
-                <div>{`${formatNumber(santanderPortfolio?.landlords)} Landlords`}</div>
-                <div>{`${formatNumber(santanderPortfolio?.buildings)} Buildings`}</div>
-                <JFCLLinkInternal
-                  href="/lenders?lender=santander"
-                  className="card__link"
-                >
-                  Santander Portfolio
-                </JFCLLinkInternal>
-              </div>
-            </div>
+            <PortfolioCards
+              portfolios={["all", "cpc", "santander"]}
+              className="home-page__cards-container"
+            />
           </div>
         </div>
       </div>

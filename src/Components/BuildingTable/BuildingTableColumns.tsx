@@ -65,9 +65,15 @@ export const columns = [
         header: getColumnHeader("landlord"),
         cell: (info) => (
           <div className="cell__landlord">
-            <Link to={`/landlords?landlord=${info.row.original.landlord_slug}`}>
-              {info.getValue()}
-            </Link>
+            {info.row.original.landlord_slug ? (
+              <Link
+                to={`/landlords?landlord=${info.row.original.landlord_slug}`}
+              >
+                {info.getValue()}
+              </Link>
+            ) : (
+              <span className="not-available">Not available</span>
+            )}
           </div>
         ),
         sortUndefined: "last",
@@ -330,6 +336,7 @@ export const columns = [
         meta: {
           filterVariant: "boolean",
         },
+        size: 200,
       }),
       columnHelper.accessor((row) => getColumnAccessor(row.in_conh), {
         id: "in_conh",
@@ -351,6 +358,7 @@ export const columns = [
         meta: {
           filterVariant: "boolean",
         },
+        size: 200,
       }),
     ],
   }),
@@ -597,3 +605,5 @@ export const columns = [
     ],
   }),
 ];
+
+export const LAST_COLUMN_ID = "cong_dist";
