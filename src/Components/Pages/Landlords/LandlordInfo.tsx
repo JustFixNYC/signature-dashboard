@@ -60,8 +60,8 @@ export const LandlordInfo: React.FC<LandlordInfoProps> = ({ landlord }) => {
           <PageTitle>{data.collection_name}</PageTitle>
           <p className="landlord-context">
             {data.collection_name} has a portfolio of{" "}
-            {formatNumber(data.buildings) as string} rent-regulated buildings
-            that were financed by Signature Bank.
+            {formatNumber(data.buildings_agg) as string} rent-regulated
+            buildings that were financed by Signature Bank.
           </p>
           <div className="layout-two-col">
             <div>

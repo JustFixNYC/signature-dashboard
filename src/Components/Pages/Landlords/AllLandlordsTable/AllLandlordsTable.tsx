@@ -39,9 +39,9 @@ export const columns = [
       filterVariant: "select",
     },
   }),
-  columnHelper.accessor((row) => getColumnAccessor(row.buildings), {
-    id: "buildings",
-    header: getColumnHeader("buildings"),
+  columnHelper.accessor((row) => getColumnAccessor(row.buildings_agg), {
+    id: "buildings_agg",
+    header: getColumnHeader("buildings_agg"),
     sortUndefined: "last",
     cell: (info) => info.getValue(),
     filterFn: "inNumberRange",
@@ -49,9 +49,9 @@ export const columns = [
       filterVariant: "range",
     },
   }),
-  columnHelper.accessor((row) => getColumnAccessor(row.units_res), {
-    id: "units_res",
-    header: getColumnHeader("units_res"),
+  columnHelper.accessor((row) => getColumnAccessor(row.units_res_agg), {
+    id: "units_res_agg",
+    header: getColumnHeader("units_res_agg"),
     sortUndefined: "last",
     cell: (info) => formatNumber(info.getValue()),
     filterFn: "inNumberRange",
@@ -60,10 +60,10 @@ export const columns = [
     },
   }),
   columnHelper.accessor(
-    (row) => getColumnAccessor(row.hpd_viol_bc_open_per_unit),
+    (row) => getColumnAccessor(row.hpd_viol_bc_open_per_unit_agg),
     {
-      id: "hpd_viol_bc_open_per_unit",
-      header: getColumnHeader("hpd_viol_bc_open_per_unit"),
+      id: "hpd_viol_bc_open_per_unit_agg",
+      header: getColumnHeader("hpd_viol_bc_open_per_unit_agg"),
       sortUndefined: "last",
       cell: (info) => round(info.getValue()),
       filterFn: "inNumberRange",
@@ -72,9 +72,9 @@ export const columns = [
       },
     }
   ),
-  columnHelper.accessor((row) => getColumnAccessor(row.debt_per_unit), {
-    id: "debt_per_unit",
-    header: getColumnHeader("debt_per_unit"),
+  columnHelper.accessor((row) => getColumnAccessor(row.debt_per_unit_agg), {
+    id: "debt_per_unit_agg",
+    header: getColumnHeader("debt_per_unit_agg"),
     sortUndefined: "last",
     cell: (info) => formatMoney(info.getValue()),
     filterFn: "inNumberRange",

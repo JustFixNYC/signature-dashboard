@@ -584,22 +584,22 @@
             "example": "cpc",
             "description": "Lender name slug, used for API and URL"
           },
-          "buildings": {
+          "buildings_agg": {
             "type": "integer",
             "example": 26,
             "description": "Number of properties (BBLs) in the collection"
           },
-          "units_res": {
+          "units_res_agg": {
             "type": "integer",
             "example": 1800,
             "description": "Total number of residential units in the collection"
           },
-          "hpd_viol_bc_open_per_unit": {
+          "hpd_viol_bc_open_per_unit_agg": {
             "type": "number",
             "example": 8.495,
             "description": "The average number of open B & C class HPD violations per unit in the collection, since 2010"
           },
-          "debt_per_unit": {
+          "debt_per_unit_agg": {
             "type": "number",
             "example": 78271.42179999998,
             "description": "The average Signature debt per unit in the collection"
@@ -613,7 +613,7 @@
             "example": "cpc",
             "description": "Collection name slug for the portfolio, used for API and URL. (all, cpc, santander)"
           },
-          "buildings": {
+          "buildings_agg": {
             "type": "integer",
             "example": 140,
             "description": "Total number of buildings in the collection"

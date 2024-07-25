@@ -71,7 +71,7 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
               </SubSectionHeader>
             }
             data={chartData}
-            units_res={data.units_res}
+            units_res={data.units_res_agg}
             dataUnitName="portfolio"
           />
         </div>

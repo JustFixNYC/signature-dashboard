@@ -29,7 +29,7 @@ export const PortfolioCards: React.FC<PortfolioCardsProps> = ({
         <div className="card">
           <div className="card__title">Signature Portfolio</div>
           <div>{`${formatNumber(entirePortfolio?.landlords)} Landlords`}</div>
-          <div>{`${formatNumber(entirePortfolio?.buildings)} Buildings`}</div>
+          <div>{`${formatNumber(entirePortfolio?.buildings_agg)} Buildings`}</div>
           <JFCLLinkInternal href="/entire-portfolio" className="card__link">
             Entire Signature Portfolio
           </JFCLLinkInternal>
@@ -40,7 +40,7 @@ export const PortfolioCards: React.FC<PortfolioCardsProps> = ({
         <div className="card">
           <div className="card__title">CPC Portfolio</div>
           <div>{`${formatNumber(cpcPortfolio?.landlords)} Landlords`}</div>
-          <div>{`${formatNumber(cpcPortfolio?.buildings)} Buildings`}</div>
+          <div>{`${formatNumber(cpcPortfolio?.buildings_agg)} Buildings`}</div>
           <JFCLLinkInternal href="/lenders?lender=cpc" className="card__link">
             CPC Portfolio
           </JFCLLinkInternal>
@@ -51,7 +51,7 @@ export const PortfolioCards: React.FC<PortfolioCardsProps> = ({
         <div className="card">
           <div className="card__title">Santander Portfolio</div>
           <div>{`${formatNumber(santanderPortfolio?.landlords)} Landlords`}</div>
-          <div>{`${formatNumber(santanderPortfolio?.buildings)} Buildings`}</div>
+          <div>{`${formatNumber(santanderPortfolio?.buildings_agg)} Buildings`}</div>
           <JFCLLinkInternal
             href="/lenders?lender=santander"
             className="card__link"

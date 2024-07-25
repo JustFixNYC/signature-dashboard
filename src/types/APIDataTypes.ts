@@ -218,7 +218,7 @@ export interface MapData {
 
 export interface APIPortfolioData {
   collection_slug: "cpc" | "santander" | "all";
-  buildings: number;
+  buildings_agg: number;
   landlords: number;
 }
 

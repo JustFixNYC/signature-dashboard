@@ -38,7 +38,7 @@ export const EntirePortfolio: React.FC = () => {
               <PageTitle>Entire Signature Portfolio</PageTitle>
 
               <p className="signature-context">
-                There are {formatNumber(data.buildings) as string}{" "}
+                There are {formatNumber(data.buildings_agg) as string}{" "}
                 rent-regulated buildings on the Signature Portfolio Dashboard.
                 See below for aggregate stats on the entire portfolio and a list
                 of all buildings.
