@@ -38,25 +38,25 @@ export const PortfolioCards: React.FC<PortfolioCardsProps> = ({
 
       {portfolios.includes("cpc") && (
         <div className="card">
-          <div className="card__title">CPC Portfolio</div>
+          <div className="card__title">CPC Loan Pool</div>
           <div>{`${formatNumber(cpcPortfolio?.landlords)} Landlords`}</div>
           <div>{`${formatNumber(cpcPortfolio?.buildings_agg)} Buildings`}</div>
-          <JFCLLinkInternal href="/lenders?lender=cpc" className="card__link">
-            CPC Portfolio
+          <JFCLLinkInternal href="/loan-pools?loan-pool=cpc" className="card__link">
+            CPC Loan Pool
           </JFCLLinkInternal>
         </div>
       )}
 
       {portfolios.includes("santander") && (
         <div className="card">
-          <div className="card__title">Santander Portfolio</div>
+          <div className="card__title">Santander Loan Pool</div>
           <div>{`${formatNumber(santanderPortfolio?.landlords)} Landlords`}</div>
           <div>{`${formatNumber(santanderPortfolio?.buildings_agg)} Buildings`}</div>
           <JFCLLinkInternal
-            href="/lenders?lender=santander"
+            href="/loan-pools?loan-pool=santander"
             className="card__link"
           >
-            Santander Portfolio
+            Santander Loan Pool
           </JFCLLinkInternal>
         </div>
       )}

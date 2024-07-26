@@ -12,6 +12,14 @@ import { VisibilityState } from "@tanstack/react-table";
 import { INDICATOR_STRINGS } from "./indicators";
 import { useEffect, useState } from "react";
 
+export function loanPoolNameLong(loanPoolSlug: string): string {
+  return loanPoolSlug === "cpc"
+    ? "Community Preservation Corporation (CPC)"
+    : loanPoolSlug === "santander"
+      ? "Santander Bank"
+      : loanPoolSlug;
+}
+
 export function splitBBL(bbl: string) {
   const bblArr = bbl.split("");
   const boro = bblArr.slice(0, 1).join("");
@@ -200,7 +208,7 @@ export const buildingToMapData = (buildingData: BuildingInfo[]): MapData[] => {
       zip: building.zip,
       landlord: building.landlord,
       landlord_slug: building.landlord_slug,
-      lender_slug: building.lender_slug,
+      loan_pool_slug: building.loan_pool_slug,
       lat: building.lat,
       lng: building.lng,
     } as MapData;

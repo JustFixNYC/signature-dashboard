@@ -92,9 +92,19 @@ export const About: React.FC = () => {
         </p>
       </div>
       <SectionHeader className="about__section-header">
-        Signature Bank collapse and the FDIC
+        About the data
       </SectionHeader>
       <div className="about__content" style={{ width: "600px" }}>
+        <p>
+          Landlord portfolios are identified by cross referencing HPD
+          Registration and ACRIS data; they are our best approximations based on
+          the publicly available data. To provide input that can help us refine
+          our landlord portfolio identification strategy, please fill out this{" "}
+          <Link href={"https://form.typeform.com/to/xWz7AK8h"}>
+            feedback form
+          </Link>
+          .
+        </p>
         <p>
           All of the data comes from public sources and are automatically
           updated every day with the latest versions available from each source,

@@ -20,12 +20,12 @@ import {
 import { Loading } from "../../Loading/Loading";
 import { formatNumber } from "../../../util/helpers";
 
-interface LenderInfoProps {
-  lender: string;
+interface LoanPoolInfoProps {
+  loanPool: string;
 }
 
-export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
-  const { data, error, isLoading } = useGetCollectionInfo(lender);
+export const LoanPoolInfo: React.FC<LoanPoolInfoProps> = ({ loanPool }) => {
+  const { data, error, isLoading } = useGetCollectionInfo(loanPool);
   const {
     data: lastUpdatedData,
     error: lastUpdatedError,
@@ -43,7 +43,7 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
           <div className="top-bar">
             <BreadCrumbs
               crumbs={[
-                { path: "/lenders", name: "Lenders" },
+                { path: "/loan-pools", name: "Loan pool" },
                 { name: data.collection_name },
               ]}
             />
@@ -54,16 +54,16 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
               />
             </div>
           </div>
-          <PageTitle className="lender-page__page-title">
+          <PageTitle className="loan-pool-page__page-title">
             {data.collection_slug === "cpc" &&
               "Community Preservation Corporation (CPC)"}
             {data.collection_slug === "santander" && "Santander Bank"}
           </PageTitle>
-          <p className="lender-context">
-            {data.collection_name} manages the loans for{" "}
+          <p className="loan-pool-context">
+            {data.collection_name} manages the mortgages for{" "}
             {formatNumber(data.buildings_agg) as string} rent-regulated
             buildings in the Signature Portfolio.{" "}
-            <Link href="/lenders">About the lender program</Link>
+            <Link href="/loan-pools">About the loan pools</Link>
           </p>
 
           <div className="layout-two-col">
@@ -73,7 +73,7 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
                 <TOCList>
                   <TOCItem href="#summary-stats">Summary stats</TOCItem>
                   <TOCItem href="#trend-charts">Trend charts</TOCItem>
-                  <TOCItem href="#map">Portfolio Map</TOCItem>
+                  <TOCItem href="#map">Loan pool map</TOCItem>
                   <TOCItem href="#buildings-table">Buildings table</TOCItem>
                 </TOCList>
               </TableOfContents>
@@ -85,7 +85,7 @@ export const LenderInfo: React.FC<LenderInfoProps> = ({ lender }) => {
             </div>
           </div>
 
-          <Collection collection={lender} data={data} />
+          <Collection collection={loanPool} data={data} />
         </>
       )}
     </>

@@ -16,16 +16,16 @@ export const generateBuildingCSV = (data: BuildingInfo) => {
   const csvData = [];
   csvData.push(["name", "key", "value"]);
   [...Array(values.length).keys()].forEach((i) => {
-    if (["lender_slug", "landlord_slug"].includes(api_keys[i])) return;
+    if (["loan_pool_slug", "landlord_slug"].includes(api_keys[i])) return;
     csvData.push([api_keys[i], indicator_names[i], values[i]]);
   });
 
   const base_url = window.location.host;
   csvData.push([
-    "link_lender",
+    "link_loan_pool",
     "",
     "",
-    `${base_url}/lenders?lender=${data.lender_slug}`,
+    `${base_url}/loan-pools?loan-pool=${data.loan_pool_slug}`,
   ]);
   csvData.push([
     "link_landlord",

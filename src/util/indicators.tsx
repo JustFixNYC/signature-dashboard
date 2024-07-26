@@ -31,20 +31,20 @@ const indicatorStringsBuildingOnly: Partial<{
     name: "Borough",
   },
   units_res: {
-    name: "Residential Units",
+    name: "Residential units",
     format: "comma",
   },
   units_nonres: {
-    name: "Has Non-Residential Units",
+    name: "Has non-residential units",
     description:
       "Presence of any non-residential units. May include one or more types of units (offices, retail stores, etc.)",
     format: "boolean",
   },
   year_built: {
-    name: "Year Built",
+    name: "Year built",
   },
   rs_units: {
-    name: "Rent Stabilized Units",
+    name: "Rent-stabilized units",
     description:
       "The number of rent stabilized units most recently registered with DHCR. All properties in the Signature portfolio have rent stabilized units, so any zero values are most likely a reporting error.",
     format: "comma",
@@ -72,11 +72,11 @@ const indicatorStringsBuildingOnly: Partial<{
   landlord_name: {
     name: "Landlord",
   },
-  lender: {
-    name: "Lender",
+  loan_pool: {
+    name: "Loan pool",
   },
-  lender_name: {
-    name: "Lender",
+  loan_pool_name: {
+    name: "Loan pool",
   },
   hpd_viol_bc_open: {
     name: "Open HPD violations (B & C)",

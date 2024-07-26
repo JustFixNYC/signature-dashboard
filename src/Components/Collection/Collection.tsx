@@ -80,9 +80,9 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
 
       {data.collection_type !== "all" && (
         <>
-          {data.collection_type === "lender" && (
+          {data.collection_type === "loan_pool" && (
             <SectionHeader id="map">
-              Map of buildings in {data.collection_name} portfolio
+              Map of buildings in {data.collection_name} loan pool
             </SectionHeader>
           )}
           {data.collection_type === "landlord" && (
@@ -98,9 +98,9 @@ export const Collection: React.FC<CollectionProps> = ({ collection, data }) => {
         </>
       )}
 
-      {data.collection_type === "lender" && (
+      {data.collection_type === "loan_pool" && (
         <SectionHeader id="buildings-table">
-          Buildings in {data.collection_name} portfolio
+          Buildings in {data.collection_name} loan pool
         </SectionHeader>
       )}
       {data.collection_type === "landlord" && (

@@ -103,10 +103,10 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
             )}
           </div>
           <div>
-            Lender:{" "}
-            {buildingInfo.lender ? (
-              <Link to={`/lenders?lender=${buildingInfo.lender_slug}`}>
-                {buildingInfo.lender}
+            Loan pool:{" "}
+            {buildingInfo.loan_pool ? (
+              <Link to={`/loan-pools?loan-pool=${buildingInfo.loan_pool_slug}`}>
+                {buildingInfo.loan_pool}
               </Link>
             ) : (
               <span className="not-available">N/A</span>

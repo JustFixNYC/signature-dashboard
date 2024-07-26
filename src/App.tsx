@@ -14,7 +14,7 @@ import { APIDocs } from "./Components/Pages/APIDocs/APIDocs";
 import { Login } from "./Components/Pages/Login/Login";
 import { PrivateRoutes } from "./auth";
 import { Landlords } from "./Components/Pages/Landlords/Landlords";
-import { Lenders } from "./Components/Pages/Lenders/Lenders";
+import { LoanPools } from "./Components/Pages/LoanPools/LoanPools";
 import { Home } from "./Components/Pages/Home/Home";
 import { About } from "./Components/Pages/About/About";
 import { Map } from "./Components/Pages/Map/Map";
@@ -41,7 +41,7 @@ function App() {
             <Route path="entire-portfolio" element={<EntirePortfolio />} />
             <Route path="buildings" element={<Buildings />} />
             <Route path="landlords" element={<Landlords />} />
-            <Route path="lenders" element={<Lenders />} />
+            <Route path="loan-pools" element={<LoanPools />} />
             <Route path="about" element={<About />} />
             <Route path="map" element={<Map />} />
             <Route path="*" element={<Home />} />
@@ -56,7 +56,7 @@ function App() {
 
 function Layout() {
   const [searchParams] = useSearchParams();
-  const lender = searchParams.get("lender");
+  const loanPool = searchParams.get("loan-pool");
   return (
     <>
       <header id="header">
@@ -133,9 +133,9 @@ function Layout() {
               </li>
               <li>
                 <NavLink
-                  to="/lenders"
+                  to="/loan-pools"
                   className={({ isActive }) =>
-                    isActive && !lender
+                    isActive && !loanPool
                       ? "nav-link nav-link-active"
                       : "nav-link"
                   }
@@ -143,14 +143,14 @@ function Layout() {
                   <span className="nav-link__icon">
                     <Icon icon="buildingColumns" />
                   </span>
-                  Lenders
+                  Loan pools
                 </NavLink>
                 <ul className="sublinks">
                   <li>
                     <NavLink
-                      to="/lenders?lender=cpc"
+                      to="/loan-pools?loan-pool=cpc"
                       className={({ isActive }) =>
-                        isActive && lender === "cpc"
+                        isActive && loanPool === "cpc"
                           ? "nav-link nav-link-active"
                           : "nav-link"
                       }
@@ -160,9 +160,9 @@ function Layout() {
                   </li>
                   <li>
                     <NavLink
-                      to="/lenders?lender=santander"
+                      to="/loan-pools?loan-pool=santander"
                       className={({ isActive }) =>
-                        isActive && lender === "santander"
+                        isActive && loanPool === "santander"
                           ? "nav-link nav-link-active"
                           : "nav-link"
                       }

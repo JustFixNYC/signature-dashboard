@@ -8,10 +8,8 @@ import {
   formatNumber,
   getColumnAccessor,
 } from "../../../../util/helpers";
-import { useGetAllLandlords } from "../../../../api/hooks";
 import { Table } from "../../../Table/Table";
 import "./style.scss";
-import { Loading } from "../../../Loading/Loading";
 
 const columnHelper = createColumnHelper<LandlordInfo>();
 
@@ -29,9 +27,9 @@ export const columns = [
     ),
     filterFn: "includesString",
   }),
-  columnHelper.accessor((row) => getColumnAccessor(row.lender_name), {
-    id: "lender_name",
-    header: getColumnHeader("lender_name"),
+  columnHelper.accessor((row) => getColumnAccessor(row.loan_pool_name), {
+    id: "loan_pool_name",
+    header: getColumnHeader("loan_pool_name"),
     sortUndefined: "last",
     cell: (info) => info.getValue(),
     filterFn: "includesString",
@@ -84,31 +82,17 @@ export const columns = [
   }),
 ];
 
-export const AllLandlordsTable: React.FC = () => {
-  const { data, error, isLoading } = useGetAllLandlords();
-
+export const AllLandlordsTable: React.FC<{
+  data: LandlordInfo[];
+}> = ({ data }) => {
   return (
-    <>
-      {isLoading && <Loading />}
-      {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-      {data && (
-        <>
-          <p className="landing-page-table-context">
-            {data.length} landlords with rent-regulated properties financed by
-            Signature Bank. Each one will have their portfolios entirely in
-            either the Community Preservation Corporation (CPC) or Santander
-            Bank joint ventures.
-          </p>
-          <Table
-            data={data}
-            columns={columns}
-            pagination
-            initialSorting={[{ id: "units_res", desc: true }]}
-            qsPrefix="ll" // NOTE: changing this value will break bookmarked urls
-            className="landlords-table"
-          />
-        </>
-      )}
-    </>
+    <Table
+      data={data}
+      columns={columns}
+      pagination
+      initialSorting={[{ id: "units_res_agg", desc: true }]}
+      qsPrefix="ll" // NOTE: changing this value will break bookmarked urls
+      className="landlords-table"
+    />
   );
 };

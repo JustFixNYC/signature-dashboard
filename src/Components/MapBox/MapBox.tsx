@@ -162,7 +162,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
           zip: bldg.zip,
           landlord: bldg.landlord,
           landlord_slug: bldg.landlord_slug,
-          lender_slug: bldg.lender_slug,
+          loan_pool_slug: bldg.loan_pool_slug,
           selected: bldg.bbl === selectedAddr?.bbl,
         },
       };
@@ -252,9 +252,9 @@ export const MapBox: React.FC<MapBoxProps> = ({
               )}
             </div>
             <div>
-              <span className="label-name">Lender:</span>{" "}
-              <Link to={`/lenders?lender=${selectedAddr.lender_slug}`}>
-                {selectedAddr.lender_slug == "cpc" ? "CPC" : "Santander"}
+              <span className="label-name">Loan pool:</span>{" "}
+              <Link to={`/loan-pools?loan-pool=${selectedAddr.loan_pool_slug}`}>
+                {selectedAddr.loan_pool_slug == "cpc" ? "CPC" : "Santander"}
               </Link>
             </div>
             <div>

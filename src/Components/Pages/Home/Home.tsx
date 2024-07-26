@@ -21,7 +21,7 @@ export const Home: React.FC = () => {
               View, filter, and download data on every building that was
               financed by Signature Bank at the time of the crash. Track key
               indicators of physical and financial distress. See aggregate stats
-              by landlord or lender.
+              by landlord or loan pool.
             </p>
             <p className="org-credit">
               This project is a collaboration between{" "}
