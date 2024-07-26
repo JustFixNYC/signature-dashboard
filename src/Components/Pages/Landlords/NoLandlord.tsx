@@ -6,8 +6,13 @@ import { AllLandlordsTable } from "./AllLandlordsTable/AllLandlordsTable";
 import { Link } from "@justfixnyc/component-library";
 import "./style.scss";
 import { SectionHeader } from "../../SectionHeader/SectionHeader";
+import { useGetAllLandlords } from "../../../api/hooks";
+import { Loading } from "../../Loading/Loading";
+import { formatNumber } from "../../../util/helpers";
 
 export const NoLandlord: React.FC = () => {
+  const { data, error, isLoading } = useGetAllLandlords();
+
   return (
     <>
       <PageTitle>Landlords</PageTitle>
@@ -24,7 +29,32 @@ export const NoLandlord: React.FC = () => {
       <SectionHeader className="landing-page-table-header">
         Landlord Table
       </SectionHeader>
-      <AllLandlordsTable />
+
+      {isLoading && <Loading />}
+      {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
+
+      {data && (
+        <>
+          <p className="landing-page-table-context">
+            {formatNumber(data.length) as string} landlords with rent-regulated
+            properties financed by Signature Bank. Each one will have their
+            portfolios entirely in either the Community Preservation Corporation
+            (CPC) or Santander Bank joint ventures.
+          </p>
+          <p className="landing-page-table-context">
+            Landlord portfolios are identified by cross referencing HPD
+            Registration and ACRIS data; they are our best approximations based
+            on the publicly available data. To provide input that can help us
+            refine our landlord portfolio identification strategy, please fill
+            out this{" "}
+            <Link href={"https://form.typeform.com/to/xWz7AK8h"}>
+              feedback form
+            </Link>
+            .
+          </p>
+          <AllLandlordsTable data={data} />
+        </>
+      )}
     </>
   );
 };

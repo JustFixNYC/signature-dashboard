@@ -16,14 +16,14 @@ export const NoLoanPool: React.FC = () => {
       <div style={{ width: "600px" }}>
         <p>
           Rent-regulated buildings in the former Signature Bank multifamily loan
-          portfolio were broken into two joint venture vehicles. These pools are
-          now administered by{" "}
+          portfolio were broken into loan pools that were transferred to two
+          joint venture vehicles. These pools are now administered by{" "}
           <Link to="/loan-pools?loan-pool=cpc">
             Community Preservation Corporation (CPC)
           </Link>{" "}
           and <Link to="/loan-pools?loan-pool=santander">Santander Bank</Link>.
-          The FDIC oversees and holds a majority financial stake in both joint
-          ventures.
+          These entities are the current mortgage holders, but the FDIC oversees
+          and still holds a majority financial stake in both joint ventures.
         </p>
         <p>
           Landlords with rent-regulated properties financed by Signature Bank
