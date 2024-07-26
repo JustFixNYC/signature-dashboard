@@ -1,4 +1,5 @@
 import { BuildingInfo, CollectionInfo } from "../../types/APIDataTypes";
+import { loanPoolNameLong } from "../../util/helpers";
 import Link from "../JFCLLinkInternal";
 import "./style.scss";
 
@@ -26,23 +27,23 @@ export const InternalLinks: React.FC<RelatedLinksProps> = ({
               </Link>
             </>
           )}
-          <h3 className="related-links-header">Lender</h3>
+          <h3 className="related-links-header">Loan pool</h3>
           <Link
-            href={`/lenders?lender=${buildingInfo.lender_slug}`}
+            href={`/loan-pools?loan-pool=${buildingInfo.loan_pool_slug}`}
             className="related-link"
           >
-            {buildingInfo.lender} Portfolio
+            {loanPoolNameLong(buildingInfo.loan_pool_slug)}
           </Link>
         </div>
       )}
       {collectionInfo && (
         <div className="related-links related-links-internal">
-          <h3 className="related-links-header">Lender</h3>
+          <h3 className="related-links-header">Loan pool</h3>
           <Link
-            href={`/lenders?lender=${collectionInfo.bldg_data[0].lender_slug}`}
+            href={`/loan-pools?loan-pool=${collectionInfo.bldg_data[0].loan_pool_slug}`}
             className="related-link"
           >
-            {collectionInfo.bldg_data[0].lender} Portfolio
+            {loanPoolNameLong(collectionInfo.bldg_data[0].loan_pool_slug)}
           </Link>
         </div>
       )}

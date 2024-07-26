@@ -5,34 +5,34 @@ import { PageTitle } from "../../PageTitle/PageTitle";
 import { PortfolioCards } from "../../PortfolioCards/PortfolioCards";
 import { SectionHeader } from "../../SectionHeader/SectionHeader";
 
-export const NoLender: React.FC = () => {
+export const NoLoanPool: React.FC = () => {
   return (
     <>
-      <PageTitle>Lenders</PageTitle>
+      <PageTitle>Loan pools</PageTitle>
       <PortfolioCards portfolios={["cpc", "santander"]} />
-      <SectionHeader className="lenders-page__section-header">
-        About lender portfolios
+      <SectionHeader className="loan-pools-page__section-header">
+        About loan pools
       </SectionHeader>
       <div style={{ width: "600px" }}>
         <p>
           Rent-regulated buildings in the former Signature Bank multifamily loan
           portfolio were broken into two joint venture vehicles. These pools are
           now administered by{" "}
-          <Link to="/lenders?lender=cpc">
+          <Link to="/loan-pools?loan-pool=cpc">
             Community Preservation Corporation (CPC)
           </Link>{" "}
-          and <Link to="/lenders?lender=santander">Santander Bank</Link>. The
-          FDIC oversees and holds a majority financial stake in both joint
+          and <Link to="/loan-pools?loan-pool=santander">Santander Bank</Link>.
+          The FDIC oversees and holds a majority financial stake in both joint
           ventures.
         </p>
         <p>
           Landlords with rent-regulated properties financed by Signature Bank
           will have their portfolios entirely in either the CPC or Santander
           Bank joint ventures. For landlords, CPC and Santander are their new
-          lender.
+          mortgage holders.
         </p>
         <p>
-          Lenders are responsible for carrying out the{" "}
+          Mortgage holders are responsible for carrying out the{" "}
           <Link
             to="https://www.fdic.gov/buying/historical/structured/documents.html"
             target="_blank"
@@ -45,9 +45,9 @@ export const NoLender: React.FC = () => {
           <li>regular loan servicing</li>
           <li>asset management</li>
           <li>
-            various tools and incentives that lenders can use to intervene in
-            issues that affect tenant stability & safety and responsible
-            building operations
+            various tools and incentives that mortgage holders can use to
+            intervene in issues that affect tenant stability & safety and
+            responsible building operations
           </li>
         </ul>
       </div>

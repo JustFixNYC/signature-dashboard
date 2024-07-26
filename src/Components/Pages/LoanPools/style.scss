@@ -1,13 +1,13 @@
-h2.lender-page__page-title {
+h2.loan-pool-page__page-title {
     margin-bottom: 0.5rem;
 }
-h3.section-header.lenders-page__section-header {
+h3.section-header.loan-pools-page__section-header {
   &::before {
     display: none;
   }
 }
 
-.lender-context {
+.loan-pool-context {
     width: 600px;
     margin: 0 0 3rem 0;
 }

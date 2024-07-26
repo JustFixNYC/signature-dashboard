@@ -50,15 +50,15 @@
             "example": "a-e-real-estate-holdings-doug-eisenberg",
             "description": "Landlord name in slug format. Same as 'collection_slug' for collection page"
           },
-          "lender": {
+          "loan_pool": {
             "type": "string",
             "example": "Santander",
-            "description": "Name of lender for Signature debt"
+            "description": "Name of loan pool for Signature debt"
           },
-          "lender_slug": {
+          "loan_pool_slug": {
             "type": "string",
             "example": "santander",
-            "description": "Lender name in slug format. Same as 'collection_slug' for collection page"
+            "description": "Loan pool name in slug format. Same as 'collection_slug' for collection page"
           },
           "loan_status": {
             "type": "string",
@@ -441,17 +441,17 @@
           "collection_type": {
             "type": "string",
             "example": "landlord",
-            "description": "Collection type (landlord or lender)"
+            "description": "Collection type (landlord, loan_pool, or all)"
           },
-          "lender_name": {
+          "loan_pool_name": {
             "type": "string",
             "example": "CPC",
-            "description": "Lender display name. Available for Landlord records only"
+            "description": "Loan pool display name. Available for Landlord records only"
           },
-          "lender_slug": {
+          "loan_pool_slug": {
             "type": "string",
             "example": "cpc",
-            "description": "Lender name slug, used for API and URL. Available for Landlord records only"
+            "description": "Loan pool name slug, used for API and URL. Available for Landlord records only"
           },
           "buildings_agg": {
             "type": "integer",
@@ -574,15 +574,15 @@
             "example": "ved-parkash",
             "description": "Landlord name slug, used for API and URL"
           },
-          "lender_name": {
+          "loan_pool_name": {
             "type": "string",
             "example": "CPC",
-            "description": "Lender display name"
+            "description": "Loan pool display name"
           },
-          "lender_slug": {
+          "loan_pool_slug": {
             "type": "string",
             "example": "cpc",
-            "description": "Lender name slug, used for API and URL"
+            "description": "Loan pool name slug, used for API and URL"
           },
           "buildings_agg": {
             "type": "integer",
@@ -657,10 +657,10 @@
             "example": "ved-parkash",
             "description": "Landlord name slug, used for API and URL"
           },
-          "lender_slug": {
+          "loan_pool_slug": {
             "type": "string",
             "example": "cpc",
-            "description": "Lender name slug, used for API and URL"
+            "description": "Loan pool name slug, used for API and URL"
           },
           "lat": {
             "type": "number",
@@ -778,7 +778,7 @@
     },
     "/signature/collection": {
       "get": {
-        "summary": "Returns data for the dashboard's Collection page for the requested collection (landlord, lender, all).",
+        "summary": "Returns data for the dashboard's Collection page for the requested collection (landlord, loan pool, all).",
         "parameters": [
           {
             "name": "collection",
@@ -811,14 +811,14 @@
             }
           },
           "400": {
-            "description": "Bad Request. Collection should be 'all' or landlord/lender name in slug format."
+            "description": "Bad Request. Collection should be 'all' or landlord/loan pool name in slug format."
           }
         }
       }
     },
     "/signature/collection/charts": {
       "get": {
-        "summary": "Returns data for charts on the dashboard's Collection page for the requested collection (landlord, lender, all).",
+        "summary": "Returns data for charts on the dashboard's Collection page for the requested collection (landlord, loan pool, all).",
         "parameters": [
           {
             "name": "collection",
@@ -851,7 +851,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. Collection should be 'all' or landlord/lender name in slug format."
+            "description": "Bad Request. Collection should be 'all' or landlord/loan pool name in slug format."
           }
         }
       }
@@ -886,10 +886,10 @@
     },
     "/signature/portfolios": {
       "get": {
-        "summary": "Returns data for signature/lender portfolios to use on home page cards.",
+        "summary": "Returns data for signature/loan pool portfolios to use on home page cards.",
         "responses": {
           "200": {
-            "description": "Data for entire Signature portfolio and each lender for cards on home and lender pages.",
+            "description": "Data for entire Signature portfolio and each loan pool for cards on home and loan pool pages.",
             "content": {
               "application/json": {
                 "schema": {
@@ -917,7 +917,7 @@
         "summary": "Returns a data for all properties in the Signature portfolio to populate the dedicated map page of the dashboard.",
         "responses": {
           "200": {
-            "description": "List properties with address, lender/landlord links, and lat/long coordinates",
+            "description": "List properties with address, loan pool/landlord links, and lat/long coordinates",
             "content": {
               "application/json": {
                 "schema": {

@@ -80,9 +80,9 @@ export const columns = [
         filterFn: "includesString",
         size: 200,
       }),
-      columnHelper.accessor((row) => getColumnAccessor(row.lender), {
-        id: "lender",
-        header: getColumnHeader("lender"),
+      columnHelper.accessor((row) => getColumnAccessor(row.loan_pool), {
+        id: "loan_pool",
+        header: getColumnHeader("loan_pool"),
         sortUndefined: "last",
         filterFn: "includesString",
         meta: {

@@ -58,7 +58,7 @@ export interface Indicators {
   last_rodent_date: number;
   last_rodent_result: number;
   last_sale_date: string;
-  lender: string;
+  loan_pool: string;
   link_acris: string;
   link_dap: string;
   link_dob: string;
@@ -77,7 +77,7 @@ export interface Indicators {
 
 export type BuildingInfo = {
   landlord_slug: string;
-  lender_slug: string;
+  loan_pool_slug: string;
   loan_status: LoanStatus;
   loan_action: LoanAction;
   lat: number;
@@ -89,7 +89,7 @@ export type BuildingInfo = {
   | "borough"
   | "zip"
   | "landlord"
-  | "lender"
+  | "loan_pool"
   | "link_hpd"
   | "link_acris"
   | "link_dob"
@@ -196,8 +196,8 @@ export interface APIChartData {
 export interface LandlordInfo {
   landlord_name: string;
   landlord_slug: string;
-  lender_name: string;
-  lender_slug: string;
+  loan_pool_name: string;
+  loan_pool_slug: string;
   buildings_agg: number;
   units_res_agg: number;
   hpd_viol_bc_open_per_unit_agg: number;
@@ -211,7 +211,7 @@ export interface MapData {
   zip: string;
   landlord: string;
   landlord_slug: string;
-  lender_slug: string;
+  loan_pool_slug: string;
   lat: number;
   lng: number;
 }
