@@ -92,7 +92,7 @@ export const About: React.FC = () => {
         </p>
       </div>
       <SectionHeader className="about__section-header">
-        Signature Bank collapse and the FDIC
+        About the data
       </SectionHeader>
       <div className="about__content" style={{ width: "600px" }}>
         <p>

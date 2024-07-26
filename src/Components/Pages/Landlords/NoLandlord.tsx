@@ -16,6 +16,27 @@ export const NoLandlord: React.FC = () => {
   return (
     <>
       <PageTitle>Landlords</PageTitle>
+      {data && (
+        <>
+          <p className="landing-page-table-context">
+            There are {formatNumber(data.length) as string} landlords with
+            rent-regulated properties financed by Signature Bank. Each one will
+            have their portfolios entirely in either the Community Preservation
+            Corporation (CPC) or Santander Bank joint ventures.
+          </p>
+          <p className="landing-page-table-context">
+            Landlord portfolios are identified by cross referencing HPD
+            Registration and ACRIS data; they are our best approximations based
+            on the publicly available data. To provide input that can help us
+            refine our landlord portfolio identification strategy, please fill
+            out this{" "}
+            <Link href={"https://form.typeform.com/to/xWz7AK8h"}>
+              feedback form
+            </Link>
+            .
+          </p>
+        </>
+      )}
       <LandlordSearch
         labelText="Search for landlord by name"
         noResultsText="No landlords in the Signature portfolio match your search."
@@ -32,29 +53,7 @@ export const NoLandlord: React.FC = () => {
 
       {isLoading && <Loading />}
       {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
-
-      {data && (
-        <>
-          <p className="landing-page-table-context">
-            {formatNumber(data.length) as string} landlords with rent-regulated
-            properties financed by Signature Bank. Each one will have their
-            portfolios entirely in either the Community Preservation Corporation
-            (CPC) or Santander Bank joint ventures.
-          </p>
-          <p className="landing-page-table-context">
-            Landlord portfolios are identified by cross referencing HPD
-            Registration and ACRIS data; they are our best approximations based
-            on the publicly available data. To provide input that can help us
-            refine our landlord portfolio identification strategy, please fill
-            out this{" "}
-            <Link href={"https://form.typeform.com/to/xWz7AK8h"}>
-              feedback form
-            </Link>
-            .
-          </p>
-          <AllLandlordsTable data={data} />
-        </>
-      )}
+      {data && <AllLandlordsTable data={data} />}
     </>
   );
 };
