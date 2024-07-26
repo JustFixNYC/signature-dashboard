@@ -33,10 +33,23 @@
 
 .table-container {
   background-color: $WHITE;
-  overflow-x: scroll;
   width: fit-content;
   max-width: 100%;
   position: relative;
+  
+  // force horizontal scrollbar to be visible
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+  &::-webkit-scrollbar:horizontal {
+    height: 16px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid $WHITE;
+    background-color: $GREY_400;
+  }
 
   a {
     &:visited {
