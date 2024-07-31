@@ -45,6 +45,7 @@ export type BarChartProps = {
   className?: string;
   stacked?: boolean;
   timeUnit?: IndicatorsTimeSpan;
+  xAxisStartDate?: Date;
 };
 
 const getTooltipDate = (value: string, timeUnit: IndicatorsTimeSpan) => {
@@ -79,6 +80,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   stacked,
   yAxisTitle,
   timeUnit = "month",
+  xAxisStartDate,
   className,
 }) => {
   const [timespan, setTimespan] = useState<"two-years" | "all-time">(
@@ -167,7 +169,7 @@ export const BarChart: React.FC<BarChartProps> = ({
       x: {
         stacked: stacked,
         type: "time",
-        min: timespan === "two-years" ? twoYearsAgo : null,
+        min: timespan === "two-years" ? twoYearsAgo : xAxisStartDate || null,
         autoSkip: false,
         time: {
           unit: timeUnit,
