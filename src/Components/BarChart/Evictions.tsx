@@ -111,6 +111,7 @@ export const EvictionsChart: React.FC<EvictionsChartProps> = ({
       lastSaleDate={lastSaleDate}
       timeUnit="year"
       className={className}
+      xAxisStartDate={new Date('2017-01-01')}
     />
   );
 };
