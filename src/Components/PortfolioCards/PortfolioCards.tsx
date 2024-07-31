@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { useGetPortfolios } from "../../api/hooks";
+import { APIPortfolioData } from "../../types/APIDataTypes";
 import { formatNumber } from "../../util/helpers";
 import JFCLLinkInternal from "../JFCLLinkInternal";
 
@@ -10,6 +11,15 @@ type PortfolioCardsProps = {
   portfolios: ("all" | "cpc" | "santander")[];
   className?: string;
 };
+
+const PortfolioStats = ({ data }: { data?: APIPortfolioData }) => (
+  <>
+    <div>{data ? `${formatNumber(data?.landlords)} Landlords` : <br />}</div>
+    <div>
+      {data ? `${formatNumber(data?.buildings_agg)} Buildings` : <br />}
+    </div>
+  </>
+);
 
 export const PortfolioCards: React.FC<PortfolioCardsProps> = ({
   portfolios,
@@ -28,8 +38,7 @@ export const PortfolioCards: React.FC<PortfolioCardsProps> = ({
       {portfolios.includes("all") && (
         <div className="card">
           <div className="card__title">Signature Portfolio</div>
-          <div>{`${formatNumber(entirePortfolio?.landlords)} Landlords`}</div>
-          <div>{`${formatNumber(entirePortfolio?.buildings_agg)} Buildings`}</div>
+          <PortfolioStats data={entirePortfolio} />
           <JFCLLinkInternal href="/entire-portfolio" className="card__link">
             Entire Signature Portfolio
           </JFCLLinkInternal>
@@ -39,9 +48,11 @@ export const PortfolioCards: React.FC<PortfolioCardsProps> = ({
       {portfolios.includes("cpc") && (
         <div className="card">
           <div className="card__title">CPC Loan Pool</div>
-          <div>{`${formatNumber(cpcPortfolio?.landlords)} Landlords`}</div>
-          <div>{`${formatNumber(cpcPortfolio?.buildings_agg)} Buildings`}</div>
-          <JFCLLinkInternal href="/loan-pools?loan-pool=cpc" className="card__link">
+          <PortfolioStats data={cpcPortfolio} />
+          <JFCLLinkInternal
+            href="/loan-pools?loan-pool=cpc"
+            className="card__link"
+          >
             CPC Loan Pool
           </JFCLLinkInternal>
         </div>
@@ -50,8 +61,7 @@ export const PortfolioCards: React.FC<PortfolioCardsProps> = ({
       {portfolios.includes("santander") && (
         <div className="card">
           <div className="card__title">Santander Loan Pool</div>
-          <div>{`${formatNumber(santanderPortfolio?.landlords)} Landlords`}</div>
-          <div>{`${formatNumber(santanderPortfolio?.buildings_agg)} Buildings`}</div>
+          <PortfolioStats data={santanderPortfolio} />
           <JFCLLinkInternal
             href="/loan-pools?loan-pool=santander"
             className="card__link"
