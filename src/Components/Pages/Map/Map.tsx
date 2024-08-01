@@ -8,8 +8,10 @@ import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../../../auth";
 import { Loading } from "../../Loading/Loading";
 
+const STABILIZING_USERS = ["user-stabilizingnyc", "user-staff"];
+
 export const Map: React.FC = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const [bbl, setBBL] = React.useState("");
   const {
@@ -36,7 +38,7 @@ export const Map: React.FC = () => {
         <MapBox
           data={mapData}
           initialSelectedBBL={bbl}
-          showStabilizingToggle={user === "user-stabilizingnyc"}
+          showStabilizingToggle={STABILIZING_USERS.includes(user)}
           className="all-map"
         />
       )}
