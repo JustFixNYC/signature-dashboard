@@ -290,7 +290,7 @@ export const Table = <T extends object>(
                                         "unsorted"
                                     )}
                                     onClick={() => {
-                                      header.column.getToggleSortingHandler();
+                                      header.column.getToggleSortingHandler()();
                                       dataLayer.push("sig_table_sort", {column: header.column.columnDef.id})
                                     }}
                                   />
