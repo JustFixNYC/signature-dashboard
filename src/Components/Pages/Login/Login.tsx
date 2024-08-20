@@ -3,13 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../auth";
 import { Button, TextInput } from "@justfixnyc/component-library";
 import "./styles.scss";
-import { gtmPush } from "../../../google-tag-manager";
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { login, user } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   interface LocationState {
     from: {
@@ -29,9 +28,6 @@ export const Login: React.FC = () => {
 
     login(password, () => {
       navigate(`${fromPath}${queryParams}`, { replace: true });
-      gtmPush("sig_login", {
-        user_type: user,
-      });
     });
   }
 
