@@ -1,5 +1,5 @@
-export interface GTMDataLayer {
-  push(params?: { event: string; [key: string]: unknown }): void;
+interface GTMDataLayer {
+  push(obj: GTMDataLayerObject): void;
 }
 
 declare global {
@@ -14,13 +14,21 @@ declare global {
 }
 
 /** Data layer event to send with optional params */
-export type GTMDataLayerObject = {
+type GTMDataLayerObject = {
   event: string;
-  params?: {
+  eventModel?: {
     [key: string]: unknown;
   };
 };
 
-export function getDataLayer(): GTMDataLayer {
+function getDataLayer(): GTMDataLayer {
   return window.dataLayer || [];
 }
+
+export const gtmPush = (
+  event: string,
+  params?: { [key: string]: unknown }
+): void => {
+  const dataLayer = getDataLayer();
+  dataLayer.push({ event: event, eventModel: { ...params } });
+};
