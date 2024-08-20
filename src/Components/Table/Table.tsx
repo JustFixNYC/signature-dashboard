@@ -289,9 +289,13 @@ export const Table = <T extends object>(
                                       sortIcon === "arrowUpArrowDown" &&
                                         "unsorted"
                                     )}
-                                    onClick={() => {
-                                      header.column.getToggleSortingHandler()();
-                                      dataLayer.push("sig_table_sort", {column: header.column.columnDef.id})
+                                    onClick={(e) => {
+                                      const toggleSort =
+                                        header.column.getToggleSortingHandler();
+                                      toggleSort && toggleSort(e);
+                                      dataLayer.push("sig_table_sort", {
+                                        column: header.column.columnDef.id,
+                                      });
                                     }}
                                   />
                                 </span>
