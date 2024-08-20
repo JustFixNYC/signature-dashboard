@@ -33,6 +33,7 @@ import { PageSizeOptions, Pagination } from "./Pagination";
 import classNames from "classnames";
 import { LAST_COLUMN_ID } from "../BuildingTable/BuildingTableColumns";
 import { gtmPush } from "../../google-tag-manager";
+import { useAuth } from "../../auth";
 
 export interface TableProps<T extends object> {
   data: T[];
@@ -91,6 +92,7 @@ export const Table = <T extends object>(
     pageSize: pageSize,
   });
 
+  const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const FILTERS_PARAM_KEY = `${qsPrefix}_f`;
@@ -293,6 +295,7 @@ export const Table = <T extends object>(
                                       toggleSort && toggleSort(e);
                                       gtmPush("sig_table_sort", {
                                         column: header.column.columnDef.id,
+                                        user_type: user,
                                       });
                                     }}
                                   />
