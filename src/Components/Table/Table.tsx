@@ -32,6 +32,7 @@ import { FilterChips } from "../FilterChips/FilterChips";
 import { PageSizeOptions, Pagination } from "./Pagination";
 import classNames from "classnames";
 import { LAST_COLUMN_ID } from "../BuildingTable/BuildingTableColumns";
+import { getDataLayer } from "../../google-tag-manager";
 
 export interface TableProps<T extends object> {
   data: T[];
@@ -119,6 +120,8 @@ export const Table = <T extends object>(
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const dataLayer = getDataLayer();
 
   // Update query params for table sorting, filtering, and column visibility
   useEffect(() => {
@@ -286,7 +289,10 @@ export const Table = <T extends object>(
                                       sortIcon === "arrowUpArrowDown" &&
                                         "unsorted"
                                     )}
-                                    onClick={header.column.getToggleSortingHandler()}
+                                    onClick={() => {
+                                      header.column.getToggleSortingHandler();
+                                      dataLayer.push("sig_table_sort", {column: header.column.columnDef.id})
+                                    }}
                                   />
                                 </span>
                               )}
