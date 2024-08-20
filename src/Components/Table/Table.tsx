@@ -293,7 +293,8 @@ export const Table = <T extends object>(
                                       const toggleSort =
                                         header.column.getToggleSortingHandler();
                                       toggleSort && toggleSort(e);
-                                      dataLayer.push("sig_table_sort", {
+                                      dataLayer.push({
+                                        event: "sig_table_sort",
                                         column: header.column.columnDef.id,
                                       });
                                     }}

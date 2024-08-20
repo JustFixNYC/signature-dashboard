@@ -1,10 +1,5 @@
 export interface GTMDataLayer {
-  push(
-    event: string,
-    params?: {
-      [key: string]: unknown;
-    }
-  ): void;
+  push(params?: { event: string; [key: string]: unknown }): void;
 }
 
 declare global {
