@@ -7,6 +7,7 @@ import { INDICATOR_STRINGS } from "../../util/indicators";
 import { useCSVDownloader } from "react-papaparse";
 import { gtmPush } from "../../google-tag-manager";
 import { useAuth } from "../../auth";
+import { useLocation } from "react-router-dom";
 
 export const generateBuildingCSV = (data: BuildingInfo) => {
   const api_keys = Object.keys(data);
@@ -71,6 +72,14 @@ export const DownloadCSV: React.FC<DownloadProps> = ({
 }) => {
   const { CSVDownloader } = useCSVDownloader();
   const { user } = useAuth();
+  const location = useLocation();
+
+  const fromPage =
+    location.pathname !== "/buildings"
+      ? location.pathname
+      : location.search.startsWith("?bbl=")
+        ? "building"
+        : "all-buildings";
 
   const today = new Date(Date.now()).toISOString().slice(0, 10);
 
@@ -86,7 +95,9 @@ export const DownloadCSV: React.FC<DownloadProps> = ({
     >
       <button
         className="download-button"
-        onClick={() => gtmPush("sig_download", { user_type: user })}
+        onClick={() =>
+          gtmPush("sig_download", { user_type: user, from: fromPage })
+        }
       >
         <Icon icon="download" type="regular" />
         {labelText}
