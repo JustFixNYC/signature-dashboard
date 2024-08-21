@@ -9,6 +9,9 @@ import "mapbox-gl/src/css/mapbox-gl.css";
 import { MapData } from "../../types/APIDataTypes";
 import { Button, RadioButton } from "@justfixnyc/component-library";
 import "./style.scss";
+import { useAuth } from "../../auth";
+
+const STABILIZING_USERS = ["user-stabilizingnyc", "user-staff"];
 
 const STYLE_SIGNATURE_LIGHT =
   "mapbox://styles/justfix/clxummt2k047a01qj3ra1gjf6";
@@ -100,7 +103,6 @@ type MapBoxProps = {
   data: MapData[];
   initialSelectedBBL?: string;
   preventScrollZoom?: boolean;
-  showStabilizingToggle?: boolean;
   className?: string;
 };
 
@@ -108,11 +110,14 @@ export const MapBox: React.FC<MapBoxProps> = ({
   data,
   initialSelectedBBL,
   preventScrollZoom = false,
-  showStabilizingToggle = false,
   className,
 }) => {
+  const { user } = useAuth();
   const [cursor, setCursor] = useState("");
   const [mapStyle, setMapStyle] = useState("default");
+
+  const showStabilizingToggle = STABILIZING_USERS.includes(user);
+
   const layerStyle =
     mapStyle === "stabilizing" ? LAYER_STYLE_STABILIZING : LAYER_STYLE_DEFAULT;
 

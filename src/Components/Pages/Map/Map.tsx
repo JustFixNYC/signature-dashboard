@@ -5,13 +5,9 @@ import { PageTitle } from "../../PageTitle/PageTitle";
 import { useGetMapData } from "../../../api/hooks";
 import { MapBox } from "../../MapBox/MapBox";
 import { useSearchParams } from "react-router-dom";
-import { useAuth } from "../../../auth";
 import { Loading } from "../../Loading/Loading";
 
-const STABILIZING_USERS = ["user-stabilizingnyc", "user-staff"];
-
 export const Map: React.FC = () => {
-  const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const [bbl, setBBL] = React.useState("");
   const {
@@ -35,12 +31,7 @@ export const Map: React.FC = () => {
       {mapDataError && <pre>{JSON.stringify(mapDataError, null, 2)}</pre>}
 
       {!!mapData && (
-        <MapBox
-          data={mapData}
-          initialSelectedBBL={bbl}
-          showStabilizingToggle={STABILIZING_USERS.includes(user)}
-          className="all-map"
-        />
+        <MapBox data={mapData} initialSelectedBBL={bbl} className="all-map" />
       )}
     </>
   );
