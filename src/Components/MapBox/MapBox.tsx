@@ -260,7 +260,6 @@ export const MapBox: React.FC<MapBoxProps> = ({
                       user_type: user,
                       to: "landlord",
                     });
-                    console.log("sig_map_link");
                   }}
                 >
                   {selectedAddr.landlord}
