@@ -1,3 +1,4 @@
+import { gtmPush } from "../../google-tag-manager";
 import { BuildingInfo } from "../../types/APIDataTypes";
 import JFCLLinkExternal from "../JFCLLinkExternal";
 import "./style.scss";
@@ -22,40 +23,64 @@ export const ExternalLinks: React.FC<RelatedLinksProps> = ({
           <JFCLLinkExternal
             href={buildingInfo.link_acris}
             className="related-link"
+            onClick={() => {
+              gtmPush("sig_related_link", { to: "acris" });
+            }}
           >
             View documents on ACRIS
           </JFCLLinkExternal>
           <JFCLLinkExternal
             href={buildingInfo.link_dob}
             className="related-link"
+            onClick={() => {
+              gtmPush("sig_related_link", { to: "dob" });
+            }}
           >
             DOB Building Profile
           </JFCLLinkExternal>
           <JFCLLinkExternal
             href={buildingInfo.link_hpd}
             className="related-link"
+            onClick={() => {
+              gtmPush("sig_related_link", { to: "hpd" });
+            }}
           >
             HPD Building Profile
           </JFCLLinkExternal>
           <JFCLLinkExternal
             href={buildingInfo.link_wow}
             className="related-link"
+            onClick={() => {
+              gtmPush("sig_related_link", { to: "wow" });
+            }}
           >
             Who Owns What
           </JFCLLinkExternal>
           <JFCLLinkExternal
             href={buildingInfo.link_dap}
             className="related-link"
+            onClick={() => {
+              gtmPush("sig_related_link", { to: "dap" });
+            }}
           >
             ANHD DAP Portal
           </JFCLLinkExternal>
           <JFCLLinkExternal
             href={buildingInfo.link_political}
             className="related-link"
+            onClick={() => {
+              gtmPush("sig_related_link", { to: "political" });
+            }}
           >
             Political Representatives
           </JFCLLinkExternal>
-          <JFCLLinkExternal href={googleMapURL} className="related-link">
+          <JFCLLinkExternal
+            href={googleMapURL}
+            className="related-link"
+            onClick={() => {
+              gtmPush("sig_related_link", { to: "google-maps" });
+            }}
+          >
             View on Google Maps
           </JFCLLinkExternal>
         </div>

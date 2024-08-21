@@ -32,6 +32,8 @@ import { FilterChips } from "../FilterChips/FilterChips";
 import { PageSizeOptions, Pagination } from "./Pagination";
 import classNames from "classnames";
 import { LAST_COLUMN_ID } from "../BuildingTable/BuildingTableColumns";
+import { gtmPush } from "../../google-tag-manager";
+import { useAuth } from "../../auth";
 
 export interface TableProps<T extends object> {
   data: T[];
@@ -90,6 +92,7 @@ export const Table = <T extends object>(
     pageSize: pageSize,
   });
 
+  const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const FILTERS_PARAM_KEY = `${qsPrefix}_f`;
@@ -155,6 +158,24 @@ export const Table = <T extends object>(
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting, columnFilters, columnVisibility, setSearchParams]);
+
+  // Fires one GTM event for each column filter applied. Logs each new filter
+  // when it's first applied. Won't count multiple changes to a single filter.
+  // Will count each filter when landing on page with filters via query params.
+  const [pastFilters, setPastFilters] = useState<string[]>([]);
+  useEffect(() => {
+    const currentFilters = columnFilters.map((x) => x.id);
+    const newFilters = currentFilters.filter((x) => !pastFilters.includes(x));
+    newFilters.forEach((column) => {
+      gtmPush("sig_table_filter", {
+        column,
+        user_type: user,
+        active_filters: currentFilters.length,
+      });
+    });
+    setPastFilters(currentFilters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [columnFilters]);
 
   const options: TableOptions<T> = {
     data,
@@ -286,7 +307,15 @@ export const Table = <T extends object>(
                                       sortIcon === "arrowUpArrowDown" &&
                                         "unsorted"
                                     )}
-                                    onClick={header.column.getToggleSortingHandler()}
+                                    onClick={(e) => {
+                                      const toggleSort =
+                                        header.column.getToggleSortingHandler();
+                                      toggleSort && toggleSort(e);
+                                      gtmPush("sig_table_sort", {
+                                        column: header.column.columnDef.id,
+                                        user_type: user,
+                                      });
+                                    }}
                                   />
                                 </span>
                               )}

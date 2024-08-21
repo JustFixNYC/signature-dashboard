@@ -10,6 +10,7 @@ import { MapData } from "../../types/APIDataTypes";
 import { Button, RadioButton } from "@justfixnyc/component-library";
 import "./style.scss";
 import { useAuth } from "../../auth";
+import { gtmPush } from "../../google-tag-manager";
 
 const STABILIZING_USERS = ["user-stabilizingnyc", "user-staff"];
 
@@ -151,6 +152,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
 
     const mapPoint = event.features[0]?.properties as MapData;
     setSelectedAddr(mapPoint);
+    !!mapPoint && gtmPush("sig_map_point", { user_type: user });
   };
 
   // Type error on "features" because bldg.lng and bldg.lat might be null
@@ -233,7 +235,12 @@ export const MapBox: React.FC<MapBoxProps> = ({
         {!!selectedAddr && (
           <div className="map-sidepane">
             <div className="building-address-row">
-              <Link to={`/buildings?bbl=${selectedAddr.bbl}`}>
+              <Link
+                to={`/buildings?bbl=${selectedAddr.bbl}`}
+                onClick={() =>
+                  gtmPush("sig_map_link", { user_type: user, to: "building" })
+                }
+              >
                 {`${selectedAddr.address}, ${selectedAddr.borough.toUpperCase()}`}
               </Link>
               <Button
@@ -249,7 +256,15 @@ export const MapBox: React.FC<MapBoxProps> = ({
             <div>
               <span className="label-name">Landlord:</span>{" "}
               {selectedAddr.landlord ? (
-                <Link to={`/landlords?landlord=${selectedAddr.landlord_slug}`}>
+                <Link
+                  to={`/landlords?landlord=${selectedAddr.landlord_slug}`}
+                  onClick={() => {
+                    gtmPush("sig_map_link", {
+                      user_type: user,
+                      to: "landlord",
+                    });
+                  }}
+                >
                   {selectedAddr.landlord}
                 </Link>
               ) : (
@@ -258,7 +273,12 @@ export const MapBox: React.FC<MapBoxProps> = ({
             </div>
             <div>
               <span className="label-name">Loan pool:</span>{" "}
-              <Link to={`/loan-pools?loan-pool=${selectedAddr.loan_pool_slug}`}>
+              <Link
+                to={`/loan-pools?loan-pool=${selectedAddr.loan_pool_slug}`}
+                onClick={() =>
+                  gtmPush("sig_map_link", { user_type: user, to: "loan-pool" })
+                }
+              >
                 {selectedAddr.loan_pool_slug == "cpc" ? "CPC" : "Santander"}
               </Link>
             </div>

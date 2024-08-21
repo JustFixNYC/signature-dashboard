@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useLocation, Navigate, useNavigate, Outlet } from "react-router-dom";
 import useCookie from "react-use-cookie";
+import { gtmPush } from "./google-tag-manager";
 
 interface AuthContextType {
   user: string;
@@ -20,6 +21,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (username) {
       setUser(username);
       callback();
+      gtmPush("sig_login", { user_type: username });
     } else {
       console.log("Invalid Password");
     }

@@ -5,12 +5,15 @@ import { BuildingInfo, CollectionInfo } from "../../types/APIDataTypes";
 import { apiKeys, slugify } from "../../util/helpers";
 import { INDICATOR_STRINGS } from "../../util/indicators";
 import { useCSVDownloader } from "react-papaparse";
+import { gtmPush } from "../../google-tag-manager";
+import { useAuth } from "../../auth";
+import { useLocation } from "react-router-dom";
 
 export const generateBuildingCSV = (data: BuildingInfo) => {
   const api_keys = Object.keys(data);
   const values = Object.values(data);
   const indicator_names = api_keys.map(
-    (x) => INDICATOR_STRINGS[x as apiKeys]?.name || "",
+    (x) => INDICATOR_STRINGS[x as apiKeys]?.name || ""
   );
 
   const csvData = [];
@@ -41,7 +44,7 @@ export const generateMultiBuildingCSV = (data: CollectionInfo) => {
   const bldgData = data.bldg_data;
   // get all the building data var names in order of the helper object to reorder csv columns
   const api_keys = Object.keys(INDICATOR_STRINGS).filter((x) =>
-    Object.keys(bldgData[0]).includes(x),
+    Object.keys(bldgData[0]).includes(x)
   ) as Array<keyof BuildingInfo>;
   const indicator_names = api_keys.map((x) => INDICATOR_STRINGS[x]?.name || "");
 
@@ -67,13 +70,21 @@ export const DownloadCSV: React.FC<DownloadProps> = ({
   nameForFile,
   labelText,
 }) => {
-  const { CSVDownloader, Type } = useCSVDownloader();
+  const { CSVDownloader } = useCSVDownloader();
+  const { user } = useAuth();
+  const location = useLocation();
+
+  const fromPage =
+    location.pathname !== "/buildings"
+      ? location.pathname
+      : location.search.startsWith("?bbl=")
+        ? "building"
+        : "all-buildings";
 
   const today = new Date(Date.now()).toISOString().slice(0, 10);
 
   return csvData ? (
     <CSVDownloader
-      type={Type.Link}
       className="jfcl-link"
       filename={`signature_${nameForFile}_${today}`}
       bom={true}
@@ -82,8 +93,15 @@ export const DownloadCSV: React.FC<DownloadProps> = ({
       }}
       data={csvData}
     >
-      <Icon icon="download" type="regular" />
-      {labelText}
+      <button
+        className="download-button"
+        onClick={() =>
+          gtmPush("sig_download", { user_type: user, from: fromPage })
+        }
+      >
+        <Icon icon="download" type="regular" />
+        {labelText}
+      </button>
     </CSVDownloader>
   ) : (
     <Link className="disabled">
