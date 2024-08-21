@@ -149,7 +149,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
 
     const mapPoint = event.features[0]?.properties as MapData;
     setSelectedAddr(mapPoint);
-    gtmPush("sig_map_point", { user_type: user });
+    !!mapPoint && gtmPush("sig_map_point", { user_type: user });
   };
 
   // Type error on "features" because bldg.lng and bldg.lat might be null
@@ -255,9 +255,13 @@ export const MapBox: React.FC<MapBoxProps> = ({
               {selectedAddr.landlord ? (
                 <Link
                   to={`/landlords?landlord=${selectedAddr.landlord_slug}`}
-                  onClick={() =>
-                    gtmPush("sig_map_link", { user_type: user, to: "landlord" })
-                  }
+                  onClick={() => {
+                    gtmPush("sig_map_link", {
+                      user_type: user,
+                      to: "landlord",
+                    });
+                    console.log("sig_map_link");
+                  }}
                 >
                   {selectedAddr.landlord}
                 </Link>
