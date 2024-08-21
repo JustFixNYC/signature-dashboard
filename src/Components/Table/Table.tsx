@@ -159,6 +159,24 @@ export const Table = <T extends object>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting, columnFilters, columnVisibility, setSearchParams]);
 
+  // Fires one GTM event for each column filter applied. Logs each new filter
+  // when it's first applied. Won't count multiple changes to a single filter.
+  // Will count each filter when landing on page with filters via query params.
+  const [pastFilters, setPastFilters] = useState<string[]>([]);
+  useEffect(() => {
+    const currentFilters = columnFilters.map((x) => x.id);
+    const newFilters = currentFilters.filter((x) => !pastFilters.includes(x));
+    newFilters.forEach((column) => {
+      gtmPush("sig_table_filter", {
+        column,
+        user_type: user,
+        active_filters: currentFilters.length,
+      });
+    });
+    setPastFilters(currentFilters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [columnFilters]);
+
   const options: TableOptions<T> = {
     data,
     columns,

@@ -5,6 +5,8 @@ import { apiKeys } from "../../../util/helpers";
 import { INDICATOR_STRINGS } from "../../../util/indicators";
 import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
+import { gtmPush } from "../../../google-tag-manager";
+import { useAuth } from "../../../auth";
 
 interface ColumnFilter {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -12,6 +14,7 @@ interface ColumnFilter {
 }
 
 export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
+  const { user } = useAuth();
   const [showMenu, setShowMenu] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
@@ -49,7 +52,7 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
     "filter-button--has-hidden": numHiddenColumn > 0,
   });
 
-  const clearnButtonLabel = hasHiddenColumns
+  const clearButtonLabel = hasHiddenColumns
     ? numHiddenColumn === 1
       ? `1 Hidden Column`
       : `${numHiddenColumn} Hidden Columns`
@@ -61,7 +64,7 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
         ref={buttonRef}
         className={buttonClassNames}
         onClick={onClick}
-        labelText={clearnButtonLabel}
+        labelText={clearButtonLabel}
         variant="secondary"
         size="small"
         iconOnRight={false}
@@ -97,7 +100,14 @@ export const ColumnFilter: React.FC<ColumnFilter> = ({ table }) => {
                     labelText={labelText}
                     id={column.id}
                     checked={column.getIsVisible()}
-                    onChange={column.getToggleVisibilityHandler()}
+                    onChange={(e) => {
+                      column.getToggleVisibilityHandler()(e);
+                      gtmPush("sig_table_visible", {
+                        user_type: user,
+                        column: column.id,
+                        type: column.getIsVisible() ? "hide" : "show",
+                      });
+                    }}
                   />
                 );
               })}

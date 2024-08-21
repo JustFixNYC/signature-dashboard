@@ -10,6 +10,8 @@ import type { Hit as AlgoliaHit } from "instantsearch.js/es/types";
 import { useNavigate } from "react-router-dom";
 import { useSearchBox } from "react-instantsearch";
 import { Dropdown } from "@justfixnyc/component-library";
+import { gtmPush } from "../../google-tag-manager";
+import { useAuth } from "../../auth";
 // import algoliaIcon from "../assets/img/algolia.svg";
 
 import "./styles.scss";
@@ -61,6 +63,7 @@ const CustomSearchBox: React.FC<CustomSearchBoxProps> = ({
   const { query, refine } = useSearchBox(props);
   const { hits } = useHits<SearchHitProps>();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const noOptionsMessage = !query ? noSearchText : noResultsText;
 
@@ -75,7 +78,10 @@ const CustomSearchBox: React.FC<CustomSearchBoxProps> = ({
       labelText={labelText}
       onInputChange={(value: string) => refine(value)}
       // @ts-expect-error We need to update the JFCL onChange props to match react-select
-      onChange={(selection) => selection && navigate(selection.value)} //   options={selectOptions}
+      onChange={(selection) => {
+        selection && navigate(selection.value);
+        gtmPush("sig_search", { user_type: user });
+      }}
       // @ts-expect-error We need to update the JFCL options props to allow undefined
       options={selectOptions}
       noOptionsMessage={() => noOptionsMessage}
