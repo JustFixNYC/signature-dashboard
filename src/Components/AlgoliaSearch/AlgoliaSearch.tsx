@@ -79,8 +79,8 @@ const CustomSearchBox: React.FC<CustomSearchBoxProps> = ({
       onInputChange={(value: string) => refine(value)}
       // @ts-expect-error We need to update the JFCL onChange props to match react-select
       onChange={(selection) => {
-        selection && navigate(selection.value);
         gtmPush("sig_search", { user_type: user });
+        selection && navigate(selection.value);
       }}
       // @ts-expect-error We need to update the JFCL options props to allow undefined
       options={selectOptions}
