@@ -85,6 +85,7 @@ const CustomSearchBox: React.FC<CustomSearchBoxProps> = ({
       // @ts-expect-error We need to update the JFCL options props to allow undefined
       options={selectOptions}
       noOptionsMessage={() => noOptionsMessage}
+      filterOption={null}
       placeholder={placeholder}
       className={classNames("algolia-search", className)}
     />
