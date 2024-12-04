@@ -384,7 +384,7 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
         ? []
         : Array.from(uniqeValues.keys())
             .filter((v) => v !== undefined)
-            .sort(),
+            .sort((a, b) => a - b),
     [uniqeValues, filterVariant]
   );
   return filterVariant === "range" ? (

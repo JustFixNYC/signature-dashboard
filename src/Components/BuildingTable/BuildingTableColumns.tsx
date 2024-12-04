@@ -566,7 +566,7 @@ export const columns = [
         id: "coun_dist",
         header: getColumnHeader("coun_dist"),
         sortUndefined: "last",
-        filterFn: "includesString",
+        filterFn: "equalsString",
         meta: {
           inputWidth: "1.5rem",
           filterVariant: "select",
@@ -576,7 +576,7 @@ export const columns = [
         id: "assem_dist",
         header: getColumnHeader("assem_dist"),
         sortUndefined: "last",
-        filterFn: "includesString",
+        filterFn: "equalsString",
         meta: {
           inputWidth: "1.5rem",
           filterVariant: "select",
@@ -586,7 +586,7 @@ export const columns = [
         id: "stsen_dist",
         header: getColumnHeader("stsen_dist"),
         sortUndefined: "last",
-        filterFn: "includesString",
+        filterFn: "equalsString",
         meta: {
           inputWidth: "1.5rem",
           filterVariant: "select",
@@ -596,7 +596,7 @@ export const columns = [
         id: "cong_dist",
         header: getColumnHeader("cong_dist"),
         sortUndefined: "last",
-        filterFn: "includesString",
+        filterFn: "equalsString",
         meta: {
           inputWidth: "1.5rem",
           filterVariant: "select",
