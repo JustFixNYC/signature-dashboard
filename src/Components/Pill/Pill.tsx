@@ -1,13 +1,15 @@
 import { ReactNode } from "react";
 import "./style.scss";
+import classNames from "classnames";
 
 export type PillColors = "yellow" | "orange" | "grey" | "red" | "blue";
 
 type PillProps = {
   children: ReactNode;
   color: PillColors;
+  className?: string;
 };
 
-export const Pill: React.FC<PillProps> = ({ color, children }) => {
-  return <div className={`pill pill-${color}`}>{children}</div>;
-};
+export const Pill: React.FC<PillProps> = ({ color, children, className }) => (
+  <div className={classNames(`pill pill-${color}`, className)}>{children}</div>
+);

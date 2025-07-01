@@ -11,6 +11,14 @@
   letter-spacing: 1.12px;
   box-sizing: border-box;
 
+  &.pill-loan-status {
+    border-radius: 2rem; // extra for two-line pills in building tables
+    height: fit-content;
+    width: fit-content;
+    align-self: center;
+    padding: 4px 12px;
+  }
+
   &.pill-yellow {
     background-color: $PILL_YELLOW;
   }

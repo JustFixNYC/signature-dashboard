@@ -29,8 +29,18 @@ const STATUS_LABEL: {
   write_down_rehab: "Refinanced",
 };
 
+export const getLoanStatusLabel = (status: LoanStatus): string =>
+  STATUS_LABEL[status];
+
 export const LoanStatusPill: React.FC<LoanStatusPillProps> = ({ status }) => {
   const color = STATUS_COLORS[status];
   const label = STATUS_LABEL[status];
-  return <Pill color={color}>{label}</Pill>;
+  // TODO: might need to have an option for wrapped text with </br> to get the
+  // padding/width correct in table cell. waiting for everything else to be
+  // finalized before returning to this
+  return (
+    <Pill className="pill-loan-status" color={color}>
+      {label}
+    </Pill>
+  );
 };
