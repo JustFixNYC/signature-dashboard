@@ -25,7 +25,7 @@ export const FilterChip: React.FC<FilterChipProps> = ({
     {
       ["jfcl-filter-chip--is-selected"]: selected,
     },
-    className
+    className,
   );
   return (
     <div

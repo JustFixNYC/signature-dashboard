@@ -68,7 +68,7 @@ export const columns = [
       meta: {
         filterVariant: "range",
       },
-    }
+    },
   ),
   columnHelper.accessor((row) => getColumnAccessor(row.debt_per_unit_agg), {
     id: "debt_per_unit_agg",

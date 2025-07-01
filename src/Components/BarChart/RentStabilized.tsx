@@ -24,7 +24,7 @@ export const RentStabilizedUnitsChart: React.FC<
   const yearlyData: yearlyChartData[] = groupData(
     data,
     "rentstab_units",
-    "year"
+    "year",
   ) as yearlyChartData[];
   const datasets = [
     {
@@ -41,8 +41,8 @@ export const RentStabilizedUnitsChart: React.FC<
 
   const dataNote = dataSum === 0 && (
     <p className="chart-note">
-      Note: There are no rent stabilized units registered in this {dataUnitName},
-      however all properties in the Signature portfolio have rent-stabilized
+      Note: There are no rent stabilized units registered in this {dataUnitName}
+      , however all properties in the Signature portfolio have rent-stabilized
       units so this is most likely a reporting error.
     </p>
   );

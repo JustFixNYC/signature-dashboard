@@ -126,7 +126,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
     data.find((x) => x.bbl === initialSelectedBBL) || null;
 
   const [selectedAddr, setSelectedAddr] = useState<MapData | null>(
-    initialSelected
+    initialSelected,
   );
 
   const radioID = useId();
@@ -181,7 +181,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
       <div
         className={classNames(
           "map-style-radios",
-          !showStabilizingToggle && "map-type-radios-hidden"
+          !showStabilizingToggle && "map-type-radios-hidden",
         )}
       >
         <RadioButton
@@ -205,7 +205,7 @@ export const MapBox: React.FC<MapBoxProps> = ({
         className={classNames(
           "map-container",
           !showStabilizingToggle && "map-type-radios-hidden",
-          className
+          className,
         )}
       >
         <Map
