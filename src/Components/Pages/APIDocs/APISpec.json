@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://demo-api.justfix.org/api"
+      "url": "https://demo-wowserver.justfix.org/api"
     }
   ],
   "components": {
@@ -18,6 +18,52 @@
       }
     },
     "schemas": {
+      "LoanLinks": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "example": "https://a836-acris.nyc.gov/DS/DocumentSearch/DocumentImageView?doc_id=2024053000137007",
+            "description": "Link to a document related to the building's loan status history (likely ACRIS for refinancing or NYSCEF for foreclosure)"
+          },
+          "label": {
+            "type": "string",
+            "example": "Foreclosure Document 1",
+            "description": "Label to display for the associated link"
+          }
+        }
+      },
+      "LoanStatus": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "refinanced",
+            "description": "value indicating status of the loan at this step in the history"
+          },
+          "date": {
+            "type": "string",
+            "example": "2025-01-01",
+            "description": "Date associated with the status"
+          }
+        }
+      },
+      "LoanStatusInfo": {
+        "properties": {
+          "statuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LoanStatus"
+            },
+            "description": "Array of loan statuses for the history of the loan"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LoanLinks"
+            },
+            "description": "Array of links related to loan status history"
+          }
+        }
+      },
       "Building": {
         "properties": {
           "bbl": {
@@ -60,15 +106,15 @@
             "example": "santander",
             "description": "Loan pool name in slug format. Same as 'collection_slug' for collection page"
           },
-          "loan_status": {
-            "type": "string",
-            "example": "active",
-            "description": "Current status of the Signature loan ('active' or 'satisfied'), provided by UNHP"
+          "status_info": {
+            "type": "object",
+            "$ref": "#/components/schemas/LoanStatusInfo",
+            "description": "Collection of data for the loan status history and related links"
           },
-          "loan_action": {
+          "status_current": {
             "type": "string",
             "example": "refinanced",
-            "description": "Action taken on the Signature loan ('refinanced', 'new landlord', 'debt write down', or null), provided by UNHP"
+            "description": "Latest status of the Signature loan ('pending', 'write_down', 'write_down_rehab', 'refinanced', 'foreclosure', or 'left_program'), provided by UNHP"
           },
           "link_hpd": {
             "type": "string",
