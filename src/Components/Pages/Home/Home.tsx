@@ -7,7 +7,6 @@ import { Link } from "@justfixnyc/component-library";
 import { PortfolioCards } from "../../PortfolioCards/PortfolioCards";
 
 export const Home: React.FC = () => {
-
   return (
     <>
       <div className="home-content">

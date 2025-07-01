@@ -27,7 +27,7 @@ function getDataLayer(): GTMDataLayer {
 
 export const gtmPush = (
   event: string,
-  params?: { [key: string]: unknown }
+  params?: { [key: string]: unknown },
 ): void => {
   const dataLayer = getDataLayer();
   dataLayer.push({ event: event, eventModel: { ...params } });

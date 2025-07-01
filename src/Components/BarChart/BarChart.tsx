@@ -28,7 +28,7 @@ ChartJS.register(
   Tooltip,
   Legend,
   TimeScale,
-  annotationPlugin
+  annotationPlugin,
 );
 
 const twoYearsAgo = new Date();
@@ -84,7 +84,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   className,
 }) => {
   const [timespan, setTimespan] = useState<"two-years" | "all-time">(
-    timeUnit !== "year" ? "two-years" : "all-time"
+    timeUnit !== "year" ? "two-years" : "all-time",
   );
   const radioID = useId();
 

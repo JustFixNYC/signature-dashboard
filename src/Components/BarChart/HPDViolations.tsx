@@ -61,7 +61,7 @@ export const HPDViolationsChart: React.FC<HPDViolationsChartProps> = ({
         row.hpdviolations_class_b +
         row.hpdviolations_class_c +
         row.hpdviolations_class_i,
-      0
+      0,
     ) || 0;
 
   const dataNote = dataSum === 0 && (

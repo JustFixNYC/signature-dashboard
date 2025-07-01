@@ -43,7 +43,7 @@ export const BuildingSummaryTable: React.FC<BuildingSummaryTableProps> = ({
       <DetailTableRow
         key={key}
         apiKey={key}
-        value={(key === "rs_units" && data[key] === 0) ? "0*" : data[key]}
+        value={key === "rs_units" && data[key] === 0 ? "0*" : data[key]}
         lastUpdatedData={lastUpdatedData}
       />
     );
