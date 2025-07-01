@@ -2,6 +2,8 @@
 
 .section-header,
 .subsection-header {
+  display: flex;
+
   &:not(.chart__title)::before {
     content: "";
     // Hack so that on hash link scrolling, the header appears below the fixed page header
@@ -15,6 +17,13 @@
   margin-top: 4rem;
   &:has(+ .section-subtitle) {
     margin-bottom: 8px;
+  }
+  .pill {
+    margin-left: auto;
+    width: unset;
+    height: fit-content;
+    align-self: center;
+    padding: 0.25rem 0.75rem;
   }
 }
 .subsection-header {

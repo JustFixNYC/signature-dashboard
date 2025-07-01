@@ -23,6 +23,15 @@
     background-color: $GREY_50;
   }
 
+  &.pill-blue {
+    background-color: $BLUE_150;
+  }
+
+  &.pill-red {
+    background-color: $RED;
+    color: $OFF_WHITE_100;
+  }
+
   .pill__icon_check {
     color: $GREEN;
     margin-right: 10px;
