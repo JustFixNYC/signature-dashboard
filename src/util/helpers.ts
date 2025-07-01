@@ -91,7 +91,7 @@ export type yearlyChartData = {
 export const groupData = (
   dataArray: APIChartData[],
   apiKey: keyof Omit<APIChartData, "month">,
-  timeSpan: IndicatorsTimeSpan
+  timeSpan: IndicatorsTimeSpan,
 ) => {
   // if (dataArray && timeSpan === "quarter") {
   // const dataByQuarter = [];
@@ -193,7 +193,7 @@ export const decodeFromURI = (str: string) => {
 // given a URLSearchParams object and a key, return the original object
 export const getObjFromEncodedParam = (
   params: URLSearchParams,
-  key: string
+  key: string,
 ) => {
   const encodedStr = params.get(key);
   return encodedStr ? decodeFromURI(encodedStr) : null;
@@ -232,7 +232,7 @@ export const useOnScreen = (ref: React.RefObject<unknown>) => {
   const observer =
     isIntersectionObserverSupported &&
     new IntersectionObserver(([entry]) =>
-      setIntersecting(entry.isIntersecting)
+      setIntersecting(entry.isIntersecting),
     );
 
   useEffect(() => {

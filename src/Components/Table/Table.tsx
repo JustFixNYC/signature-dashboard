@@ -75,7 +75,7 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
 };
 
 export const Table = <T extends object>(
-  props: TableProps<T> & { className?: string }
+  props: TableProps<T> & { className?: string },
 ) => {
   const {
     data,
@@ -102,23 +102,23 @@ export const Table = <T extends object>(
   // Get table setting from query string
   const columnVisibilityParams = getObjFromEncodedParam(
     searchParams,
-    VISIBILITY_PARAM_KEY
+    VISIBILITY_PARAM_KEY,
   );
   const columnFiltersParams = getObjFromEncodedParam(
     searchParams,
-    FILTERS_PARAM_KEY
+    FILTERS_PARAM_KEY,
   );
   const sortingParams = getObjFromEncodedParam(searchParams, SORTING_PARAM_KEY);
 
   // Setup tables settings in state
   const [sorting, setsorting] = useState<ColumnSort[]>(
-    sortingParams ? sortingParams : initialSorting ? initialSorting : []
+    sortingParams ? sortingParams : initialSorting ? initialSorting : [],
   );
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
-    columnFiltersParams ?? []
+    columnFiltersParams ?? [],
   );
   const [columnVisibility, setColumnVisibility] = useState(
-    columnVisibilityParams ?? {}
+    columnVisibilityParams ?? {},
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -154,7 +154,7 @@ export const Table = <T extends object>(
 
         return params;
       },
-      { replace: true }
+      { replace: true },
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting, columnFilters, columnVisibility, setSearchParams]);
@@ -257,7 +257,7 @@ export const Table = <T extends object>(
       <div
         className={classNames(
           "table-container-wrapper",
-          hideScrollFade && "hide-scroll-fade"
+          hideScrollFade && "hide-scroll-fade",
         )}
       >
         <div className="table-container" ref={containerRef}>
@@ -292,7 +292,7 @@ export const Table = <T extends object>(
                             <div className="column-header__label">
                               {flexRender(
                                 header.column.columnDef.header,
-                                header.getContext()
+                                header.getContext(),
                               )}
                               {header.column.getCanSort() && (
                                 <span className="column-header__sort-icons">
@@ -305,7 +305,7 @@ export const Table = <T extends object>(
                                     className={classNames(
                                       "column-header__sort-icon",
                                       sortIcon === "arrowUpArrowDown" &&
-                                        "unsorted"
+                                        "unsorted",
                                     )}
                                     onClick={(e) => {
                                       const toggleSort =
@@ -352,7 +352,7 @@ export const Table = <T extends object>(
                         {valueExists
                           ? flexRender(
                               cell.column.columnDef.cell,
-                              cell.getContext()
+                              cell.getContext(),
                             )
                           : "N/A"}
                       </td>
@@ -385,7 +385,7 @@ function Filter<T>({ column }: { column: Column<T, unknown> }) {
         : Array.from(uniqeValues.keys())
             .filter((v) => v !== undefined)
             .sort((a, b) => a - b),
-    [uniqeValues, filterVariant]
+    [uniqeValues, filterVariant],
   );
   return filterVariant === "range" ? (
     <div>

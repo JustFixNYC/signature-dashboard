@@ -29,7 +29,11 @@ export const BuildingDetailTable: React.FC<BuildingDetailTable> = ({
       {indicators.map((indicator, i) => (
         <DetailTableRow
           apiKey={indicator}
-          value={(indicator === "rs_units" && data[indicator] === 0) ? "0*" : data[indicator]}
+          value={
+            indicator === "rs_units" && data[indicator] === 0
+              ? "0*"
+              : data[indicator]
+          }
           lastUpdatedData={lastUpdatedData}
           key={i}
         />

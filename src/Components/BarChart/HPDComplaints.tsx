@@ -41,7 +41,7 @@ export const HPDComplaintsChart: React.FC<HPDComplaintsChartProps> = ({
     data.reduce(
       (acc, row) =>
         acc + row.hpdcomplaints_emergency + row.hpdcomplaints_nonemergency,
-      0
+      0,
     ) || 0;
 
   const dataNote = dataSum === 0 && (

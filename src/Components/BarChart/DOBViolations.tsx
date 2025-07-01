@@ -40,7 +40,7 @@ export const DOBViolationsChart: React.FC<DOBViolationsChartProps> = ({
   const dataSum =
     data.reduce(
       (acc, row) => acc + row.dobviolations_regular + row.dobviolations_ecb,
-      0
+      0,
     ) || 0;
 
   const dataNote = dataSum === 0 && (
