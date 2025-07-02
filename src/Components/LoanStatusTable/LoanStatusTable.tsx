@@ -50,7 +50,7 @@ export const LoanStatusTable: React.FC<LoanStatusTableProps> = ({
           onClick={handleRowClick}
         >
           <dt className="detail-table__name">
-            Loan history from ACRIS
+            Loan history
             <Icon icon="circleInfo" className="detail-table__name_icon" />
           </dt>
           <dd className="detail-table__value"></dd>
