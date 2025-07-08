@@ -5,9 +5,6 @@ export type Borough =
   | "Queens"
   | "Staten Island";
 
-export type LoanStatus = "active" | "satisfied";
-export type LoanAction = "refinanced" | "new landlord" | "debt write down";
-
 export const indicatorsTimeSpans = ["month", "quarter", "year"] as const;
 export type IndicatorsTimeSpan = (typeof indicatorsTimeSpans)[number];
 
@@ -78,8 +75,8 @@ export interface Indicators {
 export type BuildingInfo = {
   landlord_slug: string;
   loan_pool_slug: string;
-  loan_status: LoanStatus;
-  loan_action: LoanAction;
+  status_info: LoanStatusData;
+  status_current: LoanStatus;
   lat: number;
   lng: number;
 } & Pick<
@@ -225,4 +222,30 @@ export interface APIPortfolioData {
 export interface DatasetLastUpdatedData {
   dataset: string;
   last_updated: string;
+}
+
+export type LoanStatus =
+  | "pending"
+  | "left_program"
+  | "foreclosure"
+  | "refinanced"
+  | "write_down"
+  | "rehab"
+  | "write_down_rehab";
+
+export type LoanLink = {
+  url: string;
+  label: string;
+};
+
+export interface LoanHistory {
+  // No need for "pending" entry since it applies to all and we already have
+  // origination date
+  status: Exclude<LoanStatus, "pending">;
+  date: string;
+}
+
+export interface LoanStatusData {
+  statuses: LoanHistory[];
+  links?: LoanLink[];
 }

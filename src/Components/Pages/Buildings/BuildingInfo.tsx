@@ -33,6 +33,8 @@ import {
   TOCList,
 } from "../../TableOfContents/TableOfContents";
 import { Loading } from "../../Loading/Loading";
+import { LoanStatusTable } from "../../LoanStatusTable/LoanStatusTable";
+import { LoanStatusPill } from "../../Pill/LoanStatusPill";
 
 export interface BuildingInfoProps {
   bbl: string;
@@ -118,11 +120,20 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
               <TableOfContents>
                 <TOCHeader>On this page</TOCHeader>
                 <TOCList>
+                  <TOCItem href="#loan -status">Loan status</TOCItem>
                   <TOCItem href="#summary-stats">Summary stats</TOCItem>
                   <TOCItem href="#all-data">All data</TOCItem>
                   <TOCItem href="#trend-charts">Trend charts</TOCItem>
                 </TOCList>
               </TableOfContents>
+
+              <SectionHeader id="loan-status" className="scroll-el">
+                <>
+                  Loan status
+                  <LoanStatusPill status={buildingInfo.status_current} />
+                </>
+              </SectionHeader>
+              <LoanStatusTable data={buildingInfo} lastUpdated="2025-01-01" />
 
               <SectionHeader id="summary-stats" className="scroll-el">
                 Summary stats

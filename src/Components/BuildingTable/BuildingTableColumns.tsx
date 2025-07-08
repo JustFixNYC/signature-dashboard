@@ -11,6 +11,7 @@ import { BuildingInfo } from "../../types/APIDataTypes";
 import { Link } from "react-router-dom";
 import { BIPPill } from "../Pill/BIPPill";
 import { YesNoPill } from "../Pill/YesNoPill";
+import { getLoanStatusLabel, LoanStatusPill } from "../Pill/LoanStatusPill";
 
 const columnHelper = createColumnHelper<BuildingInfo>();
 
@@ -90,6 +91,22 @@ export const columns = [
           filterVariant: "select",
         },
       }),
+      columnHelper.accessor(
+        (row) => getColumnAccessor(getLoanStatusLabel(row.status_current)),
+        {
+          id: "status_current",
+          header: getColumnHeader("status_current"),
+          cell: (info) => (
+            <LoanStatusPill status={info.cell.row.original.status_current} />
+          ),
+          sortUndefined: "last",
+          filterFn: "includesString",
+          meta: {
+            inputWidth: "4rem",
+            filterVariant: "select",
+          },
+        },
+      ),
       columnHelper.accessor((row) => getColumnAccessor(row.units_res), {
         id: "units_res",
         header: getColumnHeader("units_res"),
