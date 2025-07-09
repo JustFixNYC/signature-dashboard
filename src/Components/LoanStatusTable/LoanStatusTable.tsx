@@ -19,6 +19,23 @@ const LOAN_STATUS_LABELS: { [K in Exclude<LoanStatus, "pending">]: string } = {
   write_down_rehab: "Refinanced",
 };
 
+export const LOAN_STATUS_DESCRIPTIONS: { [K in LoanStatus]: string } = {
+  pending:
+    "The borrower and the lender are in discussion to finalize the specific terms and conditions of the loan agreement.",
+  left_program:
+    "The building is no longer a part of the joint venture program since the loan has been paid off in full.",
+  foreclosure:
+    "The lender has begun legal proceedings to seize and sell the borrower's property due to non-payment of the loan.",
+  refinanced:
+    "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender.",
+  write_down:
+    "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender. There was 1 debt write down, which means that the lender paid off part of the loan.",
+  rehab:
+    "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender. [Sentence explaining rehabilitation plan].",
+  write_down_rehab:
+    "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender. There was 1 debt write down, which means that the lender paid off part of the loan. [Sentence explaining rehabilitation plan].",
+};
+
 interface LoanStatusTableProps extends HTMLAttributes<HTMLDListElement> {
   data: BuildingInfo;
   lastUpdated: string;

@@ -33,7 +33,10 @@ import {
   TOCList,
 } from "../../TableOfContents/TableOfContents";
 import { Loading } from "../../Loading/Loading";
-import { LoanStatusTable } from "../../LoanStatusTable/LoanStatusTable";
+import {
+  LOAN_STATUS_DESCRIPTIONS,
+  LoanStatusTable,
+} from "../../LoanStatusTable/LoanStatusTable";
 import { LoanStatusPill } from "../../Pill/LoanStatusPill";
 
 export interface BuildingInfoProps {
@@ -133,6 +136,10 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
                   <LoanStatusPill status={buildingInfo.status_current} />
                 </>
               </SectionHeader>
+              <hr className="loan-status-rule" />
+              <p className="loan-status-description">
+                {LOAN_STATUS_DESCRIPTIONS[buildingInfo.status_current]}
+              </p>
               <LoanStatusTable data={buildingInfo} lastUpdated="2025-01-01" />
 
               <SectionHeader id="summary-stats" className="scroll-el">
