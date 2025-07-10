@@ -34,7 +34,7 @@ import {
 } from "../../TableOfContents/TableOfContents";
 import { Loading } from "../../Loading/Loading";
 import {
-  LOAN_STATUS_DESCRIPTIONS,
+  loanStatusDescription,
   LoanStatusTable,
 } from "../../LoanStatusTable/LoanStatusTable";
 import { LoanStatusPill } from "../../Pill/LoanStatusPill";
@@ -138,7 +138,7 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
               </SectionHeader>
               <hr className="loan-status-rule" />
               <p className="loan-status-description">
-                {LOAN_STATUS_DESCRIPTIONS[buildingInfo.status_current]}
+                {loanStatusDescription(buildingInfo)}
               </p>
               <LoanStatusTable data={buildingInfo} lastUpdated="2025-01-01" />
 

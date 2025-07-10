@@ -3,37 +3,51 @@ import classNames from "classnames";
 import { Icon } from "@justfixnyc/component-library";
 import { DetailTable } from "../DetailTable/DetailTable";
 import { formatDate, formatLastUpdatedDate } from "../../util/helpers";
-import { BuildingInfo, LoanStatus } from "../../types/APIDataTypes";
+import { BuildingInfo, LoanHistory } from "../../types/APIDataTypes";
 import JFCLLinkExternal from "../JFCLLinkExternal";
 
 import "./LoanStatusTable.scss";
 
-// Adapted from DetailRowTable.tsx
-
-const LOAN_STATUS_LABELS: { [K in Exclude<LoanStatus, "pending">]: string } = {
-  left_program: "Satisfied",
-  foreclosure: "Foreclosure began",
-  refinanced: "Refinanced",
-  write_down: "Refinanced",
-  rehab: "Refinanced",
-  write_down_rehab: "Refinanced",
+const loanStatusLabel = (statusEntry: LoanHistory) => {
+  const { status, date } = statusEntry;
+  switch (status) {
+    case "left_program":
+      return `Satisfied on ${formatDate(date)}`;
+    case "foreclosure":
+      return `Foreclosure began on ${formatDate(date)}`;
+    case "refinanced":
+      return `Refinanced on ${formatDate(date)}`;
+    case "write_down":
+      return `Refinanced on ${formatDate(date)} with debt write down`;
+    case "rehab":
+      return `Refinanced on ${formatDate(date)} as part of a rehabilitation plan`;
+    case "write_down_rehab":
+      return `Refinanced on ${formatDate(date)} with debt write down, as part of a rehabilitation plan`;
+  }
 };
 
-export const LOAN_STATUS_DESCRIPTIONS: { [K in LoanStatus]: string } = {
-  pending:
-    "The borrower and the lender are in discussion to finalize the specific terms and conditions of the loan agreement.",
-  left_program:
-    "The building is no longer a part of the joint venture program since the loan has been paid off in full.",
-  foreclosure:
-    "The lender has begun legal proceedings to seize and sell the borrower's property due to non-payment of the loan.",
-  refinanced:
-    "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender.",
-  write_down:
-    "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender. There was 1 debt write down, which means that the lender paid off part of the loan.",
-  rehab:
-    "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender. [Sentence explaining rehabilitation plan].",
-  write_down_rehab:
-    "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender. There was 1 debt write down, which means that the lender paid off part of the loan. [Sentence explaining rehabilitation plan].",
+export const loanStatusDescription = (buildingInfo: BuildingInfo) => {
+  const { status_current } = buildingInfo;
+
+  // TODO: if we need to give the number of refinancing/write downs in the
+  // description, then we'll need to pull out the status_info and count them up
+
+  switch (status_current) {
+    case "pending":
+      return "The borrower and the lender are in discussion to finalize the specific terms and conditions of the loan agreement.";
+    case "left_program":
+      return "The building is no longer a part of the joint venture program since the loan has been paid off in full.";
+    case "foreclosure":
+      return "The lender has begun legal proceedings to seize and sell the borrower's property due to non-payment of the loan.";
+    case "refinanced":
+      return "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender.";
+    case "write_down":
+      return "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender. There was 1 debt write down, which means that the lender paid off part of the loan.";
+    case "rehab":
+      return "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender. [Sentence explaining rehabilitation plan].";
+    case "write_down_rehab":
+      return "The building has an active mortgage held by CPC. It was refinanced, meaning that the mortgage terms were adjusted by the lender. There was 1 debt write down, which means that the lender paid off part of the loan. [Sentence explaining rehabilitation plan].";
+  }
 };
 
 interface LoanStatusTableProps extends HTMLAttributes<HTMLDListElement> {
@@ -41,6 +55,7 @@ interface LoanStatusTableProps extends HTMLAttributes<HTMLDListElement> {
   lastUpdated: string;
 }
 
+// Adapted from DetailRowTable.tsx
 export const LoanStatusTable: React.FC<LoanStatusTableProps> = ({
   data,
   lastUpdated,
@@ -88,12 +103,7 @@ export const LoanStatusTable: React.FC<LoanStatusTableProps> = ({
                     return dateB.getTime() - dateA.getTime();
                   })
                   .map((entry) => {
-                    return (
-                      <li>
-                        {LOAN_STATUS_LABELS[entry.status]} on{" "}
-                        {formatDate(entry.date)}
-                      </li>
-                    );
+                    return <li>{loanStatusLabel(entry)}</li>;
                   })}
               <li>Loan originated on {formatDate(data.origination_date)}</li>
             </ul>
