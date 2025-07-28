@@ -11,7 +11,7 @@ interface BuildingSummaryTableProps extends HTMLAttributes<HTMLDListElement> {
   lastUpdatedData: DatasetLastUpdatedData[];
 }
 
-const keys: Partial<keyof BuildingInfo>[] = [
+const keys: Partial<keyof Omit<BuildingInfo, "status_info">>[] = [
   "units_res",
   "rs_units",
   "bip",

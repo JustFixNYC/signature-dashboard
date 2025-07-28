@@ -53,6 +53,15 @@ h3.section-header.landing-page-table-header {
   }
 }
 
+hr.loan-status-rule {
+  border: 1px solid $GREY_NEW;
+}
+
+p.loan-status-description,
+.loan-status-table {
+  width: 600px;
+}
+
 p.landing-page-table-context {
   margin-bottom: 2rem;
 }

@@ -109,7 +109,8 @@ table.collection-building-table tbody tr {
     padding: 2px 8px;
     .pill {
       margin: 3px auto;
-      padding: 4px 0;
+      padding: 4px 12px;
+      width: fit-content;
     }
   }
 }

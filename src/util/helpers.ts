@@ -64,6 +64,9 @@ export const formatNumberNoComma = (value: number) => {
 
 export const formatDate = (value: string) => {
   return new Date(value).toLocaleDateString("en", {
+    // The date is already in local time, but gets parsed assuming UTC so this
+    // ensures that it's not adjusted in conversion to string
+    timeZone: "UTC",
     year: "numeric",
     month: "short",
     day: "numeric",
