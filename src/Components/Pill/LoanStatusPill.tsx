@@ -17,7 +17,7 @@ const STATUS_COLORS: {
 };
 
 export const LoanStatusPill: React.FC<{
-  status: LoanAction
+  status: LoanAction;
 }> = ({ status }) => {
   const color = STATUS_COLORS[status];
   const label = loanStatusLabel(status);

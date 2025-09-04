@@ -106,7 +106,7 @@ export const columns = [
             inputWidth: "4rem",
             filterVariant: "select",
           },
-        }
+        },
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.units_res), {
         id: "units_res",
@@ -193,7 +193,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        }
+        },
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_bc_total), {
         id: "hpd_viol_bc_total",
@@ -263,7 +263,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        }
+        },
       ),
     ],
   }),
@@ -282,7 +282,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        }
+        },
       ),
       columnHelper.accessor(
         (row) => getColumnAccessor(row.hpd_comp_emerg_total_per_unit),
@@ -296,7 +296,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        }
+        },
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_heat), {
         id: "hpd_comp_heat",
@@ -417,7 +417,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        }
+        },
       ),
       columnHelper.accessor(
         (row) => getColumnAccessor(row.hp_open_judgements),
@@ -430,7 +430,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        }
+        },
       ),
     ],
   }),
@@ -458,7 +458,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        }
+        },
       ),
     ],
   }),
@@ -491,7 +491,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        }
+        },
       ),
     ],
   }),
@@ -522,7 +522,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        }
+        },
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.water_charges), {
         id: "water_charges",
@@ -555,7 +555,7 @@ export const columns = [
           sortUndefined: "last",
           filterFn: "includesString",
           size: 200,
-        }
+        },
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.debt_total), {
         id: "debt_total",
