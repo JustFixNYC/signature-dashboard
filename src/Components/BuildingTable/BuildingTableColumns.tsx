@@ -11,7 +11,8 @@ import { BuildingInfo } from "../../types/APIDataTypes";
 import { Link } from "react-router-dom";
 import { BIPPill } from "../Pill/BIPPill";
 import { YesNoPill } from "../Pill/YesNoPill";
-import { getLoanStatusLabel, LoanStatusPill } from "../Pill/LoanStatusPill";
+import { LoanStatusPill } from "../Pill/LoanStatusPill";
+import { loanStatusLabel } from "../LoanStatusTable/LoanStatusTable";
 
 const columnHelper = createColumnHelper<BuildingInfo>();
 
@@ -92,12 +93,12 @@ export const columns = [
         },
       }),
       columnHelper.accessor(
-        (row) => getColumnAccessor(getLoanStatusLabel(row.status_current)),
+        (row) => getColumnAccessor(loanStatusLabel(row.latest_action)),
         {
-          id: "status_current",
-          header: getColumnHeader("status_current"),
+          id: "latest_action",
+          header: getColumnHeader("latest_action"),
           cell: (info) => (
-            <LoanStatusPill status={info.cell.row.original.status_current} />
+            <LoanStatusPill status={info.cell.row.original.latest_action} />
           ),
           sortUndefined: "last",
           filterFn: "includesString",
@@ -105,7 +106,7 @@ export const columns = [
             inputWidth: "4rem",
             filterVariant: "select",
           },
-        },
+        }
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.units_res), {
         id: "units_res",
@@ -192,7 +193,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        },
+        }
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_viol_bc_total), {
         id: "hpd_viol_bc_total",
@@ -262,7 +263,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        },
+        }
       ),
     ],
   }),
@@ -281,7 +282,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        },
+        }
       ),
       columnHelper.accessor(
         (row) => getColumnAccessor(row.hpd_comp_emerg_total_per_unit),
@@ -295,7 +296,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        },
+        }
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.hpd_comp_heat), {
         id: "hpd_comp_heat",
@@ -416,7 +417,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        },
+        }
       ),
       columnHelper.accessor(
         (row) => getColumnAccessor(row.hp_open_judgements),
@@ -429,7 +430,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        },
+        }
       ),
     ],
   }),
@@ -457,7 +458,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        },
+        }
       ),
     ],
   }),
@@ -490,7 +491,7 @@ export const columns = [
           meta: {
             filterVariant: "range",
           },
-        },
+        }
       ),
     ],
   }),
@@ -521,7 +522,7 @@ export const columns = [
             filterVariant: "range",
           },
           size: 200,
-        },
+        }
       ),
       columnHelper.accessor((row) => getColumnAccessor(row.water_charges), {
         id: "water_charges",
@@ -546,13 +547,16 @@ export const columns = [
         sortUndefined: "last",
         filterFn: "includesString",
       }),
-      columnHelper.accessor((row) => getColumnAccessor(row.origination_date), {
-        id: "origination_date",
-        header: getColumnHeader("origination_date"),
-        sortUndefined: "last",
-        filterFn: "includesString",
-        size: 200,
-      }),
+      columnHelper.accessor(
+        (row) => getColumnAccessor(row.origination_date || ""),
+        {
+          id: "origination_date",
+          header: getColumnHeader("origination_date"),
+          sortUndefined: "last",
+          filterFn: "includesString",
+          size: 200,
+        }
+      ),
       columnHelper.accessor((row) => getColumnAccessor(row.debt_total), {
         id: "debt_total",
         header: getColumnHeader("debt_total"),

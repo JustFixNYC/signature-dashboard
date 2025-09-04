@@ -34,26 +34,26 @@
       },
       "LoanStatus": {
         "properties": {
-          "status": {
+          "action": {
             "type": "string",
-            "example": "refinanced",
-            "description": "value indicating status of the loan at this step in the history"
+            "example": "foreclosure_active",
+            "description": "Value indicating an action taken on the loan at this step in the history"
           },
           "date": {
             "type": "string",
             "example": "2025-01-01",
-            "description": "Date associated with the status"
+            "description": "Date associated with the action"
           }
         }
       },
       "LoanStatusInfo": {
         "properties": {
-          "statuses": {
+          "actions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LoanStatus"
             },
-            "description": "Array of loan statuses for the history of the loan"
+            "description": "Array of loan actions for the history of the loan"
           },
           "links": {
             "type": "array",
@@ -106,15 +106,15 @@
             "example": "santander",
             "description": "Loan pool name in slug format. Same as 'collection_slug' for collection page"
           },
-          "status_info": {
+          "loan_info": {
             "type": "object",
             "$ref": "#/components/schemas/LoanStatusInfo",
             "description": "Collection of data for the loan status history and related links"
           },
-          "status_current": {
+          "latest_action": {
             "type": "string",
             "example": "refinanced",
-            "description": "Latest status of the Signature loan ('pending', 'write_down', 'write_down_rehab', 'refinanced', 'foreclosure', or 'left_program'), provided by UNHP"
+            "description": "Latest status of the Signature loan ('satisfied', 'sold_market', 'sold_preservation', 'sold_foreclosure', 'foreclosure_active', 'foreclosure_settled', 'loan_modified', or 'reo'), provided by UNHP"
           },
           "link_hpd": {
             "type": "string",

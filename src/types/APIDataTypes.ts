@@ -62,7 +62,7 @@ export interface Indicators {
   link_hpd: string;
   link_wow: string;
   link_political: string;
-  origination_date: string;
+  origination_date?: string;
   rs_units: number;
   stsen_dist: string;
   units_nonres: number;
@@ -75,8 +75,8 @@ export interface Indicators {
 export type BuildingInfo = {
   landlord_slug: string;
   loan_pool_slug: string;
-  status_info: LoanStatusData;
-  status_current: LoanStatus;
+  loan_info: LoanActionData;
+  latest_action: LoanAction;
   lat: number;
   lng: number;
 } & Pick<
@@ -224,14 +224,16 @@ export interface DatasetLastUpdatedData {
   last_updated: string;
 }
 
-export type LoanStatus =
-  | "pending"
-  | "left_program"
-  | "foreclosure"
-  | "refinanced"
-  | "write_down"
-  | "rehab"
-  | "write_down_rehab";
+export type LoanAction =
+  | "no_action"
+  | "satisfied"
+  | "sold_market"
+  | "sold_preservation"
+  | "sold_foreclosure"
+  | "foreclosure_active"
+  | "foreclosure_settled"
+  | "loan_modified"
+  | "reo";
 
 export type LoanLink = {
   url: string;
@@ -239,13 +241,11 @@ export type LoanLink = {
 };
 
 export interface LoanHistory {
-  // No need for "pending" entry since it applies to all and we already have
-  // origination date
-  status: Exclude<LoanStatus, "pending">;
+  action: LoanAction;
   date: string;
 }
 
-export interface LoanStatusData {
-  statuses: LoanHistory[];
+export interface LoanActionData {
+  actions: LoanHistory[];
   links?: LoanLink[];
 }

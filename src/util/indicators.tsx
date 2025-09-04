@@ -791,7 +791,7 @@ const indicatorStringsBuildingOnly: Partial<{
   stsen_dist: {
     name: "State Senate",
   },
-  status_current: {
+  latest_action: {
     name: "Loan status",
   },
   lat: {
