@@ -16,7 +16,7 @@ import { YesNoPill } from "../Pill/YesNoPill";
 
 interface DetailTableRowProps extends HTMLAttributes<HTMLDivElement> {
   apiKey: apiKeys;
-  value: string | number | boolean;
+  value: string | number | boolean | undefined;
   lastUpdatedData?: DatasetLastUpdatedData[];
 }
 
