@@ -79,7 +79,13 @@ export const About: React.FC = () => {
           receivership and held by the Federal Deposit Insurance Corporation
           (FDIC) until early 2024, when the loans on rent-regulated housing were
           transferred into two joint ventures, administered by Community
-          Preservation Corporation (CPC) and Santander Bank.
+          Preservation Corporation (CPC) and Santander Bank. The loans on
+          market-rate housing were transferred to Blackstone, which is not
+          subject to the same agreements as CPC and Santander. Any loans in the
+          Blackstone portfolio are not in the Signature Portfolio Dashboard. If
+          you would like to find out if your building is in the Blackstone
+          Signature portfolio feel free to contact{" "}
+          <a href="mailto:bip@unhp.org">bip@unhp.org</a>.
         </p>
 
         <p>
