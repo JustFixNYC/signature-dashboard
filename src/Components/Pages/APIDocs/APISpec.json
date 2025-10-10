@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://demo-wowserver.justfix.org/api"
+      "url": "https://api.justfix.org/api"
     }
   ],
   "components": {
