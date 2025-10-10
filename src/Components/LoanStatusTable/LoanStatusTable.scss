@@ -1,0 +1,13 @@
+.loan-status-table {
+  li {
+    list-style-type: square;
+    margin-bottom: 0.25rem;
+  }
+  .loan-status-links {
+    margin-top: 0.75rem;
+    a {
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+  }
+}

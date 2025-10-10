@@ -10,7 +10,7 @@ import classNames from "classnames";
 interface BuildingDetailTable extends HTMLAttributes<HTMLDListElement> {
   data: BuildingInfo;
   lastUpdatedData: DatasetLastUpdatedData[];
-  indicators: (keyof BuildingInfo)[];
+  indicators: (keyof Omit<BuildingInfo, "loan_info">)[];
   className?: string;
 }
 

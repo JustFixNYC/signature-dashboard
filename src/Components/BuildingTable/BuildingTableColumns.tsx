@@ -11,6 +11,8 @@ import { BuildingInfo } from "../../types/APIDataTypes";
 import { Link } from "react-router-dom";
 import { BIPPill } from "../Pill/BIPPill";
 import { YesNoPill } from "../Pill/YesNoPill";
+import { LoanStatusPill } from "../Pill/LoanStatusPill";
+import { loanStatusLabel } from "../LoanStatusTable/LoanStatusTable";
 
 const columnHelper = createColumnHelper<BuildingInfo>();
 
@@ -90,6 +92,22 @@ export const columns = [
           filterVariant: "select",
         },
       }),
+      columnHelper.accessor(
+        (row) => getColumnAccessor(loanStatusLabel(row.latest_action)),
+        {
+          id: "latest_action",
+          header: getColumnHeader("latest_action"),
+          cell: (info) => (
+            <LoanStatusPill status={info.cell.row.original.latest_action} />
+          ),
+          sortUndefined: "last",
+          filterFn: "includesString",
+          meta: {
+            inputWidth: "4rem",
+            filterVariant: "select",
+          },
+        },
+      ),
       columnHelper.accessor((row) => getColumnAccessor(row.units_res), {
         id: "units_res",
         header: getColumnHeader("units_res"),
@@ -529,13 +547,16 @@ export const columns = [
         sortUndefined: "last",
         filterFn: "includesString",
       }),
-      columnHelper.accessor((row) => getColumnAccessor(row.origination_date), {
-        id: "origination_date",
-        header: getColumnHeader("origination_date"),
-        sortUndefined: "last",
-        filterFn: "includesString",
-        size: 200,
-      }),
+      columnHelper.accessor(
+        (row) => getColumnAccessor(row.origination_date || ""),
+        {
+          id: "origination_date",
+          header: getColumnHeader("origination_date"),
+          sortUndefined: "last",
+          filterFn: "includesString",
+          size: 200,
+        },
+      ),
       columnHelper.accessor((row) => getColumnAccessor(row.debt_total), {
         id: "debt_total",
         header: getColumnHeader("debt_total"),

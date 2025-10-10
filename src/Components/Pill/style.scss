@@ -11,6 +11,14 @@
   letter-spacing: 1.12px;
   box-sizing: border-box;
 
+  &.pill-loan-status {
+    border-radius: 2rem; // extra for two-line pills in building tables
+    height: fit-content;
+    width: fit-content;
+    align-self: center;
+    padding: 4px 12px;
+  }
+
   &.pill-yellow {
     background-color: $PILL_YELLOW;
   }
@@ -20,7 +28,24 @@
   }
 
   &.pill-grey {
-    background-color: $GREY_50;
+    background-color: $GREY_200;
+  }
+
+  &.pill-blue {
+    background-color: $BLUE_150;
+  }
+
+  &.pill-green {
+    background-color: $GREEN;
+  }
+
+  &.pill-pink {
+    background-color: $PINK;
+  }
+
+  &.pill-red {
+    background-color: $RED;
+    color: $OFF_WHITE_100;
   }
 
   .pill__icon_check {

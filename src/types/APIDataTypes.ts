@@ -5,9 +5,6 @@ export type Borough =
   | "Queens"
   | "Staten Island";
 
-export type LoanStatus = "active" | "satisfied";
-export type LoanAction = "refinanced" | "new landlord" | "debt write down";
-
 export const indicatorsTimeSpans = ["month", "quarter", "year"] as const;
 export type IndicatorsTimeSpan = (typeof indicatorsTimeSpans)[number];
 
@@ -65,7 +62,7 @@ export interface Indicators {
   link_hpd: string;
   link_wow: string;
   link_political: string;
-  origination_date: string;
+  origination_date?: string;
   rs_units: number;
   stsen_dist: string;
   units_nonres: number;
@@ -78,8 +75,8 @@ export interface Indicators {
 export type BuildingInfo = {
   landlord_slug: string;
   loan_pool_slug: string;
-  loan_status: LoanStatus;
-  loan_action: LoanAction;
+  loan_info: LoanActionData;
+  latest_action: LoanAction;
   lat: number;
   lng: number;
 } & Pick<
@@ -225,4 +222,30 @@ export interface APIPortfolioData {
 export interface DatasetLastUpdatedData {
   dataset: string;
   last_updated: string;
+}
+
+export type LoanAction =
+  | "no_action"
+  | "satisfied"
+  | "sold_market"
+  | "sold_preservation"
+  | "sold_foreclosure"
+  | "foreclosure_active"
+  | "foreclosure_settled"
+  | "loan_modified"
+  | "reo";
+
+export type LoanLink = {
+  url: string;
+  label: string;
+};
+
+export interface LoanHistory {
+  action: LoanAction;
+  date: string;
+}
+
+export interface LoanActionData {
+  actions: LoanHistory[];
+  links?: LoanLink[];
 }
