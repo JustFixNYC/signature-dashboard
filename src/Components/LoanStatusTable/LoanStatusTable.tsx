@@ -130,6 +130,11 @@ export const LoanStatusTable: React.FC<LoanStatusTableProps> = ({
     setShowDesc(!showDesc);
   };
 
+  // NOTE: This "unhp" record in our database table
+  // "nycdb_k8s_loader.dataset_tracker" is updated manually, unlike other
+  // datasets updated as part of the k8s-loader job, so whenever we get a new
+  // set of data files from UNHP we need to go in an manually update the date
+  // (eg. via postico).
   const lastUpdated = lastUpdatedData?.find(
     (x) => x.dataset === "unhp",
   )?.last_updated;
