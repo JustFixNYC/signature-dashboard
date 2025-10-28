@@ -3,7 +3,11 @@ import classNames from "classnames";
 import { Icon } from "@justfixnyc/component-library";
 import { DetailTable } from "../DetailTable/DetailTable";
 import { formatDate, formatLastUpdatedDate } from "../../util/helpers";
-import { BuildingInfo, LoanAction } from "../../types/APIDataTypes";
+import {
+  BuildingInfo,
+  DatasetLastUpdatedData,
+  LoanAction,
+} from "../../types/APIDataTypes";
 import JFCLLinkExternal from "../JFCLLinkExternal";
 
 import "./LoanStatusTable.scss";
@@ -110,13 +114,13 @@ const LoanHistorySection: React.FC<BuildingInfo> = ({
 
 interface LoanStatusTableProps extends HTMLAttributes<HTMLDListElement> {
   data: BuildingInfo;
-  lastUpdated: string;
+  lastUpdatedData?: DatasetLastUpdatedData[];
 }
 
 // Adapted from DetailRowTable.tsx
 export const LoanStatusTable: React.FC<LoanStatusTableProps> = ({
   data,
-  lastUpdated,
+  lastUpdatedData,
   className,
   ...props
 }) => {
@@ -125,6 +129,15 @@ export const LoanStatusTable: React.FC<LoanStatusTableProps> = ({
   const handleRowClick = () => {
     setShowDesc(!showDesc);
   };
+
+  // NOTE: This "unhp" record in our database table
+  // "nycdb_k8s_loader.dataset_tracker" is updated manually, unlike other
+  // datasets updated as part of the k8s-loader job, so whenever we get a new
+  // set of data files from UNHP we need to go in an manually update the date
+  // (eg. via postico).
+  const lastUpdated = lastUpdatedData?.find(
+    (x) => x.dataset === "unhp",
+  )?.last_updated;
 
   return (
     <DetailTable
@@ -167,10 +180,11 @@ export const LoanStatusTable: React.FC<LoanStatusTableProps> = ({
                 })}
             </div>
           </div>
-
-          <span className="last-updated">
-            Data last updated {formatLastUpdatedDate(lastUpdated)}
-          </span>
+          {lastUpdated && (
+            <span className="last-updated">
+              Data last updated {formatLastUpdatedDate(lastUpdated)}
+            </span>
+          )}
         </dd>
       </div>
     </DetailTable>

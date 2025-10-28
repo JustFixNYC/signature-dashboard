@@ -140,7 +140,10 @@ export const BuildingInfo: React.FC<BuildingInfoProps> = ({ bbl }) => {
               <p className="loan-status-description">
                 {loanDescription(buildingInfo)}
               </p>
-              <LoanStatusTable data={buildingInfo} lastUpdated="2025-01-01" />
+              <LoanStatusTable
+                data={buildingInfo}
+                lastUpdatedData={lastUpdatedData}
+              />
 
               <SectionHeader id="summary-stats" className="scroll-el">
                 Summary stats
